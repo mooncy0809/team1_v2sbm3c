@@ -88,18 +88,26 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav2">
-                                <li><a href="#"><i class="fa fa-user"></i> 내 정보</a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> 위시리스트</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> 결제 </a></li>
                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
                                 
                                 <c:choose>
 		                            <c:when test="${sessionScope.id == null}">
-		                                <li><a href="/member/login.do"><i class="fa fa-lock"></i> 로그인</a></li>
+		                                <li><a href="/member/login.do"><i class="fa fa-sign-in"></i> 로그인</a></li>
 		                            </c:when>
 		                            <c:otherwise>
-		                                <li><a href="/member/logout.do"><i class="fa fa-lock"></i>${sessionScope.id } 로그아웃</a></li>
+		                                <li><a href="/member/logout.do"><i class="fa fa-sign-out"></i>${sessionScope.id } 로그아웃</a></li>
 		                            </c:otherwise>
+                                </c:choose>
+                                
+                                <c:choose>
+                                    <c:when test="${sessionScope.id == null}">
+                                        <li><a href="/member/create.do"><i class="fa fa-plus"></i>회원 가입</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="/member/mypage.do"><i class="fa fa-user"></i>${sessionScope.id } 내 정보</a></li>
+                                    </c:otherwise>
                                 </c:choose>
                                 
                             </ul>
