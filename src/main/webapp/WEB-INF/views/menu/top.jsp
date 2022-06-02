@@ -71,7 +71,7 @@
                                         <li><a href="/member/create.do"><i class="fa fa-plus"></i>회원 가입</a></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><a href="/member/mypage.do"><i class="fa fa-user"></i>${sessionScope.id } 내 정보</a></li>
+                                        <li><a href="/member/read.do?memberno=${sessionScope.memberno}"><i class="fa fa-user"></i>${sessionScope.id } 내 정보</a></li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>

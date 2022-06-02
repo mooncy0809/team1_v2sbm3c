@@ -44,6 +44,7 @@
         <FORM name='frm_login' id='frm_login' method='POST' action='./login.do' class="form-horizontal">
           <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
           <input type="hidden" name="contentsno" id="contentsno" value="contentsno">
+          <input type="hidden" name="memberno" id="memberno" value="${sessionScope.memberno}">
           <%-- 로그인 후 자동으로 이동할 페이지 전달 ★ --%>
           <input type="hidden" name="return_url" value="${return_url}">
     

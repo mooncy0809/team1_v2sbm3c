@@ -572,6 +572,8 @@ public class MemberCont {
       session.setAttribute("mname", memberVO.getMname());
       session.setAttribute("grade", memberVO.getGrade());
       
+      System.out.println(session.getAttribute("memberno"));
+      
       // -------------------------------------------------------------------
       // id 관련 쿠기 저장
       // -------------------------------------------------------------------
