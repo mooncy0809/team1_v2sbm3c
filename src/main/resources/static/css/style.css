@@ -4,7 +4,7 @@
     background: none;
     color: #fdb45e;
 }
-
+    
 div {
     display: block;
 }
@@ -80,6 +80,7 @@ a {
     -o-transition: 300ms;
     transition: 300ms;
     background: transparent;
+
 }
 
 .contactinfo ul li a {

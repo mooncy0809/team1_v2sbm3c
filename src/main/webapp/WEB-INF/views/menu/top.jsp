@@ -56,6 +56,25 @@
                                 <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             </ul> -->
+                            <ul class="nav navbar-nav2">
+                                    <c:choose>
+                                    <c:when test="${sessionScope.id == null}">
+                                        <li><a href="/member/login.do"><i class="fa fa-sign-in"></i> 로그인</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="/member/logout.do"><i class="fa fa-sign-out"></i>${sessionScope.id } 로그아웃</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                                
+                                <c:choose>
+                                    <c:when test="${sessionScope.id == null}">
+                                        <li><a href="/member/create.do"><i class="fa fa-plus"></i>회원 가입</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="/member/mypage.do"><i class="fa fa-user"></i>${sessionScope.id } 내 정보</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -81,29 +100,32 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                        <div class="shop-menu pull-right">
-                            <ul class="nav navbar-nav2">
-                                <li><a href="#"><i class="fa fa-star"></i> 위시리스트</a></li>
+                        <div class="mainmenu pull-right">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+<!--                            <li><a href="#"><i class="fa fa-star"></i> 위시리스트</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> 결제 </a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
-                                
-                                <c:choose>
-		                            <c:when test="${sessionScope.id == null}">
-		                                <li><a href="/member/login.do"><i class="fa fa-sign-in"></i> 로그인</a></li>
-		                            </c:when>
-		                            <c:otherwise>
-		                                <li><a href="/member/logout.do"><i class="fa fa-sign-out"></i>${sessionScope.id } 로그아웃</a></li>
-		                            </c:otherwise>
-                                </c:choose>
-                                
-                                <c:choose>
-                                    <c:when test="${sessionScope.id == null}">
-                                        <li><a href="/member/create.do"><i class="fa fa-plus"></i>회원 가입</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><a href="/member/mypage.do"><i class="fa fa-user"></i>${sessionScope.id } 내 정보</a></li>
-                                    </c:otherwise>
-                                </c:choose>
+                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li> -->
+                                <li><a href="index.html"class="active">공지사항</a></li>
+                                <li class="dropdown"><a href="#">다이어트 꿀팁<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="shop.html">전체</a></li>
+                                        <li><a href="product-details.html">칼럼</a></li> 
+                                        <li><a href="checkout.html">운동</a></li> 
+                                        <li><a href="cart.html">식단</a></li> 
+                                        <li><a href="login.html">성공후기</a></li> 
+                                    </ul>                                   
+                                </li> 
+                                <li class="dropdown"><a href="#">커뮤니티<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="blog.html">전체</a></li>
+                                        <li><a href="blog-single.html">팁&노하우</a></li>
+                                        <li><a href="shop.html">고민&질문</a></li>
+                                        <li><a href="product-details.html">자유게시판</a></li> 
+                                    </ul>
+                                </li>
+                                <li><a href="404.html">홈트레이닝</a></li> 
+                                <li><a href="404.html">칼로리사전</a></li>
+
                                 
                             </ul>
                         </div>
@@ -126,7 +148,7 @@
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="index.html"class="active">공지사항</a></li>
+<!--                             <li><a href="index.html"class="active">공지사항</a></li>
                                 <li class="dropdown"><a href="#">다이어트 꿀팁<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">전체</a></li>
@@ -145,7 +167,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="404.html">홈트레이닝</a></li> 
-                                <li><a href="404.html">칼로리사전</a></li>
+                                <li><a href="404.html">칼로리사전</a></li> -->
                             </ul>
                         </div>
                     </div>
