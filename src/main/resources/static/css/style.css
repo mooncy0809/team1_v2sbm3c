@@ -1,4 +1,10 @@
 
+/* 공지사항 active 주황색 */
+.mainmenu ul li a:hover, .mainmenu ul li a.active, .shop-menu ul li a.active {
+    background: none;
+    color: #fdb45e;
+}
+
 div {
     display: block;
 }

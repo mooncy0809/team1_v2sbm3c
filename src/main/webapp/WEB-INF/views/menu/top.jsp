@@ -23,6 +23,15 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+    
+    
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.scrollUp.min.js"></script>
+    <script src="../js/price-range.js"></script>
+    <script src="../js/jquery.prettyPhoto.js"></script>
+    <script src="../js/main.js"></script>
+    
 </head><!--/head-->
 
 <body>
@@ -33,20 +42,20 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="#"><i class="fa fa-phone"></i> 02 - 1234- 5678 </a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i> 삼대몇?@m2jcy.com</a></li>
+                                <li><a href="#">삼대몇?</a></li>
+                                <li><a href="#">하루삼끼</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="social-icons pull-right">
-                            <ul class="nav navbar-nav2">
+<!--                             <ul class="nav navbar-nav2">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>
@@ -63,25 +72,11 @@
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                    대한민국
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">KR</a></li>
-                                    <li><a href="#">USA</a></li>
-                                </ul>
+                               
                             </div>
                             
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                    Won
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Won</a></li>
-                                    <li><a href="#">Dollar</a></li>
-                                </ul>
+                               
                             </div>
                         </div>
                     </div>
@@ -117,7 +112,7 @@
             </div>
         </div><!--/header-middle-->
     
-        <!-- <div class="header-bottom">header-bottom
+        <div class="header-bottom">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-9">
@@ -131,35 +126,37 @@
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="index.html" class="active">Home</a></li>
-                                <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                            <li><a href="index.html"class="active">공지사항</a></li>
+                                <li class="dropdown"><a href="#">다이어트 꿀팁<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-                                        <li><a href="product-details.html">Product Details</a></li> 
-                                        <li><a href="checkout.html">Checkout</a></li> 
-                                        <li><a href="cart.html">Cart</a></li> 
-                                        <li><a href="login.html">Login</a></li> 
+                                        <li><a href="shop.html">전체</a></li>
+                                        <li><a href="product-details.html">칼럼</a></li> 
+                                        <li><a href="checkout.html">운동</a></li> 
+                                        <li><a href="cart.html">식단</a></li> 
+                                        <li><a href="login.html">성공후기</a></li> 
                                     </ul>
                                 </li> 
-                                <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                <li class="dropdown"><a href="#">커뮤니티<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-                                        <li><a href="blog-single.html">Blog Single</a></li>
+                                        <li><a href="blog.html">전체</a></li>
+                                        <li><a href="blog-single.html">팁&노하우</a></li>
+                                        <li><a href="shop.html">고민&질문</a></li>
+                                        <li><a href="product-details.html">자유게시판</a></li> 
                                     </ul>
-                                </li> 
-                                <li><a href="404.html">404</a></li>
-                                <li><a href="contact-us.html">Contact</a></li>
+                                </li>
+                                <li><a href="404.html">홈트레이닝</a></li> 
+                                <li><a href="404.html">칼로리사전</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="search_box pull-right">
+<!--                         <div class="search_box pull-right">
                             <input type="text" placeholder="Search"/>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
-        </div>/header-bottom-->
+        </div>
     </header>
   
   <%-- 내용 --%> 
