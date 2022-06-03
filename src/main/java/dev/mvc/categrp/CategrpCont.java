@@ -97,7 +97,7 @@ public class CategrpCont {
       ModelAndView mav = new ModelAndView();
       
       // 등록 순서별 출력    
-      // List<CategrpVO> list = this.categrpProc.list_categrpno_asc();
+//       List<CategrpVO> list = this.categrpProc.list_categrpno_asc();
 
       // 출력 순서별 출력
       List<CategrpVO> list = this.categrpProc.list_seqno_asc();
