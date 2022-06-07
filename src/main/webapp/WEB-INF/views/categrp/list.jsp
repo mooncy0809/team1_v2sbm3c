@@ -84,19 +84,19 @@
       <c:set var="visible" value="${categrpVO.visible }" />
       
       <TR>
-        <TD class="td_bs">${categrpVO.seqno }</TD>
-        <TD class="td_bs_left"> 
-        <A href = '../cate/list_by_categrpno.do?categrpno=${categrpno}'>${name }
-        </A>
-        </TD>
-        <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD>
-        <TD class="td_bs">
+        
           <c:choose>
             <c:when test="${visible == 'Y'}">
+                <TD class="td_bs">${categrpVO.seqno }</TD>
+                <TD class="td_bs_left"> 
+                    <A href = '../cate/list_by_categrpno.do?categrpno=${categrpno}'>${name }</A>
+                </TD>
+                <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD>
+                <TD class="td_bs">
               <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open.png" style='width: 18px;'></A>
             </c:when>
             <c:otherwise>
-              <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/close.png" style='width: 18px;'></A>
+                <td>N인데 왜 출력해 왜왜왜</td>
             </c:otherwise>
           </c:choose>
         </TD>   

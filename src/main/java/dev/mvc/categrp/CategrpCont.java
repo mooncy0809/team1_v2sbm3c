@@ -146,11 +146,10 @@ public class CategrpCont {
     @RequestMapping(value="/categrp/read_ajax2.do", method=RequestMethod.GET )
     @ResponseBody
     public String read_ajax2(int categrpno) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }    
+        /*
+         * try { Thread.sleep(2000); } catch (InterruptedException e) {
+         * e.printStackTrace(); }
+         */
 
         CategrpVO categrpVO = this.categrpProc.read(categrpno);
           

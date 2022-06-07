@@ -100,8 +100,6 @@
       $('#panel_update').css("display","none"); // hide, 태그를 숨김  
       $('#panel_delete').css("display",""); // show, 숨겨진 태그 출력 
 
-      $('#delete_submit').hide();
-      $('#btn_delete_cancel').hide();
       
       // return;
       
@@ -283,27 +281,42 @@
       <c:set var="visible" value="${categrpVO.visible }" />
       
       <TR>
-        <TD class="td_bs">${categrpVO.seqno }</TD>
+        <%-- <TD class="td_bs">${categrpVO.seqno }</TD>
         <TD class="td_bs_left"><A href="../cate/list_by_categrpno.do?categrpno=${categrpno }">${name }</A></TD>
-        <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD>
-        <TD class="td_bs">
-          <c:choose>
+        <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD> --%>
+        
+            <c:choose>
+            <c:when test="${visible == 'Y'}">
+                <TD class="td_bs">${categrpVO.seqno }</TD>
+                <TD class="td_bs_left"> 
+                    <A href = '../cate/list_by_categrpno.do?categrpno=${categrpno}'>${name }</A>
+                </TD>
+                <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD>
+                <TD class="td_bs">
+              <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open.png" style='width: 18px;'></A>
+              <TD class="td_bs">
+          <A href="../cate/create.do?categrpno=${categrpno }" title="${name } 등록"><i class="fa-solid fa-pen-to-square"></i></A>
+          <A href="javascript: read_update_ajax(${categrpno })" title="수정"><i class="fa-regular fa-pen-to-square"></i></A>
+          <A href="javascript: read_delete_ajax(${categrpno })" title="삭제"><i class="fa-solid fa-eraser"></i></A>
+          <A href="./update_seqno_up.do?categrpno=${categrpno }" title="우선순위 상향"><i class="fa-solid fa-angle-up"></i></A>
+          <A href="./update_seqno_down.do?categrpno=${categrpno }" title="우선순위 하향"><i class="fa-solid fa-angle-down"></i></A>         
+        </TD>
+            </c:when>
+            <c:otherwise>
+                
+            </c:otherwise>
+          </c:choose>
+          <%-- <c:choose>
             <c:when test="${visible == 'Y'}">  <!-- /categrp/images/open.png: /static/categrp/images/open.png -->
               <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open.png" style='width: 18px;'></A>
             </c:when>
             <c:otherwise>
               <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/close.png" style='width: 18px;'></A>
             </c:otherwise>
-          </c:choose>
-        </TD>   
+          </c:choose> --%>
+          
         
-        <TD class="td_bs">
-          <A href="../cate/create.do?categrpno=${categrpno }" title="${name } 등록"><i class="fa-solid fa-pen-to-square"></i></A>
-          <A href="javascript: read_update_ajax(${categrpno })" title="수정"><i class="fa-regular fa-pen-to-square"></i></A>
-          <A href="javascript: read_delete_ajax(${categrpno })" title="삭제"><i class="fa-solid fa-eraser"></i></A>
-          <A href="./update_seqno_up.do?categrpno=${categrpno }" title="우선순위 상향"><i class="fa-solid fa-angle-up"></i></A>
-          <A href="./update_seqno_down.do?categrpno=${categrpno }" title="우선순위 하향"><i class="fa-solid fa-angle-down"></i></A>         
-        </TD>   
+           
       </TR>   
     </c:forEach> 
     </tbody>

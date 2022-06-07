@@ -114,31 +114,40 @@
 <!--                            <li><a href="#"><i class="fa fa-star"></i> 위시리스트</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> 결제 </a></li>
                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li> -->
-                                <c:forEach var="categrpVO" items="${list}">
+                               <!-- <c:forEach var="categrpVO" items="${list}">
                                 <c:set var="categrpno" value="${categrpVO.categrpno }" />
                                 <c:set var="name" value="${categrpVO.name }" />
                                 <li><A href="../cate/list_by_categrpno.do?categrpno=${categrpno }">${name }</A></li>
-                                </c:forEach>
-                                <!-- <li><a href="index.html"class="active">공지사항</a></li>
+                                </c:forEach>   -->
+                                <li><a href="index.html"class="active">공지사항</a></li>
                                 <li class="dropdown"><a href="#">다이어트 꿀팁<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">전체</a></li>
-                                        <li><a href="product-details.html">칼럼</a></li> 
-                                        <li><a href="checkout.html">운동</a></li> 
-                                        <li><a href="cart.html">식단</a></li> 
-                                        <li><a href="login.html">성공후기</a></li> 
+                                        <c:forEach var="categrpVO" items="${list }">
+                                        <c:set var="categrpno" value="${categrpVO.categrpno }" />
+                                        <c:set var="name" value="${categrpVO.name }" />
+                                        <c:choose>
+                                            <c:when test="${categrpno == 2 }">
+                                            <li><a href="../cate/list_by_categrpno.do?categrpno=${categrpno }">${name }</a></li>
+                                            </c:when>
+                                        </c:choose>
+                                </c:forEach> 
                                     </ul>                                   
                                 </li> 
                                 <li class="dropdown"><a href="#">커뮤니티<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">전체</a></li>
-                                        <li><a href="blog-single.html">팁&노하우</a></li>
-                                        <li><a href="shop.html">고민&질문</a></li>
-                                        <li><a href="product-details.html">자유게시판</a></li> 
+                                        <c:forEach var="categrpVO" items="${list }">
+                                        <c:set var="categrpno" value="${categrpVO.categrpno }" />
+                                        <c:set var="name" value="${categrpVO.name }" />
+                                        <c:choose>
+                                            <c:when test="${categrpno == 7 }">
+                                            <li><a href="../cate/list_by_categrpno.do?categrpno=${categrpno }">${name }</a></li>
+                                            </c:when>
+                                        </c:choose>
+                                </c:forEach> 
                                     </ul>
                                 </li>
                                 <li><a href="404.html">홈트레이닝</a></li> 
-                                <li><a href="404.html">칼로리사전</a></li> -->
+                                <li><a href="404.html">칼로리사전</a></li>
 
                                 
                             </ul>
