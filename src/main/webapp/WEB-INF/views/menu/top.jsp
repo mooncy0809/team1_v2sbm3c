@@ -106,6 +106,10 @@
                                             href="/categrp/list.do"><i
                                                 class="fa fa-gears"></i>
                                                 관리자</a></li>
+                                                <li><a
+                                            href="../../you/list_by_categrpno.do?categrpno=4"><i
+                                                class="fa fa-gears"></i>
+                                                홈트레이닝</a></li>
                                     </c:when>
                                 </c:choose>
 
@@ -197,7 +201,7 @@
                             <li>DIET TIP</li>          </a>
                             <a href=""   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">         
                             <li>COMMUNITY</li>                </a>
-                            <a href=""   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">   
+                            <a href="../you/list_by_categrpno_grid.do?categrpno=4"   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">   
                             <li>HOME TRAINING</li>             </a>
                             <a href=""   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">      
                             <li>CALORIE DICTIONARY</li>           </a>

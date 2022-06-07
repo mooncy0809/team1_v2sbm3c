@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.you.YouDAOInter">
+  <insert id="create" parameterType="dev.mvc.you.YouVO">
+    INSERT INTO you(youno,ytitle,ytext,url,rdate,cnt,categrpno)
+    VALUES(you_seq.nextval, #{ytitle}, #{ytext}, #{url}, sysdate, #{cnt}, #{categrpno})
+  </insert>
+  <!-- 
+  즐겨찾기 전체 목록
+  레코드 갯수 만큼 YouVO 객체를 만들어 ArrayList에 저장하여 리턴,
+  List<YouVO> list = new ArrayList<YouVO>(); 
+  -->
+  <select id="list_all" resultType="dev.mvc.you.YouVO">
+    SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno
+    FROM you
+    ORDER BY youno ASC
+  </select>
+ <!-- 카테고리 그룹별 목록 -->
+  <select id="list_by_categrpno" resultType="dev.mvc.you.YouVO" parameterType="int">
+    SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno
+    FROM you
+    WHERE categrpno = #{categrpno}
+    ORDER BY youno ASC
+  </select>
+ 
+   <!-- 조회, id: read, 입력: youno, 리턴: YouVO -->
+  <select id="read" resultType="dev.mvc.you.YouVO" parameterType="int">
+    SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno
+    FROM you
+    WHERE youno=#{youno}
+  </select>  
+  
+  <update id="update" parameterType="dev.mvc.you.YouVO">
+    UPDATE you
+    SET categrpno=#{categrpno}, ytitle=#{ytitle}, ytext=#{ytext}
+    WHERE youno = #{youno}
+  </update>
+  
+  <!-- 삭제, return: int -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM you
+    WHERE youno = #{youno}
+  </delete>
+  
+  <update id="cnt">
+    UPDATE you 
+    SET cnt = cnt + 1
+    WHERE youno = #{youno}
+  </update>   
+</mapper>
+
