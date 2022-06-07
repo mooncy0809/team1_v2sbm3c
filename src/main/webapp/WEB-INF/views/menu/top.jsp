@@ -49,8 +49,8 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="#">삼대몇?</a></li>
-                                <li><a href="#">하루삼끼</a></li>
+                                <li><a href="./index.do">삼대몇?</a></li>
+                                <li><a href="./index2.do">하루삼끼</a></li>
                             </ul>
                         </div>
                     </div>

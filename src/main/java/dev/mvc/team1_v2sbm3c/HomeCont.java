@@ -42,4 +42,18 @@ public class HomeCont {
     
     return mav;
   }
+  
+//http://localhost:9091
+ @RequestMapping(value = "/index2.do", method = RequestMethod.GET)
+ public ModelAndView home2() {
+     
+   ModelAndView mav = new ModelAndView();
+   
+   mav.setViewName("/index2");  // /WEB-INF/views/index.jsp
+   
+   List<CateVO> list = this.cateProc.list_all();
+   mav.addObject("list", list); // request.setAttribute("list", list);   
+   
+   return mav;
+ }
 }
