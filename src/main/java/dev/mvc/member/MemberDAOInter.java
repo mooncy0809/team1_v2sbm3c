@@ -72,4 +72,17 @@ public interface MemberDAOInter {
    */
   public int login(Map<String, Object> map);
   
+  /**
+   * 아이디 찾기
+   */
+  public int find_id(Map<String, Object> map);
+  
+  /**
+   * tel로 회원 정보 조회
+   * @param id
+   * @return
+   */
+  public MemberVO read_id(Map<String, Object> map);
+  
+  
 }

@@ -721,5 +721,66 @@ public class MemberCont {
      }
      
      
+     /**
+      * 아이디 찾기 폼
+      * @param session
+      * @return
+      */
+     @RequestMapping(value="/member/find_id_form.do", 
+                                method=RequestMethod.GET)
+     public ModelAndView find_id_form(){
+       ModelAndView mav = new ModelAndView();
+       
+       mav.setViewName("/member/find_id_form");
+       
+       return mav;
+     }    
+     
+     
+     /**
+      * 아이디 찾기 처리
+      */
+     @RequestMapping(value = "/member/find_id_form.do", method = RequestMethod.POST)
+     public ModelAndView find_id(
+                               @RequestParam("mname") String mname,
+                               @RequestParam(value="tel") String tel) {
+         
+         ModelAndView mav = new ModelAndView();
+         
+         
+         Map<String, Object> map = new HashMap<String, Object>();
+         map.put("mname", mname);
+         map.put("tel", tel);
+         
+         int count = memberProc.find_id(map);
+         if (count == 1) { // 로그인 성공
+           // System.out.println(id + " 로그인 성공");
+           MemberVO memberVO = memberProc.read_id(map);
+           mav.addObject("id", memberVO.getId());
+                
+         }
+         
+         mav.setViewName("/member/find_id_result");
+         
+         
+         return mav;
+     }
+     
+     /**
+      * 아이디 찾기 결과 창
+      * @param 
+      * @return
+      */
+     @RequestMapping(value="/member/find_id_result.do", 
+                                method=RequestMethod.GET)
+     public ModelAndView find_id_result(MemberVO memberVO){
+       ModelAndView mav = new ModelAndView();
+       
+       mav.addObject("id", memberVO.getId());
+       mav.setViewName("/member/find_id_form_result");
+       
+       return mav;
+     }
+     
      
 }

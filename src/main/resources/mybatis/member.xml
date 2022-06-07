@@ -69,4 +69,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE id=#{id} AND passwd=#{passwd}
   </select>
   
+  <!-- 아이디 찾기 -->
+  <select id="find_id" resultType="int" parameterType="Map">
+    select COUNT(id) as cnt 
+    from member 
+    where mname = #{mname} AND tel = #{tel} 
+  </select>
+  
+    <!-- 아이디 찾기 회원정보 조회 -->
+  <select id="read_id" resultType="dev.mvc.member.MemberVO" parameterType="Map">
+    SELECT id
+    FROM member
+    WHERE mname = #{mname} AND tel = #{tel}
+  </select>
+  
 </mapper> 

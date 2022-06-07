@@ -29,6 +29,13 @@
   function send() {
       frm_login.submit();
   }
+
+  function enterkey() {
+      if (window.event.keyCode == 13) {
+          // 엔터키가 눌렸을 때
+          send();
+      }
+  }
 </script> 
 
 </head> 
@@ -66,7 +73,7 @@
             <label class="col-md-4 control-label" style='font-size: 0.8em;'>패스워드</label>    
             <div class="col-md-8">
               <input type='password' class="form-control" name='passwd' id='passwd' 
-                        value='${ck_passwd }' required="required" style='width: 40%;' placeholder="패스워드">
+                        value='${ck_passwd }' required="required" style='width: 40%;' placeholder="패스워드" onkeyup="enterkey()">
               <Label>
                 <input type='checkbox' name='passwd_save' value='Y' 
                           ${ck_passwd_save == 'Y' ? "checked='checked'" : "" }> 저장
@@ -79,8 +86,10 @@
     <div style='text-align: center; margin: 10px auto;'>
       <button type="button" id='btn_login' class="btn btn-info">로그인</button>
       <button type='button' onclick="location.href='./create.do'" class="btn btn-info">회원가입</button>
+      <button type='button' onclick="location.href='./find_id_form.do'" class="btn btn-info">아이디 찾기</button>
+      <button type='button' onclick="location.href='./find_pwd_form.do'" class="btn btn-info">비밀번호 찾기</button>
       <button type='button' id='btn_loadDefault' class="btn btn-info">테스트 계정</button>
-      <button type='button' id='btn_cancel' class="btn btn-info" onclick="location.href='../index.do'">취소</button> 
+      <button type='button' id='btn_cancel' class="btn btn-info" onclick="location.href='../index.do'">취소</button>
       <!-- <button type='button' id='btn_cancel' class="btn btn-info" onclick="$('#div_login').hide();">취소</button> -->
     </div>
   

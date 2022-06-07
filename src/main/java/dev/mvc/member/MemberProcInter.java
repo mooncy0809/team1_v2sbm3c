@@ -86,6 +86,18 @@ public interface MemberProcInter {
    * @param session
    * @return true: 관리자
    */
-  public boolean isAdmin(HttpSession session);   
+  public boolean isAdmin(HttpSession session);
+  
+  /**
+   * 아이디 찾기
+   */
+  public int find_id(Map<String, Object> map);
+  
+  /**
+   * tel로 회원 정보 조회
+   * @param id
+   * @return
+   */
+  public MemberVO read_id(Map<String, Object> map);
   
 }

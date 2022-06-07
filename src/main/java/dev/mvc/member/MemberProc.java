@@ -116,7 +116,21 @@ public class MemberProc implements MemberProcInter{
       }
       
       return sw;
+    }
+
+    @Override
+    public int find_id(Map<String, Object> map) {
+        int cnt = this.memberDAO.find_id(map);        
+        return cnt;
+    }
+
+    @Override
+    public MemberVO read_id(Map<String, Object> map) {
+        MemberVO memberVO = this.memberDAO.read_id(map);
+        return memberVO;
     } 
+    
+    
     
     
     
