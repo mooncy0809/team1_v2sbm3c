@@ -4,7 +4,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-2">
+                    <!-- <div class="col-sm-2">
                         <div class="companyinfo">
                             <h2><span>e</span>-shopper</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
@@ -76,12 +76,12 @@
                             <img src="/images/home/map.png" alt="" />
                             <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
         
-        <div class="footer-widget">
+       <!--  <div class="footer-widget">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-2">
@@ -140,8 +140,8 @@
                                 <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
                                 <p>Get the most recent updates from <br />our site and be updated your self...</p>
                             </form>
-                        </div>
-                    </div>
+                        </div> 
+                    </div>-->
                     
                 </div>
             </div>
@@ -149,9 +149,10 @@
         
         <div class="footer-bottom">
             <div class="container">
-                <div class="row">
-                    Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a></span></p>
-                </div>
+                 <div class="row"     style="padding-bottom: 50px;">
+                 Copyright (c) 2022. soldesk team1 All Rights Reserved.
+                    <!--Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a></span></p>-->
+                </div> 
             </div>
         </div>
         
