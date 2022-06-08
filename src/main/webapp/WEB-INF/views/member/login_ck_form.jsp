@@ -48,7 +48,7 @@
 <DIV class='content_body'>
   <DIV id='div_login' style='display: ;'>
     <div style='width: 100%; margin: 0px 0px 0px 0px;'>
-        <FORM name='frm_login' id='frm_login' method='POST' action='./login.do' class="form-horizontal">
+        <FORM name='frm_login' id='frm_login' method='post' action='./login.do' class="form-horizontal">
           <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
           <input type="hidden" name="contentsno" id="contentsno" value="contentsno">
           <input type="hidden" name="memberno" id="memberno" value="${sessionScope.memberno}">

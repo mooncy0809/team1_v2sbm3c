@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /*
         contentsno                            NUMBER(10)         NOT NULL         PRIMARY KEY,
-        adminno                              NUMBER(10)     NOT NULL ,
+        memberno                              NUMBER(10)     NOT NULL ,
         cateno                                NUMBER(10)         NOT NULL ,
         title                                 VARCHAR2(300)         NOT NULL,
         content                               CLOB                  NOT NULL,
@@ -18,17 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
         file1saved                            VARCHAR(100)          NULL,
         thumb1                              VARCHAR(100)          NULL,
         size1                                 NUMBER(10)      DEFAULT 0 NULL,  
-        price                                 NUMBER(10)      DEFAULT 0 NULL,  
-        dc                                    NUMBER(10)      DEFAULT 0 NULL,  
-        saleprice                            NUMBER(10)      DEFAULT 0 NULL,  
-        point                                 NUMBER(10)      DEFAULT 0 NULL,  
-        salecnt                               NUMBER(10)      DEFAULT 0 NULL,  
  */
 public class ContentsVO {
     /** 컨텐츠 번호 */
     private int contentsno;
     /** 관리자 번호 */
-    private int adminno;
+    private int memberno;
     /** 카테고리 번호 */
     private int cateno;
     /** 제목 */
@@ -57,29 +52,20 @@ public class ContentsVO {
     /** 메인 이미지 크기 */
     private long size1;
 
-    /** 정가 */
-    private int price;
-    /** 할인률 */
-    private int dc;
-    /** 판매가 */
-    private int saleprice;
-    /** 포인트 */
-    private int point;
-    /** 재고 수량 */
-    private int salecnt;
-    
     /**
      이미지 파일
      <input type='file' class="form-control" name='file1MF' id='file1MF' 
-                value='' placeholder="파일 선택">
+                    value='' placeholder="파일 선택">
      */
     private MultipartFile file1MF;
     
-    /** 메인 이미지 크기 단위, 파일 크기 */
-    private String size1_label = "";
-
+    /**
+     * 메인 이미지 크기 단위, 파일 크기 출력
+     */
+    private String size1_label;
+    
     public ContentsVO() { // 기본 생성자
-        
+
     }
 
     public int getContentsno() {
@@ -90,12 +76,12 @@ public class ContentsVO {
         this.contentsno = contentsno;
     }
 
-    public int getAdminno() {
-        return adminno;
+    public int getMemberno() {
+        return memberno;
     }
 
-    public void setAdminno(int adminno) {
-        this.adminno = adminno;
+    public void setMemberno(int memberno) {
+        this.memberno = memberno;
     }
 
     public int getCateno() {
@@ -202,46 +188,6 @@ public class ContentsVO {
         this.size1 = size1;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getDc() {
-        return dc;
-    }
-
-    public void setDc(int dc) {
-        this.dc = dc;
-    }
-
-    public int getSaleprice() {
-        return saleprice;
-    }
-
-    public void setSaleprice(int saleprice) {
-        this.saleprice = saleprice;
-    }
-
-    public int getPoint() {
-        return point;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
-    }
-
-    public int getSalecnt() {
-        return salecnt;
-    }
-
-    public void setSalecnt(int salecnt) {
-        this.salecnt = salecnt;
-    }
-
     public MultipartFile getFile1MF() {
         return file1MF;
     }
@@ -257,11 +203,5 @@ public class ContentsVO {
     public void setSize1_label(String size1_label) {
         this.size1_label = size1_label;
     }
-    
-    
-    
+
 }
-
-
-
-

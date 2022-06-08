@@ -12,45 +12,48 @@ import dev.mvc.tool.Tool;
 public class ContentsProc implements ContentsProcInter {
     @Autowired
     private ContentsDAOInter contentsDAO;
-
+    
     @Override
     public int create(ContentsVO contentsVO) {
         int cnt = this.contentsDAO.create(contentsVO);
         return cnt;
     }
-
-    /**
-     * 조회
-     */
+    
     @Override
-    public ContentsVO read(int contentsno) {
+    public ContentsVO update_read(int contentsno) {
         ContentsVO contentsVO = this.contentsDAO.read(contentsno);
-
-        String title = contentsVO.getTitle();
-        String content = contentsVO.getContent();
-
-        title = Tool.convertChar(title); // 특수 문자 처리
-        content = Tool.convertChar(content);
-
-        contentsVO.setTitle(title);
-        contentsVO.setContent(content);
-
-        long size1 = contentsVO.getSize1();
-        contentsVO.setSize1_label(Tool.unit(size1));
-
         return contentsVO;
     }
 
     @Override
-    public int product_update(ContentsVO contentsVO) {
-        int cnt = this.contentsDAO.product_update(contentsVO);
+    public ContentsVO read(int contentsno) {
+        ContentsVO contentsVO = this.contentsDAO.read(contentsno);
+        
+        String title = contentsVO.getTitle();
+        String content = contentsVO.getContent();
+        
+        title = Tool.convertChar(title);  // 특수 문자 처리
+        content = Tool.convertChar(content); 
+        
+        contentsVO.setTitle(title);
+        contentsVO.setContent(content);  
+        
+        long size1 = contentsVO.getSize1();
+        contentsVO.setSize1_label(Tool.unit(size1));
+        
+        return contentsVO;
+    }
+
+    @Override
+    public int product_update(ContentsVO contentVO) {
+        int cnt = this.contentsDAO.product_update(contentVO);
         return cnt;
     }
 
     @Override
     public List<ContentsVO> list_by_cateno(int cateno) {
         List<ContentsVO> list = this.contentsDAO.list_by_cateno(cateno);
-
+        
         for (ContentsVO contentsVO : list) {
             String content = contentsVO.getContent();
 
@@ -67,15 +70,16 @@ public class ContentsProc implements ContentsProcInter {
             contentsVO.setTitle(title);
             contentsVO.setContent(content);
         }
-
+        
         return list;
     }
+
     
     @Override
     public List<ContentsVO> list_by_cateno_search(HashMap<String, Object> hashMap) {
       List<ContentsVO> list = contentsDAO.list_by_cateno_search(hashMap);
       
-      for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
+      for (ContentsVO contentsVO : list) { // 내용이 150자 이상이면 150자만 선택
         String content = contentsVO.getContent();
         if (content.length() > 150) {
           content = content.substring(0, 150) + "...";
@@ -91,7 +95,7 @@ public class ContentsProc implements ContentsProcInter {
       int count = contentsDAO.search_count(hashMap);
       return count;
     }
-
+    
     @Override
     public List<ContentsVO> list_by_cateno_search_paging(HashMap<String, Object> map) {
       /*
@@ -130,8 +134,8 @@ public class ContentsProc implements ContentsProcInter {
       
       for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
         String content = contentsVO.getContent();
-        if (content.length() > 150) {
-          content = content.substring(0, 150) + "...";
+        if (content.length() > 160) {
+          content = content.substring(0, 160) + "...";
           contentsVO.setContent(content);
         }
         
@@ -239,7 +243,7 @@ public class ContentsProc implements ContentsProcInter {
     }
 
     @Override
-    public int passwd_check(HashMap map) {
+    public int passwd_check(HashMap<String, Object> map) {
         int cnt = this.contentsDAO.passwd_check(map);
         return cnt;
     }
@@ -249,14 +253,10 @@ public class ContentsProc implements ContentsProcInter {
         int cnt = this.contentsDAO.update_text(contentsVO);
         return cnt;
     }
-    
+
     @Override
     public int update_file(ContentsVO contentsVO) {
-        // System.out.println("-> ContentsProc update_file executed.");
-        // System.out.println("-> ContentsProc getContentsno(): " + contentsVO.getContentsno());
         int cnt = this.contentsDAO.update_file(contentsVO);
-        // System.out.println("-> ContentsProc cnt: " + cnt);
-        
         return cnt;
     }
     
@@ -271,8 +271,17 @@ public class ContentsProc implements ContentsProcInter {
         int cnt = this.contentsDAO.count_by_cateno(cateno);
         return cnt;
     }
+
+    @Override
+    public int cnt(int contentsno) {
+        int cnt = this.contentsDAO.cnt(contentsno);
+        return cnt;
+    }
+
+    @Override
+    public List<Cate_ContentsVO> list_all_join() {
+        List<Cate_ContentsVO> list = this.contentsDAO.list_all_join();
+        return list;
+    }
     
-
 }
-
-

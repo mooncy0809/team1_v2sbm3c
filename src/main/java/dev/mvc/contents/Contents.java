@@ -17,7 +17,7 @@ public class Contents {
         String path = "";
         if (File.separator.equals("\\")) {
             // path = "C:/kd/deploy/resort_v1sbm3c/contents/storage/";
-            path="C:\\kd\\ws_java\\resort_v1sbm3c\\src\\main\\resources\\static\\contents\\storage\\";
+            path = "C:\\kd\\ws_java\\resort_v1sbm3c\\src\\main\\resources\\static\\contents\\storage\\";
             // System.out.println("Windows 10: " + path);
             
         } else {

@@ -1,6 +1,9 @@
 /**********************************/
 /* Table Name: 카테고리 */
 /**********************************/
+
+DROP table cate;
+
 CREATE TABLE cate(
         cateno                                NUMBER(10)         NOT NULL         PRIMARY KEY,
         categrpno                             NUMBER(10)         NULL ,
@@ -9,6 +12,8 @@ CREATE TABLE cate(
         cnt                                   NUMBER(10)         DEFAULT 0         NOT NULL,
   FOREIGN KEY (categrpno) REFERENCES categrp (categrpno)
 );
+
+DROP SEQUENCE cate_seq;
 
 CREATE SEQUENCE cate_seq
   START WITH 1              -- 시작 번호
@@ -30,6 +35,21 @@ VALUES(cate_seq.nextval, 2, '꿀꿀', sysdate, 0);
 
 INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
 VALUES(cate_seq.nextval, 2, '꿀팁입니다', sysdate, 0);
+
+INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
+VALUES(cate_seq.nextval, 3, '전체', sysdate, 0);
+
+INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
+VALUES(cate_seq.nextval, 3, '자유게시판', sysdate, 0);
+
+INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
+VALUES(cate_seq.nextval, 3, '팁/노하우', sysdate, 0);
+
+INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
+VALUES(cate_seq.nextval, 3, '고민/질문', sysdate, 0);
+
+INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
+VALUES(cate_seq.nextval, 3, '일기', sysdate, 0);
 
 INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
 VALUES(cate_seq.nextval, 7, '닭가슴살', sysdate, 0);
