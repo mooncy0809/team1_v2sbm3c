@@ -570,9 +570,7 @@ public class MemberCont {
       session.setAttribute("memberno", memberVO.getMemberno()); // 서버의 메모리에 기록
       session.setAttribute("id", id);
       session.setAttribute("mname", memberVO.getMname());
-      session.setAttribute("grade", memberVO.getGrade());
-      
-      System.out.println(session.getAttribute("memberno"));
+      session.setAttribute("grade", memberVO.getGrade());     
       
       // -------------------------------------------------------------------
       // id 관련 쿠기 저장

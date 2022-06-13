@@ -62,7 +62,7 @@ public class Download extends javax.servlet.http.HttpServlet {
     // 저장 폴더를 절대 경로로 변환, /contents/storage
     String dir = request.getParameter("dir");
     if (dir.equals("/contents/storage")) {
-        dir = Contents.getUploadDir();  // C:/kd/deploy/resort_v1sbm3c/contents/storage/
+        dir = Contents.getUploadDir();
     }
 
 //    if (dir.equals("/contents/storage")) {
@@ -94,7 +94,7 @@ public class Download extends javax.servlet.http.HttpServlet {
     String contentType = getType(fileStr);
     // System.out.println("다운로드 타입: " + contentType);
 
-    // 브러우저는 plugin 파일을 열지말고(jpg, pdf 파일등은 자동열림) 다운로드를 진행 할 것. 
+    // 브라우저는 plugin 파일을 열지말고(jpb, pdf 파일등은 자동열림) 다운로드를 진행 할 것.
     String disposition = getDisposition(downname, getBrowser(request));
     response.addHeader("Content-disposition", disposition);
     response.setHeader("Content-Transfer-Encoding", "binary");

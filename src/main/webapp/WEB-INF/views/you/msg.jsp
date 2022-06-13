@@ -69,7 +69,7 @@ code: ${code } / count: ${count }
             </c:when>
         </c:choose>
         
-        <button type="button" onclick="location.href='./list_by_categrpno.do?categrpno=${param.categrpno}'" class="btn btn-primary">목록</button>
+        <button type="button" onclick="location.href='./list_by_categrpno_search_paging.do?categrpno=${param.categrpno}'" class="btn btn-primary">목록</button>
       </LI>
     </UL>
   </fieldset>

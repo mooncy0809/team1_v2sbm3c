@@ -83,4 +83,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE mname = #{mname} AND tel = #{tel}
   </select>
   
+  
+  
 </mapper> 

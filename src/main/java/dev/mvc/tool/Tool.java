@@ -351,10 +351,11 @@ public class Tool {
    */
   public static synchronized String getFname(String path) {
       // Windows: \, Linux: /
-      // System.out.println("-> File.separator: " +  File.separator);
+      System.out.println("-> File.separator: " +  File.separator);
       
-      int last_separator_idx = path.lastIndexOf(File.separator); // \, /
-      // System.out.println("-> last_separator_idx: " +  last_separator_idx);
+      // 마지막으로 등장한 파일 구분자 위치 \, /
+      int last_separator_idx = path.lastIndexOf(File.separator);
+      System.out.println("-> last_separator_idx: " +  last_separator_idx);
       
       String fname =  path.substring(last_separator_idx+1); // \ 제외
       System.out.println("-> fname: " +  fname);
@@ -370,17 +371,21 @@ public class Tool {
    */
   public static String youtube(String url, int width, int height) {
       int width1 = url.indexOf("\""); // 처음부터 "위치
-      int width2 = url.indexOf("\"", width1+1); // width1+1부터 "위치 찾음
-      int height1 = url.indexOf("\"", width2+1); // width2+1부터 "위치 찾음
-      int height2 = url.indexOf("\"", height1+1); // width1부터 "위치 찾음
-
-      url = url.substring(0, width1+1) + width +"%" + url.substring(width2, height1+1) + height + url.substring(height2);
-
+      int width2 = url.indexOf("\"", width1 + 1); // width1부터 "위치 찾음
+      int height1 = url.indexOf("\"", width2 + 1); // width1부터 "위치 찾음
+      int height2 = url.indexOf("\"", height1 + 1); // width1부터 "위치 찾음
+      
+      url = url.substring(0, width1 + 1) + width + url.substring(width2, height1+1) + height + url.substring(height2);
+      
       return url;
   }
-}
   
-
+  public static void main(String[] args) {
+     // getFname("C:/kd/sw_images_kd1/spring/spring.jpg");
+      getFname("C:\\kd\\sw_images_kd1\\spring\\spring.jpg");
+  }
+  
+}
 
 
 
