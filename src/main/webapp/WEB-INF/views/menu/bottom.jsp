@@ -148,10 +148,17 @@
         </div>
         
         <div class="footer-bottom">
+       
             <div class="container">
                  <div class="row"     style="padding-bottom: 50px;">
+                 <div class="col-sm-4">
                  Copyright (c) 2022. soldesk team1 All Rights Reserved.
                     <!--Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a></span></p>-->
+                    </div>
+                    <div class="col-sm-8" style="padding-left: 550px;">
+                    
+                    <button type="button" onclick="location.href='../qna/member_join.do?categrpno=4&memberno=${sessionScope.memberno}' ">관리자에게</button>
+                    </div>
                 </div> 
             </div>
         </div>
