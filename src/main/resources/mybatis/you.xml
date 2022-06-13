@@ -51,5 +51,81 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     SET cnt = cnt + 1
     WHERE youno = #{youno}
   </update>   
+  
+  <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
+  <select id="list_by_categrpno_grid_search_paging" 
+             resultType="dev.mvc.you.YouVO" parameterType="HashMap">
+   SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno, r
+   FROM (
+              SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno, rownum as r
+              FROM (
+                        SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno
+                        FROM you
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE categrpno=#{categrpno}
+                          </when>
+                          <otherwise>
+                            WHERE categrpno=#{categrpno} AND (UPPER(ytitle) LIKE '%' || #{word} || '%'  <!-- ||: 결합, %첫눈% -->
+                                                                  OR UPPER(ytext) LIKE '%' || #{word} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY youno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+   <!--  1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30; -->
+     
+  </select> 
+  
+  
+  <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM you
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE categrpno=#{categrpno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE categrpno=#{categrpno} AND (UPPER(ytitle) LIKE '%' || #{word} || '%' 
+                                                     OR UPPER(ytext) LIKE '%' || #{word} || '%' )
+      </otherwise>
+    </choose>
+  </select>
+  
+   <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
+  <select id="list_by_categrpno_search_paging" 
+             resultType="dev.mvc.you.YouVO" parameterType="HashMap">
+   SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno, r
+   FROM (
+              SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno, rownum as r
+              FROM (
+                        SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno
+                        FROM you
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE categrpno=#{categrpno}
+                          </when>
+                          <otherwise>
+                            WHERE categrpno=#{categrpno} AND (UPPER(ytitle) LIKE '%' || #{word} || '%'  <!-- ||: 결합, %첫눈% -->
+                                                                  OR UPPER(ytext) LIKE '%' || #{word} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY youno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+   <!--  1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30; -->
+     
+  </select> 
+  
+  
 </mapper>
 
