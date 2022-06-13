@@ -1,8 +1,8 @@
-package dev.mvc.contents;
+package dev.mvc.product;
 
 import java.io.File;
 
-public class Contents {
+public class Product {
     /** 페이지당 출력할 레코드 갯수 */
     public static int RECORD_PER_PAGE = 3;
 

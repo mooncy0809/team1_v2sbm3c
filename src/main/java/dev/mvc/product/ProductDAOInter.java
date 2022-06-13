@@ -1,44 +1,44 @@
-package dev.mvc.contents;
+package dev.mvc.product;
 
 import java.util.HashMap;
 import java.util.List;
 
-public interface ContentsDAOInter {
+public interface ProductDAOInter {
     /**
      * 등록
-     * @param contentsVO 등록할 내용
+     * @param productVO 등록할 내용
      * @return 등록된 레코드 갯수
      */
-    public int create(ContentsVO contentsVO);
+    public int create(ProductVO productVO);
     
     /**
      * 조회
-     * select id="read" resultType="dev.mvc.contents.ContentsVO" parameterType="int"
-     * @param contentsno
+     * select id="read" resultType="dev.mvc.product.ProductVO" parameterType="int"
+     * @param productno
      * @return
      */
-    public ContentsVO read(int contentsno);
+    public ProductVO read(int productno);
     
     /**
      * 상품 정보 변경
-     * @param contentsVO
+     * @param productVO
      * @return
      */
-    public int product_update(ContentsVO contentsVO);
+    public int product_update(ProductVO productVO);
     
     /**
      * 특정 카테고리의 등록된 글목록
      * @param cateno
      * @return
      */
-    public List<ContentsVO> list_by_cateno(int cateno);
+    public List<ProductVO> list_by_cateno(int cateno);
     
     /**
      * 카테고리별 검색 목록
      * @param hashMap
      * @return
      */
-    public List<ContentsVO> list_by_cateno_search(HashMap<String, Object> hashMap);
+    public List<ProductVO> list_by_cateno_search(HashMap<String, Object> hashMap);
 
     /**
      * 카테고리별 검색 레코드 갯수
@@ -50,11 +50,11 @@ public interface ContentsDAOInter {
     /**
      * 검색 + 페이징 목록
      * select id="list_by_cateno_search_paging" 
-             resultType="dev.mvc.contents.ContentsVO" parameterType="HashMap"
+             resultType="dev.mvc.product.ProductVO" parameterType="HashMap"
      * @param map
      * @return
      */
-    public List<ContentsVO> list_by_cateno_search_paging(HashMap<String, Object> map);
+    public List<ProductVO> list_by_cateno_search_paging(HashMap<String, Object> map);
     
     /**
      * 패스워드 검사
@@ -65,24 +65,24 @@ public interface ContentsDAOInter {
     
     /**
      * 텍스트 정보 수정
-     * @param contentsVO
+     * @param productVO
      * @return 처리된 레코드 갯수
      */
-    public int update_text(ContentsVO contentsVO);
+    public int update_text(ProductVO productVO);
     
     /**
      * 파일 정보 수정
-     * @param contentsVO
+     * @param productVO
      * @return 처리된 레코드 갯수
      */
-    public int update_file(ContentsVO contentsVO);
+    public int update_file(ProductVO productVO);
     
     /**
      * 삭제
-     * @param contentsno
+     * @param productno
      * @return 삭제된 레코드 개수
      */
-    public int delete(int contentsno);
+    public int delete(int productno);
     
     /**
      * 카테고리 번호에 의한 카운트 

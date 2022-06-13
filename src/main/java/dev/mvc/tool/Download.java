@@ -15,7 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dev.mvc.contents.Contents;
+import dev.mvc.product.Product;
 
 // dev.mvc.resort_v1sbm3c.ServletRegister.java에서 등록
 public class Download extends javax.servlet.http.HttpServlet {
@@ -62,7 +62,7 @@ public class Download extends javax.servlet.http.HttpServlet {
     // 저장 폴더를 절대 경로로 변환, /contents/storage
     String dir = request.getParameter("dir");
     if (dir.equals("/contents/storage")) {
-        dir = Contents.getUploadDir();  // C:/kd/deploy/resort_v1sbm3c/contents/storage/
+        dir = Product.getUploadDir();  // C:/kd/deploy/resort_v1sbm3c/contents/storage/
     }
 
 //    if (dir.equals("/contents/storage")) {

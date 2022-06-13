@@ -1,4 +1,4 @@
-package dev.mvc.contents;
+package dev.mvc.product;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +23,7 @@ import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
 @Controller
-public class ContentsCont {
+public class ProductCont {
     // CategrpProcInter를 [구현한 CategrpProc 클래스]의 객체를 자동으로 만들어 할당
     @Autowired
     @Qualifier("dev.mvc.categrp.CategrpProc") // @Component("dev.mvc.categrp.CategrpProc")
@@ -34,11 +34,11 @@ public class ContentsCont {
     private CateProcInter cateProc;
 
     @Autowired
-    @Qualifier("dev.mvc.contents.ContentsProc")
-    private ContentsProcInter contentsProc;
+    @Qualifier("dev.mvc.product.ProductProc")
+    private ProductProcInter productProc;
 
-    public ContentsCont() {
-        System.out.println("-> ContentsCont created.");
+    public ProductCont() {
+        System.out.println("-> ProductCont created.");
     }
 
     /**
@@ -46,7 +46,7 @@ public class ContentsCont {
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/msg.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/msg.do", method = RequestMethod.GET)
     public ModelAndView msg(String url) {
         ModelAndView mav = new ModelAndView();
 
@@ -56,16 +56,16 @@ public class ContentsCont {
     }
 
     /**
-     * 등록폼 http://localhost:9091/contents/create.do
-     * http://localhost:9091/contents/create.do?cateno=1 FK 값 명시
-     * http://localhost:9091/contents/create.do?cateno=4 FK 값 명시
+     * 등록폼 http://localhost:9091/product/create.do
+     * http://localhost:9091/product/create.do?cateno=1 FK 값 명시
+     * http://localhost:9091/product/create.do?cateno=4 FK 값 명시
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/create.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/create.do", method = RequestMethod.GET)
     public ModelAndView create(int cateno) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/contents/create"); // /webapp/WEB-INF/views/contents/create.jsp
+        mav.setViewName("/product/create"); // /webapp/WEB-INF/views/product/create.jsp
 
         CateVO cateVO = this.cateProc.read(cateno);
         mav.addObject("cateVO", cateVO);
@@ -77,20 +77,20 @@ public class ContentsCont {
     }
 
     /**
-     * 등록 처리 http://localhost:9091/contents/create.do
+     * 등록 처리 http://localhost:9091/product/create.do
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/create.do", method = RequestMethod.POST)
-    public ModelAndView create(HttpServletRequest request, ContentsVO contentsVO) {
+    @RequestMapping(value = "/product/create.do", method = RequestMethod.POST)
+    public ModelAndView create(HttpServletRequest request, ProductVO productVO) {
         ModelAndView mav = new ModelAndView();
 
         // ------------------------------------------------------------------------------
         // 파일 전송 코드 시작
         // ------------------------------------------------------------------------------
-        String file1 = ""; // 원본 파일명 image
-        String file1saved = ""; // 저장된 파일명, image
-        String thumb1 = ""; // preview image
+        String pfile1 = ""; // 원본 파일명 image
+        String pfile1saved = ""; // 저장된 파일명, image
+        String pthumb1 = ""; // preview image
 
         // 기준 경로 확인
         String user_dir = System.getProperty("user.dir"); // 시스템 제공
@@ -99,87 +99,87 @@ public class ContentsCont {
 
         // 파일 접근임으로 절대 경로 지정, static 폴더 지정
         // 완성된 경로
-        // C:/kd1/ws_java/resort_v1sbm3c/src/main/resources/static/contents/storage
-        String upDir = user_dir + "/src/main/resources/static/contents/storage/"; // 절대 경로
+        // C:/kd1/ws_java/resort_v1sbm3c/src/main/resources/static/product/storage
+        String upDir = user_dir + "/src/main/resources/static/product/storage/"; // 절대 경로
         // System.out.println("-> upDir: " + upDir);
 
         // 전송 파일이 없어도 file1MF 객체가 생성됨.
         // <input type='file' class="form-control" name='file1MF' id='file1MF'
         // value='' placeholder="파일 선택">
-        MultipartFile mf = contentsVO.getFile1MF();
+        MultipartFile mf = productVO.getPfile1MF();
 
-        file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
+        pfile1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
         // System.out.println("-> file1: " + file1);
 
-        long size1 = mf.getSize(); // 파일 크기
+        long psize1 = mf.getSize(); // 파일 크기
 
-        if (size1 > 0) { // 파일 크기 체크
+        if (psize1 > 0) { // 파일 크기 체크
             // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
-            file1saved = Upload.saveFileSpring(mf, upDir);
+            pfile1saved = Upload.saveFileSpring(mf, upDir);
 
-            if (Tool.isImage(file1saved)) { // 이미지인지 검사
+            if (Tool.isImage(pfile1saved)) { // 이미지인지 검사
                 // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
-                thumb1 = Tool.preview(upDir, file1saved, 200, 150); // 저장 폴더, 저장된 파일명, width, height
+                pthumb1 = Tool.preview(upDir, pfile1saved, 200, 150); // 저장 폴더, 저장된 파일명, width, height
             }
 
         }
 
-        contentsVO.setFile1(file1); // 원본 파일명
-        contentsVO.setFile1saved(file1saved); // 실제 저장된 파일명
-        contentsVO.setThumb1(thumb1); // 축소 이미지
-        contentsVO.setSize1(size1); // 파일 크기
+        productVO.setPfile1(pfile1); // 원본 파일명
+        productVO.setPfile1saved(pfile1saved); // 실제 저장된 파일명
+        productVO.setPthumb1(pthumb1); // 축소 이미지
+        productVO.setPsize1(psize1); // 파일 크기
         // ------------------------------------------------------------------------------
         // 파일 전송 코드 종료
         // ------------------------------------------------------------------------------
 
-        int cnt = this.contentsProc.create(contentsVO); // Call By Reference: 메모리 공유, Hashcode 전달
+        int cnt = this.productProc.create(productVO); // Call By Reference: 메모리 공유, Hashcode 전달
 
         // ------------------------------------------------------------------------------
         // 글번호 PK의 return
         // ------------------------------------------------------------------------------
-        // System.out.println("--> contentsno: " + contentsVO.getContentsno());
-        mav.addObject("contentsno", contentsVO.getContentsno()); // redirect parameter 적용
+        // System.out.println("--> productno: " + productVO.getProductno());
+        mav.addObject("productno", productVO.getProductno()); // redirect parameter 적용
         // ------------------------------------------------------------------------------
 
         if (cnt == 1) {
             mav.addObject("code", "create_success");
-            // cateProc.increaseCnt(contentsVO.getCateno()); // 글수 증가
+            // cateProc.increaseCnt(productVO.getCateno()); // 글수 증가
         } else {
             mav.addObject("code", "create_fail");
         }
         mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
 
-        // System.out.println("--> cateno: " + contentsVO.getCateno());
+        // System.out.println("--> cateno: " + productVO.getCateno());
         // redirect시에 hidden tag로 보낸것들이 전달이 안됨으로 request에 다시 저장
-        mav.addObject("cateno", contentsVO.getCateno()); // redirect parameter 적용
-        mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
+        mav.addObject("cateno", productVO.getCateno()); // redirect parameter 적용
+        mav.addObject("url", "/product/msg"); // msg.jsp, redirect parameter 적용
 
-        mav.setViewName("redirect:/contents/msg.do"); // GET 방식 호출, 전달되는데이터도 URL에 결합됨.
+        mav.setViewName("redirect:/product/msg.do"); // GET 방식 호출, 전달되는데이터도 URL에 결합됨.
 
         return mav; // forward
     }
 
     /**
      * 상품 정보 수정 폼 사전 준비된 레코드: 관리자 1번, cateno 1번, categrpno 1번을 사용하는 경우 테스트 URL
-     * http://localhost:9091/contents/create.do?cateno=1
+     * http://localhost:9091/product/create.do?cateno=1
      * 
      * @param cateno     카테고리번호
-     * @param contentsno 현재 insert한 글번호
+     * @param productno 현재 insert한 글번호
      * @return
      */
-    @RequestMapping(value = "/contents/product_update.do", method = RequestMethod.GET)
-    public ModelAndView product_update(int cateno, int contentsno) {
+    @RequestMapping(value = "/product/product_update.do", method = RequestMethod.GET)
+    public ModelAndView product_update(int cateno, int productno) {
         ModelAndView mav = new ModelAndView();
 
         CateVO cateVO = this.cateProc.read(cateno);
         CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
-        ContentsVO contentsVO = this.contentsProc.read(contentsno);
+        ProductVO productVO = this.productProc.read(productno);
 
         mav.addObject("cateVO", cateVO);
         mav.addObject("categrpVO", categrpVO);
-        mav.addObject("contentsVO", contentsVO);
+        mav.addObject("productVO", productVO);
 
-        mav.setViewName("/contents/product_update"); // /views/contents/product_update.jsp
+        mav.setViewName("/product/product_update"); // /views/product/product_update.jsp
         // String content = "장소:\n인원:\n준비물:\n비용:\n기타:\n";
         // mav.addObject("content", content);
 
@@ -187,24 +187,24 @@ public class ContentsCont {
     }
 
     /**
-     * 상품 정보 수정 처리 http://localhost:9091/contents/product_update.do
+     * 상품 정보 수정 처리 http://localhost:9091/product/product_update.do
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/product_update.do", method = RequestMethod.POST)
-    public ModelAndView product_update(ContentsVO contentsVO) {
+    @RequestMapping(value = "/product/product_update.do", method = RequestMethod.POST)
+    public ModelAndView product_update(ProductVO productVO) {
         ModelAndView mav = new ModelAndView();
 
         // Call By Reference: 메모리 공유, Hashcode 전달
-        int cnt = this.contentsProc.product_update(contentsVO);
+        int cnt = this.productProc.product_update(productVO);
 
         mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
-        mav.addObject("cateno", contentsVO.getCateno()); // redirect parameter 적용
+        mav.addObject("cateno", productVO.getCateno()); // redirect parameter 적용
 
-        // 연속 입력 지원용 변수, Call By Reference에 기반하여 contentsno를 전달 받음
-        mav.addObject("contentsno", contentsVO.getContentsno());
+        // 연속 입력 지원용 변수, Call By Reference에 기반하여 productno를 전달 받음
+        mav.addObject("productno", productVO.getProductno());
 
-        mav.addObject("url", "/contents/msg"); // msg.jsp
+        mav.addObject("url", "/product/msg"); // msg.jsp
 
         if (cnt == 1) {
             mav.addObject("code", "product_success");
@@ -212,23 +212,23 @@ public class ContentsCont {
             mav.addObject("code", "product_fail");
         }
 
-        mav.setViewName("redirect:/contents/msg.do");
+        mav.setViewName("redirect:/product/msg.do");
 
         return mav; // forward
     }
 
     /**
-     * 카테고리별 컨텐츠 목록 http://localhost:9091/contents/list_by_cateno.do?cateno=1
+     * 카테고리별 컨텐츠 목록 http://localhost:9091/product/list_by_cateno.do?cateno=1
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/list_by_cateno.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/list_by_cateno.do", method = RequestMethod.GET)
     public ModelAndView list_by_cateno(int cateno) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/contents/list_by_cateno");
+        mav.setViewName("/product/list_by_cateno");
 
-        // 테이블 이미지 기반, /webapp/contents/list_by_cateno.jsp
-        mav.setViewName("/contents/list_by_cateno");
+        // 테이블 이미지 기반, /webapp/product/list_by_cateno.jsp
+        mav.setViewName("/product/list_by_cateno");
 
         CateVO cateVO = this.cateProc.read(cateno);
         mav.addObject("cateVO", cateVO);
@@ -236,61 +236,61 @@ public class ContentsCont {
         CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
         mav.addObject("categrpVO", categrpVO);
 
-        List<ContentsVO> list = this.contentsProc.list_by_cateno(cateno);
+        List<ProductVO> list = this.productProc.list_by_cateno(cateno);
         mav.addObject("list", list);
 
         return mav; // forward
     }
 
-    // http://localhost:9091/contents/read.do?contentsno=1
+    // http://localhost:9091/product/read.do?productno=1
     /**
      * 조회
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/read.do", method = RequestMethod.GET)
-    public ModelAndView read(int contentsno) {
+    @RequestMapping(value = "/product/read.do", method = RequestMethod.GET)
+    public ModelAndView read(int productno) {
         ModelAndView mav = new ModelAndView();
 
-        ContentsVO contentsVO = this.contentsProc.read(contentsno);
-        mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
+        ProductVO productVO = this.productProc.read(productno);
+        mav.addObject("productVO", productVO); // request.setAttribute("productVO", productVO);
 
-        CateVO cateVO = this.cateProc.read(contentsVO.getCateno());
+        CateVO cateVO = this.cateProc.read(productVO.getCateno());
         mav.addObject("cateVO", cateVO);
 
         CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
         mav.addObject("categrpVO", categrpVO);
 
-        mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
+        mav.setViewName("/product/read"); // /WEB-INF/views/product/read.jsp
 
         return mav;
     }
 
     /**
      * 목록 + 검색 지원
-     * http://localhost:9091/contents/list_by_cateno_search.do?cateno=1&word=스위스
+     * http://localhost:9091/product/list_by_cateno_search.do?cateno=1&word=스위스
      * 
      * @param cateno
      * @param word
      * @return
      */
-    @RequestMapping(value = "/contents/list_by_cateno_search.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/list_by_cateno_search.do", method = RequestMethod.GET)
     public ModelAndView list_by_cateno_search(@RequestParam(value = "cateno", defaultValue = "1") int cateno,
-            @RequestParam(value = "word", defaultValue = "") String word) {
+            @RequestParam(value = "pword", defaultValue = "") String word) {
 
         ModelAndView mav = new ModelAndView();
 
         // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
         HashMap<String, Object> map = new HashMap<String, Object>(); // 키, 값
         map.put("cateno", cateno); // #{cateno}
-        map.put("word", word.toUpperCase()); // #{word}
+        map.put("pword", word.toUpperCase()); // #{word}
 
         // 검색 목록
-        List<ContentsVO> list = contentsProc.list_by_cateno_search(map);
+        List<ProductVO> list = productProc.list_by_cateno_search(map);
         mav.addObject("list", list);
 
         // 검색된 레코드 갯수
-        int search_count = contentsProc.search_count(map);
+        int search_count = productProc.search_count(map);
         mav.addObject("search_count", search_count);
 
         CateVO cateVO = cateProc.read(cateno);
@@ -299,21 +299,21 @@ public class ContentsCont {
         CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
         mav.addObject("categrpVO", categrpVO);
 
-        mav.setViewName("/contents/list_by_cateno_search"); // /contents/list_by_cateno_search.jsp
+        mav.setViewName("/product/list_by_cateno_search"); // /product/list_by_cateno_search.jsp
 
         return mav;
     }
 
 //    /**
 //     * 목록 + 검색 + 페이징 지원
-//     * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+//     * http://localhost:9090/product/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
 //     * 
 //     * @param cateno
 //     * @param word
 //     * @param now_page
 //     * @return
 //     */
-//    @RequestMapping(value = "/contents/list_by_cateno_search_paging.do", method = RequestMethod.GET)
+//    @RequestMapping(value = "/product/list_by_cateno_search_paging.do", method = RequestMethod.GET)
 //    public ModelAndView list_by_cateno_search_paging(
 //            @RequestParam(value = "cateno", defaultValue = "1") int cateno,
 //            @RequestParam(value = "word", defaultValue = "") String word,
@@ -329,11 +329,11 @@ public class ContentsCont {
 //        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 //
 //        // 검색 목록
-//        List<ContentsVO> list = contentsProc.list_by_cateno_search_paging(map);
+//        List<ProductVO> list = productProc.list_by_cateno_search_paging(map);
 //        mav.addObject("list", list);
 //
 //        // 검색된 레코드 갯수
-//        int search_count = contentsProc.search_count(map);
+//        int search_count = productProc.search_count(map);
 //        mav.addObject("search_count", search_count);
 //
 //        CateVO cateVO = cateProc.read(cateno);
@@ -351,31 +351,31 @@ public class ContentsCont {
 //         * @param word 검색어
 //         * @return 페이징용으로 생성된 HTML/CSS tag 문자열
 //         */
-//        String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
+//        String paging = productProc.pagingBox(cateno, search_count, now_page, word);
 //        // System.out.println("-> paging: " + paging);
 //        mav.addObject("paging", paging);
 //
 //        // mav.addObject("now_page", now_page);
 //
-//        // /contents/list_by_cateno_table_img1_search_paging.jsp
-//        mav.setViewName("/contents/list_by_cateno_search_paging");
+//        // /product/list_by_cateno_table_img1_search_paging.jsp
+//        mav.setViewName("/product/list_by_cateno_search_paging");
 //
 //        return mav;
 //    }
 
     /**
      * 목록 + 검색 + 페이징 + Cookie 지원
-     * http://localhost:9091/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+     * http://localhost:9091/product/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
      * 
      * @param cateno
      * @param word
      * @param now_page
      * @return
      */
-    @RequestMapping(value = "/contents/list_by_cateno_search_paging.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/list_by_cateno_search_paging.do", method = RequestMethod.GET)
     public ModelAndView list_by_cateno_search_paging_cookie(
         @RequestParam(value = "cateno", defaultValue = "1") int cateno,
-        @RequestParam(value = "word", defaultValue = "") String word,
+        @RequestParam(value = "pword", defaultValue = "") String word,
         @RequestParam(value = "now_page", defaultValue = "1") int now_page,
         HttpServletRequest request) {
       System.out.println("-> list_by_cateno_search_paging now_page: " + now_page);
@@ -385,15 +385,15 @@ public class ContentsCont {
       // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
+      map.put("pword", word); // #{word}
       map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
       // 검색 목록
-      List<ContentsVO> list = contentsProc.list_by_cateno_search_paging(map);
+      List<ProductVO> list = productProc.list_by_cateno_search_paging(map);
       mav.addObject("list", list);
 
       // 검색된 레코드 갯수
-      int search_count = contentsProc.search_count(map);
+      int search_count = productProc.search_count(map);
       mav.addObject("search_count", search_count);
 
       CateVO cateVO = cateProc.read(cateno);
@@ -411,16 +411,15 @@ public class ContentsCont {
        * @param word 검색어
        * @return 페이징 생성 문자열
        */
-      String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
+      String paging = productProc.pagingBox(cateno, search_count, now_page, word);
      
       mav.addObject("paging", paging);
 
       mav.addObject("now_page", now_page);
 
-      // /views/contents/list_by_cateno_search_paging_cookie.jsp
-      // mav.setViewName("/contents/list_by_cateno_search_paging_cookie");
-      mav.setViewName("/contents/list_by_cateno_search_paging_cookie_cart");
-
+      // /views/product/list_by_cateno_search_paging_cookie.jsp
+      // mav.setViewName("/product/list_by_cateno_search_paging_cookie");
+      mav.setViewName("/product/list_by_cateno_search_paging_cookie_cart");
       // -------------------------------------------------------------------------------
       // 쇼핑 카트 장바구니에 상품 등록전 로그인 폼 출력 관련 쿠기  
       // -------------------------------------------------------------------------------
@@ -464,11 +463,11 @@ public class ContentsCont {
     
     
     /**
-     * Grid 형태의 화면 구성 http://localhost:9091/contents/list_by_cateno_grid.do
+     * Grid 형태의 화면 구성 http://localhost:9091/product/list_by_cateno_grid.do
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/list_by_cateno_grid.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/list_by_cateno_grid.do", method = RequestMethod.GET)
     public ModelAndView list_by_cateno_grid(int cateno) {
       ModelAndView mav = new ModelAndView();
       
@@ -478,34 +477,34 @@ public class ContentsCont {
       CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
       mav.addObject("categrpVO", categrpVO);
       
-      List<ContentsVO> list = this.contentsProc.list_by_cateno(cateno);
+      List<ProductVO> list = this.productProc.list_by_cateno(cateno);
       mav.addObject("list", list);
 
-      // 테이블 이미지 기반, /webapp/contents/list_by_cateno_grid.jsp
-      mav.setViewName("/contents/list_by_cateno_grid");
+      // 테이블 이미지 기반, /webapp/product/list_by_cateno_grid.jsp
+      mav.setViewName("/product/list_by_cateno_grid");
 
       return mav; // forward
     }
     
     /**
      * 수정 폼
-     * http://localhost:9091/contents/update_text.do?contentsno=1
+     * http://localhost:9091/product/update_text.do?productno=1
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/update_text.do", method = RequestMethod.GET)
-    public ModelAndView update_text(int contentsno) {
+    @RequestMapping(value = "/product/update_text.do", method = RequestMethod.GET)
+    public ModelAndView update_text(int productno) {
       ModelAndView mav = new ModelAndView();
       
-      ContentsVO contentsVO = this.contentsProc.read(contentsno);
-      CateVO cateVO = this.cateProc.read(contentsVO.getCateno());
+      ProductVO productVO = this.productProc.read(productno);
+      CateVO cateVO = this.cateProc.read(productVO.getCateno());
       CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
       
-      mav.addObject("contentsVO", contentsVO);
+      mav.addObject("productVO", productVO);
       mav.addObject("cateVO", cateVO);
       mav.addObject("categrpVO", categrpVO);
       
-      mav.setViewName("/contents/update_text"); // /WEB-INF/views/contents/update_text.jsp
+      mav.setViewName("/product/update_text"); // /WEB-INF/views/product/update_text.jsp
       // String content = "장소:\n인원:\n준비물:\n비용:\n기타:\n";
       // mav.addObject("content", content);
 
@@ -514,35 +513,35 @@ public class ContentsCont {
 
     /**
      * 수정 처리
-     * http://localhost:9091/contents/update_text.do?contentsno=1
+     * http://localhost:9091/product/update_text.do?productno=1
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/update_text.do", method = RequestMethod.POST)
-    public ModelAndView update_text(ContentsVO contentsVO,
+    @RequestMapping(value = "/product/update_text.do", method = RequestMethod.POST)
+    public ModelAndView update_text(ProductVO productVO,
                                                     @RequestParam(value = "word_search", defaultValue = "") String word_search,
                                                     @RequestParam(value = "now_page", defaultValue = "1") int now_page) {
       ModelAndView mav = new ModelAndView();
       
       HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("contentsno", contentsVO.getContentsno());
-      map.put("passwd", contentsVO.getPasswd());
+      map.put("productno", productVO.getProductno());
+      map.put("ppasswd", productVO.getPpasswd());
       
-      int cnt = 0;
-      int passwd_cnt = this.contentsProc.passwd_check(map);
+      int pcnt = 0;
+      int passwd_cnt = this.productProc.passwd_check(map);
       if (passwd_cnt == 1) {
-          cnt = this.contentsProc.update_text(contentsVO); // 수정 처리
-          System.out.println("-> word_search: " + word_search);
+          pcnt = this.productProc.update_text(productVO); // 수정 처리
+          //System.out.println("-> word_search: " + word_search);
           
           mav.addObject("word", word_search);
           mav.addObject("now_page", now_page);
-          mav.addObject("contentsno", contentsVO.getContentsno());
-          mav.setViewName("redirect:/contents/read.do");  //  param 접근 가능: now_page , contentsno         
+          mav.addObject("productno", productVO.getProductno());
+          mav.setViewName("redirect:/product/read.do");  //  param 접근 가능: now_page , productno         
       } else {
-          mav.addObject("cnt", cnt);
+          mav.addObject("pcnt", pcnt);
           mav.addObject("code", "passwd_fail");
-          mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
-          mav.setViewName("redirect:/contents/msg.do"); //  param 접근 가능: cnt , code, url
+          mav.addObject("url", "/product/msg"); // msg.jsp, redirect parameter 적용
+          mav.setViewName("redirect:/product/msg.do"); //  param 접근 가능: cnt , code, url
       }
 
       return mav; // forward
@@ -550,65 +549,65 @@ public class ContentsCont {
     
     /**
      * 파일 수정 폼
-     * http://localhost:9091/contents/update_file.do?contentsno=1
+     * http://localhost:9091/product/update_file.do?productno=1
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/update_file.do", method = RequestMethod.GET)
-    public ModelAndView update_file(int contentsno) {
+    @RequestMapping(value = "/product/update_file.do", method = RequestMethod.GET)
+    public ModelAndView update_file(int productno) {
       ModelAndView mav = new ModelAndView();
       
-      ContentsVO contentsVO = this.contentsProc.read(contentsno);
-      CateVO cateVO = this.cateProc.read(contentsVO.getCateno());
+      ProductVO productVO = this.productProc.read(productno);
+      CateVO cateVO = this.cateProc.read(productVO.getCateno());
       CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
       
-      mav.addObject("contentsVO", contentsVO);
+      mav.addObject("productVO", productVO);
       mav.addObject("cateVO", cateVO);
       mav.addObject("categrpVO", categrpVO);
       
-      mav.setViewName("/contents/update_file"); // /WEB-INF/views/contents/update_file.jsp
+      mav.setViewName("/product/update_file"); // /WEB-INF/views/product/update_file.jsp
 
       return mav; // forward
     }
 
     /**
-     * 파일 수정 처리 http://localhost:9091/contents/update_file.do
+     * 파일 수정 처리 http://localhost:9091/product/update_file.do
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/update_file.do", method = RequestMethod.POST)
-    public ModelAndView update_file(HttpServletRequest request, ContentsVO contentsVO, 
+    @RequestMapping(value = "/product/update_file.do", method = RequestMethod.POST)
+    public ModelAndView update_file(HttpServletRequest request, ProductVO productVO, 
                                                       int now_page, String word) {
       ModelAndView mav = new ModelAndView();
       
       // System.out.println("-> now_page: " + now_page);
       
       // 삭제할 파일 정보를 읽어옴, 기존에 등록된 레코드 저장용
-      ContentsVO contentsVO_old = contentsProc.read(contentsVO.getContentsno());
+      ProductVO productVO_old = productProc.read(productVO.getProductno());
       
       HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("contentsno", contentsVO.getContentsno());
-      map.put("passwd", contentsVO.getPasswd());
+      map.put("productno", productVO.getProductno());
+      map.put("ppasswd", productVO.getPpasswd());
       
       int cnt = 0;
-      int passwd_cnt = this.contentsProc.passwd_check(map);
+      int passwd_cnt = this.productProc.passwd_check(map);
       if (passwd_cnt == 1) { // 패스워드 일치 -> 등록된 파일 삭제 -> 신규 파일 등록
           // -------------------------------------------------------------------
           // 파일 삭제 코드 시작
           // -------------------------------------------------------------------
-//          System.out.println("contentsno: " + vo.getContentsno());
+//          System.out.println("productno: " + vo.getproductno());
 //          System.out.println("file1: " + vo.getFile1());
           
-          String file1saved = contentsVO_old.getFile1saved(); // 실제 저장된 파일명
-          String thumb1 = contentsVO_old.getThumb1();       // 실제 저장된 preview 이미지 파일명
-          long size1 = 0;
+          String pfile1saved = productVO_old.getPfile1saved(); // 실제 저장된 파일명
+          String pthumb1 = productVO_old.getPthumb1();       // 실제 저장된 preview 이미지 파일명
+          long psize1 = 0;
           boolean sw = false;
           
-          // 완성된 경로 C:/kd/ws_java/resort_v1sbm3c/src/main/resources/static/contents/storage/
-          String upDir =  System.getProperty("user.dir") + "/src/main/resources/static/contents/storage/"; // 절대 경로
+          // 완성된 경로 C:/kd/ws_java/resort_v1sbm3c/src/main/resources/static/product/storage/
+          String upDir =  System.getProperty("user.dir") + "/src/main/resources/static/product/storage/"; // 절대 경로
 
-          sw = Tool.deleteFile(upDir, file1saved);  // Folder에서 1건의 파일 삭제
-          sw = Tool.deleteFile(upDir, thumb1);     // Folder에서 1건의 파일 삭제
+          sw = Tool.deleteFile(upDir, pfile1saved);  // Folder에서 1건의 파일 삭제
+          sw = Tool.deleteFile(upDir, pthumb1);     // Folder에서 1건의 파일 삭제
           // System.out.println("sw: " + sw);
           // -------------------------------------------------------------------
           // 파일 삭제 종료 시작
@@ -617,133 +616,133 @@ public class ContentsCont {
           // -------------------------------------------------------------------
           // 파일 전송 코드 시작
           // -------------------------------------------------------------------
-          String file1 = "";          // 원본 파일명 image
+          String pfile1 = "";          // 원본 파일명 image
 
-          // 완성된 경로 F:/ai8/ws_frame/resort_v1sbm3a/src/main/resources/static/contents/storage/
-          // String upDir =  System.getProperty("user.dir") + "/src/main/resources/static/contents/storage/"; // 절대 경로
+          // 완성된 경로 F:/ai8/ws_frame/resort_v1sbm3a/src/main/resources/static/product/storage/
+          // String upDir =  System.getProperty("user.dir") + "/src/main/resources/static/product/storage/"; // 절대 경로
           
           // 전송 파일이 없어도 fnamesMF 객체가 생성됨.
           // <input type='file' class="form-control" name='file1MF' id='file1MF' 
           //           value='' placeholder="파일 선택">
-          MultipartFile mf = contentsVO.getFile1MF();
+          MultipartFile mf = productVO.getPfile1MF();
           
-          file1 = mf.getOriginalFilename(); // 원본 파일명
-          size1 = mf.getSize();  // 파일 크기
+          pfile1 = mf.getOriginalFilename(); // 원본 파일명
+          psize1 = mf.getSize();  // 파일 크기
           
-          if (size1 > 0) { // 파일 크기 체크
+          if (psize1 > 0) { // 파일 크기 체크
             // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
-            file1saved = Upload.saveFileSpring(mf, upDir); 
+            pfile1saved = Upload.saveFileSpring(mf, upDir); 
             
-            if (Tool.isImage(file1saved)) { // 이미지인지 검사
+            if (Tool.isImage(pfile1saved)) { // 이미지인지 검사
               // thumb 이미지 생성후 파일명 리턴됨, width: 250, height: 200
-              thumb1 = Tool.preview(upDir, file1saved, 250, 200); 
+              pthumb1 = Tool.preview(upDir, pfile1saved, 250, 200); 
             }
             
           } else { // 파일이 삭제만 되고 새로 올리지 않는 경우
-              file1="";
-              file1saved="";
-              thumb1="";
-              size1=0;
+              pfile1="";
+              pfile1saved="";
+              pthumb1="";
+              psize1=0;
           }
           
-          contentsVO.setFile1(file1);
-          contentsVO.setFile1saved(file1saved);
-          contentsVO.setThumb1(thumb1);
-          contentsVO.setSize1(size1);
+          productVO.setPfile1(pfile1);
+          productVO.setPfile1saved(pfile1saved);
+          productVO.setPthumb1(pthumb1);
+          productVO.setPsize1(psize1);
           // -------------------------------------------------------------------
           // 파일 전송 코드 종료
           // -------------------------------------------------------------------
           
           // Call By Reference: 메모리 공유, Hashcode 전달
-          cnt = this.contentsProc.update_file(contentsVO);
+          cnt = this.productProc.update_file(productVO);
           // System.out.println("-> cnt: " + cnt);
           
           System.out.println("-> word: " + word);
-          mav.addObject("word", word);
+          mav.addObject("pword", word);
           // request.setAttribute("now_page", now_page);
           mav.addObject("now_page", now_page);
-          mav.addObject("contentsno", contentsVO.getContentsno());
-          mav.setViewName("redirect:/contents/read.do"); // request -> param으로 접근 전환
+          mav.addObject("productno", productVO.getProductno());
+          mav.setViewName("redirect:/product/read.do"); // request -> param으로 접근 전환
           
       } else { // 패스워드 오류
           mav.addObject("cnt", cnt);
           mav.addObject("code", "passwd_fail");
-          mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
-          mav.setViewName("redirect:/contents/msg.do");
+          mav.addObject("url", "/product/msg"); // msg.jsp, redirect parameter 적용
+          mav.setViewName("redirect:/product/msg.do");
       }
 
-      mav.addObject("cateno", contentsVO_old.getCateno());
-      System.out.println("-> cateno: " + contentsVO_old.getCateno());
+      mav.addObject("cateno", productVO_old.getCateno());
+      System.out.println("-> cateno: " + productVO_old.getCateno());
       
       return mav; // forward
     }   
 
     /**
      * 삭제 폼
-     * @param contentsno
+     * @param productno
      * @return
      */
-    @RequestMapping(value="/contents/delete.do", method=RequestMethod.GET )
-    public ModelAndView delete(int contentsno) { 
+    @RequestMapping(value="/product/delete.do", method=RequestMethod.GET )
+    public ModelAndView delete(int productno) { 
       ModelAndView mav = new  ModelAndView();
       
       // 삭제할 정보를 조회하여 확인
-      ContentsVO contentsVO = this.contentsProc.read(contentsno);
-      CateVO cateVO = this.cateProc.read(contentsVO.getCateno());
+      ProductVO productVO = this.productProc.read(productno);
+      CateVO cateVO = this.cateProc.read(productVO.getCateno());
       CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
       
-      mav.addObject("contentsVO", contentsVO);
+      mav.addObject("productVO", productVO);
       mav.addObject("cateVO", cateVO);
       mav.addObject("categrpVO", categrpVO);
       
-      mav.setViewName("/contents/delete");  // contents/delete.jsp
+      mav.setViewName("/product/delete");  // product/delete.jsp
       
       return mav; 
     }
 
     /**
-     * 삭제 처리 http://localhost:9091/contents/delete.do
+     * 삭제 처리 http://localhost:9091/product/delete.do
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/delete.do", method = RequestMethod.POST)
-    public ModelAndView delete(HttpServletRequest request, ContentsVO contentsVO, 
+    @RequestMapping(value = "/product/delete.do", method = RequestMethod.POST)
+    public ModelAndView delete(HttpServletRequest request, ProductVO productVO, 
                                             int now_page,
-                                            @RequestParam(value="word", defaultValue="") String word) {
+                                            @RequestParam(value="pword", defaultValue="") String word) {
       ModelAndView mav = new ModelAndView();
-      int contentsno = contentsVO.getContentsno();
+      int productno = productVO.getProductno();
       
       HashMap<String, Object> passwd_map = new HashMap<String, Object>();
-      passwd_map.put("contentsno", contentsVO.getContentsno());
-      passwd_map.put("passwd", contentsVO.getPasswd());
+      passwd_map.put("productno", productVO.getProductno());
+      passwd_map.put("ppasswd", productVO.getPpasswd());
       
       int cnt = 0;
-      int passwd_cnt = this.contentsProc.passwd_check(passwd_map);
+      int passwd_cnt = this.productProc.passwd_check(passwd_map);
       if (passwd_cnt == 1) { // 패스워드 일치 -> 등록된 파일 삭제 -> 신규 파일 등록
           // -------------------------------------------------------------------
           // 파일 삭제 코드 시작
           // -------------------------------------------------------------------
           // 삭제할 파일 정보를 읽어옴.
-          ContentsVO vo = contentsProc.read(contentsno);
-//          System.out.println("contentsno: " + vo.getContentsno());
+          ProductVO vo = productProc.read(productno);
+//          System.out.println("productno: " + vo.getProductno());
 //          System.out.println("file1: " + vo.getFile1());
           
-          String file1saved = vo.getFile1saved();
-          String thumb1 = vo.getThumb1();
-          long size1 = 0;
+          String pfile1saved = vo.getPfile1saved();
+          String pthumb1 = vo.getPthumb1();
+          long psize1 = 0;
           boolean sw = false;
           
-          // 완성된 경로 C:/kd/ws_java/resort_v1sbm3c/src/main/resources/static/contents/storage/
-          String upDir =  System.getProperty("user.dir") + "/src/main/resources/static/contents/storage/"; // 절대 경로
+          // 완성된 경로 C:/kd/ws_java/resort_v1sbm3c/src/main/resources/static/product/storage/
+          String upDir =  System.getProperty("user.dir") + "/src/main/resources/static/product/storage/"; // 절대 경로
 
-          sw = Tool.deleteFile(upDir, file1saved);  // Folder에서 1건의 파일 삭제
-          sw = Tool.deleteFile(upDir, thumb1);     // Folder에서 1건의 파일 삭제
+          sw = Tool.deleteFile(upDir, pfile1saved);  // Folder에서 1건의 파일 삭제
+          sw = Tool.deleteFile(upDir, pthumb1);     // Folder에서 1건의 파일 삭제
           // System.out.println("sw: " + sw);
           // -------------------------------------------------------------------
           // 파일 삭제 종료 시작
           // -------------------------------------------------------------------
           
-          cnt = this.contentsProc.delete(contentsno); // DBMS 삭제
+          cnt = this.productProc.delete(productno); // DBMS 삭제
 
           // -------------------------------------------------------------------------------------
           // System.out.println("-> cateno: " + vo.getCateno());
@@ -752,11 +751,11 @@ public class ContentsCont {
           // 마지막 페이지의 레코드 삭제시의 페이지 번호 -1 처리
           HashMap<String, Object> page_map = new HashMap<String, Object>();
           page_map.put("cateno", vo.getCateno());
-          page_map.put("word", word);
+          page_map.put("pword", word);
           // 10번째 레코드를 삭제후
           // 하나의 페이지가 3개의 레코드로 구성되는 경우 현재 9개의 레코드가 남아 있으면
           // 페이지수를 4 -> 3으로 감소 시켜야함.
-          if (contentsProc.search_count(page_map) % Contents.RECORD_PER_PAGE == 0) {
+          if (productProc.search_count(page_map) % Product.RECORD_PER_PAGE == 0) {
             now_page = now_page - 1;
             if (now_page < 1) {
               now_page = 1; // 시작 페이지
@@ -765,16 +764,16 @@ public class ContentsCont {
           // -------------------------------------------------------------------------------------
  
           mav.addObject("now_page", now_page);
-          mav.setViewName("redirect:/contents/list_by_cateno_search_paging.do"); // redirect: param.now_page
+          mav.setViewName("redirect:/product/list_by_cateno_search_paging.do"); // redirect: param.now_page
 
       } else { // 패스워드 오류
           mav.addObject("cnt", cnt);
           mav.addObject("code", "passwd_fail");
-          mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
-          mav.setViewName("redirect:/contents/msg.do");
+          mav.addObject("url", "/product/msg"); // msg.jsp, redirect parameter 적용
+          mav.setViewName("redirect:/product/msg.do");
       }
-      mav.addObject("cateno", contentsVO.getCateno());
-      System.out.println("-> cateno: " + contentsVO.getCateno());
+      mav.addObject("cateno", productVO.getCateno());
+      //System.out.println("-> cateno: " + productVO.getCateno());
       
       return mav; // forward
     }   

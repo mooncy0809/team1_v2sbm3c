@@ -6,7 +6,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>삼대몇</title>
+<title>하루삼끼</title>
 
 <!-- /static 기준 -->
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
@@ -146,7 +146,7 @@
 </head> 
  
 <body>
-<jsp:include page="../menu/top.jsp" />
+<jsp:include page="../menu/top2.jsp" />
  
 <DIV class='title_line'><A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > ${categrpVO.name }</DIV>
 

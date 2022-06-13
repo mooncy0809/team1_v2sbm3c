@@ -8,7 +8,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>커뮤니티 관리자</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -96,7 +96,7 @@
               <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open.png" style='width: 18px;'></A>
             </c:when>
             <c:otherwise>
-                <td>N인데 왜 출력해 왜왜왜</td>
+                
             </c:otherwise>
           </c:choose>
         </TD>   

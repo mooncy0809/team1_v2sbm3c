@@ -1,6 +1,7 @@
 /**********************************/
 /* Table Name: 상품 */
 /**********************************/
+DROP TABLE products;
 CREATE TABLE products(
         productno                            NUMBER(10)         NOT NULL         PRIMARY KEY,
         cateno                                NUMBER(10)         NOT NULL ,
@@ -45,6 +46,7 @@ COMMENT ON COLUMN products.saleprice is '판매가';
 COMMENT ON COLUMN products.point is '포인트';
 COMMENT ON COLUMN products.salecnt is '수량';
 
+DROP SEQUENCE products_seq;
 CREATE SEQUENCE products_seq
   START WITH 1                -- 시작 번호
   INCREMENT BY 1            -- 증가값
@@ -52,14 +54,19 @@ CREATE SEQUENCE products_seq
   CACHE 2                        -- 2번은 메모리에서만 계산
   NOCYCLE;                      -- 다시 1부터 생성되는 것을 방지
 
-DROP TABLE products;
-DROP SEQUENCE products_seq;
+
+
 
 --삽입
 INSERT INTO products(productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, ppasswd, pword, rdate, price, dc, saleprice, point, salecnt)
 VALUES(products_seq.nextval, 1, '아임웰 훈제 닭가슴살', '아주 맛있는 훈제 닭가슴살', 0, 0, 0, '123', '닭가슴살', sysdate,2000, 10, 1800, 100, 500);
 
+INSERT INTO products(productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, ppasswd, pword, rdate, price, dc, saleprice, point, salecnt)
+VALUES(products_seq.nextval, 21, '불닭맛 닭가슴살', '아주 맛있는 닭가슴살', 0, 0, 0, '123', '닭가슴살', sysdate,2000, 10, 1800, 100, 500);
+
 SELECT * FROM products;
+
+commit;
 
 PRODUCTNO     CATENO PTITLE                                                                                                                                                                                                                                                                                                       PCONTENT                                                                             PRECOM       PCNT  PREPLYCNT PPASSWD         PWORD                                                                                                                                                                                                                                                                                                        RDATE               PFILE1                                                                                               PFILE1SAVED
 ---------- ---------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------------------------------------------------------------------- ---------- ---------- ---------- --------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ------------------- ---------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------

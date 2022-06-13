@@ -49,8 +49,8 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="./index.do">삼대몇?</a></li>
-                                <li><a href="./index2.do">하루삼끼</a></li>
+                                <li><a href="../index.do">삼대몇?</a></li>
+                                <li><a href="../index2.do">하루삼끼</a></li>
                             </ul>
                         </div>
                     </div>
@@ -102,14 +102,17 @@
                                     <c:when
                                         test="${sessionScope.grade < 10}">
                                         <%-- 로그인 한 경우 --%>
-                                        <li><a
-                                            href="/categrp/list.do"><i
-                                                class="fa fa-gears"></i>
-                                                관리자</a></li>
-                                                <li><a
-                                            href="../../you/list_by_categrpno.do?categrpno=4"><i
-                                                class="fa fa-gears"></i>
-                                                홈트레이닝</a></li>
+                                                <div class="nav navbar-nav2">
+                                                    <ul class="nav navbar-nav collapse navbar-collapse">
+                                                        <li class="dropdown"><a href="#">관리자<i class="fa fa-angle-down"></i></a>
+                                                            <ul role="menu" class="sub-menu">
+                                                                <li><a href="/categrp/list.do"><i class="fa fa-gears"></i>삼대몇 관리자</a></li>
+                                                                <li><a href="/categrp/list2.do"><i class="fa fa-gears"></i>하루삼끼 관리자</a></li>
+                                                                <li><a href="../../you/list_by_categrpno.do?categrpno=4"><i class="fa fa-gears"></i>홈트레이닝</a></li> 
+                                                            </ul>
+                                                        </li>
+                                                     </ul>
+                                                </div>         
                                     </c:when>
                                 </c:choose>
 
@@ -195,8 +198,8 @@
                     <li class="menu" style=list-style:none; >
                         <ul >
                         
-                            <a href=""  style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">         
-                            <li>NOTICE</li>     </a> 
+                            <a href=""  style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">       
+                            <li>NOTICE</li>     </a>
                             <a href=""   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">              
                             <li>DIET TIP</li>          </a>
                             <a href=""   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">         

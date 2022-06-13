@@ -14,7 +14,7 @@ public class CateProc implements CateProcInter {
     public CateProc() {
         // System.out.println("-> CateProc created");
     }
-
+    
     @Override
     public int create(CateVO cateVO) {
         int cnt = this.cateDAO.create(cateVO);
@@ -28,7 +28,15 @@ public class CateProc implements CateProcInter {
     }
 
     @Override
+    
     public List<CateVO> list_by_categrpno(int categrpno) {
+        List<CateVO> list = this.cateDAO.list_by_categrpno(categrpno);
+        return list;
+    }
+    
+ @Override
+    
+    public List<CateVO> list_by_categrpno2(int categrpno) {
         List<CateVO> list = this.cateDAO.list_by_categrpno(categrpno);
         return list;
     }

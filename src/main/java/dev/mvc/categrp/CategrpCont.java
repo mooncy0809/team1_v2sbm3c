@@ -64,7 +64,7 @@ public class CategrpCont {
      * @return
      */
     @RequestMapping(value = "/categrp/create.do", method = RequestMethod.POST)
-    public ModelAndView create(CategrpVO categrpVO) { // categrpVO 자동 생성, Form -> VO
+    public ModelAndView create(CategrpVO categrpVO, char visible) { // categrpVO 자동 생성, Form -> VO
         // CategrpVO categrpVO <FORM> 태그의 값으로 자동 생성됨.
         // request.setAttribute("categrpVO", categrpVO); 자동 실행
 
@@ -74,19 +74,32 @@ public class CategrpCont {
         // cnt = 0; // error test
         
         mav.addObject("cnt", cnt);
-       
-        if (cnt == 1) {
-            System.out.println("등록 성공");
-            
-            // mav.addObject("code", "create_success"); // request에 저장, request.setAttribute("code", "create_success")
-            // mav.setViewName("/categrp/msg"); // /WEB-INF/views/categrp/msg.jsp
-            
-            //response.sendRedirect("/categrp/list.do");
-            mav.setViewName("redirect:/categrp/list.do");
-        } else {
-            mav.addObject("code", "create_fail"); // request에 저장, request.setAttribute("code", "create_fail")
-            mav.setViewName("/categrp/msg"); // /WEB-INF/views/categrp/msg.jsp
+        mav.addObject("visible",categrpVO.getVisible());
+        if (visible == 'Y') {
+            if (cnt == 1) {
+                System.out.println("등록 성공");
+                
+                //response.sendRedirect("/categrp/list.do");
+                mav.setViewName("redirect:/categrp/list.do");
+                
+            } else {
+                mav.addObject("code", "create_fail"); // request에 저장, request.setAttribute("code", "create_fail")
+                mav.setViewName("/categrp/msg"); // /WEB-INF/views/categrp/msg.jsp
+            }
         }
+        else {
+            if (cnt == 1) {
+                System.out.println("등록 성공");
+                
+                //response.sendRedirect("/categrp/list.do");
+                mav.setViewName("redirect:/categrp/list2.do");
+                
+            } else {
+                mav.addObject("code", "create_fail"); // request에 저장, request.setAttribute("code", "create_fail")
+                mav.setViewName("/categrp/msg"); // /WEB-INF/views/categrp/msg.jsp
+            }
+        }
+        
 
         return mav; // forward
     }
@@ -105,6 +118,23 @@ public class CategrpCont {
       mav.addObject("list", list); // request.setAttribute("list", list);
 
       mav.setViewName("/categrp/list_ajax"); // /webapp/WEB-INF/views/categrp/list.jsp
+      return mav;
+    }
+    
+    // http://localhost:9091/categrp/list.do
+    @RequestMapping(value="/categrp/list2.do", method=RequestMethod.GET )
+    public ModelAndView list2() {
+      ModelAndView mav = new ModelAndView();
+      
+      // 등록 순서별 출력    
+//       List<CategrpVO> list = this.categrpProc.list_categrpno_asc();
+
+      // 출력 순서별 출력
+      List<CategrpVO> list = this.categrpProc.list_seqno_asc();
+      
+      mav.addObject("list", list); // request.setAttribute("list", list);
+
+      mav.setViewName("/categrp/list_ajax2"); // /webapp/WEB-INF/views/categrp/list.jsp
       return mav;
     }
     
@@ -217,7 +247,6 @@ public class CategrpCont {
       mav.addObject("list", list);  // request 객체에 저장
 
       mav.setViewName("/categrp/read_delete"); // read_delete.jsp
-      
       return mav;
     }
     
@@ -228,16 +257,22 @@ public class CategrpCont {
      * @return
      */
     @RequestMapping(value="/categrp/delete.do", method=RequestMethod.POST )
-    public ModelAndView delete(int categrpno) {
-      ModelAndView mav = new ModelAndView();
+    public ModelAndView delete(int categrpno, char visible) {
+      ModelAndView mav = new ModelAndView();      
       
       CategrpVO categrpVO = this.categrpProc.read(categrpno); // 삭제 정보
+      mav.addObject("visible",categrpVO.getVisible());    
       mav.addObject("categrpVO", categrpVO);  // request 객체에 저장
       
-      int cnt = this.categrpProc.delete(categrpno); // 삭제 처리
-      mav.addObject("cnt", cnt);  // request 객체에 저장
+        
       
-      mav.setViewName("redirect:/categrp/list.do");
+      
+          int cnt = this.categrpProc.delete(categrpno); // 삭제 처리
+          mav.addObject("cnt", cnt);  // request 객체에 저장
+          
+          mav.setViewName("redirect:/categrp/list.do");
+     
+      
 
 
       return mav;

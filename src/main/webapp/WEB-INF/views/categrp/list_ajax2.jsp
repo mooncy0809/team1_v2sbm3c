@@ -8,7 +8,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>커뮤니티 관리자</title>
+<title>쇼핑몰 관리자</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -164,7 +164,7 @@
 </head> 
  
 <body>
-<jsp:include page="../menu/top.jsp" />
+<jsp:include page="../menu/top2.jsp" />
  
 <DIV class='title_line'>카테고리 그룹</DIV>
 
@@ -183,8 +183,7 @@
   
       <label>형식</label>
       <select name='visible'>
-        <option value='Y' selected="selected">Y</option>
-        <option value='N'>N</option>
+        <option value='N' selected="selected">N</option>
       </select>
        
       <button type="submit" id='submit' class='btn'>등록</button>
@@ -286,10 +285,10 @@
         <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD> --%>
         
             <c:choose>
-            <c:when test="${visible == 'Y'}">
+            <c:when test="${visible == 'N'}">
                 <TD class="td_bs">${categrpVO.seqno }</TD>
                 <TD class="td_bs_left"> 
-                    <A href = '../cate/list_by_categrpno.do?categrpno=${categrpno}'>${name }</A>
+                    <A href = '../cate/list_by_categrpno2.do?categrpno=${categrpno}'>${name }</A>
                 </TD>
                 <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD>
                 <TD class="td_bs">

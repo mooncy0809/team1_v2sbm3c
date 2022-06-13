@@ -24,6 +24,13 @@ public interface CateDAOInter {
      * @return
      */
     public List<CateVO> list_by_categrpno(int categrpno);
+    
+    /**
+     * categrpno별 목록
+     * 
+     * @return
+     */
+    public List<CateVO> list_by_categrpno2(int categrpno);
 
     /**
      * Categrp + Cate join, 연결 목록
