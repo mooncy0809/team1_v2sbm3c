@@ -201,7 +201,7 @@
                             <li>DIET TIP</li>          </a>
                             <a href=""   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">         
                             <li>COMMUNITY</li>     </a>                            
-                                        <li><a href="blog.html">전체</a></li>
+                                        <li><a href="../contents/list_all_join.do">전체</a></li>
                                         <li><a href="../contents/list_by_cateno_search_paging.do?cateno=4&now_page=1">자유게시판</a></li>
                                         <li><a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1">팁&노하우</a></li>
                                         <li><a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1">고민&질문</a></li>

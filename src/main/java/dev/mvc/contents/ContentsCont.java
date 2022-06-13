@@ -94,7 +94,7 @@ public class ContentsCont {
     public ModelAndView create(HttpServletRequest request, 
                                HttpServletResponse response, 
                                HttpSession session,
-                               int memberno, ContentsVO contentsVO) {
+                               int memberno, String mname, ContentsVO contentsVO) {
         ModelAndView mav = new ModelAndView();
 
         // ------------------------------------------------------------------------------
@@ -156,6 +156,10 @@ public class ContentsCont {
 
         // MemberVO memberVO = memberProc.readById(id); // 로그인한 회원의 정보 조회
         session.setAttribute("memberno", memberno);
+        session.setAttribute("mname", mname);
+        
+        mav.addObject("mname", mname);
+        
 //        System.out.println("memberno " + memberVO.getMemberno());
         
         if (cnt == 1) {
@@ -257,6 +261,7 @@ public class ContentsCont {
 
         return mav; // forward
     }
+    
 
     // http://localhost:9091/contents/read.do?contentsno=3
     /**
@@ -264,30 +269,144 @@ public class ContentsCont {
      * 
      * @return
      */
-    @RequestMapping(value = "/contents/read.do", method = RequestMethod.GET)
-    public ModelAndView read(int contentsno,
-                             @RequestParam(value = "now_page", defaultValue = "1") int now_page,
-                             HttpSession session, String id) {
+//    @RequestMapping(value = "/contents/read.do", method = RequestMethod.GET)
+//    public ModelAndView read(int contentsno,
+//                             @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+//                             HttpSession session, String id) {
+//        ModelAndView mav = new ModelAndView();
+//
+//        contentsProc.cnt(contentsno);
+//        
+//        ContentsVO contentsVO = this.contentsProc.read(contentsno);
+//        mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
+//
+//        CateVO cateVO = this.cateProc.read(contentsVO.getCateno());
+//        mav.addObject("cateVO", cateVO);
+//        
+//        session.setAttribute("id", id);
+//
+//        CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
+//        mav.addObject("categrpVO", categrpVO);
+//        mav.addObject("now_page", now_page);
+//
+//        mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
+//
+//        return mav;
+//    }
+    
+    
+ // http://localhost:9091/contents/read.do
+    /**
+     * 조회
+     * @return
+     */
+    @RequestMapping(value="/contents/read.do", method=RequestMethod.GET )
+    public ModelAndView read_ajax(HttpServletRequest request, int contentsno) {
+      // public ModelAndView read(int contentsno, int now_page) {
+      // System.out.println("-> now_page: " + now_page);
+      
+      ModelAndView mav = new ModelAndView();
+
+      ContentsVO contentsVO = this.contentsProc.read(contentsno);
+      mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
+
+      CateVO cateVO = this.cateProc.read(contentsVO.getCateno());
+      mav.addObject("cateVO", cateVO); 
+
+      CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
+      mav.addObject("categrpVO", categrpVO); 
+      
+      // 단순 read
+      // mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
+      
+      // 쇼핑 기능 추가
+      // mav.setViewName("/contents/read_cookie"); // /WEB-INF/views/contents/read_cookie.jsp
+      
+      // 댓글 기능 추가 
+      mav.setViewName("/contents/read_cookie_reply"); // /WEB-INF/views/contents/read_cookie_reply.jsp
+      
+      // -------------------------------------------------------------------------------
+      // 쇼핑 카트 장바구니에 상품 등록전 로그인 폼 출력 관련 쿠기  
+      // -------------------------------------------------------------------------------
+      Cookie[] cookies = request.getCookies();
+      Cookie cookie = null;
+
+      String ck_id = ""; // id 저장
+      String ck_id_save = ""; // id 저장 여부를 체크
+      String ck_passwd = ""; // passwd 저장
+      String ck_passwd_save = ""; // passwd 저장 여부를 체크
+
+      if (cookies != null) {  // Cookie 변수가 있다면
+        for (int i=0; i < cookies.length; i++){
+          cookie = cookies[i]; // 쿠키 객체 추출
+          
+          if (cookie.getName().equals("ck_id")){
+            ck_id = cookie.getValue();                                 // Cookie에 저장된 id
+          }else if(cookie.getName().equals("ck_id_save")){
+            ck_id_save = cookie.getValue();                          // Cookie에 id를 저장 할 것인지의 여부, Y, N
+          }else if (cookie.getName().equals("ck_passwd")){
+            ck_passwd = cookie.getValue();                          // Cookie에 저장된 password
+          }else if(cookie.getName().equals("ck_passwd_save")){
+            ck_passwd_save = cookie.getValue();                  // Cookie에 password를 저장 할 것인지의 여부, Y, N
+          }
+        }
+      }
+      
+      System.out.println("-> ck_id: " + ck_id);
+      
+      mav.addObject("ck_id", ck_id); 
+      mav.addObject("ck_id_save", ck_id_save);
+      mav.addObject("ck_passwd", ck_passwd);
+      mav.addObject("ck_passwd_save", ck_passwd_save);
+      // -------------------------------------------------------------------------------
+      
+      return mav;
+    }
+
+    
+    /**
+     * Concert + ConcertCate join, 연결 목록
+     * http://localhost:9091/concertcate/list_all_join.do 
+     * @return
+     */
+    @RequestMapping(value = "/contents/list_all_join.do", method=RequestMethod.GET)
+    public ModelAndView list_all_join(
+            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page
+            ) {
         ModelAndView mav = new ModelAndView();
-
-        contentsProc.cnt(contentsno);
         
-        ContentsVO contentsVO = this.contentsProc.read(contentsno);
-        mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
-
-        CateVO cateVO = this.cateProc.read(contentsVO.getCateno());
-        mav.addObject("cateVO", cateVO);
+        HashMap<String, Object> map = new HashMap<String, Object>();        
+        map.put("word", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
         
-        session.setAttribute("id", id);
-
-        CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
-        mav.addObject("categrpVO", categrpVO);
+        // 검색된 레코드 갯수
+        int search_count = contentsProc.search_count2(map);
+        mav.addObject("search_count2", search_count);
+        
+        List<ContentsVO>list = this.contentsProc.list_all_join(map);
+        mav.addObject("list", list); // request.setAttribute("list", list);
+        
+        /*
+       * SPAN태그를 이용한 박스 모델의 지원
+       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+       * 18 19 20 [다음]
+       * @param cateno 카테고리번호
+       * @param search_count 검색(전체) 레코드수
+       * @param now_page 현재 페이지
+       * @param word 검색어
+       * @return 페이징용으로 생성된 HTML tag 문자열
+       */
+        String paging = contentsProc.pagingBox2(search_count, now_page, word);
+        System.out.println("-> paging: " + paging);
+        mav.addObject("paging", paging);
+    
         mav.addObject("now_page", now_page);
-
-        mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
-
+        
+        mav.setViewName("/contents/list_all_join"); // /WEB-INF/views/concertcate/list_all_join.jsp
         return mav;
     }
+    
 
     /**
      * 목록 + 검색 + 페이징 지원

@@ -27,9 +27,7 @@
 <jsp:include page="../menu/top.jsp" />
  
 <DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  <A href="../cate/list_by_categrpno.do?categrpno=${categrpVO.categrpno }" class='title_link'>${categrpVO.name }</A> >
-  <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }" class='title_link'>${cateVO.name }</A>
+  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 전체 게시물
 </DIV>
 
 <DIV class='content_body'>
@@ -44,14 +42,14 @@
   </ASIDE> 
 
   <DIV style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_cateno_search_paging.do'>
-      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
+    <form name='frm' id='frm' method='get' action='./list_all_join.do'>
+      
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
       <button type='submit'>검색</button>
       <c:if test="${param.word.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list_by_cateno_search_paging.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
+                     onclick="location.href='./list_all_join.do">검색 취소</button>  
       </c:if>    
     </form>
   </DIV>
@@ -61,7 +59,8 @@
   <table class="table table-striped" style='width: 100%;'>
     <colgroup>
       <col style="width: 10%;"></col>
-      <col style="width: 20%;"></col>
+      <col style="width: 10%;"></col>
+      <col style="width: 10%;"></col>
       <col style="width: 30%;"></col>
       <col style="width: 10%;"></col>
       <col style="width: 10%;"></col>
@@ -71,11 +70,12 @@
     <thead>
       <tr>
         <th style='text-align: center;'></th>
+        <th style='text-align: center;'>카테고리</th>
         <th style='text-align: center;'>제목</th>
         <th style='text-align: center;'>내용</th>
         <th style='text-align: center;'>조회수</th>
         <th style='text-align: center;'>작성자</th>
-        <th style='text-align: center;'>기타</th>
+        <th style='text-align: center;'>작성일</th>
       </tr>
     
     </thead>
@@ -84,7 +84,7 @@
     <tbody>
       <c:forEach var="contentsVO" items="${list }">
         <c:set var="contentsno" value="${contentsVO.contentsno }" />
-        <c:set var="cateno" value="${contentsVO.cateno }" />
+        <c:set var="name" value="${contentsVO.name }" />
         <c:set var="title" value="${contentsVO.title }" />
         <c:set var="content" value="${contentsVO.content }" />
         <c:set var="file1" value="${contentsVO.file1 }" />
@@ -92,7 +92,7 @@
         <c:set var="memberno" value="${contentsVO.memberno }" />
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
-        
+        <c:set var="rdate" value="${contentsVO.rdate }" />
         
         <tr> 
           <td style='vertical-align: middle; text-align: center;'>
@@ -106,9 +106,14 @@
               </c:otherwise>
             </c:choose>
           </td>  
+          
+          <!-- 게시판 카테고리 -->
+          <td style='vertical-align: middle; text-align: center;'>${name} </td> 
+          
           <td style='vertical-align: middle; text-align: center;'>
             <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
-            <strong>${title}</strong> </a> </td>
+          <strong>${title}</strong> </a> </td>
+          
           <td style='vertical-align: middle; text-align: center;'>${content} </td> 
           
           <!-- 조회수 -->
@@ -117,12 +122,9 @@
           <!-- 작성자 -->
           <td style='vertical-align: middle; text-align: center;'>${mname } </td>
           
-          
-          
-          <td style='vertical-align: middle; text-align: center;'>
-            <A href="./update_text.do?contentsno=${contentsno}&now_page=${param.now_page }"><img src="/contents/images/update.png"></A>
-            <A href="./delete.do?contentsno=${contentsno}&now_page=${param.now_page }&cateno=${cateno}"><img src="/contents/images/delete.png"></A>
-          </td>
+          <!-- 작성일 -->
+          <td style='vertical-align: middle; text-align: center;'>${rdate } </td>
+
         </tr>
       </c:forEach>
       

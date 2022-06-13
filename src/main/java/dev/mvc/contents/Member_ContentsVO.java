@@ -2,27 +2,10 @@ package dev.mvc.contents;
 
 import org.springframework.web.multipart.MultipartFile;
 
-/*
-        contentsno                            NUMBER(10)         NOT NULL         PRIMARY KEY,
-        memberno                              NUMBER(10)     NOT NULL ,
-        cateno                                NUMBER(10)         NOT NULL ,
-        title                                 VARCHAR2(300)         NOT NULL,
-        content                               CLOB                  NOT NULL,
-        recom                                 NUMBER(7)         DEFAULT 0         NOT NULL,
-        cnt                                   NUMBER(7)         DEFAULT 0         NOT NULL,
-        replycnt                              NUMBER(7)         DEFAULT 0         NOT NULL,
-        passwd                                VARCHAR2(15)         NOT NULL,
-        word                                  VARCHAR2(300)         NULL ,
-        rdate                                 DATE               NOT NULL,
-        file1                                   VARCHAR(100)          NULL,
-        file1saved                            VARCHAR(100)          NULL,
-        thumb1                              VARCHAR(100)          NULL,
-        size1                                 NUMBER(10)      DEFAULT 0 NULL,  
- */
-public class ContentsVO {
+public class Member_ContentsVO {
     
-    /** 카테고리 이름 */
-    private String name;
+    /** 작성자 */
+    private String mname;
     
     /** 컨텐츠 번호 */
     private int contentsno;
@@ -55,8 +38,6 @@ public class ContentsVO {
     private String thumb1 = "";
     /** 메인 이미지 크기 */
     private long size1;
-    /** 작성자 */
-    private String mname;
 
     /**
      이미지 파일
@@ -70,7 +51,7 @@ public class ContentsVO {
      */
     private String size1_label;
     
-    public ContentsVO() { // 기본 생성자
+    public Member_ContentsVO() { // 기본 생성자
 
     }
 
@@ -216,14 +197,6 @@ public class ContentsVO {
 
     public void setMname(String mname) {
         this.mname = mname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

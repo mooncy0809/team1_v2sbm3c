@@ -18,6 +18,7 @@ CREATE TABLE CONTENTS(
 		FILE1SAVED                    		VARCHAR2(100)		 NULL ,
 		THUMB1                        		VARCHAR2(100)		 NULL ,
 		SIZE1                         		NUMBER(10)		DEFAULT 0 NULL,
+        mname                               VARCHAR(20)       NULL,
   FOREIGN KEY (cateno) REFERENCES cate (cateno),
   FOREIGN KEY (MEMBERNO) REFERENCES MEMBER (MEMBERNO)
 );
@@ -38,6 +39,7 @@ COMMENT ON COLUMN CONTENTS.FILE1 is '메인 이미지';
 COMMENT ON COLUMN CONTENTS.FILE1SAVED is '실제 저장된 메인 이미지';
 COMMENT ON COLUMN CONTENTS.THUMB1 is '메인 이미지 Preview';
 COMMENT ON COLUMN CONTENTS.SIZE1 is '메인 이미지 크기';
+COMMENT ON COLUMN CONTENTS.MNAME is '작성자';
 
 DROP SEQUENCE contents_seq;
 
@@ -49,22 +51,24 @@ CREATE SEQUENCE contents_seq
   NOCYCLE;                      -- 다시 1부터 생성되는 것을 방지
   
 INSERT INTO contents(contentsno, memberno, cateno, title, content, recom, cnt, replycnt, passwd, word, rdate,
-                              file1, file1saved, thumb1, size1)
-VALUES(contents_seq.nextval, 1, 1, '인터스텔라', '앤헤서웨이 주연', 0, 0, 0, '123', '우주', sysdate,
-            'space.jpg', 'space_1.jpg', 'space_t.jpg', 1000);
+                              file1, file1saved, thumb1, size1, mname)
+VALUES(contents_seq.nextval, 1, 4, '인터스텔라', '앤헤서웨이 주연', 0, 0, 0, '123', '우주', sysdate,
+            'space.jpg', 'space_1.jpg', 'space_t.jpg', 1000, '크러쉬');
 
 -- FK 컬럼의 값이 사전에 등록되었는지 확인
 -- ORA-02291: integrity constraint (AI8.SYS_C007066) violated - parent key not found
 
 INSERT INTO contents(contentsno, memberno, cateno, title, content, recom, cnt, replycnt, passwd, word, rdate,
-                              file1, file1saved, thumb1, size1)
-VALUES(contents_seq.nextval, 1, 1, '마션', '멧데이먼 주연 화성 탈출', 0, 0, 0, '123', '우주', sysdate,
-            'space.jpg', 'space_1.jpg', 'space_t.jpg', 1000);
+                              file1, file1saved, thumb1, size1, mname)
+VALUES(contents_seq.nextval, 1, 4, '마션', '멧데이먼 주연 화성 탈출', 0, 0, 0, '123', '우주', sysdate,
+            'space.jpg', 'space_1.jpg', 'space_t.jpg', 1000, '크러쉬');
             
 INSERT INTO contents(contentsno, memberno, cateno, title, content, recom, cnt, replycnt, passwd, word, rdate,
-                              file1, file1saved, thumb1, size1)
-VALUES(contents_seq.nextval, 1, 1, 'AI', '주드로', 0, 0, 0, '123', '로봇,인공지능', sysdate,
-            'space.jpg', 'space_1.jpg', 'space_t.jpg', 1000);  
+                              file1, file1saved, thumb1, size1, mname)
+VALUES(contents_seq.nextval, 1, 4, 'AI', '주드로', 0, 0, 0, '123', '로봇,인공지능', sysdate,
+            'space.jpg', 'space_1.jpg', 'space_t.jpg', 1000, '크러쉬');  
+            
+commit;
   
 
 /**********************************/
