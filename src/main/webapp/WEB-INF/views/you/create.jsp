@@ -29,7 +29,7 @@
  
 <DIV class='title_line'style="width:70%;">
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  <A href="./list_by_categrpno.do?categrpno=4" class='title_link'>홈트레이닝</A> > 
+  <A href="./list_by_categrpno_search_paging.do?categrpno=4" class='title_link'>홈트레이닝</A> > 
      유튜브 등록 
 </DIV>
 
@@ -59,7 +59,7 @@
          <textarea name='ytext' required="required" class="form-control" rows="12" style='width: 70%;'></textarea>
       <div class="content_body_bottom" style="text-align:right; width:70%;">
       <button type="submit" class="btn btn-primary">등록</button>
-      <button type="button" onclick="location.href='./list_by_categrpno.do?categrpno=4'" class="btn btn-primary">목록</button>
+      <button type="button" onclick="location.href='./list_by_categrpno_search_paging.do?categrpno=4'" class="btn btn-primary">목록</button>
       </div>
       </div>        
 

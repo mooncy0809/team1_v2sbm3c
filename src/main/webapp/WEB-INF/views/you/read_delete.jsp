@@ -26,7 +26,7 @@
  
 <DIV class='title_line'>
   <A href="../categrp/list.do" class='title_link'>유튜브 그룹</A> > 
-  <A href="./list_by_categrpno.do?categrpno=${param.categrpno }" class='title_link'>${categrpVO.name}</A> > 
+  <A href="./list_by_categrpno_search_paging.do?categrpno=${param.categrpno }" class='title_link'>${categrpVO.name}</A> > 
   ${youVO.ytitle } 수정 
 </DIV>
 
@@ -41,7 +41,7 @@
       <label>유튜브</label>: ${youVO.ytitle}  
        
       <button type="submit" id='submit'>삭제</button>
-      <button type="button" onclick="location.href='./list_by_categrpno.do?categrpno=${youVO.categrpno}'">취소</button>
+      <button type="button" onclick="location.href='./list_by_categrpno_search_paging.do?categrpno=${youVO.categrpno}'">취소</button>
     </FORM>
   </DIV>
 

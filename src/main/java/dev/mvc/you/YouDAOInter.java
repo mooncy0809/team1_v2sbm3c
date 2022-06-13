@@ -1,6 +1,9 @@
 package dev.mvc.you;
 
+import java.util.HashMap;
 import java.util.List;
+
+import dev.mvc.contents.ContentsVO;
 
 public interface YouDAOInter {
   /**
@@ -9,16 +12,7 @@ public interface YouDAOInter {
    * @return 등록된 갯수
    */
   public int create(YouVO youVO);
-  /**
-   *  전체 목록
-   * @return
-   */
-  public List<YouVO> list_all();  
-  /**
-   *  categrpno별 목록
-   * @return
-   */
-  public List<YouVO> list_by_categrpno(int categrpno);   
+ 
   /**
    * Urlgrp + Url join, 연결 목록
    * @return
@@ -45,6 +39,16 @@ public interface YouDAOInter {
    */
   public int cnt(int youno);
  
+  public List<YouVO> list_by_categrpno_grid_search_paging(HashMap<String, Object> map);
+  
+  public int search_count(HashMap<String, Object> hashMap);
+  
+  public String pagingBox(int categrpno, int search_count, int now_page, String word);
+  
+  public List<YouVO> list_by_categrpno_search_paging(HashMap<String, Object> map);
+  
+  String pagingBox_t(int categrpno, int search_count, int now_page, String word);
+
 }
 
 

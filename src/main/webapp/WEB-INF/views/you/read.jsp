@@ -40,44 +40,18 @@
 
 
 <DIV class='content_body' style="width:70%;">
-<%--   <ASIDE class="aside_right">
-    <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
-    <span class='menu_divide' >│</span>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }&now_page=${param.now_page}&word=${param.word }">기본 목록형</A>    
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
-    <span class='menu_divide' >│</span>
-    <A href="./update_text.do?contentsno=${contentsno}&now_page=${param.now_page}&word=${param.word }">수정</A>
-    <span class='menu_divide' >│</span>
-    <A href="./update_file.do?contentsno=${contentsno}&now_page=${param.now_page}&word=${param.word }">파일 수정</A>  
-    <span class='menu_divide' >│</span>
-    <A href="./delete.do?contentsno=${contentsno}&now_page=${param.now_page}&cateno=${cateno}&word=${param.word }">삭제</A>  
-  </ASIDE>  --%>
-  
-<%--   <DIV style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_cateno_search_paging.do'>
-      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
-      <c:choose>
-        <c:when test="${param.word != '' }"> 검색하는 경우
-          <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
-        </c:when>
-        <c:otherwise> 검색하지 않는 경우
-          <input type='text' name='word' id='word' value='' style='width: 20%;'>
-        </c:otherwise>
-      </c:choose>
-      <button type='submit'>검색</button>
-      <c:if test="${param.word.length() > 0 }">
-        <button type='button' 
-                     onclick="location.href='./list_by_cateno_search_paging.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
-      </c:if>    
-    </form>
-  </DIV> --%>
   
   <fieldset class="fieldset_basic">
     <DIV class='title_line'>
-    <A href="./list_by_categrpno_grid.do?categrpno=4" class='title_link' >홈트레이닝</A> > 
+    <A href="./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno}&word=" class='title_link'>홈트레이닝</A> >
+       <c:choose>
+                                    <c:when
+                                        test="${sessionScope.grade < 10}">
+                                        <%-- 로그인 한 경우 --%>
+                                       <a href="../../you/list_by_categrpno_search_paging.do?categrpno=4&word=">
+                                                홈트레이닝(관리자 전용 링크)</a>   >              
+                                    </c:when>
+        </c:choose> 
     ${youVO.ytitle }
     </DIV>
    <DIV class='menu_line'style="width:50%; font-size: 1.5em; font-weight: bold;">
