@@ -20,7 +20,7 @@
                             <li data-target="#slider-carousel" data-slide-to="1"></li>
                             <li data-target="#slider-carousel" data-slide-to="2"></li>
                         </ol>
-                        
+                           
                         <div class="carousel-inner">
                             <div class="item active">
                                 <div class="col-sm-6">
@@ -40,6 +40,7 @@
                                     <h2>100% Responsive Design</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                                     <button type="button" class="btn btn-default get">Get it now</button>
+                                   
                                 </div>
                                 <div class="col-sm-6">
                                     <img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
@@ -222,6 +223,7 @@
                     <div class="features_items"><!--features_items-->
                         <h2 class="title text-center">Features Items</h2>
                         <div class="col-sm-4">
+
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                         <div class="productinfo text-center">

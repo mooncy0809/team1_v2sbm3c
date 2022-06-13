@@ -70,7 +70,7 @@ VALUES(contents_seq.nextval, 1, 4, 'AI', '주드로', 0, 0, 0, '123', '로봇,�
             
 commit;
   
-
+commit;
 /**********************************/
 /* Table Name: 댓글 */
 /**********************************/
@@ -88,3 +88,4 @@ COMMENT ON COLUMN reply.replyno is '댓글 번호';
 COMMENT ON COLUMN reply.CONTENTSNO is '컨텐츠 번호';
 COMMENT ON COLUMN reply.MEMBERNO is '회원 번호';
 COMMENT ON COLUMN reply.content is '내용';
+

@@ -49,8 +49,8 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="./index.do">삼대몇?</a></li>
-                                <li><a href="./index2.do">하루삼끼</a></li>
+                                <li><a href="../index.do">삼대몇?</a></li>
+                                <li><a href="../index2.do">하루삼끼</a></li>
                             </ul>
                         </div>
                     </div>
@@ -107,9 +107,10 @@
                                                 class="fa fa-gears"></i>
                                                 관리자</a></li>
                                                 <li><a
-                                            href="../../you/list_by_categrpno.do?categrpno=4"><i
+                                            href="../../you/list_by_categrpno_search_paging.do?categrpno=4&word="><i
                                                 class="fa fa-gears"></i>
                                                 홈트레이닝</a></li>
+                                               
                                     </c:when>
                                 </c:choose>
 
@@ -206,9 +207,9 @@
                                         <li><a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1">팁&노하우</a></li>
                                         <li><a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1">고민&질문</a></li>
                                         <li><a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1">일기</a></li>  
-                            <a href="../you/list_by_categrpno_grid.do?categrpno=4"   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">   
+                            <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4&now_page=1"   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">   
                             <li>HOME TRAINING</li>             </a>
-                            <a href=""   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">      
+                            <a href="../dict/list_by_categrpno_search_paging.do?categrpno=5"   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">      
                             <li>CALORIE DICTIONARY</li>           </a>
                         </ul>        
                     </li>

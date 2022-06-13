@@ -9,10 +9,10 @@ CREATE TABLE qna(
 		title                         		VARCHAR2(50)		 NOT NULL,
 		content                       		VARCHAR2(1000)		 NOT NULL,
 		pwd                           		NUMBER(10)		 NOT NULL,
+        rdate                                   DATE             NOT NULL,
   FOREIGN KEY (MEMBERNO) REFERENCES MEMBER (MEMBERNO),
   FOREIGN KEY (categrpno) REFERENCES categrp (categrpno)
 );
-
 
 COMMENT ON TABLE qna is '질문게시판';
 COMMENT ON COLUMN qna.qnano is '질문답변번호';
@@ -21,7 +21,9 @@ COMMENT ON COLUMN qna.MEMBERNO is '회원 번호';
 COMMENT ON COLUMN qna.title is '질문답변 제목';
 COMMENT ON COLUMN qna.content is '질문답변 내용';
 COMMENT ON COLUMN qna.pwd is '질문답변 비밀번호';
+COMMENT ON COLUMN qna.rdate is '작성일';
 
+DROP TABLE qna;
 DROP SEQUENCE qna_seq;
 CREATE SEQUENCE qna_seq
   START WITH 1              -- 시작 번호
@@ -50,8 +52,8 @@ WHERE id='user1';
  --INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
 -- VALUES(cate_seq.nextval, 4, '자신없어', sysdate, 0);
 
-INSERT INTO qna(qnano, categrpno, memberno, title, content, pwd)
-VALUES ( qna_seq.nextval, 4 , 1, '질문', '질문내용', 1234 );
+INSERT INTO qna(qnano, categrpno, memberno, title, content, pwd, rdate)
+VALUES ( qna_seq.nextval, 4 , 1,  '질문', '질문내용', 1234, sysdate );
 
 2. 목록
 - 검색을 하지 않는 경우, 전체 목록 출력
@@ -63,7 +65,7 @@ ORDER BY qnano ASC;
 3. 조회
 SELECT qnano, categrpno, memberno, title, content, pwd
 FROM qna
-WHERE memberno = 1;
+WHERE qnano = 1;
 
 4. 수정
 UPDATE qna 
@@ -81,4 +83,11 @@ DELETE FROM qna;
 DELETE FROM qna
 WHERE qnano=1;
 
+
+
+SELECT m.memberno as m_memberno, m.id as m_id,
+               q.qnano, q.title, q.content, q.pwd, q.rdate
+    FROM member m, qna q
+    WHERE m.memberno = q.memberno
+    
 COMMIT;
