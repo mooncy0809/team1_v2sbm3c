@@ -142,6 +142,22 @@ public class CateCont {
         mav.setViewName("/cate/list_by_categrpno_ajax"); // /cate/list_by_categrpno_ajax.jsp
         return mav;
     }
+    
+    @RequestMapping(value = "/cate/list_by_categrpno2.do", method = RequestMethod.GET)
+    public ModelAndView list_by_categrpno2(int categrpno) {
+        ModelAndView mav = new ModelAndView();
+
+        List<CateVO> list = this.cateProc.list_by_categrpno(categrpno);
+        mav.addObject("list", list); // request.setAttribute("list", list);
+
+        CategrpVO categrpVO = this.categrpProc.read(categrpno); // 카테고리 그룹 정보
+        mav.addObject("categrpVO", categrpVO); // request.setAttribute("categrpVO", categrpVO);
+
+        // mav.setViewName("/cate/list_by_categrpno"); // /cate/list_by_categrpno.jsp
+        mav.setViewName("/cate/list_by_categrpno_ajax2"); // /cate/list_by_categrpno_ajax.jsp
+        return mav;
+    }
+    
 
     /**
      * Categrp + Cate join, 연결 목록 http://localhost:9091/cate/list_all_join.do

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.product.ProductDAOInter"> 
+<!--   <insert id="create" parameterType="dev.mvc.product.ProductVO">
+    INSERT INTO product(productno,  cateno, title, content, passwd, word,
+                                     file1, file1saved, thumb1, size1, rdate)
+    VALUES(product_seq.nextval, #{adminno}, #{cateno}, #{title}, #{content}, #{passwd}, #{word},
+                #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
+  </insert> -->
+
+  <!-- 연속 입력 지원 등록: sequence가 SQL 실행전에 생성되어 ProductVO에 저장 후 사용 -->
+  <insert id="create" parameterType="dev.mvc.product.ProductVO">
+    <selectKey keyProperty="productno" resultType="int" order="BEFORE">
+      SELECT products_seq.nextval FROM dual
+    </selectKey>
+    
+    INSERT INTO products(productno, cateno, ptitle, pcontent, ppasswd, pword,
+                                     pfile1, pfile1saved, pthumb1, psize1, rdate)
+    VALUES(#{productno}, #{cateno}, #{ptitle}, #{pcontent}, #{ppasswd}, #{pword},
+                #{pfile1}, #{pfile1saved}, #{pthumb1}, #{psize1}, sysdate)
+  </insert>
+  
+  <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.product.ProductVO" parameterType="int">
+    SELECT productno,  cateno, ptitle, pcontent, precom, pcnt, preplycnt, ppasswd, pword, rdate,
+              pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point, salecnt
+    FROM products
+    WHERE productno = #{productno}
+  </select>
+  
+  <!-- 상품 정보 변경 -->
+  <update id="product_update" parameterType="dev.mvc.product.ProductVO">
+    UPDATE products
+    SET price=#{price}, dc=#{dc}, saleprice=#{saleprice}, point=#{point}, salecnt=#{salecnt}
+    WHERE productno = #{productno}
+  </update> 
+  
+  <!-- 특정 카테고리의 등록된 글목록 -->
+  <select id="list_by_cateno" resultType="dev.mvc.product.ProductVO" parameterType="int">
+    SELECT productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, rdate,
+              pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point
+    FROM products 
+    WHERE cateno = #{cateno}
+    ORDER BY productno DESC
+  </select>   
+
+  <!-- 카테고리별 검색 목록 -->
+  <select id="list_by_cateno_search" resultType="dev.mvc.product.ProductVO" 
+             parameterType="HashMap">
+    SELECT productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, rdate,
+            pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point
+    FROM products
+    <choose>
+      <when test="pword == null or pword == ''"> <!-- 검색하지 않는 경우 -->
+        WHERE cateno=#{cateno}
+      </when>
+      <otherwise> <!-- 검색하는 경우 -->
+        WHERE cateno=#{cateno} AND (UPPER(ptitle) LIKE '%' || #{pword} || '%' 
+                                                     OR UPPER(pcontent) LIKE '%' || #{pword} || '%' 
+                                                     OR UPPER(pword) LIKE '%' || #{pword} || '%')
+      </otherwise>
+    </choose>
+    ORDER BY productno DESC   
+  </select>
+   
+  <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as pcnt
+    FROM products
+    <choose>
+      <when test="pword == null or pword == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE cateno=#{cateno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE cateno=#{cateno} AND (UPPER(ptitle) LIKE '%' || #{pword} || '%' 
+                                                     OR UPPER(pcontent) LIKE '%' || #{pword} || '%' 
+                                                     OR UPPER(pword) LIKE '%' || #{pword} || '%')
+      </otherwise>
+    </choose>
+  </select>    
+
+  <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
+  <select id="list_by_cateno_search_paging" 
+             resultType="dev.mvc.product.ProductVO" parameterType="HashMap">
+   SELECT productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, rdate,
+                 pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point, r
+   FROM (
+              SELECT productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, rdate,
+                     pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point, rownum as r
+              FROM (
+                        SELECT productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, rdate,
+                                   pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point
+                        FROM products
+                        <choose>
+                          <when test="pword == null or pword == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE cateno=#{cateno}
+                          </when>
+                          <otherwise>
+                            WHERE cateno=#{cateno} AND (UPPER(ptitle) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pcontent) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pword) LIKE '%' || #{pword} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY productno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+    <!--  1 page: WHERE r >= 1 AND r <= 10; 
+            2 page: WHERE r >= 11 AND r <= 20;
+            3 page: WHERE r >= 21 AND r <= 30; -->
+     
+  </select>   
+  
+  <!-- 패스워드 검사 -->
+  <select id="passwd_check" resultType="int" parameterType="HashMap">
+	SELECT COUNT(*) as pcnt 
+	FROM products
+	WHERE productno=#{productno} AND ppasswd=#{ppasswd}
+  </select>
+
+  <!-- 텍스트 수정 -->
+  <update id="update_text" parameterType="dev.mvc.product.ProductVO">
+    UPDATE products
+    SET ptitle=#{ptitle}, pcontent=#{pcontent},  pword=#{pword}, 
+          price=#{price}, dc=#{dc}, saleprice=#{saleprice}, point=#{point}, salecnt=#{salecnt}
+    WHERE productno = #{productno}
+  </update>
+
+  <!-- 파일 수정 -->
+  <update id="update_file" parameterType="dev.mvc.product.ProductVO">
+    UPDATE products
+    SET pfile1=#{pfile1}, pfile1saved=#{pfile1saved}, pthumb1=#{pthumb1}, psize1=#{psize1}
+    WHERE productno = #{productno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM products
+    WHERE productno=#{productno}
+  </delete>
+  
+  <!-- 특정 카테고리에 속한 레코드 갯수 산출 -->
+  <select id="count_by_cateno" resultType="int" parameterType="int">
+	SELECT COUNT(*) as pcnt
+	FROM products
+	WHERE cateno=#{cateno}
+  </select>
+  
+</mapper> 
+
+
+
+
+

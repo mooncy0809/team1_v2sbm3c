@@ -31,17 +31,7 @@
     <script src="../js/price-range.js"></script>
     <script src="../js/jquery.prettyPhoto.js"></script>
     <script src="../js/main.js"></script>
-    <script>
-    function recommend(){
-        var url = '../tensorflow/recommend/start.do';
-        var win = window.open(url, 'AI 서비스', 'width=1300px, height=600px');
-
-        var x = (screen.width - 1300) / 2;
-        var y = (screen.height - 600) / 2;
-
-        win.moveTo(x, y); // 화면 중앙으로 이동
-    }
-    </script>
+    
 </head><!--/head-->
 
 <body>
@@ -52,8 +42,8 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="../index.do">삼대몇?</a></li>
-                                <li><a href="../index2.do">하루삼끼</a></li>
+                                <li><a href="./index.do">삼대몇?</a></li>
+                                <li><a href="./index2.do">하루삼끼</a></li>
                             </ul>
                         </div>
                     </div>
@@ -88,8 +78,20 @@
                                 </c:choose>
                                 
                                 <c:choose>
-                                    <c:when test="${sessionScope.grade < 10}"> <%-- 로그인 한 경우 --%> 
-                                        <li><a href="/categrp/list.do"><i class="fa fa-gears"></i> 관리자</a></li>
+                                    <c:when
+                                        test="${sessionScope.grade < 10}">
+                                        <%-- 로그인 한 경우 --%>
+                                                <div class="nav navbar-nav2">
+                                                    <ul class="nav navbar-nav collapse navbar-collapse">
+                                                        <li class="dropdown"><a href="#">관리자<i class="fa fa-angle-down"></i></a>
+                                                            <ul role="menu" class="sub-menu">
+                                                                <li><a href="/categrp/list.do"><i class="fa fa-gears"></i>삼대몇 관리자</a></li>
+                                                                <li><a href="/categrp/list2.do"><i class="fa fa-gears"></i>하루삼끼 관리자</a></li>
+                                                                <li><a href="../../you/list_by_categrpno.do?categrpno=4"><i class="fa fa-gears"></i>홈트레이닝</a></li> 
+                                                            </ul>
+                                                        </li>
+                                                     </ul>
+                                                </div>         
                                     </c:when>
                                 </c:choose>
                                 
@@ -124,13 +126,10 @@
 <!--                            <li><a href="#"><i class="fa fa-star"></i> 위시리스트</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> 결제 </a></li>
                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li> -->
-                                <li><a href="javascript: recommend()"class="active">추천시스템</a></li>
-                                <c:forEach var="categrpVO" items="${list}">
-                                <c:set var="categrpno" value="${categrpVO.categrpno }" />
-                                <c:set var="name" value="${categrpVO.name }" />
-                                <li><A href="../cate/list_by_categrpno.do?categrpno=${categrpno }">${name }</A></li>
-                                </c:forEach>
-                                <!--<li class="dropdown"><a href="#">다이어트 꿀팁<i class="fa fa-angle-down"></i></a>
+                                <li><a href="../../product/list_by_cateno_grid.do?cateno=1"class="active">닭가슴살</a></li>
+                                <li><a href="../../product/list_by_cateno_grid.do?cateno=19"class="active">닭가슴살2</a></li>
+                                <li><a href="../../product/list_by_cateno_grid.do?cateno=3"class="active">닭가슴살3</a></li>
+                                <!-- <li class="dropdown"><a href="#">다이어트 꿀팁<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">전체</a></li>
                                         <li><a href="product-details.html">칼럼</a></li> 
@@ -148,7 +147,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="404.html">홈트레이닝</a></li> 
-                                <li><a href="404.html">칼로리사전</a></li> -->
+                                <li><a href="404.html">칼로리사전</a></li>  -->
 
                                 
                             </ul>
