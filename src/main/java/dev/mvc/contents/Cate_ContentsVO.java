@@ -5,6 +5,9 @@ public class Cate_ContentsVO {
     /** 카테고리 이름 */
     private String r_name;
     
+    
+    /** 카테고리 번호 */
+    private int contentsno;  
     /** 카테고리 번호 */
     private int cateno;  
     /** 제목 */
@@ -15,6 +18,9 @@ public class Cate_ContentsVO {
     private String rdate;
     /** 조회 수 */
     private int cnt;
+    
+    /** 작성자 */
+    private String mname;
     
     public Cate_ContentsVO() {
         
@@ -66,6 +72,22 @@ public class Cate_ContentsVO {
 
     public void setCnt(int cnt) {
         this.cnt = cnt;
+    }
+
+    public int getContentsno() {
+        return contentsno;
+    }
+
+    public void setContentsno(int contentsno) {
+        this.contentsno = contentsno;
+    }
+
+    public String getMname() {
+        return mname;
+    }
+
+    public void setMname(String mname) {
+        this.mname = mname;
     }
     
     

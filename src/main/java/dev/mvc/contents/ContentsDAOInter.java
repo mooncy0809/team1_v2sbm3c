@@ -52,6 +52,14 @@ public interface ContentsDAOInter {
      * @return
      */
     public int search_count(HashMap<String, Object> hashMap);
+    
+    /**
+     * 전체 게시물 카테고리별 검색 레코드 갯수
+     * 
+     * @param hashMap
+     * @return
+     */
+    public int search_count2(HashMap<String, Object> hashMap);
 
     /**
      * 검색 + 페이징 목록
@@ -109,6 +117,28 @@ public interface ContentsDAOInter {
      * Cate + Contents join, 연결 목록
      * @return
      */
-    public List<Cate_ContentsVO> list_all_join(); 
+//    public List<Cate_ContentsVO> list_all_join(); 
+    
+    /**
+     * 검색 + 페이징 목록
+     * 
+     * @param map
+     * @return
+     */
+    public List<ContentsVO> list_all_join(HashMap<String, Object> map);
+    
+    /**
+     * 글 수 증가
+     * @param 
+     * @return
+     */ 
+    public int increaseReplycnt(int contentsno);
+   
+    /**
+     * 글 수 감소
+     * @param 
+     * @return
+     */   
+    public int decreaseReplycnt(int contentsno);
     
 }

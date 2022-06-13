@@ -74,6 +74,7 @@
     <input type="hidden" name="cateno" value="${param.cateno }">
     <%-- <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }"> --%>
     <input type="hidden" name="memberno" id="memberno" value="${sessionScope.memberno}">
+    <input type="hidden" name="mname" id="mname" value="${sessionScope.mname}">
     <%-- <input type="hidden" name="adminno" value="1"> 관리자 개발후 변경 필요 --%>
     
     <div class="form-group">
