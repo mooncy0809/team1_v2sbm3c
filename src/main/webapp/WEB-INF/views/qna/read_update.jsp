@@ -60,7 +60,7 @@
             <div class="form-group">
                 <label class="control-label col-md-3">비밀번호</label>
                 <div class="col-md-9">
-                    <input id='pwd' type='password' /></input>
+                    <input name='pwd' type='password' /></input>
 
                     <div class="content_body_bottom"
                         style="text-align: right; width: 70%;">

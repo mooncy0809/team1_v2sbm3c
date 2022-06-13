@@ -1,8 +1,10 @@
 package dev.mvc.qna;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import dev.mvc.qna.QnaVO;
 import dev.mvc.you.YouVO;
 import dev.mvc.categrp.CategrpProcInter;
 import dev.mvc.categrp.CategrpVO;
+import dev.mvc.contents.ContentsVO;
 import dev.mvc.member.MemberVO;
 
 @Controller
@@ -31,7 +34,17 @@ public class QnaCont {
     public QnaCont() {
         System.out.println("-> QnaCont created.");
     }
-    
+    /**
+     * 새로고침 방지
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/qna/msg.do", method = RequestMethod.GET)
+    public ModelAndView msg() {
+        ModelAndView mav = new ModelAndView();
+        return mav; // forward
+    }
+
     /**
      * 등록폼 
      * 
@@ -41,7 +54,7 @@ public class QnaCont {
     public ModelAndView create(int categrpno, int memberno) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/qna/create");
-        
+
         return mav;
     }
     
@@ -51,10 +64,14 @@ public class QnaCont {
      * @return
      */
     @RequestMapping(value= "/qna/create.do", method = RequestMethod.POST)
-    public ModelAndView create(QnaVO qnaVO, HttpSession session, int memberno) {
+    public ModelAndView create(HttpServletRequest request, 
+            HttpServletResponse response, 
+            HttpSession session,
+            int memberno, QnaVO qnaVO) {
         ModelAndView mav = new ModelAndView();
         
         int cnt = this.qnaProc.create(qnaVO);
+        mav.addObject("qnano", qnaVO.getQnano());
         session.setAttribute("memberno", memberno);
         
         
@@ -220,10 +237,14 @@ public class QnaCont {
      */
     @RequestMapping(value = "/qna/input_pwd.do", 
                                method = RequestMethod.GET)
-   public ModelAndView input_pwd() {
+   public ModelAndView input_pwd(HttpServletRequest request, QnaVO qnaVO) {
       ModelAndView mav = new ModelAndView();
-   
-     mav.setViewName("/qna/input_pwd");
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      
+      map.put("qnano", qnaVO.getQnano());
+      map.put("pwd", qnaVO.getPwd());
+      
+      mav.setViewName("/qna/input_pwd");
      return mav;
     }
 
@@ -231,43 +252,30 @@ public class QnaCont {
      * 비밀번호 입력 처리
      * @return
      */
-    @RequestMapping(value = "/qna/password.do", 
-                               method = RequestMethod.POST)
-    public ModelAndView password(int qnano) {
+    @RequestMapping(value = "/qna/passwd_check.do", 
+                               method = RequestMethod.GET)
+    public ModelAndView password(HttpServletRequest request, QnaVO qnaVO) {
       ModelAndView mav = new ModelAndView();
-      QnaVO qnaVO = this.qnaProc.read(qnano);
+     qnaProc.read(qnaVO.getQnano());
 
-      int cnt = this.qnaProc.password(qnano);
-      
-      if (cnt == 1) {
-          mav.addObject("categrpno", qnaVO.getCategrpno());  
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("qnano", qnaVO.getQnano());
+      map.put("pwd", qnaVO.getPwd());
+
+      int cnt = 0;
+      int passwd_cnt = this.qnaProc.passwd_check(map);
+      if (passwd_cnt == 1) {
+   
+          mav.addObject("qnano", qnaVO.getQnano());  
           mav.setViewName("redirect:/qna/read.do");
           
-      }else {
-          mav.addObject("code", "update_fail"); // request에 저장
+      }else { // 패스워드 오류
           mav.addObject("cnt", cnt);
-          mav.addObject("qnano", qnaVO.getQnano());
-          mav.addObject("categrpno", qnaVO.getCategrpno());
-          mav.addObject("title", qnaVO.getTitle());
-          mav.addObject("content", qnaVO.getContent());
-          mav.addObject("pwd", qnaVO.getPwd());
-          mav.addObject("rdate", qnaVO.getRdate());
-          mav.setViewName("redirect:/qna/read.do");
-          
+          mav.addObject("code", "passwd_fail");
+          mav.addObject("url", "/qna/msg"); // msg.jsp, redirect parameter 적용
+          mav.setViewName("redirect:/qna/msg.do");
       }
-//        QnaVO qnaVO = memberProc.readById(id); // 로그인한 회원의 정보 조회
-//        session.setAttribute("memberno", memberVO.getMemberno());
-//        session.setAttribute("id", id);
-//        session.setAttribute("mname", memberVO.getMname());
-//        session.setAttribute("grade", memberVO.getGrade());
-//        
-//        mav.setViewName("redirect:/index.do"); // 시작 페이지로 이동  
-//      } else {
-//        mav.addObject("url", "/member/login_fail_msg"); // login_fail_msg.jsp, redirect parameter 적용
-//       
-//        mav.setViewName("redirect:/member/msg.do"); // 새로고침 방지
-//      }
-//          
+    
       return mav;
     }
 

@@ -1,9 +1,12 @@
 package dev.mvc.qna;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import dev.mvc.contents.ContentsVO;
 
 
 
@@ -53,8 +56,14 @@ public class QnaProc implements QnaProcInter{
     }
 
     @Override
-    public int password(int qnano) {
-        int cnt = this.qnaDAO.password(qnano);
+    public int input_pwd(QnaVO qnaVO) {
+        int cnt = this.qnaDAO.input_pwd(qnaVO);
+        return cnt;
+    }
+    
+    @Override
+    public int passwd_check(HashMap<String, Object> map) {
+        int cnt = this.qnaDAO.passwd_check(map);
         return cnt;
     }
 

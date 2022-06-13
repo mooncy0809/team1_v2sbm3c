@@ -1,5 +1,6 @@
 package dev.mvc.qna;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface QnaProcInter {
@@ -41,9 +42,16 @@ public interface QnaProcInter {
     public int delete(int qnano);
     /**
      * 비밀번호 입력
-     * @param qnano
-     * @return
+     * @param qnaVO
+     * @return 처리된 레코드 갯수
      */
-    public int password(int qnano);
+    public int input_pwd(QnaVO qnaVO);
+    /**
+     * 패스워드 체크
+     * 
+     * @param map
+     * @return 1 or 0
+     */
+    public int passwd_check(HashMap<String, Object> map);
 
 }

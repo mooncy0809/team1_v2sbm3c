@@ -53,8 +53,35 @@
    <br>
    <DIV>${content }</DIV> 
   </fieldset>
+  
+  
 
 </DIV>
+
+<!-- ------------------------------ 댓글 영역 시작 ------------------------------ -->
+<DIV style='width: 80%; margin: 0px auto;'>
+    <HR>
+    <FORM name='frm_reply' id='frm_reply'> <%-- 댓글 등록 폼 --%>
+        <input type='hidden' name='contentsno' id='contentsno' value='${contentsno}'>
+        <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'>
+        
+        <textarea name='content' id='content' style='width: 100%; height: 60px;' placeholder="댓글 작성, 로그인해야 등록 할 수 있습니다."></textarea>
+        <input type='password' name='passwd' id='passwd' placeholder="비밀번호">
+        <button type='button' id='btn_create'>등록</button>
+    </FORM>
+    <HR>
+    <DIV id='reply_list' data-replypage='1'>  <%-- 댓글 목록 --%>
+    
+    </DIV>
+    <DIV id='reply_list_btn' style='border: solid 1px #EEEEEE; margin: 0px auto; width: 100%; background-color: #EEFFFF;'>
+        <button id='btn_add' style='width: 100%;'>더보기 ▽</button>
+    </DIV>  
+  
+</DIV>
+
+<!-- ------------------------------ 댓글 영역 종료 ------------------------------  -->
+  
+   
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>

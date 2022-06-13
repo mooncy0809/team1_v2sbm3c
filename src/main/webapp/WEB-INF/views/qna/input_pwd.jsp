@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="qnano" value="${qnaVO.qnano }" />
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -25,12 +27,12 @@ $(function(){
 <body>
 <jsp:include page="../menu/top.jsp" />
 <DIV class='content_body' style="width:70%;">
-<FORM name='frm' method='POST' action='./password.do' class="form-horizontal">
-<input type="hidden" name="qnano" value="${param.qnano }">
-     <div class="form-group">
+<FORM name='frm' method='GET' action='./passwd_check.do' class="form-horizontal">
+<input type="hidden" name="qnano" value="${qnano }">
+   <div class="form-group">
        <label class="control-label col-md-4">비밀번호를 입력하세요.</label>
        <div class="col-md-8">
-       <input id='pwd' type='password'/></input>
+       <input name='pwd' type='password'/></input>
 
        <button type="submit" onclick="./read.do?qnano=${Member_QnaVO.qnano}" class="btn btn-primary">등록</button>
 

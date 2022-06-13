@@ -41,10 +41,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE qnano = #{qnano}
   </delete>  
   
-  <select id="password" resultType="int" >
-    SELECT COUNT(qnano) as cnt
+  <select id="passwd_check" resultType="int" parameterType="HashMap">
+    SELECT count(*) as cnt
     FROM qna
-    WHERE pwd=#{pwd}
+    WHERE qnano=#{qnano} and pwd=#{pwd}
   </select>
   
   

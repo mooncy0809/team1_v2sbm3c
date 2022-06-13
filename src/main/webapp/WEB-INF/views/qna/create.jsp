@@ -33,7 +33,7 @@
  <span style="width:70%; font-size: 1.5em; font-weight: bold;">글쓰기</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
    <br>
-  <FORM name='frm' method='POST' action='./create.do' class="form-horizontal">
+  <FORM name='frm' method='POST' action='./create.do' class="form-horizontal"  enctype="multipart/form-data">
   
   <input type="hidden" name="categrpno" value="${param.categrpno }"> 
   <input type="hidden" name="memberno" id="memberno" value="${sessionScope.memberno }"> 
@@ -56,7 +56,7 @@
      <div class="form-group">
        <label class="control-label col-md-4">비밀번호</label>
        <div class="col-md-8">
-       <input id='pwd' type='password'/></input>
+       <input name='pwd'  type='password' required="required">
         <div class="content_body_bottom" style="padding-right: 20%;">
        <button type="submit" class="btn btn-primary">등록</button>
       <button type="button" onclick="location.href='./member_join.do'" class="btn btn-primary">목록</button>
