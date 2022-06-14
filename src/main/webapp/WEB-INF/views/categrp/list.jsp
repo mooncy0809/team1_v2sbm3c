@@ -93,7 +93,7 @@
                 </TD>
                 <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD>
                 <TD class="td_bs">
-              <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open.png" style='width: 18px;'></A>
+              <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open.png" ></A>
             </c:when>
             <c:otherwise>
                 <td>N인데 왜 출력해 왜왜왜</td>

@@ -228,7 +228,7 @@
       <input type='hidden' name='categrpno' id='categrpno' value=''>
         
       <label>그룹 이름</label>: <span id='frm_delete_name'></span>  
-      <label>순서</label>: <span id='frm_delete_seqno'></span>
+      <label>번호</label>: <span id='frm_delete_seqno'></span>
       <label>출력 형식</label>: <span id='frm_delete_visible'></span>
       
       <%-- 자식 레코드 갯수 출력 --%>
@@ -258,7 +258,7 @@
    
     <thead>  
     <TR>
-      <TH class="th_bs">순서</TH>
+      <TH class="th_bs">번호</TH>
       <TH class="th_bs">이름</TH>
       <TH class="th_bs">등록일</TH>
       <TH class="th_bs">출력</TH>
@@ -292,13 +292,13 @@
                 </TD>
                 <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD>
                 <TD class="td_bs">
-              <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open.png" style='width: 18px;'></A>
+              <A href="./update_visible2.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open2.png"></A>
               <TD class="td_bs">
           <A href="../cate/create.do?categrpno=${categrpno }" title="${name } 등록"><i class="fa-solid fa-pen-to-square"></i></A>
           <A href="javascript: read_update_ajax(${categrpno })" title="수정"><i class="fa-regular fa-pen-to-square"></i></A>
           <A href="javascript: read_delete_ajax(${categrpno })" title="삭제"><i class="fa-solid fa-eraser"></i></A>
-          <A href="./update_seqno_up.do?categrpno=${categrpno }" title="우선순위 상향"><i class="fa-solid fa-angle-up"></i></A>
-          <A href="./update_seqno_down.do?categrpno=${categrpno }" title="우선순위 하향"><i class="fa-solid fa-angle-down"></i></A>         
+          <A href="./update_seqno_up2.do?categrpno=${categrpno }" title="우선순위 상향"><i class="fa-solid fa-angle-up"></i></A>
+          <A href="./update_seqno_down2.do?categrpno=${categrpno }" title="우선순위 하향"><i class="fa-solid fa-angle-down"></i></A>         
         </TD>
             </c:when>
             <c:otherwise>

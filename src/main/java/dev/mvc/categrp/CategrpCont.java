@@ -104,7 +104,7 @@ public class CategrpCont {
         return mav; // forward
     }
     
- // http://localhost:9091/categrp/list.do
+ // http://localhost:9091/categrp/list.do =>삼대몇
     @RequestMapping(value="/categrp/list.do", method=RequestMethod.GET )
     public ModelAndView list() {
       ModelAndView mav = new ModelAndView();
@@ -121,7 +121,7 @@ public class CategrpCont {
       return mav;
     }
     
-    // http://localhost:9091/categrp/list.do
+    // http://localhost:9091/categrp/list.do =>하루삼끼
     @RequestMapping(value="/categrp/list2.do", method=RequestMethod.GET )
     public ModelAndView list2() {
       ModelAndView mav = new ModelAndView();
@@ -230,6 +230,7 @@ public class CategrpCont {
       return mav;
     }
     
+    
  // http://localhost:9091/categrp/read_delete.do
     /**
      * 조회 + 삭제폼
@@ -271,10 +272,6 @@ public class CategrpCont {
           mav.addObject("cnt", cnt);  // request 객체에 저장
           
           mav.setViewName("redirect:/categrp/list.do");
-     
-      
-
-
       return mav;
     }
     
@@ -293,6 +290,22 @@ public class CategrpCont {
       this.categrpProc.update_seqno_up(categrpno);  // 우선 순위 상향 처리
 
       mav.setViewName("redirect:/categrp/list.do"); 
+      return mav;
+    }  
+    
+    /**
+     * 우선순위 상향 up 10 ▷ 1
+     * @param categrpno 카테고리 번호
+     * @return
+     */
+    @RequestMapping(value="/categrp/update_seqno_up2.do", 
+                                method=RequestMethod.GET )
+    public ModelAndView update_seqno_up2(int categrpno) {
+      ModelAndView mav = new ModelAndView();
+      
+      this.categrpProc.update_seqno_up(categrpno);  // 우선 순위 상향 처리
+
+      mav.setViewName("redirect:/categrp/list2.do"); 
       return mav;
     }  
     
@@ -316,6 +329,23 @@ public class CategrpCont {
     }  
     
     /**
+     * 우선순위 하향 up 1 ▷ 10
+     * @param categrpno 카테고리 번호
+     * @return
+     */
+    @RequestMapping(value="/categrp/update_seqno_down2.do", 
+                                method=RequestMethod.GET )
+    public ModelAndView update_seqno_down2(int categrpno) {
+      ModelAndView mav = new ModelAndView();
+      
+      this.categrpProc.update_seqno_down(categrpno);
+
+      mav.setViewName("redirect:/categrp/list2.do");
+
+      return mav;
+    }  
+    
+    /**
      * 출력 모드의 변경
      * @param categrpVO
      * @return
@@ -332,4 +362,20 @@ public class CategrpCont {
       return mav;
     }  
     
+    /**
+     * 출력 모드의 변경
+     * @param categrpVO
+     * @return
+     */
+    @RequestMapping(value="/categrp/update_visible2.do", 
+        method=RequestMethod.GET )
+    public ModelAndView update_visible2(CategrpVO categrpVO) {
+      ModelAndView mav = new ModelAndView();
+      
+      int cnt = this.categrpProc.update_visible(categrpVO);
+      
+      mav.setViewName("redirect:/categrp/list2.do"); // request 객체 전달 안됨. 
+      
+      return mav;
+    }  
 }

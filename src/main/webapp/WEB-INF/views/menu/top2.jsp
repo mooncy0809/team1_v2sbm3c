@@ -42,8 +42,8 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="./index.do">삼대몇?</a></li>
-                                <li><a href="./index2.do">하루삼끼</a></li>
+                                <li><a href="../index.do">삼대몇?</a></li>
+                                <li><a href="../index2.do">하루삼끼</a></li>
                             </ul>
                         </div>
                     </div>
@@ -125,31 +125,21 @@
                             <ul class="nav navbar-nav collapse navbar-collapse">
 <!--                            <li><a href="#"><i class="fa fa-star"></i> 위시리스트</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> 결제 </a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li> -->
-                                <li><a href="../../product/list_by_cateno_grid.do?cateno=1"class="active">닭가슴살</a></li>
-                                <li><a href="../../product/list_by_cateno_grid.do?cateno=19"class="active">닭가슴살2</a></li>
-                                <li><a href="../../product/list_by_cateno_grid.do?cateno=3"class="active">닭가슴살3</a></li>
-                                <!-- <li class="dropdown"><a href="#">다이어트 꿀팁<i class="fa fa-angle-down"></i></a>
+                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li> -->   
+                                <li><a href="../../product/list_by_cateno_grid.do?cateno=1"class="active">추천시스템</a></li>                           
+                                <li class="dropdown"><a href="#">전체 카테고리<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">전체</a></li>
-                                        <li><a href="product-details.html">칼럼</a></li> 
-                                        <li><a href="checkout.html">운동</a></li> 
-                                        <li><a href="cart.html">식단</a></li> 
-                                        <li><a href="login.html">성공후기</a></li> 
+                                        <li><a href="../product/list_by_cateno_grid.do?categrpno=6&cateno=7">닭가슴살</a></li>
+                                        <li><a href="product-details.html">간편요리</a></li> 
+                                        <li><a href="checkout.html">샐러드</a></li> 
+                                        <li><a href="cart.html">건강미용</a></li> 
+                                        <li><a href="login.html">간식</a></li> 
                                     </ul>                                   
                                 </li> 
-                                <li class="dropdown"><a href="#">커뮤니티<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">전체</a></li>
-                                        <li><a href="blog-single.html">팁&노하우</a></li>
-                                        <li><a href="shop.html">고민&질문</a></li>
-                                        <li><a href="product-details.html">자유게시판</a></li> 
-                                    </ul>
-                                </li>
-                                <li><a href="404.html">홈트레이닝</a></li> 
-                                <li><a href="404.html">칼로리사전</a></li>  -->
-
                                 
+                                <li><a href="../../product/list_by_cateno_grid.do?cateno=1">베스트</a></li>
+                                <li><a href="../../product/list_by_cateno_grid.do?cateno=19">특가</a></li>
+                                <li><a href="../../product/list_by_cateno_grid.do?cateno=3">신상품</a></li>                
                             </ul>
                         </div>
                     </div>
