@@ -39,5 +39,13 @@ public interface DictProcInter {
     public List<DictVO> list_by_categrpno_search_paging(HashMap<String, Object> map);
     
     public String pagingBox(int categrpno, int search_count, int now_page, String word);
+    
+    /**
+     * 검색 + 페이징 목록
+     * 
+     * @param map
+     * @return
+     */
+    public List<DictVO> index_contents3(HashMap<String, Object> map);
 
 }

@@ -14,7 +14,6 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-">
 
 </head> 
 <body>
@@ -31,6 +30,13 @@
             <span class="span_fail">패스워드가 일치하지 않습니다.</span>
           </LI> 
         </c:when>
+        
+        <c:when test="${param.code == 'qna_fail'}">
+          <LI class='li_none'>
+            <span class="span_fail">로그인 후 이용해주세요.</span>
+          </LI> 
+        </c:when>
+        
         <c:when test="${param.code == 'product_success'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_success">상품 정보를 등록했습니다.</span>
@@ -98,7 +104,7 @@
         </c:choose>
         
         <%-- <a href="./list_by_cateno.do?cateno=${param.cateno}" class="btn btn-primary">목록</a> --%>
-        <button type='button' onclick="location.href='./list_by_cateno_search_paging.do?cateno=${param.cateno}'" class="btn btn-primary">목록</button> 
+        <button type="button" onclick="location.href='./member_join.do'" class="btn btn-primary">목록</button> 
         <%-- <button type='button' onclick="location.href='./list_by_cateno_search.do?cateno=${param.cateno}'" class="btn btn-primary">목록</button> --%>
         <%-- <button type='button' onclick="location.href='./list_by_cateno_search_paging.do?cateno=${param.cateno}'" class="btn btn-primary">목록</button> --%>
 

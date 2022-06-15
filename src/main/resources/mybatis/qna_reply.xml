@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.qna_reply.Qna_replyDAOInter">
+  <insert id="create">
+    INSERT INTO qna_reply(qna_replyno, qnano, memberno, content, rdate)
+    VALUES(qna_reply_seq.nextval, #{qnano}, #{memberno}, #{content}, sysdate)
+  </insert>
+  
+  <select id="list" resultType="dev.mvc.qna_reply.Qna_replyVO">
+    SELECT qna_replyno, qnano, memberno, content, rdate
+    FROM qna_reply
+    ORDER BY qna_replyno DESC
+  </select>
+
+  <select id="list_by_qnano" resultType="dev.mvc.qna_reply.Qna_replyVO" parameterType="int">
+    SELECT qna_replyno, qnano, memberno, content, rdate
+    FROM qna_reply
+    WHERE qnano=#{qnano}
+    ORDER BY qna_replyno DESC
+  </select>
+
+  <select id="list_by_qnano_join" resultType="dev.mvc.qna_reply.Qna_replyMemberVO" parameterType="int">
+    SELECT m.id,
+               r.qna_replyno, r.qnano, r.memberno, r.content, r.rdate
+    FROM member m,  qna_reply r
+    WHERE (m.memberno = r.memberno) AND r.qnano=#{qnano}
+    ORDER BY r.qna_replyno DESC
+  </select>
+  
+ 
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM qna_reply
+    WHERE qna_replyno=#{qna_replyno}
+  </delete>
+    
+</mapper> 

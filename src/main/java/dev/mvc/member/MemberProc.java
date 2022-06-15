@@ -128,7 +128,21 @@ public class MemberProc implements MemberProcInter{
     public MemberVO read_id(Map<String, Object> map) {
         MemberVO memberVO = this.memberDAO.read_id(map);
         return memberVO;
-    } 
+    }
+
+    @Override
+    public int find_passwd_check(Map<Object, Object> map) {
+        int cnt = this.memberDAO.find_passwd_check(map);
+        return cnt;
+    }
+
+    @Override
+    public int find_passwd(Map<Object, Object> map) {
+        int cnt = this.memberDAO.find_passwd(map);
+        return cnt;
+    }
+
+
     
     
     

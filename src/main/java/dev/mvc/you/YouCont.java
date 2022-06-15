@@ -298,6 +298,56 @@ public class YouCont {
 
       return mav;
     }
+    
+    
+    /**
+     * 목록 + 검색 + 페이징 지원
+     * http://localhost:9090/you/list_by_categrpno_grid_search_paging.do?categrpno=1&now_page=1
+     * 
+     * @param cateno
+     * @param word
+     * @param now_page
+     * @return
+     */
+    @RequestMapping(value = "/you/index_contents2.do", method = RequestMethod.GET)
+    public ModelAndView index_contents2(
+            @RequestParam(value = "categrpno", defaultValue = "4") int categrpno,                                                                           
+            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+
+      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("categrpno", categrpno); // #{categrpno}
+      map.put("word", word); // #{word}
+      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+      // 검색 목록
+      List<YouVO> list = youProc.index_contents2(map);
+      mav.addObject("list", list);
+
+      // 검색된 레코드 갯수
+      int search_count = youProc.search_count(map);
+      mav.addObject("search_count", search_count);
+
+      CategrpVO categrpVO = categrpProc.read(categrpno);
+      mav.addObject("categrpVO", categrpVO);
+
+      String paging = youProc.pagingBox(categrpno, search_count, now_page, word);
+      mav.addObject("paging", paging);
+
+      mav.addObject("now_page", now_page);
+      
+      mav.setViewName("/you/index_contents2");
+
+      return mav;
+    }
+    
+    
+    
+    
+    
     /** http://localhost:9090/you/list_by_categrpno_search_paging.do?categrpno=1&now_page=1
      * 
      * @param cateno
@@ -356,6 +406,9 @@ public class YouCont {
 
       return mav;
     }
+    
+    
+    
 
     
     

@@ -8,17 +8,44 @@
                                  maximum-scale=5.0, width=device-width" /> 
 
 <jsp:include page="./menu/top.jsp" flush='false' />
+
+<style type="text/css">
+.backimg{
+    background: url('./images/home/back1.png') no-repeat;
+}
+.backimg2{
+    background: url('./images/home/back2.png') no-repeat;
+}
+.backimg3{
+    background: url('./images/home/back3.png') no-repeat;
+}
+.backimg4{
+    background: url('./images/home/back4.png') no-repeat;
+}
+.backimg5{
+    background: url('./images/home/back5.png') no-repeat;
+}
+</style>
 </head>
 <body>
-  <DIV style='width: 100%; margin: 100px auto; text-align: center;'>
-    <IMG src='/images/home/back.png'>
+  <DIV style='width: 80%; margin: 30px auto; text-align: center;'><div>
+   <iframe class="backimg" src="./contents/index_contents.do?cateno=4" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
+       <iframe class="backimg2" src="./you/index_contents2.do?categrpno=4" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
+           <iframe class="backimg3" src="./dict/index_contents3.do?categrpno=5" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
+       <iframe class="backimg4" src="./contents/index_contents.do?cateno=4" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
+       <iframe class="backimg5" src="./you/index_contents2.do?categrpno=4" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
+        <a href="./member/login.do" target="_top"><IMG src='/images/home/back6.png' style="padding-right: 150px;"></a>
+  </div>
   </DIV>
+
     <section id="slider"><!--slider-->
-        <div class="container">
+<!--         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                            
+                             <IMG src='/images/home/back1.png'>
+    <IMG src='/images/home/back2.png'>
+    <IMG src='/images/home/back3.png'> -->
 
                         <!-- <ol class="carousel-indicators">
                             <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
@@ -766,9 +793,9 @@
                         </div>
                     </div>/recommended_items -->
                     
-                </div>
+<!--                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
  <jsp:include page="./menu/bottom.jsp" flush='false' />
 </body>

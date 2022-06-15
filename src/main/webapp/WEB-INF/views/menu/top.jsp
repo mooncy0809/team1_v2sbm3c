@@ -35,6 +35,42 @@
 <script src="../js/price-range.js"></script>
 <script src="../js/jquery.prettyPhoto.js"></script>
 <script src="../js/main.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Do+Hyeon&family=Gaegu:wght@300&family=Kdam+Thmor+Pro&family=Kirang+Haerang&family=Nanum+Gothic&display=swap" rel="stylesheet">
+<style type="text/css">
+
+.menu li:hover{
+    color: white;
+}
+
+.sub_com li:hover{
+    color: white;
+}
+
+.imgbtn{
+    cursor:pointer;
+    position: relative;
+}
+
+.menu li{
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 50px;
+    cursor:pointer;
+     color: black;
+
+}
+
+.sub_com li{
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 20px;
+     cursor:pointer;
+     color: black;
+}
+
+
+
+</style>
 
 </head>
 <!--/head-->
@@ -133,8 +169,9 @@
                         <div class="logo pull-left">
                             <!--                             <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
  -->
-                            <a><img src="/images/home/cate.png"
+                            <a class="imgbtn"><img src="/images/home/cate.png"
                                 onclick="openNav(this)"/></a>    
+  
                             <!--    <li class="menu">            
                                 
                                 <ul class="hide">                
@@ -195,25 +232,22 @@
 
                 </div>
                 <div id="mySidenav" class="sidenav category-bg"
-                    style="width: 40%; height: 90.5%; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:0px; ">
-                    <li class="menu" style=list-style:none; >
-                        <ul >
-                        
-                            <a href=""  style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">         
-                            <li>NOTICE</li>     </a> 
-                            <a href=""   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">              
-                            <li>DIET TIP</li>          </a>
-                            <a href=""   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">         
-                            <li>COMMUNITY</li>     </a>                            
-                                        <li><a href="../contents/list_all_join.do">전체</a></li>
-                                        <li><a href="../contents/list_by_cateno_search_paging.do?cateno=4&now_page=1">자유게시판</a></li>
-                                        <li><a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1">팁&노하우</a></li>
-                                        <li><a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1">고민&질문</a></li>
-                                        <li><a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1">일기</a></li>  
-                            <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4&now_page=1"   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">   
-                            <li>HOME TRAINING</li>             </a>
-                            <a href="../dict/list_by_categrpno_search_paging.do?categrpno=5"   style="font-family: 'Black Han Sans', sans-serif; font-size: 50px;">      
-                            <li>CALORIE DICTIONARY</li>           </a>
+                    style="padding-left: 40px; width: 40%; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:65px; box-shadow: 12px 10px 11px 7px gray;">
+                    <li class="menu" style="list-style:none;" >
+                        <ul >                       
+                            <a><li>NOTICE</li></a>
+                            <a><li>DIET TIP</li></a>       
+                            <a onclick="com(this)" ><li>COMMUNITY</li></a>            
+                                        <div class="sub_com" id="sub_com" style="display: none; ">           
+                                        <a href="../contents/list_all_join.do"><li>전체</li></a>
+                                        <a href="../contents/list_by_cateno_search_paging.do?cateno=4&now_page=1"><li>자유게시판</li></a>
+                                        <a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1"><li>팁&노하우</li></a>
+                                        <a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1"><li>고민&질문</li></a>
+                                        <a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1"><li>일기</li></a>  
+                                       <a href="/qna/member_join.do"> <li>관리자에게</li></a> 
+                                        </div>
+                            <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4&now_page=1"><li>HOME TRAINING</li></a>
+                            <a href="../dict/list_by_categrpno_search_paging.do?categrpno=5"><li>CALORIE DICTIONARY</li></a>
                         </ul>        
                     </li>
                 </div>
@@ -259,16 +293,38 @@
 <script>
 function openNav() {
     if ($('#mySidenav').css('display') == 'block'){
-        $('#mySidenav').hide();  
+        $("#mySidenav").slideUp(500);
+        
+       
         } 
-   
+    
     else{
-            $('#mySidenav').show();  
+        $("#mySidenav").slideDown(500);
             
+
             }
 
   } 
-  
+
+
+function com() {
+    if ($('#sub_com').css('display') == 'block'){
+        $("#sub_com").slideUp(500);
+        
+       
+        } 
+    
+    else{
+        $("#sub_com").slideDown(500);
+            
+
+            }
+
+  } 
+
+
+
+
  /*  $(document).ready(function(){              
       $(".logo pull-left>img").click(function(){
           var submenu = $(this).next("mySidenav");

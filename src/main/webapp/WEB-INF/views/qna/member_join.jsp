@@ -14,8 +14,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     
 <script type="text/javascript">
- 
-  
+function btn(sample){  
+    alert(sample); 
+    document.location.href="/member/login.do";
+ }  
 </script>
 </head>
 <body>
@@ -69,8 +71,19 @@
 
   </TABLE>
   
-  <div style="text-align:right;">  <button type="button" class="btn btn-primary"
-                            onclick="location.href='./create.do?categrpno=4&memberno=${sessionScope.memberno}'">글쓰기</button></div>
+  <div style="text-align:right;">  
+  <c:choose>
+  <c:when test="${sessionScope.id == null}">
+      <button type="button" class="btn btn-primary"
+                            onclick="javascript:btn('로그인 후 이용해주세요.' )">글쓰기</button>
+                            
+  </c:when>
+  <c:otherwise>
+  <button type="button" class="btn btn-primary"
+                            onclick="location.href='./create.do?categrpno=4&memberno=${sessionScope.memberno}'">글쓰기</button>
+  </c:otherwise>
+  </c:choose>
+  </div>
 
 </DIV>
 
