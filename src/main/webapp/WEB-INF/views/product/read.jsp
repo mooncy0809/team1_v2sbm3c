@@ -51,7 +51,7 @@
     if ('${sessionScope.id}' != '' || $('#login_yn').val() == 'YES') {  // 로그인이 되어 있다면
         cart_ajax_post();  // 쇼핑카트에 바로 상품을 담음
     } else { // 로그인 안된 경우
-        location.href='/cart/list_by_memberno.do';
+        console.log("앙대용");
     }
 
   }
