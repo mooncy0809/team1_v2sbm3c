@@ -135,7 +135,7 @@
             
             if (count_by_categrpno > 0) { // 자식 레코드가 있다면
                 $('#msg_count_by_categrpno').show();
-                $('#btn_submit').hide();
+                $('#delete_submit').hide();
                 
             } else {
                 $('#msg_count_by_categrpno').hide();

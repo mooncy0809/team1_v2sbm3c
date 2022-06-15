@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.cate.CateProcInter;
+
 //import dev.mvc.cate.CateProcInter;
 
 @Controller
@@ -20,9 +22,9 @@ public class CategrpCont {
     @Qualifier("dev.mvc.categrp.CategrpProc") // @Component("dev.mvc.categrp.CategrpProc);
     private CategrpProcInter categrpProc; 
     
-//    @Autowired
-//    @Qualifier("dev.mvc.cate.CateProc")  // @Component("dev.mvc.cate.CateProc);
-//    private CateProcInter cateProc;
+    @Autowired
+    @Qualifier("dev.mvc.cate.CateProc")  // @Component("dev.mvc.cate.CateProc);
+    private CateProcInter cateProc;
 
     public CategrpCont() {
         System.out.println("-> CategrpCont created.");
@@ -191,8 +193,8 @@ public class CategrpCont {
         json.put("rdate", categrpVO.getRdate());
         
         // 카테고리 그룹에 속한 카테고리수 파악
-//        int count_by_categrpno = this.cateProc.count_by_categrpno(categrpno);
-//        json.put("count_by_categrpno", count_by_categrpno);
+        int count_by_categrpno = this.cateProc.count_by_categrpno(categrpno);
+        json.put("count_by_categrpno", count_by_categrpno);
         
         return json.toString();        
     }
@@ -258,20 +260,67 @@ public class CategrpCont {
      * @return
      */
     @RequestMapping(value="/categrp/delete.do", method=RequestMethod.POST )
-    public ModelAndView delete(int categrpno, char visible) {
-      ModelAndView mav = new ModelAndView();      
+    public ModelAndView delete(int categrpno) {
+        ModelAndView mav = new ModelAndView(); 
+        try {
+               
+          
+          CategrpVO categrpVO = this.categrpProc.read(categrpno); // 삭제 정보
+          mav.addObject("visible",categrpVO.getVisible());    
+          mav.addObject("categrpVO", categrpVO);  // request 객체에 저장
+          
+              int cnt = this.categrpProc.delete(categrpno); // 삭제 처리
+              mav.addObject("cnt", cnt);  // request 객체에 저장
+              
+              mav.setViewName("redirect:/categrp/list.do");
+
+   
+      }
+      catch(Exception e){
+          mav.setViewName("redirect:/categrp/list.do");
+      }
+             return mav;
+    }
+    
+    @RequestMapping(value="/categrp/read_delete2.do", method=RequestMethod.GET )
+    public ModelAndView read_delete2(int categrpno) {
+      ModelAndView mav = new ModelAndView();
       
-      CategrpVO categrpVO = this.categrpProc.read(categrpno); // 삭제 정보
-      mav.addObject("visible",categrpVO.getVisible());    
+      CategrpVO categrpVO = this.categrpProc.read(categrpno); // 삭제할 자료 읽기
       mav.addObject("categrpVO", categrpVO);  // request 객체에 저장
       
-        
-      
-      
-          int cnt = this.categrpProc.delete(categrpno); // 삭제 처리
-          mav.addObject("cnt", cnt);  // request 객체에 저장
+      List<CategrpVO> list = this.categrpProc.list_categrpno_asc();
+      mav.addObject("list", list);  // request 객체에 저장
+
+      mav.setViewName("/categrp/read_delete2"); // read_delete.jsp
+      return mav;
+    }
+    
+    /**
+     * 삭제
+     * @param categrpno 조회할 카테고리 번호
+     * @return
+     */
+    @RequestMapping(value="/categrp/delete2.do", method=RequestMethod.POST )
+    public ModelAndView delete2(int categrpno) {
+      ModelAndView mav = new ModelAndView(); 
+        try {
+               
           
+          CategrpVO categrpVO = this.categrpProc.read(categrpno); // 삭제 정보
+          mav.addObject("visible",categrpVO.getVisible());    
+          mav.addObject("categrpVO", categrpVO);  // request 객체에 저장
+          
+              int cnt = this.categrpProc.delete(categrpno); // 삭제 처리
+              mav.addObject("cnt", cnt);  // request 객체에 저장
+              
+              mav.setViewName("redirect:/categrp/list.do");
+
+   
+      }
+      catch(Exception e){
           mav.setViewName("redirect:/categrp/list.do");
+      }
       return mav;
     }
     

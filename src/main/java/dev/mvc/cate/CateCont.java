@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.categrp.CategrpProcInter;
 import dev.mvc.categrp.CategrpVO;
 import dev.mvc.contents.ContentsProcInter;
+import dev.mvc.product.ProductProcInter;
 
 
 @Controller
@@ -32,6 +33,9 @@ public class CateCont {
     @Qualifier("dev.mvc.contents.ContentsProc") // @Component("dev.mvc.contents.ContentsProc")
     private ContentsProcInter contentsProc;
      
+    @Autowired
+    @Qualifier("dev.mvc.product.ProductProc") // @Component("dev.mvc.contents.ContentsProc")
+    private ProductProcInter productProc;
 
     public CateCont() {
         System.out.println("-> CateCont created.");
@@ -234,7 +238,7 @@ public class CateCont {
         json.put("cnt", cateVO.getCnt());
 
         // 카테고리 그룹에 속한 컨텐츠수 파악
-        int count_by_cateno = this.contentsProc.count_by_cateno(cateno);
+        int count_by_cateno = this.productProc.count_by_cateno(cateno);
         json.put("count_by_cateno", count_by_cateno);
 
         return json.toString();

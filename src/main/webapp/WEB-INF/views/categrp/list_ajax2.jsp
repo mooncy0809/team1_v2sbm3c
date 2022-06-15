@@ -224,7 +224,7 @@
   <DIV id='panel_delete' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; 
           width: 100%; text-align: center; display: none;'>
     <div class="msg_warning">카테고리 그룹을 삭제하면 복구 할 수 없습니다.</div>
-    <FORM name='frm_delete' id='frm_delete' method='POST' action='./delete.do'>
+    <FORM name='frm_delete' id='frm_delete' method='POST' action='./delete2.do'>
       <input type='hidden' name='categrpno' id='categrpno' value=''>
         
       <label>그룹 이름</label>: <span id='frm_delete_name'></span>  

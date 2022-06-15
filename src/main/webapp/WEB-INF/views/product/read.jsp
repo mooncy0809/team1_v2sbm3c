@@ -34,8 +34,70 @@
 
 <script type="text/javascript">
   $(function(){
- 
+      //$('#btn_login').on('click', login_ajax);
+     // $('#btn_loadDefault').on('click', loadDefault);
   });
+
+
+  
+  <%-- 쇼핑 카트에 상품 추가 --%>
+  function cart_ajax(productno) {
+    var f = $('#frm_login');
+    $('#productno', f).val(productno);  // 쇼핑카트 등록시 사용할 상품 번호를 저장.
+    
+    // console.log('-> productno: ' + $('#productno', f).val()); 
+    
+    // console.log('-> id:' + '${sessionScope.id}');
+    if ('${sessionScope.id}' != '' || $('#login_yn').val() == 'YES') {  // 로그인이 되어 있다면
+        cart_ajax_post();  // 쇼핑카트에 바로 상품을 담음
+    } else { // 로그인 안된 경우
+        location.href='/cart/list_by_memberno.do';
+    }
+
+  }
+
+  <%-- 쇼핑카트 상품 등록 --%>
+  function cart_ajax_post() {
+    var f = $('#frm_login');
+    var productno = $('#productno', f).val();  // 쇼핑카트 등록시 사용할 상품 번호.
+    
+    var params = "";
+    // params = $('#frm_login').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+    params += 'productno=' + productno;
+    params += '&${ _csrf.parameterName }=${ _csrf.token }';
+    // console.log('-> cart_ajax_post: ' + params);
+    // return;
+    
+    $.ajax(
+      {
+        url: '/cart/create.do',
+        type: 'post',  // get, post
+        cache: false, // 응답 결과 임시 저장 취소
+        async: true,  // true: 비동기 통신
+        dataType: 'json', // 응답 형식: json, html, xml...
+        data: params,      // 데이터
+        success: function(rdata) { // 응답이 온경우
+          var str = '';
+          //console.log('-> cart_ajax_post cnt: ' + rdata.cnt);  // 1: 쇼핑카트 등록 성공
+          
+          if (rdata.cnt == 1) {
+            var sw = confirm('선택한 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?');
+            if (sw == true) {
+              // 쇼핑카트로 이동
+              location.href='/cart/list_by_memberno.do';
+            }           
+          } else {
+            alert('선택한 상품을 장바구니에 담지못했습니다.<br>잠시후 다시 시도해주세요.');
+          }
+        },
+        // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+        error: function(request, status, error) { // callback 함수
+          console.log(error);
+        }
+      }
+    );  //  $.ajax END
+
+  }
 </script>
  
 </head> 
@@ -75,7 +137,10 @@
   </DIV>
   
   <DIV class='menu_line'></DIV>
-
+  <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
+        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
+          <input type="hidden" name="productno" id="productno" value="productno">
+          </FORM>
   <fieldset class="fieldset_basic">
     <ul>
       <li class="li_none">
@@ -101,7 +166,7 @@
           <form>
           <input type='number' name='ordercnt' value='1' required="required" 
                      min="1" max="99999" step="1" class="form-control" style='width: 30%;'><br>
-          <button type='button' onclick="" class="btn btn-info">장바 구니</button>           
+          <button type='button' onclick="cart_ajax(${productno })" class="btn btn-info">장바 구니</button>           
           <button type='button' onclick="" class="btn btn-info">바로 구매</button>
           <button type='button' onclick="" class="btn btn-info">관심 상품</button>
           </form>

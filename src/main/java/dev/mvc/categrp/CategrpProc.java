@@ -53,6 +53,14 @@ public class CategrpProc implements CategrpProcInter {
       
       return cnt;
     }
+    
+    @Override
+    public int delete2(int categrpno) {
+      int cnt = 0;
+      cnt = this.categrpDAO.delete(categrpno);
+      
+      return cnt;
+    }
 
     @Override
     public List<CategrpVO> list_seqno_asc() {
@@ -85,5 +93,7 @@ public class CategrpProc implements CategrpProcInter {
       cnt = this.categrpDAO.update_visible(categrpVO);
       return cnt;
     }
+
+   
     
 }
