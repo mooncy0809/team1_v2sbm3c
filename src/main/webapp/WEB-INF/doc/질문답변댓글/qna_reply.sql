@@ -8,7 +8,6 @@ CREATE TABLE qna_reply(
         qnano                           NUMBER(10)    NOT     NULL ,
         memberno                            NUMBER(6)         NOT NULL ,
         content                               VARCHAR2(1000)         NOT NULL,
-        passwd                                VARCHAR2(20)         NOT NULL,
         rdate                              DATE NOT NULL,
   FOREIGN KEY (qnano) REFERENCES qna (qnano),
   FOREIGN KEY (memberno) REFERENCES member (memberno)
@@ -19,7 +18,6 @@ COMMENT ON COLUMN qna_reply.qna_replyno is '댓글번호';
 COMMENT ON COLUMN qna_reply.qnano is '컨텐츠번호';
 COMMENT ON COLUMN qna_reply.memberno is '회원 번호';
 COMMENT ON COLUMN qna_reply.content is '내용';
-COMMENT ON COLUMN qna_reply.passwd is '비밀번호';
 COMMENT ON COLUMN qna_reply.rdate is '등록일';
 
 DROP SEQUENCE qna_reply_seq;
@@ -32,12 +30,12 @@ CREATE SEQUENCE qna_reply_seq
 
 
 1) 등록
-INSERT INTO qna_reply(qna_replyno, qnano, memberno, content, passwd, rdate)
-VALUES(qna_reply_seq.nextval, 5, 3, '댓글1', '1234', sysdate);
-INSERT INTO qna_reply(qna_replyno, qnano, memberno, content, passwd, rdate)
-VALUES(qna_reply_seq.nextval, 5, 3, '댓글2', '1234', sysdate);
-INSERT INTO qna_reply(qna_replyno, qnano, memberno, content, passwd, rdate)
-VALUES(qna_reply_seq.nextval, 5, 3, '댓글3', '1234', sysdate);             
+INSERT INTO qna_reply(qna_replyno, qnano, memberno, content, rdate)
+VALUES(qna_reply_seq.nextval, 17, 5, '댓글1', sysdate);
+INSERT INTO qna_reply(qna_replyno, qnano, memberno, content,rdate)
+VALUES(qna_reply_seq.nextval, 17, 5, '댓글2', sysdate);
+INSERT INTO qna_reply(qna_replyno, qnano, memberno, content, rdate)
+VALUES(qna_reply_seq.nextval, 17, 5, '댓글3', sysdate);             
 
 2) 전체 목록
 SELECT replyno, contentsno, memberno, content, passwd, rdate
@@ -121,3 +119,6 @@ WHERE replyno=1 AND passwd='1234';
 9) 삭제
 DELETE FROM reply
 WHERE replyno=1;
+
+
+commit;

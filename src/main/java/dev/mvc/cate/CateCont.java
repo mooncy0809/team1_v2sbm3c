@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.categrp.CategrpProcInter;
 import dev.mvc.categrp.CategrpVO;
 import dev.mvc.contents.ContentsProcInter;
+import dev.mvc.product.ProductProcInter;
 
 
 @Controller
@@ -32,6 +33,9 @@ public class CateCont {
     @Qualifier("dev.mvc.contents.ContentsProc") // @Component("dev.mvc.contents.ContentsProc")
     private ContentsProcInter contentsProc;
      
+    @Autowired
+    @Qualifier("dev.mvc.product.ProductProc") // @Component("dev.mvc.contents.ContentsProc")
+    private ProductProcInter productProc;
 
     public CateCont() {
         System.out.println("-> CateCont created.");
@@ -142,6 +146,22 @@ public class CateCont {
         mav.setViewName("/cate/list_by_categrpno_ajax"); // /cate/list_by_categrpno_ajax.jsp
         return mav;
     }
+    
+    @RequestMapping(value = "/cate/list_by_categrpno2.do", method = RequestMethod.GET)
+    public ModelAndView list_by_categrpno2(int categrpno) {
+        ModelAndView mav = new ModelAndView();
+
+        List<CateVO> list = this.cateProc.list_by_categrpno(categrpno);
+        mav.addObject("list", list); // request.setAttribute("list", list);
+
+        CategrpVO categrpVO = this.categrpProc.read(categrpno); // 카테고리 그룹 정보
+        mav.addObject("categrpVO", categrpVO); // request.setAttribute("categrpVO", categrpVO);
+
+        // mav.setViewName("/cate/list_by_categrpno"); // /cate/list_by_categrpno.jsp
+        mav.setViewName("/cate/list_by_categrpno_ajax2"); // /cate/list_by_categrpno_ajax.jsp
+        return mav;
+    }
+    
 
     /**
      * Categrp + Cate join, 연결 목록 http://localhost:9091/cate/list_all_join.do
@@ -218,7 +238,7 @@ public class CateCont {
         json.put("cnt", cateVO.getCnt());
 
         // 카테고리 그룹에 속한 컨텐츠수 파악
-        int count_by_cateno = this.contentsProc.count_by_cateno(cateno);
+        int count_by_cateno = this.productProc.count_by_cateno(cateno);
         json.put("count_by_cateno", count_by_cateno);
 
         return json.toString();

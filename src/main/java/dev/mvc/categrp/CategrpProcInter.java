@@ -41,6 +41,13 @@ public interface CategrpProcInter {
   public int delete(int categrpno);
   
   /**
+   * 삭제 처리
+   * @param categrpno
+   * @return 처리된 레코드 갯수
+   */
+  public int delete2(int categrpno);
+  
+  /**
    * 출력 순서별 목록
    * @return
    */

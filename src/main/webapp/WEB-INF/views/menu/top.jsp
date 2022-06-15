@@ -138,14 +138,17 @@
                                     <c:when
                                         test="${sessionScope.grade < 10}">
                                         <%-- 로그인 한 경우 --%>
-                                        <li><a
-                                            href="/categrp/list.do"><i
-                                                class="fa fa-gears"></i>
-                                                관리자</a></li>
-                                                <li><a
-                                            href="../../you/list_by_categrpno_search_paging.do?categrpno=4&word="><i
-                                                class="fa fa-gears"></i>
-                                                홈트레이닝</a></li>
+                                        <div class="nav navbar-nav2">
+                                                    <ul class="nav navbar-nav collapse navbar-collapse">
+                                                        <li class="dropdown"><a href="#">관리자<i class="fa fa-angle-down"></i></a>
+                                                            <ul role="menu" class="sub-menu">
+                                                                <li><a href="/categrp/list.do"><i class="fa fa-gears"></i>삼대몇 관리자</a></li>
+                                                                <li><a href="/categrp/list2.do"><i class="fa fa-gears"></i>하루삼끼 관리자</a></li>
+                                                                <li><a href="../../you/list_by_categrpno.do?categrpno=4"><i class="fa fa-gears"></i>홈트레이닝</a></li> 
+                                                            </ul>
+                                                        </li>
+                                                     </ul>
+                                                </div>     
                                                
                                     </c:when>
                                 </c:choose>

@@ -6,7 +6,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>삼대몇</title>
 
 <!-- /static 기준 -->
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
@@ -19,11 +19,11 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
 
 <script type="text/javascript">
-	$(function() {
-	    $('#btn_create_cancel').on('click', cancel);    
-	    $('#btn_update_cancel').on('click', cancel);
-	    $('#btn_delete_cancel').on('click', cancel);
-	});
+    $(function() {
+        $('#btn_create_cancel').on('click', cancel);    
+        $('#btn_update_cancel').on('click', cancel);
+        $('#btn_delete_cancel').on('click', cancel);
+    });
 
     function read_update_ajax(cateno) { // 수정
         // console.log('update');
@@ -139,8 +139,8 @@
       $('#span_animation_delete').css('text-align', 'center');
       $('#span_animation_delete').html("<img src='/cate/images/ani03.gif' style='width: 3%;'>");
       $('#span_animation_delete').show(); // 숨겨진 태그의 출력
-    }	
-	  
+    }   
+      
 </script>
  
 </head> 
@@ -237,12 +237,12 @@
       <TR>
         <TD class="td_bs">${cateVO.cateno }</TD>
         <TD class="td_bs">${cateVO.categrpno }</TD> 
-        <!-- http://localhost:9091/contents/list_by_cateno.do?cateno=1 -->
-        <TD class="td_bs_left"><A href="../contents/list_by_cateno_search_paging.do?cateno=${cateno }&now_page=1">${name }</A></TD>
+        <!-- http://localhost:9091/product/list_by_cateno.do?cateno=1 -->
+        <TD class="td_bs_left"><A href="../product/list_by_cateno_search_paging.do?cateno=${cateno }&now_page=1">${name }</A></TD>
         <TD class="td_bs">${cateVO.rdate.substring(0, 10) }</TD>
         <TD class="td_bs">${cateVO.cnt }</TD>
         <TD class="td_bs">
-          <A href="../contents/create.do?cateno=${cateno }" title="${name } 등록"><i class="fa-solid fa-pen-to-square"></i></A>
+          <A href="../product/create.do?cateno=${cateno }" title="${name } 등록"><i class="fa-solid fa-pen-to-square"></i></A>
           <A href="javascript: read_update_ajax(${cateno })" title="수정"><i class="fa-regular fa-pen-to-square"></i></A>
           <A href="javascript: read_delete_ajax(${cateno })" title="삭제"><i class="fa-solid fa-eraser"></i></A>
         </TD>   
