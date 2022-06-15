@@ -7,7 +7,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>하루삼끼</title>
 
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 
@@ -105,9 +105,9 @@
 
 
 <body>
-<jsp:include page="../menu/top.jsp" flush='false' />
+<jsp:include page="../menu/top2.jsp" flush='false' />
   <DIV class='title_line'>
-    주문, 결재
+    주문, 결제
   </DIV>
 
   <DIV class='content_body'>
@@ -132,9 +132,9 @@
     <tbody>
       <c:forEach var="cartVO" items="${list }">
         <c:set var="cartno" value="${cartVO.cartno }" />
-        <c:set var="contentsno" value="${cartVO.contentsno }" />
-        <c:set var="title" value="${cartVO.title }" />
-        <c:set var="thumb1" value="${cartVO.thumb1 }" />
+        <c:set var="productno" value="${cartVO.productno }" />
+        <c:set var="ptitle" value="${cartVO.ptitle }" />
+        <c:set var="pthumb1" value="${cartVO.pthumb1 }" />
         <c:set var="price" value="${cartVO.price }" />
         <c:set var="dc" value="${cartVO.dc }" />
         <c:set var="saleprice" value="${cartVO.saleprice }" />
@@ -147,17 +147,17 @@
         <tr> 
           <td style='vertical-align: middle; text-align: center;'>
             <c:choose>
-              <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-                <%-- /static/contents/storage/ --%>
-                <a href="/contents/read.do?contentsno=${contentsno}"><IMG src="/contents/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
+              <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}">
+                <%-- /static/product/storage/ --%>
+                <a href="/product/read.do?productno=${productno}"><IMG src="/product/storage/${pthumb1 }" style="width: 120px; height: 80px;"></a> 
               </c:when>
               <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
-                ${contentsVO.file1}
+                ${productVO.file1}
               </c:otherwise>
             </c:choose>
           </td>  
           <td style='vertical-align: middle;'>
-            <a href="/contents/read.do?contentsno=${contentsno}"><strong>${title}</strong></a> 
+            <a href="/product/read.do?productno=${productno}"><strong>${ptitle}</strong></a> 
           </td> 
           <td style='vertical-align: middle; text-align: center;'>
             <del><fmt:formatNumber value="${price}" pattern="#,###" /></del><br>
@@ -310,7 +310,7 @@
   
   <div style='margin-top: 20px; width: 100%; clear: both;'> </div>  
   <ASIDE class="aside_left" style='margin-top: 50px;'>
-    결재 정보<br>
+    결제 정보<br>
   </ASIDE> 
 
   <div class='menu_line'></div>
@@ -339,7 +339,7 @@
           <div class='cart_label' style='font-size: 2.0em;'>전체 주문 금액</div>
           <div class='cart_price'  style='font-size: 2.0em; color: #FF0000;'><fmt:formatNumber value="${total_order }" pattern="#,###" /> 원</div>
           
-            <button type='button' id='btn_order_pay' class='btn btn-info' style='font-size: 1.5em;'>결재하기</button>
+            <button type='button' id='btn_order_pay' class='btn btn-info' style='font-size: 1.5em;'>결제하기</button>
         <td>
       </tr>
     </tbody>

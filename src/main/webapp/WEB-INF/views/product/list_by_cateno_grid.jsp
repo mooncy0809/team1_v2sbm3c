@@ -246,14 +246,14 @@
           </c:otherwise>
         </c:choose>   
       </div> <%--사진 정렬 --%>
-      <!-- <div class="product-overlay" style="background: rgba(254,152,15,.8);">
+       <div class="product-overlay" style="background: rgba(254,152,15,.8);">
       <div class="overlay-content">
                 
                 <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>
                 <p>${ptitle}</p>
                 <a onclick="cart_ajax(${productno })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
       </div>  
-      </div>-->
+      </div>
       </div><%--add cart 구역 전 --%>
       <div class="choose">
         <ul style="margin:5px auto;padding-left:5px;">
