@@ -179,7 +179,7 @@
                 <c:choose>
                   <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}">
                     <%-- /static/product/storage/ --%>
-                    <a href="/product/read.do?productno=${productno}"><IMG src="/product/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
+                    <a href="/product/read.do?productno=${productno}"><IMG src="/product/storage/${pthumb1 }" style="width: 120px; height: 80px;"></a> 
                   </c:when>
                   <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
                     ${productVO.pfile1}
