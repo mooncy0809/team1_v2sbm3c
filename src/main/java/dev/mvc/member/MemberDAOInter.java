@@ -84,5 +84,15 @@ public interface MemberDAOInter {
    */
   public MemberVO read_id(Map<String, Object> map);
   
+  /**
+   * 비밀번호 찾기 회원 정보 일치 여부
+   */
+  public int find_passwd_check(Map<Object, Object> map);
+  
+  /**
+   * 비밀번호 변경
+   */
+  public int find_passwd(Map<Object, Object> map);
+
   
 }

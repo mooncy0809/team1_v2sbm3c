@@ -15,7 +15,7 @@
 <c:set var="size1_label" value="${contentsVO.size1_label }" />
  
 <!DOCTYPE html> 
-<html lang="ko"> 
+<html lang="ko">
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 

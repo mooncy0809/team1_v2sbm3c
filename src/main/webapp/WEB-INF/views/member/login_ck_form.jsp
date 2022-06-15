@@ -87,7 +87,7 @@
       <button type="button" id='btn_login' class="btn btn-info">로그인</button>
       <button type='button' onclick="location.href='./create.do'" class="btn btn-info">회원가입</button>
       <button type='button' onclick="location.href='./find_id_form.do'" class="btn btn-info">아이디 찾기</button>
-      <button type='button' onclick="location.href='./find_pwd_form.do'" class="btn btn-info">비밀번호 찾기</button>
+      <button type='button' onclick="location.href='./find_passwd.do'" class="btn btn-info">비밀번호 찾기</button>
       <button type='button' id='btn_loadDefault' class="btn btn-info">테스트 계정</button>
       <button type='button' id='btn_cancel' class="btn btn-info" onclick="location.href='../index.do'">취소</button>
       <!-- <button type='button' id='btn_cancel' class="btn btn-info" onclick="$('#div_login').hide();">취소</button> -->

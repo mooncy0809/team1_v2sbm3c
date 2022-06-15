@@ -5,7 +5,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>내 정보</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -33,6 +33,8 @@
     <ASIDE class="aside_right">
       <A href="javascript:location.reload();">내 정보 변경</A>
       <span class='menu_divide' >│</span> 
+      <A href='./passwd_update.do?memberno=${memberVO.memberno }'>비밀번호 변경</A>
+      <span class='menu_divide' >│</span>       
       <A href='#'>내 활동 정보</A>
       <span class='menu_divide' >│</span> 
       <A href='#'>적립금</A>

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,9 @@ public class MemberCont {
     @Autowired
     @Qualifier("dev.mvc.member.MemberProc") // @Component("dev.mvc.member.MemberProc")
     private MemberProcInter memberProc = null;
+    
+    @Autowired
+    public JavaMailSender javaMailSender;
 
     public MemberCont(){
         System.out.println("-> MemberCont created.");
@@ -738,7 +743,7 @@ public class MemberCont {
      /**
       * 아이디 찾기 처리
       */
-     @RequestMapping(value = "/member/find_id_form.do", method = RequestMethod.POST)
+     @RequestMapping(value = "/member/find_id.do", method = RequestMethod.POST)
      public ModelAndView find_id(
                                @RequestParam("mname") String mname,
                                @RequestParam(value="tel") String tel) {
@@ -802,4 +807,82 @@ public class MemberCont {
        
        return json.toString();
      }
+     
+     /** 비밀번호 찾기 폼 **/
+     @RequestMapping(value="/member/find_passwd.do" , method=RequestMethod.GET)
+     public ModelAndView findPwView(){
+         ModelAndView mav = new ModelAndView();
+         mav.setViewName("/member/find_passwd_form");
+         return mav;
+     }
+     
+     /**
+      * 아이디 찾기 처리
+      */
+     /*
+      * @RequestMapping(value = "/member/find_passwd.do", method =
+      * RequestMethod.POST) public ModelAndView find_passwd(
+      * 
+      * @RequestParam("mname") String mname,
+      * 
+      * @RequestParam(value="id") String id) {
+      * 
+      * ModelAndView mav = new ModelAndView();
+      * 
+      * 
+      * Map<Object, Object> map = new HashMap<Object, Object>(); map.put("mname",
+      * mname); map.put("id", id);
+      * 
+      * int count = memberProc.find_passwd_check(map); if (count == 1) { // mname값
+      * id값 일치했을 경우
+      * 
+      * 
+      * 
+      * }
+      * 
+      * mav.setViewName("/member/find_id_result");
+      * 
+      * 
+      * return mav; }
+      */
+     
+     
+     @RequestMapping(value = "/member/find_passwd.do", method = RequestMethod.POST)
+     public ModelAndView mail(
+                               @RequestParam("mname") String mname,
+                               @RequestParam(value="id") String id, String memberKey) {
+         
+         memberKey = new TempKey().getKey(6,false);         
+         
+         ModelAndView mav = new ModelAndView();
+         
+         
+         Map<Object, Object> map = new HashMap<Object, Object>();
+         map.put("mname", mname);
+         map.put("id", id);
+         map.put("passwd", memberKey);
+         
+         int count = memberProc.find_passwd_check(map);
+         if (count == 1) { // 로그인 성공
+
+             memberProc.find_passwd(map);
+             
+             SimpleMailMessage simpleMessage = new SimpleMailMessage();
+             
+             simpleMessage.setFrom("yshg98@gmail.com");
+             simpleMessage.setTo("yshg98@naver.com");
+             simpleMessage.setSubject("삼대몇? 임시비밀번호 발급");
+             simpleMessage.setText("인증번호: " + memberKey);
+             javaMailSender.send(simpleMessage);
+         }
+         
+         mav.setViewName("redirect:/index.do");
+         
+         
+         return mav;
+     }
+     
+     
+     
+     
 }

@@ -306,6 +306,8 @@ public class ContentsCont {
       // System.out.println("-> now_page: " + now_page);
       
       ModelAndView mav = new ModelAndView();
+      
+      contentsProc.cnt(contentsno);
 
       ContentsVO contentsVO = this.contentsProc.read(contentsno);
       mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
