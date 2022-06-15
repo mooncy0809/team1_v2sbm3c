@@ -26,7 +26,10 @@ $(function(){
 
 <body>
 <jsp:include page="../menu/top.jsp" />
-<DIV class='content_body' style="width:70%;">
+<DIV class='content_body'>
+<span style="width:70%; font-size: 1.5em; font-weight: bold;">관리자에게</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+
 <FORM name='frm' method='GET' action='./passwd_check.do' class="form-horizontal">
 <input type="hidden" name="qnano" value="${qnano }">
    <div class="form-group">

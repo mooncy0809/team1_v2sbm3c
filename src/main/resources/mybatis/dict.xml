@@ -70,4 +70,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE dictno = #{dictno}
   </update>  
   
+  
+  
+  <select id="index_contents3" 
+             resultType="dev.mvc.dict.DictVO" parameterType="HashMap">
+   SELECT CATEGRPNO, DICTNO, FNAME, BCLASS, SCLASS, FSIZE, KCAL, CARBO ,PROTEIN, FAT, SUGAR, SODIUM, CNT, r
+   FROM (
+              SELECT CATEGRPNO, DICTNO, FNAME, BCLASS, SCLASS, FSIZE, KCAL, CARBO ,PROTEIN, FAT, SUGAR, SODIUM, CNT
+              , rownum as r
+              FROM (
+                        SELECT CATEGRPNO, DICTNO, FNAME, BCLASS, SCLASS, FSIZE, KCAL, CARBO ,PROTEIN, FAT, SUGAR, SODIUM, CNT
+                        FROM CALDICT
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE categrpno=5
+                          </when>
+                        </choose>
+                ORDER BY cnt DESC
+                )
+                )
+                <choose>
+                                <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                                                WHERE <![CDATA[ r <= 3 ]]>
+                                </when>
+                </choose>
+  </select> 
 </mapper>

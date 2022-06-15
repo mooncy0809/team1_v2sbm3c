@@ -51,8 +51,6 @@ VALUES(cate_seq.nextval, 3, '고민/질문', sysdate, 0);
 INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
 VALUES(cate_seq.nextval, 3, '일기', sysdate, 0);
 
-INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
-VALUES(cate_seq.nextval, 7, '닭가슴살', sysdate, 0);
 
 SELECT * FROM cate;
 

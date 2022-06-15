@@ -12,6 +12,10 @@ public class Ytext {
     /** 목록 파일명 */
     public static String LIST_FILE = "list_by_categrpno_grid_search_paging.do";
 
+    
+    public static int RECORD_PER_PAGE2 = 3;
+    public static String LIST_FILE2 = "index_contents2.do";
+
     /*
      * // Windows, VMWare, AWS cloud 절대 경로 설정 public static synchronized String
      * getUploadDir() { String path = ""; if (File.separator.equals("\\")) { // path

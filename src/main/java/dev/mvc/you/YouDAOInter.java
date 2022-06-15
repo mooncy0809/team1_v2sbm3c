@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import dev.mvc.contents.ContentsVO;
+import dev.mvc.dict.DictVO;
 
 public interface YouDAOInter {
   /**
@@ -49,6 +50,14 @@ public interface YouDAOInter {
   
   String pagingBox_t(int categrpno, int search_count, int now_page, String word);
 
+  
+  /**
+   * 검색 + 페이징 목록
+   * 
+   * @param map
+   * @return
+   */
+  public List<YouVO> index_contents2(HashMap<String, Object> map);
 }
 
 

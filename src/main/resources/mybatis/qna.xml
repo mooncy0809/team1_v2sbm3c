@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="list_all" resultType="dev.mvc.qna.QnaVO">
     SELECT qnano, categrpno, memberno,  title, content, pwd, rdate
     FROM qna
-    ORDER BY qnano ASC
+    ORDER BY rdate DESC
   </select>
   
     <select id="read" resultType="dev.mvc.qna.QnaVO" parameterType="int">
@@ -34,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                q.qnano, q.title, q.content, q.pwd, q.rdate
     FROM member m, qna q
     WHERE m.memberno = q.memberno
+    ORDER BY rdate DESC
   </select>
   
   <delete id="delete" parameterType="int">
