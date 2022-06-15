@@ -46,14 +46,15 @@
     <colgroup>
       <col style='width: 5%;'/>
       <col style='width: 5%;'/>
-      <col style='width: 10%;'/>
-      <col style='width: 10%;'/>
+      <col style='width: 5%;'/>
+      <col style='width: 5%;'/>
       <col style='width: 30%;'/>
       <col style='width: 5%;'/>
       <col style='width: 5%;'/>
       <col style='width: 5%;'/>
       <col style='width: 10%;'/>
       <col style='width: 15%;'/>
+      <col style='width: 10%;'/>
      
     </colgroup>
     <TR>
@@ -67,6 +68,7 @@
       <TH class='th_bs'>금액</TH>
       <TH class='th_bs'>배송상태</TH>
       <TH class='th_bs'>주문일</TH>
+      <TH class='th_bs'>리뷰 작성</TH>
     </TR>
    
     <c:forEach var="order_itemVO" items="${list }">
@@ -102,6 +104,7 @@
       </TD>
       
       <TD class='td_basic'>${rdate.substring(1,16) }</TD>
+      <TD class='td_basic'><A href="../review/create.do?order_itemno=${order_itemno}">리뷰 작성</A></TD>
       
     </TR>
     </c:forEach>
