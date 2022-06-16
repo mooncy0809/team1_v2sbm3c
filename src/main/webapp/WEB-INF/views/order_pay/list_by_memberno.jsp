@@ -14,7 +14,8 @@
  
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
  
@@ -44,47 +45,41 @@
  
 <body>
 <jsp:include page="../menu/top2.jsp" flush='false' />
- 
-  <DIV class='title_line'>
-    ${sessionScope.id }님 주문결제 내역
-  </DIV>
-
-  <DIV class='content_body' style='width: 100%;'>
-
-    <ASIDE class="aside_right">
-      <A href="javascript:location.reload();">새로고침</A>
-    </ASIDE> 
-   
-    <div class='menu_line'></div>
-   
-   
-    <table class="table table-striped" style='width: 100%;'>
+    <section id="cart_items">
+    <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                  <li><a>Order</a></li>
+                  <li class="active"><a href="javascript:location.reload();">${sessionScope.id }님 주문 결제내역</a></li>
+                </ol>
+            </div>
+  <div class="table-responsive cart_info">  
+  <table class="table table-condensed">
     <colgroup>
       <col style='width: 5%;'/>
-      <col style='width: 5%;'/>
-      <col style='width: 7%;'/>
+      <col style='width: 10%;'/>
       <col style='width: 15%;'/>
-      <col style='width: 30%;'/>
+      <col style='width: 35%;'/>
       <col style='width: 10%;'/>
-      <col style='width: 10%;'/>
+      <col style='width: 7%;'/>
       <col style='width: 13%;'/>
       <col style='width: 5%;'/>
     </colgroup>
-    <TR>
-      <TH class='th_bs'>주문<br>번호</TH>
-      <TH class='th_bs'>회원<br>번호</TH>
-      <TH class='th_bs'>수취인<br>성명</TH>
-      <TH class='th_bs'>수취인<br>전화번호</TH>
-      <TH class='th_bs'>수취인<br>주소</TH>
-      <TH class='th_bs'>결제 타입</TH>
-      <TH class='th_bs'>결제 금액</TH>
-      <TH class='th_bs'>주문일</TH>
-      <TH class='th_bs'>조회</TH>
+    <thead>
+    <TR class="cart_menu">
+      <TD class="description"> </TD>
+      <TD align="center"  class="description">수취인 성명</TD>
+      <TD align="center"  class="description">수취인 전화번호</TD>
+      <TD class="description">수취인 주소</TD>
+      <TD align="center" class="description">결제수단</TD>
+      <TD align="center"  class="description">결제금액</TD>
+      <TD align="center" class="description">주문일</TD>
+      <TD align="center" class="description">조회</TD>
     </TR>
-   
+    </thead>
+    <tbody>
     <c:forEach var="order_payVO" items="${list }">
       <c:set var="order_payno" value ="${order_payVO.order_payno}" />
-      <c:set var="memberno" value ="${order_payVO.memberno}" />
       <c:set var="rname" value ="${order_payVO.rname}" />
       <c:set var="rtel" value ="${order_payVO.rtel}" />
       <c:set var="address" value ="(${order_payVO.rzipcode}) ${order_payVO.raddress1} ${order_payVO.raddress1}" />
@@ -94,12 +89,11 @@
          
        
     <TR>
-      <TD class=td_basic>${order_payno}</TD>
-      <TD class=td_basic><A href="/member/read.do?memberno=${memberno}">${memberno}</A></TD>
-      <TD class='td_basic'>${rname}</TD>
-      <TD class='td_left'>${rtel}</TD>
-      <TD class='td_basic'>${address}</TD>
-      <TD class='td_basic'>
+      <TD align="center" class="cart_description"><strong>${order_payno}</strong></TD>
+      <TD align="center" class="cart_description"><A href="/member/read2.do?memberno=${memberno}">${rname}</A></TD>
+      <TD align="center" class="cart_description">${rtel}</TD>
+      <TD class="cart_description">${address}</TD>
+      <TD class="cart_description" style="text-align:center;">
         <c:choose>
           <c:when test="${paytype == 1}">신용 카드</c:when>
           <c:when test="${paytype == 2}">모바일</c:when>
@@ -108,21 +102,19 @@
           <c:when test="${paytype == 5}">직접 입금</c:when>
         </c:choose>
       </TD>
-      <TD class='td_basic'><fmt:formatNumber value="${amount }" pattern="#,###" /></TD>
-      <TD class='td_basic'>${rdate.substring(1,16) }</TD>
-      <TD class='td_basic'>
-        <A href="/order_item/list_by_memberno.do?order_payno=${order_payno}"><img src="/order_pay/images/bu6.png" title="주문 내역 상세 조회"></A>
+      <TD align="center"  class="cart_description"><p><fmt:formatNumber value="${amount }" pattern="#,###" /></p></TD>
+      <TD align="center" class="cart_description">${rdate.substring(1,16) }</TD>
+      <TD align="center"  class="cart_description">
+        <A href="/order_item/list_by_memberno.do?order_payno=${order_payno}"><i class="fas fa-search-plus"></i></A>
       </TD>
       
     </TR>
     </c:forEach>
-    
+    </tbody>
   </TABLE>
-   
-  <DIV class='bottom_menu'>
-    <button type='button' onclick="location.reload();" class="btn btn-primary">새로 고침</button>
-  </DIV>
-</DIV>
+  </div>
+  </div>
+  </section>
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>

@@ -49,7 +49,7 @@
     <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                  <li><a href="/product/list_by_cateno_grid.do?categrpno=6&cateno=7" >마이페이지</a></li>
+                  <li><a>마이페이지</a></li>
                   <li class="active"><a style="content:none;"href="javascript:location.reload();">회원 정보 조회 및 수정</a></li>
                 </ol>
             </div>
