@@ -115,7 +115,6 @@
        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
        <input type="hidden" name="productno" id="productno" value="productno">
     </FORM>
-  <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>
     <section id="advertisement">
         <div class="container">
             <img src="images/shop/advertisement.jpg" alt="" />
