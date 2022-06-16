@@ -46,15 +46,15 @@
     <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
   </ASIDE> 
   
-    <DIV style="text-align: right; clear: both;">  
+<%--     <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='post' action='./list_by_cateno_search_paging.do'>
       <input type='hidden' name='cateno' value='${cateVO.cateno }'>
 
       <c:choose>
-        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
+        <c:when test="${param.word != '' }"> 검색하는 경우
           <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
         </c:when>
-        <c:otherwise> <%-- 검색하지 않는 경우 --%>
+        <c:otherwise> 검색하지 않는 경우
           <input type='text' name='word' id='word' value='' style='width: 20%;'>
         </c:otherwise>
       </c:choose>
@@ -64,7 +64,7 @@
                      onclick="location.href='./list_by_cateno_search.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>
-  </DIV>
+  </DIV> --%>
   
   <DIV class='menu_line'></DIV>
   
@@ -78,14 +78,14 @@
     <%-- <input type="hidden" name="adminno" value="1"> 관리자 개발후 변경 필요 --%>
     
     <div class="form-group">
-       <label class="control-label col-md-2">상품명</label>
+       <label class="control-label col-md-2">제목</label>
        <div class="col-md-10">
          <input type='text' name='title' value='가을 영화' required="required" 
                    autofocus="autofocus" class="form-control" style='width: 100%;'>
        </div>
     </div>
     <div class="form-group">
-       <label class="control-label col-md-2">상품 설명</label>
+       <label class="control-label col-md-2">내용</label>
        <div class="col-md-10">
          <textarea name='content' required="required" class="form-control" rows="12" style='width: 100%;'>가을 단풍보며 멍때리기</textarea>
        </div>
