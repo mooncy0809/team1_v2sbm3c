@@ -28,7 +28,6 @@
 <link rel="apple-touch-icon-precomposed"
     href="/images/ico/apple-touch-icon-57-precomposed.png">
 
-
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/jquery.scrollUp.min.js"></script>
@@ -36,10 +35,23 @@
 <script src="../js/jquery.prettyPhoto.js"></script>
 <script src="../js/main.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Do+Hyeon&family=Gaegu:wght@300&family=Kdam+Thmor+Pro&family=Kirang+Haerang&family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style type="text/css">
-
+#menubar:hover{
+    background-color: #FFDCD3;
+    color:white;
+}
+#menubar:hover >.sub-menu {
+    display:none;
+}
+.nav>li>a:hover, .nav>li>a:focus {
+    text-decoration: none;
+}
+#menubar:active{
+    background-color: #FFDCD3;
+    color:white;
+}
 .menu li:hover{
     color: white;
 }
@@ -57,19 +69,24 @@
     font-family: 'Alfa Slab One', cursive;
     font-size: 50px;
     cursor:pointer;
-     color: black;
+    color: black;
 
 }
-
 .sub_com li{
     font-family: 'Do Hyeon', sans-serif;
     font-size: 20px;
-     cursor:pointer;
-     color: black;
+    cursor:pointer;
+    color: black;
 }
-
-
-
+.drop{
+    position: relative;
+    list-style-type: none;
+    padding-left: 0px;
+    display: none;
+}
+.dropdown2:hover >.drop{
+    display: block; 
+}
 </style>
 
 </head>
@@ -85,12 +102,11 @@
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="../index.do">삼대몇?</a></li>
-                                <li><a href="../index2.do">하루삼끼</a></li>
+                                <li><a id="menubar" href="../index.do">삼대몇?</a></li>
+                                <li><a  id="menubar" href="../index2.do">하루삼끼</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-6">
                         <div class="social-icons pull-right">
                             <!--                             <ul class="nav navbar-nav2">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -110,7 +126,7 @@
                                     </c:when>
 
                                     <c:otherwise>
-                                        <li><a
+                                        <li id="menubar"><a id="menubar"
                                             href="/member/logout.do"><i
                                                 class="fa fa-sign-out"></i>${sessionScope.id }
                                                 로그아웃</a></li>
@@ -121,13 +137,13 @@
                                 <c:choose>
                                     <c:when
                                         test="${sessionScope.id == null}">
-                                        <li><a
+                                        <li id="menubar"><a id="menubar"
                                             href="/member/create.do"><i
                                                 class="fa fa-plus"></i>회원
                                                 가입</a></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><a
+                                        <li id="menubar"><a id="menubar"
                                             href="/member/read.do?memberno=${sessionScope.memberno}"><i
                                                 class="fa fa-user"></i>${sessionScope.id }
                                                 내 정보</a></li>
@@ -135,27 +151,30 @@
                                 </c:choose>
 
                                 <c:choose>
-                                    <c:when
-                                        test="${sessionScope.grade < 10}">
+                                    <c:when test="${sessionScope.grade < 10}">
                                         <%-- 로그인 한 경우 --%>
-                                        <div class="nav navbar-nav2">
+                                        <div class="social-icons pull-right">
                                                     <ul class="nav navbar-nav collapse navbar-collapse">
-                                                        <li class="dropdown"><a href="#"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
-                                                            <ul role="menu" class="sub-menu">
-                                                                <li><a href="/categrp/list.do"><i class="fa fa-gears"></i>삼대몇 관리자</a></li>
-                                                                <li><a href="/categrp/list2.do"><i class="fa fa-gears"></i>하루삼끼 관리자</a></li>
-                                                                <li><a href="../you/list_by_categrpno_search_paging.do?categrpno=4"><i class="fa fa-gears"></i>홈트레이닝</a></li> 
+                                                        <li><a class="dropdown" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
+                                                            <ul role="menu" class="sub-menu" style="font-size:small;">
+                                                                <li><a  id="menubar" class="dropdown2" href="#"  ><i class="fa fa-gears"></i>삼대몇 관리자<i class="fa fa-angle-down"></i></a>
+                                                                      <ul class="sub-menu" ><li class="drop"><a href="/categrp/list.do">카테고리 관리</a></li>
+                                                                      <li class="drop"><a href="../you/list_by_categrpno_search_paging.do?categrpno=4">홈트레이닝 관리</a></li>
+                                                                      </ul></li>
+                                                                <li><a href="/categrp/list2.do"><i class="fa fa-gears"></i>하루삼끼 관리자<i class="fa fa-angle-down"></i></a>
+                                                                      <ul class="drop"><li><a href="/categrp/list.do">카테고리 관리</a></li>
+                                                                      
+                                                                </ul></li>
+                                                                 
                                                             </ul>
                                                         </li>
-                                                     </ul>
-                                                </div>     
-                                               
+                                                     </ul>   
+                                       </div>
                                     </c:when>
                                 </c:choose>
 
                             </ul>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
