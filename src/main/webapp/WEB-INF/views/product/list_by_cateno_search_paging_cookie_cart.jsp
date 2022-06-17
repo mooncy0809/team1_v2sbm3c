@@ -235,6 +235,7 @@
           <td style='vertical-align: middle; text-align: center;'>
             <A href="./update_text.do?productno=${productno}&now_page=${param.now_page }"><img src='/product/images/update.png'></A>
             <A href="./delete.do?productno=${productno}&now_page=${param.now_page }&cateno=${cateno}"><img src='/product/images/delete.png'></A>
+            <A href="./update_file.do?productno=${productno}&now_page=${now_page }">파일 수정</A>  
           </td>
         </tr>
       </c:forEach>
@@ -253,4 +254,3 @@
 </body>
  
 </html>
-

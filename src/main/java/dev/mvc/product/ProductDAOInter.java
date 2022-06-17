@@ -3,6 +3,7 @@ package dev.mvc.product;
 import java.util.HashMap;
 import java.util.List;
 
+
 public interface ProductDAOInter {
     /**
      * 등록
@@ -31,7 +32,7 @@ public interface ProductDAOInter {
      * @param cateno
      * @return
      */
-    public List<ProductVO> list_by_cateno(int cateno);
+    public List<ProductVO> list_by_cateno(HashMap<String, Object> map);
     
     /**
      * 카테고리별 검색 목록
@@ -91,6 +92,11 @@ public interface ProductDAOInter {
      */
     public int count_by_cateno(int cateno);
     
+    /**
+     * Cate + Product join, 연결 목록
+     * @return
+     */
+    public List<Cate_ProductVO> list_by_cateno_grid_join();  
 }
 
 

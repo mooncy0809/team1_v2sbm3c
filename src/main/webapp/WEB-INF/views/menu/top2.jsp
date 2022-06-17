@@ -139,7 +139,7 @@
                                 
                                 <li><a href="../../product/list_by_cateno_grid.do?cateno=1">베스트</a></li>
                                 <li><a href="../../product/list_by_cateno_grid.do?cateno=19">특가</a></li>
-                                <li><a href="../../product/list_by_cateno_grid.do?cateno=3">신상품</a></li>                
+                                <li><a href="../../product/list_by_cateno_grid_join.do">전체메뉴</a></li>                
                             </ul>
                         </div>
                     </div>

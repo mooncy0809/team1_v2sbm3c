@@ -23,7 +23,7 @@
 </head> 
  
 <body>
-<jsp:include page="../menu/top.jsp" />
+<jsp:include page="../menu/top2.jsp" />
  
 <DIV class='title_line'>
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 

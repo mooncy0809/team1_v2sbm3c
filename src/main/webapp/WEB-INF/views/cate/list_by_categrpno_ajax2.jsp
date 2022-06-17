@@ -148,12 +148,12 @@
 <body>
 <jsp:include page="../menu/top2.jsp" />
  
-<DIV class='title_line'><A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > ${categrpVO.name }</DIV>
+<DIV class='title_line'><A href="../categrp/list2.do" class='title_link'>카테고리 그룹</A> > ${categrpVO.name }</DIV>
 
 <DIV class='content_body'>
 
   <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
-    <FORM name='frm_create' id='frm_create' method='POST' action='./create.do'>
+    <FORM name='frm_create' id='frm_create' method='POST' action='./create2.do'>
       <label>카테고리 그룹 번호</label>
       <input type='hidden' name='categrpno' value='${param.categrpno }' > ${param.categrpno } 
     
@@ -167,7 +167,7 @@
   
   <DIV id='panel_update' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; 
           text-align: center; display: none;'>
-    <FORM name='frm_update' id='frm_update' method='POST' action='./update.do'>
+    <FORM name='frm_update' id='frm_update' method='POST' action='./update2.do'>
       <input type="hidden" name="cateno" id="cateno" value="">
       
       <label>카테고리 그룹 번호</label>
@@ -189,7 +189,7 @@
   <DIV id='panel_delete' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; 
           width: 100%; text-align: center; display: none;'>
     <div class="msg_warning">카테고리를 삭제하면 복구 할 수 없습니다.</div>
-    <FORM name='frm_delete' id='frm_delete' method='POST' action='./delete.do'>
+    <FORM name='frm_delete' id='frm_delete' method='POST' action='./delete2.do'>
       <input type='hidden' name='cateno' id='cateno' value=''>
         
       <label>카테고리 번호</label>: <span id='frm_delete_cateno'></span>  

@@ -40,13 +40,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </update> 
   
   <!-- 특정 카테고리의 등록된 글목록 -->
-  <select id="list_by_cateno" resultType="dev.mvc.product.ProductVO" parameterType="int">
+  <!-- <select id="list_by_cateno" resultType="dev.mvc.product.ProductVO" parameterType="int">
     SELECT productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, rdate,
               pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point
     FROM products 
     WHERE cateno = #{cateno}
     ORDER BY productno DESC
-  </select>   
+  </select>  -->   
+  
+  <select id="list_by_cateno" resultType="dev.mvc.product.ProductVO" parameterType="int">
+    SELECT productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, rdate,
+                 pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point, r
+   FROM (
+              SELECT productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, rdate,
+                     pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point, rownum as r
+              FROM (
+                        SELECT productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, rdate,
+                                   pfile1, pfile1saved, pthumb1, psize1, price, dc, saleprice, point
+                        FROM products
+                        <choose>
+                          <when test="pword == null or pword == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE cateno=#{cateno}
+                          </when>
+                          <otherwise>
+                            WHERE cateno=#{cateno} AND (UPPER(ptitle) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pcontent) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pword) LIKE '%' || #{pword} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY productno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+  </select>  
 
   <!-- 카테고리별 검색 목록 -->
   <select id="list_by_cateno_search" resultType="dev.mvc.product.ProductVO" 
@@ -148,6 +174,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT COUNT(*) as pcnt
 	FROM products
 	WHERE cateno=#{cateno}
+  </select>
+  
+  <select id="list_by_cateno_grid_join" resultType="dev.mvc.product.Cate_ProductVO">
+    SELECT c.cateno as c_cateno,
+               p.productno, p.cateno, p.ptitle, p.pcontent, p.ppasswd, p.pword,
+                                     p.pfile1, p.pfile1saved, p.pthumb1, p.psize1, p.rdate
+    FROM cate c, products p
+    WHERE c.cateno = p.cateno
+    ORDER BY cateno ASC
   </select>
   
 </mapper> 
