@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -7,26 +8,44 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>관리자에게</title>
+ 
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
-function btn(sample){  
-    alert(sample); 
-    document.location.href="/member/login.do";
- }  
+ 
+  
 </script>
-</head>
+ 
+</head> 
+  
 <body>
- <jsp:include page="../menu/top.jsp" />
+<jsp:include page="../menu/top.jsp" />
+
 <DIV class='content_body'>
 <span style="width:70%; font-size: 1.5em; font-weight: bold;">관리자에게</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
-    
+
+  <DIV style="text-align: right; clear: both;">  
+    <form name='frm' id='frm' method='get' action='./list_search_paging.do'>
+      <input type='hidden' name='categrpno' value='${categrpVO.categrpno }'>
+      <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
+      <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
+      <button type='submit'>검색</button>
+      <c:if test="${param.word.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list_search_paging.do?categrpno=${categrpVO.categrpno}&word='">검색 취소</button>  
+      </c:if>    
+    </form>
+  </DIV>
+  
+  <DIV class='menu_line'></DIV>
+  
   <TABLE class='table table-striped'>
     <colgroup>
       <col style='width: 40%;'/>
@@ -39,7 +58,6 @@ function btn(sample){
       <TH class="th_bs">제목</TH>
       <TH class="th_bs">작성자</TH>
       <TH class="th_bs">작성일</TH>
-
     </TR>
     </thead>
     
@@ -67,11 +85,11 @@ function btn(sample){
       </TR>   
       
     </c:forEach> 
-  </tbody>
-
+    </tbody>
+   
   </TABLE>
   
-  <div style="text-align:right;">  
+    <div style="text-align:right;">  
   <c:choose>
   <c:when test="${sessionScope.id == null}">
       <button type="button" class="btn btn-primary"
@@ -84,10 +102,15 @@ function btn(sample){
   </c:otherwise>
   </c:choose>
   </div>
-
+  
+  <!-- 페이지 목록 출력 부분 시작 -->
+  <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
+  <!-- 페이지 목록 출력 부분 종료 -->
+  
 </DIV>
 
  
 <jsp:include page="../menu/bottom.jsp" />
 </body>
+ 
 </html>

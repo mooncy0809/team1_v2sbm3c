@@ -48,6 +48,10 @@ a:hover{
 h1{
     font-family: 'Kirang Haerang', cursive;
 }
+.eng{
+    font-family: 'Kirang Haerang', cursive;
+    font-size:20px;
+}
 
 
  
@@ -72,7 +76,7 @@ h1{
     
     </tbody>
   </TABLE>
-  <a href="../dict/list_by_categrpno_search_paging.do?categrpno=5" target="_top"><h1 style="font-size: 40px">칼로리사전</h1></a>
+  <a href="../dict/list_by_categrpno_search_paging.do?categrpno=5" target="_top"><h1 style="font-size: 40px">칼로리사전<br><div class="eng">CALORIE DICTIONARY</div></h1></a>
   
   </DIV>
 

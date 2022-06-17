@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Home | 삼대몇?</title>
@@ -232,7 +232,7 @@
 
                 </div>
                 <div id="mySidenav" class="sidenav category-bg"
-                    style="padding-left: 40px; width: 40%; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:65px; box-shadow: 12px 10px 11px 7px gray;">
+                    style="padding-left: 40px; width: 500px; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:65px; box-shadow: 12px 10px 11px 7px gray;">
                     <li class="menu" style="list-style:none;" >
                         <ul >                       
                             <a><li>NOTICE</li></a>

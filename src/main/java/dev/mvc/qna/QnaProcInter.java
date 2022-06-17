@@ -53,5 +53,8 @@ public interface QnaProcInter {
      * @return 1 or 0
      */
     public int passwd_check(HashMap<String, Object> map);
-
+    public List<QnaVO> list_search_paging(HashMap<String, Object> map);
+    public int search_count(HashMap<String, Object> hashMap);
+    public String pagingBox(int categrpno, int search_count, int now_page, String word);
+    
 }

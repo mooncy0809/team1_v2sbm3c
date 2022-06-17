@@ -50,6 +50,11 @@ h1{
     font-family: 'Kirang Haerang', cursive;
 }
 
+.eng{
+    font-family: 'Kirang Haerang', cursive;
+    font-size:20px;
+}
+
 
  
  </style>
@@ -75,7 +80,7 @@ h1{
                   </c:forEach> 
                   </tbody>
                   </table>
-                  <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4" target="_top"><h1 style="font-size: 40px">홈트레이닝</h1></a>
+                  <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4" target="_top"><h1 style="font-size: 40px">홈트레이닝<div class="eng">HOME TRAINING</div></h1></a>
                   
                   </div>
 </body>

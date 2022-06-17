@@ -12,12 +12,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.qna.QnaVO;
 import dev.mvc.you.YouVO;
 import dev.mvc.categrp.CategrpProcInter;
 import dev.mvc.categrp.CategrpVO;
+import dev.mvc.contents.Contents;
 import dev.mvc.contents.ContentsVO;
 import dev.mvc.member.MemberVO;
 
@@ -67,12 +69,15 @@ public class QnaCont {
     public ModelAndView create(HttpServletRequest request, 
             HttpServletResponse response, 
             HttpSession session,
-            int memberno, QnaVO qnaVO) {
+            int memberno,
+            String id,
+            QnaVO qnaVO) {
         ModelAndView mav = new ModelAndView();
         
         int cnt = this.qnaProc.create(qnaVO);
         mav.addObject("qnano", qnaVO.getQnano());
         session.setAttribute("memberno", memberno);
+        session.setAttribute("id", id);
         
         
         mav.addObject("code", "create_success");
@@ -165,9 +170,22 @@ public class QnaCont {
     }
     
     @RequestMapping(value="/qna/member_join.do", method=RequestMethod.GET )
-    public ModelAndView member_join() {
+    public ModelAndView member_join(      
+            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page
+            ) {
       ModelAndView mav = new ModelAndView();
       
+      
+//      HashMap<String, Object> map = new HashMap<String, Object>();        
+//      map.put("word", word); // #{word}
+//      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+//     
+//      // 검색된 레코드 갯수
+//      int search_count = qnaProc.search_count2(map);
+//      mav.addObject("search_count2", search_count);
+
+ 
       List<Member_QnaVO> list = this.qnaProc.member_join();
       mav.addObject("list", list); // request.setAttribute("list", list);
 
@@ -278,6 +296,50 @@ public class QnaCont {
     
       return mav;
     }
+    
+    /**
+     * 목록 검색 페이징
+     * @param categrpno
+     * @param word
+     * @param now_page
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/qna/list_search_paging.do", method = RequestMethod.GET)
+    public ModelAndView list_search_paging(
+            @RequestParam(value = "categrpno", defaultValue = "4") int categrpno,                                                                           
+            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpSession session) {
+        
+      ModelAndView mav = new ModelAndView();
+
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("categrpno", categrpno); // #{categrpno}
+      map.put("word", word); // #{word}
+      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+      List<QnaVO> list = qnaProc.list_search_paging(map);
+      mav.addObject("list", list);
+
+      int search_count = qnaProc.search_count(map);
+      mav.addObject("search_count", search_count);
+      
+      CategrpVO categrpVO = categrpProc.read(categrpno);
+      mav.addObject("categrpVO", categrpVO);
+      
+      String paging = qnaProc.pagingBox(categrpno, search_count, now_page, word);
+//    System.out.println("-> paging: " + paging);
+    mav.addObject("paging", paging);
+
+      mav.addObject("now_page", now_page);
+      
+      mav.setViewName("/qna/list_search_paging");
+
+      return mav;
+    }
+    
+  
 
     
     

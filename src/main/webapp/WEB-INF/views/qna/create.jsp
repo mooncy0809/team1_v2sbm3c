@@ -37,6 +37,7 @@
   
   <input type="hidden" name="categrpno" value="${param.categrpno }"> 
   <input type="hidden" name="memberno" id="memberno" value="${sessionScope.memberno }"> 
+    <input type="hidden" name="id" id="id" value="${sessionScope.id }"> 
     <div class="form-group">
        <label class="control-label col-md-4">질문 제목</label>
        <div class="col-md-8">
