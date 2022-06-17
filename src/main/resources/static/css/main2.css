@@ -8,7 +8,6 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
   position: relative;
   font-weight:400px;
 }
@@ -900,7 +899,6 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
 }
 
 .single-products:hover .product-overlay {
@@ -1543,22 +1541,12 @@ h2.title {
   padding: 3px 7px;
 }
 
-.breadcrumbs .breadcrumb li a:after {
-  content:"";
-  height:auto;
-  width: auto;
-  border-width: 8px;
-  border-style: solid;
-  border-color:transparent transparent transparent #FE980F;
-  position: absolute;
-  top: 11px;
-  left:48px;
-
+.breadcrumb>li+li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "\276f";
 }
 
-.breadcrumbs .breadcrumb > li + li:before {
-  content: " ";
-}
 
 #cart_items .cart_info {
   border: 1px solid #E6E4DF;
