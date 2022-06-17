@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
         thumb1                              VARCHAR(100)          NULL,
         size1                                 NUMBER(10)      DEFAULT 0 NULL,  
  */
-public class ContentsVO {
+public class Reply_ContentsVO {
     
     /** 댓글 번호 */
     private int replyno;
@@ -73,7 +73,7 @@ public class ContentsVO {
      */
     private String size1_label;
     
-    public ContentsVO() { // 기본 생성자
+    public Reply_ContentsVO() { // 기본 생성자
 
     }
 

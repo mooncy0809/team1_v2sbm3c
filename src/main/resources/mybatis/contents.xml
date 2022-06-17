@@ -174,22 +174,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        2 page: WHERE r >= 11 AND r <= 20;
        3 page: WHERE r >= 21 AND r <= 30; -->
      
-  </select> 
-  
-  
-  <!-- 댓글 수 증가 -->
-   <update id="increaseReplycnt" parameterType="int">
-     UPDATE contents
-     SET replycnt = replycnt + 1
-     WHERE contentsno = #{contentsno}
+  </select>   
+      
+   <!-- 댓글 수 확인 -->
+   <update id = "update_replycnt" parameterType="dev.mvc.contents.ContentsVO">
+    update contents
+    set replycnt = (
+                        SELECT COUNT(replyno) as replycnt
+                        from reply
+                        where contentsno = #{contentsno}
+                    )
+    where contentsno = #{contentsno}
    </update>
 
-   <!-- 댓글 수 감소 -->
-   <update id="decreaseReplycnt" parameterType="int">
-     UPDATE contents
-     SET replycnt = replycnt - 1
-     WHERE contentsno = #{contentsno}
-   </update>
-  
+   <!-- 댓글 수 업데이트 -->
+<!--    <update id = "update_replycnt" parameterType="dev.mvc.contents.ContentsVO">
+   <selectKey keyProperty="replycnt" resultType="int" order="BEFORE">
+    SELECT COUNT(replyno) as replycnt
+    from reply
+    where contentsno = #{contentsno}
+   </selectKey>
+    update contents
+    set replycnt = #{replycnt}
+    where contentsno = #{contentsno}
+   </update> -->
          
 </mapper> 

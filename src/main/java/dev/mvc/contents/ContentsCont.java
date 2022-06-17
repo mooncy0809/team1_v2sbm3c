@@ -307,7 +307,7 @@ public class ContentsCont {
       
       ModelAndView mav = new ModelAndView();
       
-      contentsProc.cnt(contentsno);
+      contentsProc.cnt(contentsno);        
 
       ContentsVO contentsVO = this.contentsProc.read(contentsno);
       mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
@@ -316,7 +316,10 @@ public class ContentsCont {
       mav.addObject("cateVO", cateVO); 
 
       CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
-      mav.addObject("categrpVO", categrpVO); 
+      mav.addObject("categrpVO", categrpVO);
+      
+      this.contentsProc.update_replycnt(contentsVO);  
+      
       
       // 단순 read
       // mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
@@ -374,7 +377,7 @@ public class ContentsCont {
     @RequestMapping(value = "/contents/list_all_join.do", method=RequestMethod.GET)
     public ModelAndView list_all_join(
             @RequestParam(value = "word", defaultValue = "") String word,                                                                           
-            @RequestParam(value = "now_page", defaultValue = "1") int now_page
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page            
             ) {
         ModelAndView mav = new ModelAndView();
         
@@ -388,6 +391,8 @@ public class ContentsCont {
         
         List<ContentsVO>list = this.contentsProc.list_all_join(map);
         mav.addObject("list", list); // request.setAttribute("list", list);
+        
+        
         
         /*
        * SPAN태그를 이용한 박스 모델의 지원
@@ -438,6 +443,7 @@ public class ContentsCont {
       // 검색 목록
       List<ContentsVO> list = contentsProc.list_by_cateno_search_paging(map);
       mav.addObject("list", list);
+      
 
       // 검색된 레코드 갯수
       int search_count = contentsProc.search_count(map);

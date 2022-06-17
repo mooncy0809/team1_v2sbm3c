@@ -817,36 +817,10 @@ public class MemberCont {
      }
      
      /**
-      * 아이디 찾기 처리
-      */
-     /*
-      * @RequestMapping(value = "/member/find_passwd.do", method =
-      * RequestMethod.POST) public ModelAndView find_passwd(
-      * 
-      * @RequestParam("mname") String mname,
-      * 
-      * @RequestParam(value="id") String id) {
-      * 
-      * ModelAndView mav = new ModelAndView();
-      * 
-      * 
-      * Map<Object, Object> map = new HashMap<Object, Object>(); map.put("mname",
-      * mname); map.put("id", id);
-      * 
-      * int count = memberProc.find_passwd_check(map); if (count == 1) { // mname값
-      * id값 일치했을 경우
-      * 
-      * 
-      * 
-      * }
-      * 
-      * mav.setViewName("/member/find_id_result");
-      * 
-      * 
-      * return mav; }
-      */
-     
-     
+      * 비밀번호 찾기 처리
+      * @param 
+      * @return
+      */     
      @RequestMapping(value = "/member/find_passwd.do", method = RequestMethod.POST)
      public ModelAndView mail(
                                @RequestParam("mname") String mname,
@@ -870,16 +844,33 @@ public class MemberCont {
              SimpleMailMessage simpleMessage = new SimpleMailMessage();
              
              simpleMessage.setFrom("yshg98@gmail.com");
-             simpleMessage.setTo("yshg98@naver.com");
+             simpleMessage.setTo(id);
              simpleMessage.setSubject("삼대몇? 임시비밀번호 발급");
              simpleMessage.setText("인증번호: " + memberKey);
              javaMailSender.send(simpleMessage);
          }
          
-         mav.setViewName("redirect:/index.do");
+         mav.setViewName("/member/find_passwd_result");
+         
+         // mav.setViewName("redirect:/index.do");
          
          
          return mav;
+     }
+     
+     /**
+      * 비밀번호 찾기 결과 창
+      * @param 
+      * @return
+      */
+     @RequestMapping(value="/member/find_passwd_result.do", 
+                                method=RequestMethod.GET)
+     public ModelAndView find_passwd_result(){
+       ModelAndView mav = new ModelAndView();
+      
+       mav.setViewName("/member/find_passwd_result");
+       
+       return mav;
      }
      
      

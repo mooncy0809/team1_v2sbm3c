@@ -160,16 +160,13 @@ public interface ContentsProcInter {
     public List<ContentsVO> list_all_join(HashMap<String, Object> map);
     
     /**
-     * 글 수 증가
-     * @param 
+     * 댓글 수 업데이트
+     * @param contentsVO
      * @return
-     */ 
-    public int increaseReplycnt(int contentsno);
-   
-    /**
-     * 글 수 감소
-     * @param 
-     * @return
-     */   
-    public int decreaseReplycnt(int contentsno);
+     */
+    
+    public int update_replycnt(ContentsVO contentsVO);
+    
+    
+    
 }
