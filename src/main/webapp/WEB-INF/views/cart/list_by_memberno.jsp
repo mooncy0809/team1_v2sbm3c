@@ -5,9 +5,23 @@
 <!DOCTYPE html> 
 <html lang="ko">
 <head> 
-<meta charset="UTF-8"> 
-<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>하루 삼끼</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>장바구니 | 하루삼끼</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">  
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
  
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
  
@@ -15,7 +29,22 @@
  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+<style>
+.chg{
+    border: 3px solid #FE980F;
+    background-color: #FE980F;
+    color: white; 
+    position: relative; 
+    border-radius: 7px;
+}
+.chg:hover{
+    background-color: #fdb45e;
+}
+.chg:focus{
+    border: 3px solid #FE980F;
+    outline:none;
+}
+</style>
 <script type="text/javascript">
   function delete_func(cartno) {  // GET -> POST 전송, 상품 삭제
     var frm = $('#frm_post');
@@ -56,106 +85,36 @@
   <input type='hidden' name='cartno' id='cartno'>
   <input type='hidden' name='cnt' id='cnt'>
 </form>
- 
-<DIV class='title_line'>
-  쇼핑카트입니다
-</DIV>
-
-<DIV class='content_body'>
-  <ASIDE class="aside_right">
-    <A href="/product/list_by_cateno_grid.do">쇼핑 계속하기</A>
-    <span class='menu_divide' >│</span>    
-    <A href="javascript:location.reload();">새로고침</A>
-  </ASIDE> 
-</DIV>
-  <DIV class='menu_line'></DIV>
+    <section id="cart_items">
     <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="left-sidebar">
-                        <h2>Category</h2>
-                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                            전체 카테고리
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="sportswear" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="">닭가슴살</a></li>
-                                            <li><a href="">간편요리</a></li>
-                                            <li><a href="">샐러드 </a></li>
-                                            <li><a href="">건강미용</a></li>
-                                            <li><a href="">간식 </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">베스트</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">특가</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">신상품</a></h4>
-                                </div>
-                            </div>
-                        </div><!--/category-productsr-->
-                    
-                        <div class="brands_products"><!--brands_products-->
-                            <h2>Brands</h2>
-                            <div class="brands-name">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href=""> <span class="pull-right"></span>맛있닭</a></li>
-                                    <li><a href=""> <span class="pull-right"></span>굽네</a></li>
-                                    <li><a href=""> <span class="pull-right"></span>참프레</a></li>
-                                    <li><a href=""> <span class="pull-right"></span>러브잇</a></li>
-                                </ul>
-                            </div>
-                        </div><!--/brands_products-->
-                        
-                        <div class="price-range"><!--price-range-->
-                            <h2>Price Range</h2>
-                            <div class="well">
-                                 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                                 <b>0</b> <b class="pull-right">10000</b>
-                            </div>
-                        </div><!--/price-range-->
-                        
-                    </div>
-                </div>
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                  <li><a href="/product/list_by_cateno_grid.do?categrpno=6&cateno=7">Home</a></li>
+                  <li class="active"><a href="javascript:location.reload();">Shopping Cart</a></li>
+                </ol>
+            </div>
+
+    <div class="table-responsive cart_info">
     
-  <table class="table table-striped" style='width: 70%;'>
-    <colgroup>
-      <col style="width: 10%;"></col>
-      <col style="width: 20%;"></col>
-      <col style="width: 20%;"></col>
-      <col style="width: 10%;"></col> <%-- 수량 --%>
-      <col style="width: 10%;"></col> <%-- 합계 --%>
-      <col style="width: 10%;"></col>
+  <table class="table table-condensed">
+     <colgroup>
+      <col style="width: 15%;"></col>
+      <col style="width: 35%;"></col>
+      <col style="width: 15%;"></col>
+      <col style="width: 15%;"></col>
+      <col style="width: 14%;"></col>
+      <col style="width: 6%;"></col>
     </colgroup>
-    <%-- table 컬럼 --%>
-<!--     <thead>
-      <tr>
-        <th style='text-align: center;'>파일</th>
-        <th style='text-align: center;'>상품명</th>
-        <th style='text-align: center;'>정가, 할인률, 판매가, 포인트</th>
-        <th style='text-align: center;'>기타</th>
-      </tr>
-    
-    </thead> -->
-    
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="price">Price</td>
+                            <td class="quantity">Quantity</td>
+                            <td class="total">Total</td>
+                            <td> </td>
+                        </tr>
+                    </thead>
     <%-- table 내용 --%>
     <tbody>
       <c:choose>
@@ -175,36 +134,38 @@
             <c:set var="rdate" value="${cartVO.rdate }" />
             
             <tr> 
-              <td style='vertical-align: middle; text-align: center;'>
+              <td class="cart_product">
                 <c:choose>
                   <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}">
                     <%-- /static/product/storage/ --%>
-                    <a href="/product/read.do?productno=${productno}"><IMG src="/product/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
+                    <a href="/product/read.do?productno=${productno}"><IMG src="/product/storage/${pthumb1 }" style="width: 100px; height: 100px;"></a> 
                   </c:when>
                   <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
                     ${productVO.pfile1}
                   </c:otherwise>
                 </c:choose>
               </td>  
-              <td style='vertical-align: middle;'>
-                <a href="/product/read.do?productno=${productno}"><strong>${ptitle}</strong></a> 
+              <td class="cart_description">
+                <h4><a href="/product/read.do?productno=${productno}">${ptitle}</a></h4>
               </td> 
-              <td style='vertical-align: middle; text-align: center;'>
+              <td class="cart_price">
                 <del><fmt:formatNumber value="${price}" pattern="#,###" /></del><br>
                 <span style="color: #FF0000; font-size: 1.2em;">${dc} %</span>
                 <strong><fmt:formatNumber value="${saleprice}" pattern="#,###" /></strong><br>
                 <span style="font-size: 0.8em;">포인트: <fmt:formatNumber value="${point}" pattern="#,###" /></span>
               </td>
-              <td style='vertical-align: middle; text-align: center;'>
-                <input type='number' id='${cartno }_cnt' min='1' max='100' step='1' value="${cnt }" 
-                  style='width: 52px;'><br>
-                <button type='button' onclick="update_cnt(${cartno})" class='btn' style='margin-top: 5px;'>변경</button>
+              <td  class="cart_quantity">
+              <div class="cart_quantity_button">
+                <input class="cart_quantity_input" type='number' id='${cartno }_cnt' min='1' max='100' step='1' value="${cnt }" 
+                  style='width: 52px;'>&nbsp;
+                <button class="chg" onclick="update_cnt(${cartno})" type="button">변경</button>
+                </div>
               </td>
-              <td style='vertical-align: middle; text-align: center;'>
-                <fmt:formatNumber value="${tot}" pattern="#,###" />
+              <td class="cart_total">
+                <p class="cart_total_price"><fmt:formatNumber value="${tot}" pattern="#,###" /></p>
               </td>
-              <td style='vertical-align: middle; text-align: center;'>
-                <A href="javascript: delete_func(${cartno })"><IMG src="/cart/images/delete3.png"></A>
+              <td class="cart_delete" style="margin:auto; padding-right:50px; text-align:left;">
+                <a class="cart_quantity_delete" href="javascript: delete_func(${cartno })"><i class="fa fa-times"></i></a>
               </td>
             </tr>
           </c:forEach>
@@ -212,7 +173,8 @@
         </c:when>
         <c:otherwise>
           <tr>
-            <td colspan="6" style="text-align: center; font-size: 1.3em;">쇼핑 카트에 상품이 없습니다.</td>
+            <td colspan="6" style="text-align: center; font-size: 1.3em; padding:30px;">장바구니 상품을 담아보세요.<br>
+            <a href=" /product/list_by_cateno_grid.do?categrpno=6&cateno=7"><button class="chg" type="button">상품 구경하러 가기</button></a></td>     
           </tr>
         </c:otherwise>
       </c:choose>
@@ -220,32 +182,35 @@
       
     </tbody>
   </table>
+  </div>
+  </div>
+  </section> <!--/#cart_items-->
   
+  <section id="do_action">
+  <div class="container">
   <table class="table table-striped" style='margin-top: 50px; margin-bottom: 50px; width: 100%;'>
     <tbody>
       <tr>
-        <td style='width: 50%;'>
-          <div class='cart_label'>상품 금액</div>
-          <div class='cart_price'><fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원</div>
+        <td style='margin:100px auto; width: 50%;'>
+          <div class='cart_label' style="font-size: 17px;">상품 금액 : <fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원</div>
           
-          <div class='cart_label'>포인트</div>
-          <div class='cart_price'><fmt:formatNumber value="${point_tot }" pattern="#,###" /> 원 </div>
+          <div class='cart_label' style="font-size: 17px;">포인트 : <fmt:formatNumber value="${point_tot }" pattern="#,###" /> 원 </div>
           
-          <div class='cart_label'>배송비</div>
-          <div class='cart_price'><fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원</div>
+          <div class='cart_label' style="font-size: 17px; font-weight:bold;">배송비 : <fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원</div>
         </td>
         <td style='width: 50%;'>
           <div class='cart_label' style='font-size: 2.0em;'>전체 주문 금액</div>
           <div class='cart_price'  style='font-size: 2.0em; color: #FF0000;'><fmt:formatNumber value="${total_ordering }" pattern="#,###" /> 원</div>
           
           <form name='frm' id='frm' style='margin-top: 50px;' action="/order_pay/create.do" method='get'>
-            <button type='submit' id='btn_order' class='btn btn-info' style='font-size: 1.5em;'>주문하기</button>
+            <button type='submit' class='chg' style='font-size: 1.5em;'>주문하기</button>
           </form>
         <td>
       </tr>
     </tbody>
   </table>   
-</DIV>
+</dIv>
+</section>
 
  
 <jsp:include page="../menu/bottom.jsp" />

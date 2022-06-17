@@ -139,7 +139,7 @@ public class MemberCont {
      }  
     
      /**
-      * 회원 조회
+      * 회원 조회-삼대몇
       * @param memberno
       * @return
       */
@@ -150,6 +150,22 @@ public class MemberCont {
        MemberVO memberVO = this.memberProc.read(memberno);
        mav.addObject("memberVO", memberVO);
        mav.setViewName("/member/read"); // /member/read.jsp
+       
+       return mav; // forward
+     }
+     
+     /**
+      * 회원 조회-하루삼끼
+      * @param memberno
+      * @return
+      */
+     @RequestMapping(value="/member/read2.do", method=RequestMethod.GET)
+     public ModelAndView read2(int memberno){
+       ModelAndView mav = new ModelAndView();
+       
+       MemberVO memberVO = this.memberProc.read(memberno);
+       mav.addObject("memberVO", memberVO);
+       mav.setViewName("/member/read2"); // /member/read.jsp
        
        return mav; // forward
      }
@@ -873,7 +889,7 @@ public class MemberCont {
              SimpleMailMessage simpleMessage = new SimpleMailMessage();
              
              simpleMessage.setFrom("yshg98@gmail.com");
-             simpleMessage.setTo("yshg98@naver.com");
+             simpleMessage.setTo("mooncy0809@naver.com");
              simpleMessage.setSubject("삼대몇? 임시비밀번호 발급");
              simpleMessage.setText("인증번호: " + memberKey);
              javaMailSender.send(simpleMessage);
