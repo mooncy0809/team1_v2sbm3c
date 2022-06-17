@@ -60,6 +60,7 @@
     color: white;
 }
 
+
 .imgbtn{
     cursor:pointer;
     position: relative;
@@ -78,14 +79,37 @@
     cursor:pointer;
     color: black;
 }
+
 .drop{
+    color:white;
     position: relative;
     list-style-type: none;
-    padding-left: 0px;
+    padding-left: 44px;
     display: none;
+    margin: 0 auto
 }
-.dropdown2:hover >.drop{
-    display: block; 
+ul.sub {
+    cursor:pointer;
+    position: absolute;
+    top: 36px;
+    left: 0;
+    background: rgba(255, 200, 200, 90%);
+    list-style: none;
+    padding:10px 0px 10px 0px;
+    margin: 0;
+    width: 200px;
+    -webkit-box-shadow: 0 3px 3px rgb(0 0 0 / 10%);
+    box-shadow: 0 3px 3px rgb(0 0 0 / 10%);
+    display: none;
+    line-height: 20px;
+    }
+ul.sub > li > a:hover{
+    cursor:pointer;
+    color: white;
+}
+ul.drop > li > a:hover{
+    cursor:pointer;
+    color: white;
 }
 </style>
 
@@ -155,16 +179,20 @@
                                         <%-- 로그인 한 경우 --%>
                                         <div class="social-icons pull-right">
                                                     <ul class="nav navbar-nav collapse navbar-collapse">
-                                                        <li><a class="dropdown" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
-                                                            <ul role="menu" class="sub-menu" style="font-size:small;">
-                                                                <li><a  id="menubar" class="dropdown2" href="#"  ><i class="fa fa-gears"></i>삼대몇 관리자<i class="fa fa-angle-down"></i></a>
-                                                                      <ul class="sub-menu" ><li class="drop"><a href="/categrp/list.do">카테고리 관리</a></li>
-                                                                      <li class="drop"><a href="../you/list_by_categrpno_search_paging.do?categrpno=4">홈트레이닝 관리</a></li>
-                                                                      </ul></li>
-                                                                <li><a href="/categrp/list2.do"><i class="fa fa-gears"></i>하루삼끼 관리자<i class="fa fa-angle-down"></i></a>
-                                                                      <ul class="drop"><li><a href="/categrp/list.do">카테고리 관리</a></li>
-                                                                      
-                                                                </ul></li>
+                                                        <li><a onclick="com2(this)" style="cursor:pointer;" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
+                                                            <ul role="menu" class="sub" id="sub_com2" style="font-size:small;">
+                                                                <li class="dropdown2"><a onclick="com3(this)" class="sub" style="color:white;font-weight:bold;"><i class="fa fa-gears"></i>삼대몇 관리자<i class="fa fa-angle-down"></i></a>
+                                                                      <ul role="menu"class="drop" id="sub_com3" >
+                                                                      <li><a href="/categrp/list.do">카테고리 관리</a></li><br>
+                                                                      <li> <a href="../you/list_by_categrpno_search_paging.do?categrpno=4">홈트레이닝 관리</a></li>
+                                                                      </ul>
+                                                                </li>
+                                                                <li class="dropdown2"><a onclick="com4(this)" class="sub"style="color:white;font-weight:bold;" ><i class="fa fa-gears"></i>하루삼끼 관리자<i class="fa fa-angle-down"></i></a>
+                                                                      <ul role="menu" class="drop"  id="sub_com4">
+                                                                      <li><a href="/categrp/list2.do">카테고리 관리</a></li><br>
+                                                                      <li><a href="/categrp/list.do">주문 관리</a></li>
+                                                                      </ul>
+                                                                </li>
                                                                  
                                                             </ul>
                                                         </li>
@@ -329,21 +357,38 @@ function openNav() {
 function com() {
     if ($('#sub_com').css('display') == 'block'){
         $("#sub_com").slideUp(500);
-        
-       
         } 
-    
     else{
         $("#sub_com").slideDown(500);
-            
-
             }
-
   } 
 
+function com2() {
+    if ($('#sub_com2').css('display') == 'block'){
+        $("#sub_com2").slideUp(500);   
+        }     
+    else{
+        $("#sub_com2").slideDown(500);
+            }
+  } 
 
+function com3() {
+    if ($('#sub_com3').css('display') == 'block'){
+        $("#sub_com3").slideUp(500);   
+        }     
+    else{
+        $("#sub_com3").slideDown(500);
+            }
+  } 
 
-
+function com4() {
+    if ($('#sub_com4').css('display') == 'block'){
+        $("#sub_com4").slideUp(500);   
+        }     
+    else{
+        $("#sub_com4").slideDown(500);
+            }
+  } 
  /*  $(document).ready(function(){              
       $(".logo pull-left>img").click(function(){
           var submenu = $(this).next("mySidenav");
