@@ -93,6 +93,7 @@
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
         <c:set var="rdate" value="${contentsVO.rdate }" />
+        <c:set var="replycnt" value="${contentsVO.replycnt }" />
         
         <tr> 
           <td style='vertical-align: middle; text-align: center;'>
@@ -112,7 +113,7 @@
           
           <td style='vertical-align: middle; text-align: center;'>
             <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
-          <strong>${title}</strong> </a> </td>
+          <strong>${title} [${replycnt}]</strong> </a> </td>
           
           <td style='vertical-align: middle; text-align: center;'>${content} </td> 
           

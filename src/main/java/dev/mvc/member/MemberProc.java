@@ -13,11 +13,7 @@ import org.springframework.stereotype.Component;
 public class MemberProc implements MemberProcInter{
     @Autowired
     private MemberDAOInter memberDAO;
-    
-    public MemberProc() {
-        System.out.println("-> MemberProc created");
-    }
-
+   
     @Override
     public int checkID(String id) {
         int cnt = this.memberDAO.checkID(id);

@@ -33,9 +33,12 @@
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
    <br>
   <FORM name='frm' method='post' action='./create.do' class="form-horizontal"  enctype="multipart/form-data">
-  
+  <%-- <input type="hidden" name="reviewno" value="${reviewVO.reviewno }"> --%> 
   <input type="hidden" name="order_itemno" value="${param.order_itemno }">
   <input type="hidden" name="memberno" id="memberno" value="${sessionScope.memberno }">
+  <input type="hidden" name="mname" id="mname" value="${sessionScope.mname}">
+  <input type="hidden" name="productno" value="${param.productno }">
+  
     <div class="form-group">
        <label class="control-label col-md-4">리뷰 제목</label>
        <div class="col-md-8">
@@ -52,7 +55,7 @@
 
      </div>
     
-    <div>
+    <div class="form-group">
         <span>별점을 선택해주세요</span>
         <input type="radio" name="score" value="5" id="rate1"><label
             for="rate1">★</label>
@@ -65,6 +68,14 @@
         <input type="radio" name="score" value="1" id="rate5"><label
             for="rate5">★</label>
     </div>
+    
+    <div class="form-group">
+       <label class="control-label col-md-2">이미지</label>
+       <div class="col-md-10">
+         <input type='file' class="form-control" name='file1MF' id='file1MF' 
+                    value='' placeholder="파일 선택">
+       </div>
+    </div>   
      
     <div class="content_body_bottom" style="padding-right: 20%;">
       <button type="submit" class="btn btn-primary">등록</button>

@@ -36,6 +36,7 @@
   $(function(){
       //$('#btn_login').on('click', login_ajax);
      // $('#btn_loadDefault').on('click', loadDefault);
+      list_by_productno(); // 댓글 목록
   });
 
 
@@ -97,6 +98,50 @@
       }
     );  //  $.ajax END
 
+  }
+
+  // contentsno 별 소속된 댓글 목록
+  function list_by_productno() {
+    var params = 'productno=' + ${productno };
+
+    $.ajax({
+      url: "../review/list_by_productno.do", // action 대상 주소
+      type: "get",           // get, post
+      cache: false,          // 브러우저의 캐시영역 사용안함.
+      async: true,           // true: 비동기
+      dataType: "json",   // 응답 형식: json, xml, html...
+      data: params,        // 서버로 전달하는 데이터
+      success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
+        // alert(rdata);
+        var msg = '';
+        
+        $('#review_list').html(''); // 패널 초기화, val(''): 안됨
+        
+        for (i=0; i < rdata.list.length; i++) {
+          var row = rdata.list[i];
+          
+          msg += "<DIV id='"+row.reviewno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
+          msg += "<span style='font-weight: bold;'>" + "리뷰 제목: " + row.rtitle + " /  "+ "작성자: "+row.mname + "</span>";
+          msg += "  " + row.rdate;
+          
+          if ('${sessionScope.memberno}' == row.memberno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
+            msg += " <A href='javascript:reply_delete("+row.reviewno+")'><IMG src='/reply/images/delete.png'></A>";
+          }
+          msg += "  " + "<br>";
+          msg += "<IMG src='/review/storage/"+row.thumb1 + "'" + 'style="width: 120px; height: 80px;">'
+          msg += "  " + "<br>";
+          msg += row.rcontent;
+          msg += "</DIV>";
+        }
+        // alert(msg);
+        $('#review_list').append(msg);
+      },
+      // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+      error: function(request, status, error) { // callback 함수
+        console.log(error);
+      }
+    });
+    
   }
 </script>
  
@@ -190,6 +235,20 @@
   </fieldset>
 
 </DIV>
+
+<!-- ------------------------------ 리뷰 영역 시작 ------------------------------ -->
+<DIV style='width: 80%; margin: 0px auto;'>
+    <HR>
+    <DIV id='review_list' data-replypage='1'>  <%-- 댓글 목록 --%>
+    
+    </DIV>
+<!--     <DIV id='reply_list_btn' style='border: solid 1px #EEEEEE; margin: 0px auto; width: 100%; background-color: #EEFFFF;'>
+        <button id='btn_add' style='width: 100%;'>더보기 ▽</button>
+    </DIV>  --> 
+  
+</DIV>
+
+<!-- ------------------------------ 리뷰 영역 종료 ------------------------------  -->
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>

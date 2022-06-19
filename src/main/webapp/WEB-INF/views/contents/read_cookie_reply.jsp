@@ -14,6 +14,8 @@
 <c:set var="word" value="${contentsVO.word }" />
 <c:set var="size1_label" value="${contentsVO.size1_label }" />
  
+<c:set var="replycnt" value="${contentsVO.replycnt }" />
+ 
 <!DOCTYPE html> 
 <html lang="ko">
 <head> 
@@ -40,6 +42,8 @@
     var frm_reply = $('#frm_reply');
     $('#content', frm_reply).on('click', check_login);  // 댓글 작성시 로그인 여부 확인
     $('#btn_create', frm_reply).on('click', reply_create);  // 댓글 작성시 로그인 여부 확인
+    $('#modal_x').on('click', reload); // 댓글 수 업데이트 하려면 read페이지 새로고침
+    $('#modal_close').on('click', reload); // 댓글 수 업데이트 하려면 read페이지 새로고침
 
     list_by_contentsno_join(); // 댓글 목록
     // ---------------------------------------- 댓글 관련 종료 ----------------------------------------
@@ -129,65 +133,6 @@
 
   }
 
-  <%-- 쇼핑 카트에 상품 추가 --%>
-  function cart_ajax(contentsno) {
-    var f = $('#frm_login');
-    $('#contentsno', f).val(contentsno);  // 쇼핑카트 등록시 사용할 상품 번호를 저장.
-    
-    console.log('-> contentsno: ' + $('#contentsno', f).val()); 
-    
-    // console.log('-> id:' + '${sessionScope.id}');
-    if ('${sessionScope.id}' != '' || $('#login_yn').val() == 'YES') {  // 로그인이 되어 있다면
-      cart_ajax_post();
-    } else { // 로그인 안된 경우
-      $('#div_login').show();
-    }
-
-  }
-
-  <%-- 쇼핑카트 상품 등록 --%>
-  function cart_ajax_post() {
-    var f = $('#frm_login');
-    var contentsno = $('#contentsno', f).val();  // 쇼핑카트 등록시 사용할 상품 번호.
-    
-    var params = "";
-    // params = $('#frm_login').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
-    params += 'contentsno=' + contentsno;
-    params += '&${ _csrf.parameterName }=${ _csrf.token }';
-    console.log('-> cart_ajax_post: ' + params);
-    // return;
-    
-    $.ajax(
-      {
-        url: '/cart/create.do',
-        type: 'post',  // get, post
-        cache: false, // 응답 결과 임시 저장 취소
-        async: true,  // true: 비동기 통신
-        dataType: 'json', // 응답 형식: json, html, xml...
-        data: params,      // 데이터
-        success: function(rdata) { // 응답이 온경우
-          var str = '';
-          console.log('-> cart_ajax_post cnt: ' + rdata.cnt);  // 1: 쇼핑카트 등록 성공
-          
-          if (rdata.cnt == 1) {
-            var sw = confirm('선택한 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?');
-            if (sw == true) {
-              // 쇼핑카트로 이동
-              location.href='/cart/list_by_memberno.do';
-            }           
-          } else {
-            alert('선택한 상품을 장바구니에 담지못했습니다.<br>잠시후 다시 시도해주세요.');
-          }
-        },
-        // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
-        error: function(request, status, error) { // callback 함수
-          console.log(error);
-        }
-      }
-    );  //  $.ajax END
-
-  }
-
   // 댓글 작성시 로그인 여부 확인
   function check_login() {
     var frm_reply = $('#frm_reply');
@@ -249,6 +194,7 @@
             // global_rdata_cnt = 0; // 목록 출력 글수
             
             list_by_contentsno_join(); // 페이징 댓글
+  
           } else {
             $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
             msg = "댓글 등록에 실패했습니다.";
@@ -257,18 +203,25 @@
           $('#modal_title').html('댓글 등록'); // 제목 
           $('#modal_content').html(msg);     // 내용
           $('#modal_panel').modal();           // 다이얼로그 출력
+
+
         },
         // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
         error: function(request, status, error) { // callback 함수
           console.log(error);
         }
+
       });
+   
     }
+
   }
 
   // contentsno 별 소속된 댓글 목록
   function list_by_contentsno_join() {
     var params = 'contentsno=' + ${contentsVO.contentsno };
+
+    
 
     $.ajax({
       url: "../reply/list_by_contentsno_join.do", // action 대상 주소
@@ -360,6 +313,13 @@
       }
     });
   }
+
+  function reload() {
+      location.reload();
+  }
+
+  
+  
   // -------------------- 댓글 관련 종료 --------------------
   
 </script>
@@ -375,14 +335,14 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <button type="button" id="modal_x" class="close" data-dismiss="modal">×</button>
         <h4 class="modal-title" id='modal_title'></h4><!-- 제목 -->
       </div>
       <div class="modal-body">
         <p id='modal_content'></p>  <!-- 내용 -->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="modal_close" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -418,28 +378,22 @@
 </div>
 <!-- -------------------- 댓글 삭제폼 종료 -------------------- -->
    
-<DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  <A href="../cate/list_by_categrpno.do?categrpno=${categrpVO.categrpno }" class='title_link'>${categrpVO.name }</A> >
-  <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }" class='title_link'>${cateVO.name }</A>
-</DIV>
-
 <DIV class='content_body'>
+    <span style="width:70%; font-size: 1.5em; font-weight: bold;"> ${cateVO.name } </span>
+    
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+
   <ASIDE class="aside_right">
-    <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
-    <span class='menu_divide' >│</span>
+<%--     <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
+    <span class='menu_divide' >│</span> --%>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }&now_page=${param.now_page}&word=${param.word }">기본 목록형</A>    
+    <A href="./update_text.do?contentsno=${contentsno}&now_page=${now_page}&word=${param.word }">수정</A>
     <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
+    <A href="./update_file.do?contentsno=${contentsno}&now_page=${now_page}&word=${param.word }">파일 수정</A>  
     <span class='menu_divide' >│</span>
-    <A href="./update_text.do?contentsno=${contentsno}&now_page=${param.now_page}">수정</A>
-    <span class='menu_divide' >│</span>
-    <A href="./update_file.do?contentsno=${contentsno}&now_page=${param.now_page}">파일 수정</A>  
-    <span class='menu_divide' >│</span>
-    <A href="./delete.do?contentsno=${contentsno}&now_page=${param.now_page}&cateno=${cateno}">삭제</A>  
-  </ASIDE> 
+    <A href="./delete.do?contentsno=${contentsno}&now_page=${now_page}&cateno=${cateno}&word=${param.word }">삭제</A>  
+</ASIDE>
   
   <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_search.do'>
@@ -560,6 +514,7 @@
         <input type='hidden' name='contentsno' id='contentsno' value='${contentsno}'>
         <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'>
         
+        <div>댓글수 ${replycnt }</div>
         <textarea name='content' id='content' style='width: 100%; height: 60px;' placeholder="댓글 작성, 로그인해야 등록 할 수 있습니다."></textarea>
         <input type='password' name='passwd' id='passwd' placeholder="비밀번호">
         <button type='button' id='btn_create'>등록</button>

@@ -89,3 +89,16 @@ COMMENT ON COLUMN reply.CONTENTSNO is '컨텐츠 번호';
 COMMENT ON COLUMN reply.MEMBERNO is '회원 번호';
 COMMENT ON COLUMN reply.content is '내용';
 
+update contents
+set replycnt = (
+                        SELECT COUNT(replyno) as replycnt
+                        from reply
+                        where contentsno = 5
+                    )
+where contentsno = 5;
+
+select replyCnt
+from contents
+where contentsno=5;
+
+

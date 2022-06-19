@@ -4,11 +4,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "dev.mvc.review.ReviewDAOInter">
-  <insert id="create" parameterType="dev.mvc.review.ReviewVO">
-    INSERT INTO review(reviewno, order_itemno, memberno, rtitle, rcontent, score, rdate)
-    VALUES(review_seq.nextval, #{order_itemno}, #{memberno}, #{rtitle}, #{rcontent}, #{score}, sysdate)
-  </insert>
+    <!-- 상품 별 리뷰 등록 -->
+    <insert id="create" parameterType="dev.mvc.review.ReviewVO">
+    <selectKey keyProperty="reviewno" resultType="int" order="BEFORE">
+      SELECT review_seq.nextval FROM dual
+    </selectKey>
+    
+    INSERT INTO review(reviewno, memberno, order_itemno, rtitle, rcontent, score, file1, file1saved, thumb1, size1, rdate, mname, productno)
+    VALUES(#{reviewno}, #{memberno}, #{order_itemno}, #{rtitle}, #{rcontent}, #{score}, #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate, #{mname}, #{productno})
+    </insert>
+    
+  <select id="list_by_productno" resultType="dev.mvc.review.ReviewVO" parameterType="int">
+    SELECT productno, reviewno, order_itemno, memberno, rtitle, rcontent, score, file1, file1saved, thumb1, size1, rdate, mname
+    FROM review
+    WHERE productno=#{productno}
+  </select>
   
+<!--     <select id="list_by_contentsno_join" resultType="dev.mvc.reply.ReplyMemberVO" parameterType="int">
+    SELECT r.reviewno, r.memberno, r.order_itemno, r.rtitle, r.rcontent, r.score, r.file1, r.file1saved, 
+           r.thumb1, r.size1, r.rdate, r.mname, r.productno
+    FROM products p, review r
+    WHERE (m.memberno = r.memberno) AND r.contentsno=#{contentsno}
+    ORDER BY r.replyno DESC
+  </select>
+   -->
       <!-- 일반적인 조회 -->
   <select id="read" resultType="dev.mvc.review.ReviewVO" parameterType="int">
     SELECT reviewno, order_itemno, rtitle, rcontent, score, rdate

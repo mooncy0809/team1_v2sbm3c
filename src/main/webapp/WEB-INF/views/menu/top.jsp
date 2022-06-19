@@ -55,23 +55,18 @@
 .menu li:hover{
     color: white;
 }
-
 .sub_com li:hover{
     color: white;
 }
-
-
 .imgbtn{
     cursor:pointer;
     position: relative;
 }
-
 .menu li{
     font-family: 'Alfa Slab One', cursive;
     font-size: 50px;
     cursor:pointer;
     color: black;
-
 }
 .sub_com li{
     font-family: 'Do Hyeon', sans-serif;
@@ -79,7 +74,6 @@
     cursor:pointer;
     color: black;
 }
-
 .drop{
     color:white;
     position: relative;
@@ -230,17 +224,17 @@ ul.drop > li > a:hover{
                             <!--                             <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
  -->
                             <a class="imgbtn"><img src="/images/home/cate.png"
-                                onclick="openNav(this)"/></a>    
+                                onclick="openNav(this)"/></a>    
   
-                            <!--    <li class="menu">            
+                            <!--    <li class="menu">            
                                 
-                                <ul class="hide">                
-                                <li>공지사항</li>                
-                                <li>다이어트 꿀팁</li>                
-                                <li>커뮤니티</li>                
-                                <li>홈트레이닝</li>                
-                                <li>칼로리사전</li>           
-                                </ul>        
+                                <ul class="hide">                
+                                <li>공지사항</li>                
+                                <li>다이어트 꿀팁</li>                
+                                <li>커뮤니티</li>                
+                                <li>홈트레이닝</li>                
+                                <li>칼로리사전</li>           
+                                </ul>        
                                 </li>           -->
                         </div>
 
@@ -283,7 +277,6 @@ ul.drop > li > a:hover{
                                 </li>
                                 <li><a href="404.html">홈트레이닝</a></li> 
                                 <li><a href="404.html">칼로리사전</a></li>
-
                                 
                             </ul>
                         </div>
@@ -294,9 +287,9 @@ ul.drop > li > a:hover{
                 <div id="mySidenav" class="sidenav category-bg"
                     style="padding-left: 40px; width: 500px; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:65px; box-shadow: 12px 10px 11px 7px gray;">
                     <li class="menu" style="list-style:none;" >
-                        <ul >                       
+                        <ul >                       
                             <a><li>NOTICE</li></a>
-                            <a><li>DIET TIP</li></a>       
+                            <a><li>DIET TIP</li></a>       
                             <a onclick="com(this)" ><li>COMMUNITY</li></a>            
                                         <div class="sub_com" id="sub_com" style="display: none; ">           
                                         <a href="../contents/list_all_join.do"><li>전체</li></a>
@@ -304,11 +297,15 @@ ul.drop > li > a:hover{
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1"><li>팁&노하우</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1"><li>고민&질문</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1"><li>일기</li></a>  
+
+                                       <a href="/qna/member_join.do"> <li>관리자에게</li></a> 
+
                                        <a href="/qna/list_search_paging.do?categrpno=4&memberno=${sessionScope.memberno}"> <li>관리자에게</li></a> 
+
                                         </div>
                             <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4&now_page=1"><li>HOME TRAINING</li></a>
                             <a href="../dict/list_by_categrpno_search_paging.do?categrpno=5"><li>CALORIE DICTIONARY</li></a>
-                        </ul>        
+                        </ul>        
                     </li>
                 </div>
             </div>
@@ -363,9 +360,7 @@ function openNav() {
         $("#mySidenav").slideDown(500);
 
             
-
             }
-
   } 
 
 /* $('body').click(function(){
@@ -390,7 +385,6 @@ function com() {
 
             }
   } 
-
 function com2() {
     if ($('#sub_com2').css('display') == 'block'){
         $("#sub_com2").slideUp(500);   
@@ -399,7 +393,6 @@ function com2() {
         $("#sub_com2").slideDown(500);
             }
   } 
-
 function com3() {
     if ($('#sub_com3').css('display') == 'block'){
         $("#sub_com3").slideUp(500);   
@@ -408,7 +401,6 @@ function com3() {
         $("#sub_com3").slideDown(500);
             }
   } 
-
 function com4() {
     if ($('#sub_com4').css('display') == 'block'){
         $("#sub_com4").slideUp(500);   
@@ -417,7 +409,7 @@ function com4() {
         $("#sub_com4").slideDown(500);
             }
   } 
- /*  $(document).ready(function(){              
+ /*  $(document).ready(function(){              
       $(".logo pull-left>img").click(function(){
           var submenu = $(this).next("mySidenav");
         if(submenu.is("none")){
@@ -428,15 +420,14 @@ function com4() {
             }
     });
   }); */
-
-/* $(document).ready(function(){              
+/* $(document).ready(function(){              
     $(".menu>img").click(function(){
-         var submenu = $(this).next("ul"); 
+         var submenu = $(this).next("ul"); 
          if( submenu.is(":visible") ){
-              submenu.slideUp();            
+              submenu.slideUp();            
               }
          else{
-             submenu.slideDown();            
+             submenu.slideDown();            
              }
          });
          }); */

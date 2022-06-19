@@ -17,7 +17,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
- 
+function btn(sample){  
+    alert(sample); 
+    document.location.href="/member/login.do";
+ }  
   
 </script>
  
@@ -25,23 +28,12 @@
   
 <body>
 <jsp:include page="../menu/top.jsp" />
- 
-<DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  <A href="../cate/list_by_categrpno.do?categrpno=${categrpVO.categrpno }" class='title_link'>${categrpVO.name }</A> >
-  <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }" class='title_link'>${cateVO.name }</A>
-</DIV>
 
 <DIV class='content_body'>
-  <ASIDE class="aside_right">
-    <c:if test="${sessionScope.id != null }"> 
-        <A href="./create.do?cateno=${cateVO.cateno }">등록</A>    
-    <span class='menu_divide' >│</span>
-    </c:if>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
-  </ASIDE> 
+    <span style="width:70%; font-size: 1.5em; font-weight: bold;">
+        <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }">${cateVO.name }</A>
+    </span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
   <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_search_paging.do'>
@@ -92,6 +84,7 @@
         <c:set var="memberno" value="${contentsVO.memberno }" />
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
+        <c:set var="replycnt" value="${contentsVO.replycnt }" />
         
         
         <tr> 
@@ -108,7 +101,7 @@
           </td>  
           <td style='vertical-align: middle; text-align: center;'>
             <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
-            <strong>${title}</strong> </a> </td>
+            <strong>${title} [${replycnt }]</strong> </a> </td>
           <td style='vertical-align: middle; text-align: center;'>${content} </td> 
           
           <!-- 조회수 -->
@@ -128,6 +121,20 @@
       
     </tbody>
   </table>
+  
+  <div style="text-align:right;">  
+  <c:choose>
+  <c:when test="${sessionScope.id == null}">
+      <button type="button" class="btn btn-primary"
+                            onclick="javascript:btn('로그인 후 이용해주세요.' )">글쓰기</button>
+                            
+  </c:when>
+  <c:otherwise>
+  <button type="button" class="btn btn-primary"
+                            onclick="location.href='./create.do?cateno=${cateVO.cateno }'">글쓰기</button>
+  </c:otherwise>
+  </c:choose>
+  </div>
   
   <!-- 페이지 목록 출력 부분 시작 -->
   <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>

@@ -128,17 +128,22 @@ public interface ContentsDAOInter {
     public List<ContentsVO> list_all_join(HashMap<String, Object> map);
     
     /**
-     * 글 수 증가
-     * @param 
+     * 댓글 수 업데이트
+     * @param contentsVO
      * @return
-     */ 
-    public int increaseReplycnt(int contentsno);
-   
+     */
+    
+    public int update_replycnt(ContentsVO contentsVO);
+    
     /**
-     * 글 수 감소
-     * @param 
+     * 검색 + 페이징 목록
+     * 
+     * @param map
      * @return
-     */   
-    public int decreaseReplycnt(int contentsno);
+     */
+    public List<ContentsVO> notice_by_cateno_search_paging(HashMap<String, Object> map);
+    
+    public List<ContentsVO> tip_by_cateno_search_paging(HashMap<String, Object> map);
+    
     
 }
