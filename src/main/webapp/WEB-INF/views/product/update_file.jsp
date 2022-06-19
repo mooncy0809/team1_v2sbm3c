@@ -29,7 +29,7 @@
 </head> 
  
 <body>
-<jsp:include page="../menu/top.jsp" flush='false' />
+<jsp:include page="../menu/top2.jsp" flush='false' />
  
 <DIV class='title_line'>
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 

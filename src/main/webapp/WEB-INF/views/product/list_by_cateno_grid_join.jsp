@@ -26,22 +26,14 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/> 
+ 
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<style type="text/css">
-    .read{
-        color:white;
-    }
-    .read:hover{
-        color:red;
-    }
-</style>
+
 <script type="text/javascript">
 
   $(function() {
@@ -134,6 +126,7 @@
        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
        <input type="hidden" name="productno" id="productno" value="productno">
     </FORM>
+  <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>
     <section id="advertisement">
         <div class="container">
             <img src="images/shop/advertisement.jpg" alt="" />
@@ -264,14 +257,14 @@
           </c:otherwise>
         </c:choose>   
       </div> <%--사진 정렬 --%>
-       <div class="product-overlay" style="background: rgba(254,152,15,.8);">
+      <!-- <div class="product-overlay" style="background: rgba(254,152,15,.8);">
       <div class="overlay-content">
-                <a class="read" href="./read.do?productno=${productno}"><i class="fas fa-door-open  fa-3x"></i></a>
+                
                 <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>
                 <p>${ptitle}</p>
                 <a onclick="cart_ajax(${productno })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
       </div>  
-      </div>
+      </div>-->
       </div><%--add cart 구역 전 --%>
       <div class="choose">
         <ul style="margin:5px auto;padding-left:5px;">

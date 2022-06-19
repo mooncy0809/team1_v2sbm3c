@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.cate.CateProcInter;
 import dev.mvc.cate.CateVO;
+import dev.mvc.cate.Categrp_CateVO;
 import dev.mvc.categrp.CategrpProcInter;
 import dev.mvc.categrp.CategrpVO;
 import dev.mvc.tool.Tool;
@@ -222,7 +223,7 @@ public class ProductCont {
      * 
      * @return
      */
-    @RequestMapping(value = "/product/list_by_cateno.do", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/product/list_by_cateno.do", method = RequestMethod.GET)
     public ModelAndView list_by_cateno(int cateno) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/product/list_by_cateno");
@@ -241,7 +242,7 @@ public class ProductCont {
 
         return mav; // forward
     }
-
+*/
     // http://localhost:9091/product/read.do?productno=1
     /**
      * 조회
@@ -304,65 +305,6 @@ public class ProductCont {
         return mav;
     }
 
-//    /**
-//     * 목록 + 검색 + 페이징 지원
-//     * http://localhost:9090/product/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
-//     * 
-//     * @param cateno
-//     * @param word
-//     * @param now_page
-//     * @return
-//     */
-//    @RequestMapping(value = "/product/list_by_cateno_search_paging.do", method = RequestMethod.GET)
-//    public ModelAndView list_by_cateno_search_paging(
-//            @RequestParam(value = "cateno", defaultValue = "1") int cateno,
-//            @RequestParam(value = "word", defaultValue = "") String word,
-//            @RequestParam(value = "now_page", defaultValue = "1") int now_page) {
-//        System.out.println("--> now_page: " + now_page);
-//
-//        ModelAndView mav = new ModelAndView();
-//
-//        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
-//        HashMap<String, Object> map = new HashMap<String, Object>();
-//        map.put("cateno", cateno); // #{cateno}
-//        map.put("word", word); // #{word}
-//        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
-//
-//        // 검색 목록
-//        List<ProductVO> list = productProc.list_by_cateno_search_paging(map);
-//        mav.addObject("list", list);
-//
-//        // 검색된 레코드 갯수
-//        int search_count = productProc.search_count(map);
-//        mav.addObject("search_count", search_count);
-//
-//        CateVO cateVO = cateProc.read(cateno);
-//        mav.addObject("cateVO", cateVO);
-//
-//        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
-//        mav.addObject("categrpVO", categrpVO);
-//
-//        /*
-//         * SPAN태그를 이용한 박스 모델의 지원
-//         * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17 18 19 20 [다음]
-//         * @param cateno 카테고리번호
-//         * @param search_count 검색(전체) 레코드수
-//         * @param now_page 현재 페이지
-//         * @param word 검색어
-//         * @return 페이징용으로 생성된 HTML/CSS tag 문자열
-//         */
-//        String paging = productProc.pagingBox(cateno, search_count, now_page, word);
-//        // System.out.println("-> paging: " + paging);
-//        mav.addObject("paging", paging);
-//
-//        // mav.addObject("now_page", now_page);
-//
-//        // /product/list_by_cateno_table_img1_search_paging.jsp
-//        mav.setViewName("/product/list_by_cateno_search_paging");
-//
-//        return mav;
-//    }
-
     /**
      * 목록 + 검색 + 페이징 + Cookie 지원
      * http://localhost:9091/product/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
@@ -378,7 +320,7 @@ public class ProductCont {
         @RequestParam(value = "pword", defaultValue = "") String word,
         @RequestParam(value = "now_page", defaultValue = "1") int now_page,
         HttpServletRequest request) {
-      System.out.println("-> list_by_cateno_search_paging now_page: " + now_page);
+      // System.out.println("-> list_by_cateno_search_paging now_page: " + now_page);
 
       ModelAndView mav = new ModelAndView();
 
@@ -468,17 +410,46 @@ public class ProductCont {
      * @return
      */
     @RequestMapping(value = "/product/list_by_cateno_grid.do", method = RequestMethod.GET)
-    public ModelAndView list_by_cateno_grid(int cateno) {
-      ModelAndView mav = new ModelAndView();
-      
-      CateVO cateVO = this.cateProc.read(cateno);
-      mav.addObject("cateVO", cateVO);
-      
-      CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
-      mav.addObject("categrpVO", categrpVO);
-      
-      List<ProductVO> list = this.productProc.list_by_cateno(cateno);
-      mav.addObject("list", list);
+    public ModelAndView list_by_cateno_grid(@RequestParam(value = "cateno", defaultValue = "1") int cateno,
+            @RequestParam(value = "pword", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("cateno", cateno); // #{cateno}
+        map.put("pword", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+        // 검색 목록
+        List<ProductVO> list = productProc.list_by_cateno(map);
+        mav.addObject("list", list);
+
+        // 검색된 레코드 갯수
+        int search_count = productProc.search_count(map);
+        mav.addObject("search_count", search_count);
+
+        CateVO cateVO = cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
+
+        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
+
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+         * 18 19 20 [다음]
+         * @param cateno 카테고리번호
+         * @param search_count 검색(전체) 레코드수
+         * @param now_page 현재 페이지
+         * @param word 검색어
+         * @return 페이징 생성 문자열
+         */
+        String paging2 = productProc.pagingBox2(cateno, search_count, now_page, word);
+       
+        mav.addObject("paging2", paging2);
+
+        mav.addObject("now_page", now_page);
 
       // 테이블 이미지 기반, /webapp/product/list_by_cateno_grid.jsp
       mav.setViewName("/product/list_by_cateno_grid");
@@ -778,7 +749,21 @@ public class ProductCont {
       return mav; // forward
     }   
     
+    /**
+     * Cate + Product join, 연결 목록
+     * http://localhost:9091/product/list_by_cateno_grid_join.do 
+     * @return
+     */
+    @RequestMapping(value="/product/list_by_cateno_grid_join.do", method=RequestMethod.GET )
+    public ModelAndView list_by_cateno_grid_join() {
+      ModelAndView mav = new ModelAndView();
       
+      List<Cate_ProductVO> list = this.productProc.list_by_cateno_grid_join();
+      mav.addObject("list", list); // request.setAttribute("list", list);
+
+      mav.setViewName("/product/list_by_cateno_grid_join"); // /WEB-INF/views/cate/list_all_join.jsp
+      return mav;
+    }  
     
 
 }
