@@ -10,6 +10,14 @@ public interface CateProcInter {
      * @return 등록된 갯수
      */
     public int create(CateVO cateVO);
+    
+    /**
+     * 등록
+     * 
+     * @param cateVO
+     * @return 등록된 갯수
+     */
+    public int create2(CateVO cateVO);
 
     /**
      * 전체 목록
@@ -45,6 +53,13 @@ public interface CateProcInter {
      * @return 수정된 레코드 갯수
      */
     public int update(CateVO cateVO);
+    
+    /**
+     * 수정 처리
+     * @param cateVO
+     * @return 수정된 레코드 갯수
+     */
+    public int update2(CateVO cateVO);
     
     /**
      * 삭제 처리 

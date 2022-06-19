@@ -20,6 +20,12 @@ public class CateProc implements CateProcInter {
         int cnt = this.cateDAO.create(cateVO);
         return cnt;
     }
+    
+    @Override
+    public int create2(CateVO cateVO) {
+        int cnt = this.cateDAO.create2(cateVO);
+        return cnt;
+    }
 
     @Override
     public List<CateVO> list_all() {
@@ -50,6 +56,13 @@ public class CateProc implements CateProcInter {
         int cnt = this.cateDAO.update(cateVO);
         return cnt;
     }
+    
+    @Override
+    public int update2(CateVO cateVO) {
+        int cnt = this.cateDAO.update(cateVO);
+        return cnt;
+    }
+
 
     @Override
     public int delete(int cateno) {

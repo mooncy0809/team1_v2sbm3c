@@ -31,7 +31,7 @@ public interface ProductProcInter {
      * @param cateno
      * @return
      */
-    public List<ProductVO> list_by_cateno(int cateno);
+    public List<ProductVO> list_by_cateno(HashMap<String, Object> map);
     
     /**
      * 카테고리별 검색 목록
@@ -69,6 +69,19 @@ public interface ProductProcInter {
      */ 
     public String pagingBox(int cateno, int search_count, int now_page, String word);
     
+    /** 
+     * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 
+     * 현재 페이지: 11 / 22   [이전] 11 12 13 14 15 16 17 18 19 20 [다음] 
+     *
+     * @param list_file 목록 파일명 
+     * @param cateno 카테고리번호 
+     * @param search_count 검색(전체) 레코드수 
+     * @param now_page     현재 페이지
+     * @param word 검색어
+     * @return 페이징 생성 문자열
+     */ 
+    public String pagingBox2(int cateno, int search_count, int now_page, String word);
+    
     /**
      * 패스워드 검사
      * @param map
@@ -103,6 +116,12 @@ public interface ProductProcInter {
      * @return 갯수
      */
     public int count_by_cateno(int cateno);
+    
+    /**
+     * Cate + Product join, 연결 목록
+     * @return
+     */
+    public List<Cate_ProductVO> list_by_cateno_grid_join();  
     
 }
 
