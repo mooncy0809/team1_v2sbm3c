@@ -179,7 +179,6 @@ ul.drop > li > a:hover{
                                     <c:when test="${sessionScope.grade < 10}">
                                         <%-- 로그인 한 경우 --%>
                                         <div class="social-icons pull-right">
-<<<<<<< HEAD
                                         <ul class="nav navbar-nav collapse navbar-collapse">
 
                         <li><a class="dropdown" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
@@ -192,7 +191,6 @@ ul.drop > li > a:hover{
                                                                       <ul class="drop"><li><a href="/categrp/list.do">카테고리 관리</a></li>
                                                                       
                                                                 </ul></li>
-=======
                                                     <ul class="nav navbar-nav collapse navbar-collapse">
                                                         <li><a onclick="com2(this)" style="cursor:pointer;" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
                                                             <ul role="menu" class="sub" id="sub_com2" style="font-size:small;">
@@ -208,7 +206,6 @@ ul.drop > li > a:hover{
                                                                       <li><a href="/categrp/list.do">주문 관리</a></li>
                                                                       </ul>
                                                                 </li>
->>>>>>> 1ece973b869efa10ca55394993d65eb149ecc851
                                                                  
                                                             </ul>
                                                         </li>
@@ -390,12 +387,7 @@ function com() {
         } 
     else{
         $("#sub_com").slideDown(500);
-<<<<<<< HEAD
 
-            
-
-=======
->>>>>>> 1ece973b869efa10ca55394993d65eb149ecc851
             }
   } 
 
