@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Home | 삼대몇?</title>
@@ -105,6 +105,7 @@ ul.drop > li > a:hover{
     cursor:pointer;
     color: white;
 }
+
 </style>
 
 </head>
@@ -172,6 +173,20 @@ ul.drop > li > a:hover{
                                     <c:when test="${sessionScope.grade < 10}">
                                         <%-- 로그인 한 경우 --%>
                                         <div class="social-icons pull-right">
+<<<<<<< HEAD
+                                        <ul class="nav navbar-nav collapse navbar-collapse">
+
+                        <li><a class="dropdown" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
+                                                            <ul role="menu" class="sub-menu" style="font-size:small;">
+                                                                <li><a  id="menubar" class="dropdown2" href="#"  ><i class="fa fa-gears"></i>삼대몇 관리자<i class="fa fa-angle-down"></i></a>
+                                                                      <ul class="sub-menu" ><li class="drop"><a href="/categrp/list.do">카테고리 관리</a></li>
+                                                                      <li class="drop"><a href="../you/list_by_categrpno_search_paging.do?categrpno=4">홈트레이닝 관리</a></li>
+                                                                      </ul></li>
+                                                                <li><a href="/categrp/list2.do"><i class="fa fa-gears"></i>하루삼끼 관리자<i class="fa fa-angle-down"></i></a>
+                                                                      <ul class="drop"><li><a href="/categrp/list.do">카테고리 관리</a></li>
+                                                                      
+                                                                </ul></li>
+=======
                                                     <ul class="nav navbar-nav collapse navbar-collapse">
                                                         <li><a onclick="com2(this)" style="cursor:pointer;" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
                                                             <ul role="menu" class="sub" id="sub_com2" style="font-size:small;">
@@ -187,11 +202,12 @@ ul.drop > li > a:hover{
                                                                       <li><a href="/categrp/list.do">주문 관리</a></li>
                                                                       </ul>
                                                                 </li>
+>>>>>>> 1ece973b869efa10ca55394993d65eb149ecc851
                                                                  
                                                             </ul>
                                                         </li>
-                                                     </ul>   
-                                       </div>
+                                                       </ul>
+                                                </div>
                                     </c:when>
                                 </c:choose>
 
@@ -272,7 +288,7 @@ ul.drop > li > a:hover{
 
                 </div>
                 <div id="mySidenav" class="sidenav category-bg"
-                    style="padding-left: 40px; width: 40%; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:65px; box-shadow: 12px 10px 11px 7px gray;">
+                    style="padding-left: 40px; width: 500px; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:65px; box-shadow: 12px 10px 11px 7px gray;">
                     <li class="menu" style="list-style:none;" >
                         <ul >                       
                             <a><li>NOTICE</li></a>
@@ -284,7 +300,11 @@ ul.drop > li > a:hover{
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1"><li>팁&노하우</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1"><li>고민&질문</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1"><li>일기</li></a>  
+<<<<<<< HEAD
                                        <a href="/qna/member_join.do"> <li>관리자에게</li></a> 
+=======
+                                       <a href="/qna/list_search_paging.do?categrpno=4&memberno=${sessionScope.memberno}"> <li>관리자에게</li></a> 
+>>>>>>> 83628c58bf98efc98e1f61a879ebed119ea3b680
                                         </div>
                             <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4&now_page=1"><li>HOME TRAINING</li></a>
                             <a href="../dict/list_by_categrpno_search_paging.do?categrpno=5"><li>CALORIE DICTIONARY</li></a>
@@ -334,21 +354,46 @@ ul.drop > li > a:hover{
 function openNav() {
     if ($('#mySidenav').css('display') == 'block'){
         $("#mySidenav").slideUp(500);
+
         
        
         } 
     
     else{
         $("#mySidenav").slideDown(500);
+
             
             }
   } 
+<<<<<<< HEAD
+=======
+
+/* $('body').click(function(){
+    $("#mySidenav").slideUp(500);
+   
+}); */
+/* 
+$(document).click(function(e){ //문서 body를 클릭했을때         
+    if(e.target.className =="openNav"){return false} //내가 클릭한 요소(target)를 기준으로 상위요소에 .share-pop이 없으면 (갯수가 0이라면)       
+    $("openNav").slideUp(500)
+
+    });
+ */
+
+
+>>>>>>> 83628c58bf98efc98e1f61a879ebed119ea3b680
 function com() {
     if ($('#sub_com').css('display') == 'block'){
         $("#sub_com").slideUp(500);
         } 
     else{
         $("#sub_com").slideDown(500);
+<<<<<<< HEAD
+
+            
+
+=======
+>>>>>>> 1ece973b869efa10ca55394993d65eb149ecc851
             }
   } 
 function com2() {

@@ -6,18 +6,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dev.mvc.qna.QnaDAOInter">
   <insert id="create" parameterType="dev.mvc.qna.QnaVO">
-    INSERT INTO qna(qnano, categrpno, memberno, title, content, pwd, rdate)
-    VALUES(qna_seq.nextval, #{categrpno}, #{memberno}, #{title}, #{content}, #{pwd}, sysdate)
+    INSERT INTO qna(qnano, categrpno, memberno, title, content, pwd, rdate,id)
+    VALUES(qna_seq.nextval, #{categrpno}, #{memberno}, #{title}, #{content}, #{pwd}, sysdate, #{id})
   </insert> 
   
    <select id="list_all" resultType="dev.mvc.qna.QnaVO">
-    SELECT qnano, categrpno, memberno,  title, content, pwd, rdate
+    SELECT qnano, categrpno, memberno,  title, content, pwd, rdate,id
     FROM qna
     ORDER BY rdate DESC
   </select>
   
     <select id="read" resultType="dev.mvc.qna.QnaVO" parameterType="int">
-    SELECT qnano, categrpno, memberno, title, content, pwd, rdate
+    SELECT qnano, categrpno, memberno, title, content, pwd, rdate,id
     FROM qna
     WHERE qnano = #{qnano}
     </select>
@@ -27,15 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     SET title=#{title}, content=#{content}, pwd=#{pwd}
     WHERE qnano=#{qnano}
     </update>
-    
-
-  <select id="member_join" resultType="dev.mvc.qna.Member_QnaVO">
-    SELECT m.memberno as m_memberno, m.id as m_id,
-               q.qnano, q.title, q.content, q.pwd, q.rdate
-    FROM member m, qna q
-    WHERE m.memberno = q.memberno
-    ORDER BY rdate DESC
-  </select>
+   
+  
   
   <delete id="delete" parameterType="int">
     DELETE FROM qna
@@ -52,6 +45,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- <select id="password"  resultType="int" parameterType="Map">
   </update> -->
   
+  
+     <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
+  <select id="list_search_paging" 
+             resultType="dev.mvc.qna.QnaVO" parameterType="HashMap">
+   SELECT qnano, categrpno, memberno, title, content, pwd, rdate, id, r
+   FROM (
+              SELECT qnano, categrpno, memberno, title, content, pwd, rdate, id, rownum as r
+              FROM (
+                        SELECT qnano, categrpno, memberno, title, content, pwd, rdate,id
+                        FROM qna
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE  categrpno=#{categrpno}
+                          </when>
+                          <otherwise>
+                            WHERE categrpno=#{categrpno} AND (UPPER(title) LIKE '%' || #{word} || '%'  <!-- ||: 결합, %첫눈% -->
+                                                                  OR UPPER(content) LIKE '%' || #{word} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY qnano DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+   <!--  1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30; -->
+     
+  </select> 
+  
+   <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM qna
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE categrpno=#{categrpno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE categrpno=#{categrpno} AND (UPPER(title) LIKE '%' || #{word} || '%' 
+                                                     OR UPPER(content) LIKE '%' || #{word} || '%' )
+      </otherwise>
+    </choose>
+  </select>
   
  </mapper>
   

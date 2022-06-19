@@ -12,12 +12,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.qna.QnaVO;
 import dev.mvc.you.YouVO;
 import dev.mvc.categrp.CategrpProcInter;
 import dev.mvc.categrp.CategrpVO;
+import dev.mvc.contents.Contents;
 import dev.mvc.contents.ContentsVO;
 import dev.mvc.member.MemberVO;
 
@@ -67,12 +69,15 @@ public class QnaCont {
     public ModelAndView create(HttpServletRequest request, 
             HttpServletResponse response, 
             HttpSession session,
-            int memberno, QnaVO qnaVO) {
+            int memberno,
+            String id,
+            QnaVO qnaVO) {
         ModelAndView mav = new ModelAndView();
         
         int cnt = this.qnaProc.create(qnaVO);
         mav.addObject("qnano", qnaVO.getQnano());
         session.setAttribute("memberno", memberno);
+        session.setAttribute("id", id);
         
         
         mav.addObject("code", "create_success");
@@ -83,8 +88,9 @@ public class QnaCont {
         mav.addObject("content", qnaVO.getContent());
         mav.addObject("pwd", qnaVO.getPwd());
         mav.addObject("rdate", qnaVO.getRdate());
+        mav.addObject("id", qnaVO.getId());
         
-        mav.setViewName("redirect:/qna/member_join.do");
+        mav.setViewName("redirect:/qna/list_search_paging.do");
         return mav;
     }
     
@@ -148,7 +154,7 @@ public class QnaCont {
       
       if (cnt == 1) {
           mav.addObject("categrpno", qnaVO.getCategrpno());
-          mav.setViewName("redirect:/qna/member_join.do");
+          mav.setViewName("redirect:/qna/list_search_paging.do");
       } else {
           mav.addObject("code", "update_fail"); // request에 저장
           mav.addObject("cnt", cnt); // request에 저장
@@ -164,16 +170,7 @@ public class QnaCont {
       return mav;
     }
     
-    @RequestMapping(value="/qna/member_join.do", method=RequestMethod.GET )
-    public ModelAndView member_join() {
-      ModelAndView mav = new ModelAndView();
-      
-      List<Member_QnaVO> list = this.qnaProc.member_join();
-      mav.addObject("list", list); // request.setAttribute("list", list);
-
-      mav.setViewName("/qna/member_join");
-      return mav;
-    }
+   
     
     /**
      * 조회 + 삭제폼 http://localhost:9091/qna/read_delete.do
@@ -215,7 +212,7 @@ public class QnaCont {
       
       if (cnt == 1) {
           mav.addObject("categrpno", qnaVO.getCategrpno());
-          mav.setViewName("redirect:/qna/member_join.do");
+          mav.setViewName("redirect:/qna/list_search_paging.do");
       } else {
           mav.addObject("code", "update_fail"); // request에 저장
           mav.addObject("cnt", cnt);
@@ -225,6 +222,7 @@ public class QnaCont {
           mav.addObject("content", qnaVO.getContent());
           mav.addObject("pwd", qnaVO.getPwd());
           mav.addObject("rdate", qnaVO.getRdate());
+          mav.addObject("id", qnaVO.getId());
           
       }
       
@@ -278,6 +276,51 @@ public class QnaCont {
     
       return mav;
     }
+    
+    /**
+     * 목록 검색 페이징
+     * @param categrpno
+     * @param word
+     * @param now_page
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/qna/list_search_paging.do", method = RequestMethod.GET)
+    public ModelAndView list_search_paging(
+            @RequestParam(value = "categrpno", defaultValue = "4") int categrpno,                                                                           
+            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpSession session) {
+        
+      ModelAndView mav = new ModelAndView();
+
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("categrpno", categrpno); // #{categrpno}
+      map.put("word", word); // #{word}
+      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+      List<QnaVO> list = qnaProc.list_search_paging(map);
+      mav.addObject("list", list);
+
+      int search_count = qnaProc.search_count(map);
+      
+      mav.addObject("search_count", search_count);
+      
+      CategrpVO categrpVO = categrpProc.read(categrpno);
+      mav.addObject("categrpVO", categrpVO);
+      
+      String paging = qnaProc.pagingBox(categrpno, search_count, now_page, word);
+//    System.out.println("-> paging: " + paging);
+    mav.addObject("paging", paging);
+
+      mav.addObject("now_page", now_page);
+      
+      mav.setViewName("/qna/list_search_paging");
+
+      return mav;
+    }
+    
+  
 
     
     
