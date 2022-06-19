@@ -97,6 +97,12 @@ public interface ProductDAOInter {
      * @return
      */
     public List<Cate_ProductVO> list_by_cateno_grid_join();  
+    
+    /**
+     * Cate + Product join, 연결 목록
+     * @return
+     */
+    public List<Cate_ProductVO> list_by_cateno_grid_join2(HashMap<String, Object> map);  
 }
 
 
