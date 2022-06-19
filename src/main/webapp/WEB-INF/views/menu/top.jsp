@@ -173,7 +173,6 @@ ul.drop > li > a:hover{
                                     <c:when test="${sessionScope.grade < 10}">
                                         <%-- 로그인 한 경우 --%>
                                         <div class="social-icons pull-right">
-<<<<<<< HEAD
                                         <ul class="nav navbar-nav collapse navbar-collapse">
 
                         <li><a class="dropdown" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
@@ -186,7 +185,6 @@ ul.drop > li > a:hover{
                                                                       <ul class="drop"><li><a href="/categrp/list.do">카테고리 관리</a></li>
                                                                       
                                                                 </ul></li>
-=======
                                                     <ul class="nav navbar-nav collapse navbar-collapse">
                                                         <li><a onclick="com2(this)" style="cursor:pointer;" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
                                                             <ul role="menu" class="sub" id="sub_com2" style="font-size:small;">
@@ -202,7 +200,6 @@ ul.drop > li > a:hover{
                                                                       <li><a href="/categrp/list.do">주문 관리</a></li>
                                                                       </ul>
                                                                 </li>
->>>>>>> 1ece973b869efa10ca55394993d65eb149ecc851
                                                                  
                                                             </ul>
                                                         </li>
@@ -300,11 +297,11 @@ ul.drop > li > a:hover{
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1"><li>팁&노하우</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1"><li>고민&질문</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1"><li>일기</li></a>  
-<<<<<<< HEAD
+
                                        <a href="/qna/member_join.do"> <li>관리자에게</li></a> 
-=======
+
                                        <a href="/qna/list_search_paging.do?categrpno=4&memberno=${sessionScope.memberno}"> <li>관리자에게</li></a> 
->>>>>>> 83628c58bf98efc98e1f61a879ebed119ea3b680
+
                                         </div>
                             <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4&now_page=1"><li>HOME TRAINING</li></a>
                             <a href="../dict/list_by_categrpno_search_paging.do?categrpno=5"><li>CALORIE DICTIONARY</li></a>
@@ -365,8 +362,6 @@ function openNav() {
             
             }
   } 
-<<<<<<< HEAD
-=======
 
 /* $('body').click(function(){
     $("#mySidenav").slideUp(500);
@@ -381,19 +376,13 @@ $(document).click(function(e){ //문서 body를 클릭했을때
  */
 
 
->>>>>>> 83628c58bf98efc98e1f61a879ebed119ea3b680
 function com() {
     if ($('#sub_com').css('display') == 'block'){
         $("#sub_com").slideUp(500);
         } 
     else{
         $("#sub_com").slideDown(500);
-<<<<<<< HEAD
 
-            
-
-=======
->>>>>>> 1ece973b869efa10ca55394993d65eb149ecc851
             }
   } 
 function com2() {

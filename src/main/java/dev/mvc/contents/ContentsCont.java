@@ -180,6 +180,338 @@ public class ContentsCont {
 
         return mav; // forward
     }
+    
+    /**
+     * 등록폼 http://localhost:9091/contents/create.do
+     * http://localhost:9091/contents/create.do?cateno=1 FK 값 명시
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/contents/notice_create.do", method = RequestMethod.GET)
+    public ModelAndView notice_create(int cateno) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/contents/notice_create"); // /webapp/WEB-INF/views/contents/create.jsp
+
+        CateVO cateVO = this.cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
+
+        CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
+
+        return mav;
+    }
+    
+    /**
+     * 등록 처리 http://localhost:9091/contents/notice_create.do?cateno=1
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/contents/notice_create.do", method = RequestMethod.POST)
+    public ModelAndView notice_create(HttpServletRequest request, 
+                               HttpServletResponse response, 
+                               HttpSession session,
+                               int memberno, String mname, ContentsVO contentsVO) {
+        ModelAndView mav = new ModelAndView();
+
+        // ------------------------------------------------------------------------------
+        // 파일 전송 코드 시작
+        // ------------------------------------------------------------------------------
+        String file1 = ""; // 원본 파일명 image
+        String file1saved = ""; // 저장된 파일명, image
+        String thumb1 = ""; // preview image
+
+        // 기준 경로 확인
+        String user_dir = System.getProperty("user.dir"); // 시스템 제공
+        // System.out.println("-> User dir: " + user_dir);
+        // --> User dir: C:\kd\ws_java\resort_v1sbm3c
+
+        // 파일 접근임으로 절대 경로 지정, static 폴더 지정
+        // 완성된 경로
+        // C:/kd1/ws_java/resort_v1sbm3c/src/main/resources/static/contents/storage
+        String upDir = user_dir + "/src/main/resources/static/contents/storage/"; // 절대 경로
+        // System.out.println("-> upDir: " + upDir);
+
+        // 전송 파일이 없어도 file1MF 객체가 생성됨.
+        // <input type='file' class="form-control" name='file1MF' id='file1MF'
+        // value='' placeholder="파일 선택">
+        MultipartFile mf = contentsVO.getFile1MF();
+
+        file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
+        // System.out.println("-> file1: " + file1);
+
+        long size1 = mf.getSize(); // 파일 크기
+
+        if (size1 > 0) { // 파일 크기 체크
+            // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
+            file1saved = Upload.saveFileSpring(mf, upDir);
+
+            if (Tool.isImage(file1saved)) { // 이미지인지 검사
+                // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
+                thumb1 = Tool.preview(upDir, file1saved, 200, 150); // 저장 폴더, 저장된 파일명, width, height
+            }
+
+        }
+
+        contentsVO.setFile1(file1);
+        contentsVO.setFile1saved(file1saved);
+        contentsVO.setThumb1(thumb1);
+        contentsVO.setSize1(size1);
+        // ------------------------------------------------------------------------------
+        // 파일 전송 코드 종료
+        // ------------------------------------------------------------------------------
+
+        // Call By Reference: 메모리 공유, Hashcode 전달
+        this.contentsProc.create(contentsVO);
+
+        // ------------------------------------------------------------------------------
+        // PK의 return
+        // ------------------------------------------------------------------------------
+        System.out.println("--> contentsno: " + contentsVO.getContentsno());
+        mav.addObject("contentsno", contentsVO.getContentsno()); // redirect parameter 적용
+        // ------------------------------------------------------------------------------
+
+        // MemberVO memberVO = memberProc.readById(id); // 로그인한 회원의 정보 조회
+        session.setAttribute("memberno", memberno);
+        session.setAttribute("mname", mname);
+        
+        mav.addObject("mname", mname);
+
+        // redirect시에 hidden tag로 보낸것들이 전달이 안됨으로 request에 다시 저장
+        mav.addObject("cateno", contentsVO.getCateno()); // redirect parameter 적용
+
+        mav.setViewName("redirect:/contents/notice_by_cateno.do"); // GET 방식 호출, 전달되는 데이터도 URL에 결합됨.
+        
+        return mav; // forward
+    }
+    
+    /**
+     * 공지사항 목록 + 검색 + 페이징 지원
+     * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+     * 
+     * @param cateno
+     * @param word
+     * @param now_page
+     * @return
+     */
+    @RequestMapping(value = "/contents/notice_by_cateno.do", method = RequestMethod.GET)
+    public ModelAndView notice_by_cateno(
+            @RequestParam(value = "cateno", defaultValue = "1") int cateno,                                                                           
+            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpSession session) {
+      System.out.println("--> now_page: " + now_page);
+
+      ModelAndView mav = new ModelAndView();
+
+      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("cateno", cateno); // #{cateno}
+      map.put("word", word); // #{word}
+      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+      // 검색 목록
+      List<ContentsVO> list = contentsProc.notice_by_cateno_search_paging(map);
+      mav.addObject("list", list);
+      
+
+      // 검색된 레코드 갯수
+      int search_count = contentsProc.search_count(map);
+      mav.addObject("search_count", search_count);
+
+      CateVO cateVO = cateProc.read(cateno);
+      mav.addObject("cateVO", cateVO);
+
+      CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+      mav.addObject("categrpVO", categrpVO);
+
+      /*
+       * SPAN태그를 이용한 박스 모델의 지원
+       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+       * 18 19 20 [다음]
+       * @param cateno 카테고리번호
+       * @param search_count 검색(전체) 레코드수
+       * @param now_page 현재 페이지
+       * @param word 검색어
+       * @return 페이징용으로 생성된 HTML tag 문자열
+       */
+      String paging = contentsProc.notice_pagingBox(cateno, search_count, now_page, word);
+//      System.out.println("-> paging: " + paging);
+      mav.addObject("paging", paging);
+
+      mav.addObject("now_page", now_page);
+      
+
+      // /contents/list_by_cateno_table_img1_search_paging.jsp
+      mav.setViewName("/contents/notice_by_cateno");
+
+      return mav;
+    }
+    
+    /**
+     * 등록폼 http://localhost:9091/contents/tip_create.do
+     * http://localhost:9091/contents/tip_create.do?cateno=2 FK 값 명시
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/contents/tip_create.do", method = RequestMethod.GET)
+    public ModelAndView tip_create(int cateno) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/contents/tip_create"); // /webapp/WEB-INF/views/contents/create.jsp
+
+        CateVO cateVO = this.cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
+
+        CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
+
+        return mav;
+    }
+    
+    /**
+     * 등록 처리 http://localhost:9091/contents/notice_create.do?cateno=2
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/contents/tip_create.do", method = RequestMethod.POST)
+    public ModelAndView tip_create(HttpServletRequest request, 
+                               HttpServletResponse response, 
+                               HttpSession session,
+                               int memberno, String mname, ContentsVO contentsVO) {
+        ModelAndView mav = new ModelAndView();
+
+        // ------------------------------------------------------------------------------
+        // 파일 전송 코드 시작
+        // ------------------------------------------------------------------------------
+        String file1 = ""; // 원본 파일명 image
+        String file1saved = ""; // 저장된 파일명, image
+        String thumb1 = ""; // preview image
+
+        // 기준 경로 확인
+        String user_dir = System.getProperty("user.dir"); // 시스템 제공
+        // System.out.println("-> User dir: " + user_dir);
+        // --> User dir: C:\kd\ws_java\resort_v1sbm3c
+
+        // 파일 접근임으로 절대 경로 지정, static 폴더 지정
+        // 완성된 경로
+        // C:/kd1/ws_java/resort_v1sbm3c/src/main/resources/static/contents/storage
+        String upDir = user_dir + "/src/main/resources/static/contents/storage/"; // 절대 경로
+        // System.out.println("-> upDir: " + upDir);
+
+        // 전송 파일이 없어도 file1MF 객체가 생성됨.
+        // <input type='file' class="form-control" name='file1MF' id='file1MF'
+        // value='' placeholder="파일 선택">
+        MultipartFile mf = contentsVO.getFile1MF();
+
+        file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
+        // System.out.println("-> file1: " + file1);
+
+        long size1 = mf.getSize(); // 파일 크기
+
+        if (size1 > 0) { // 파일 크기 체크
+            // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
+            file1saved = Upload.saveFileSpring(mf, upDir);
+
+            if (Tool.isImage(file1saved)) { // 이미지인지 검사
+                // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
+                thumb1 = Tool.preview(upDir, file1saved, 200, 150); // 저장 폴더, 저장된 파일명, width, height
+            }
+
+        }
+
+        contentsVO.setFile1(file1);
+        contentsVO.setFile1saved(file1saved);
+        contentsVO.setThumb1(thumb1);
+        contentsVO.setSize1(size1);
+        // ------------------------------------------------------------------------------
+        // 파일 전송 코드 종료
+        // ------------------------------------------------------------------------------
+
+        // Call By Reference: 메모리 공유, Hashcode 전달
+        this.contentsProc.create(contentsVO);
+
+        // ------------------------------------------------------------------------------
+        // PK의 return
+        // ------------------------------------------------------------------------------
+        System.out.println("--> contentsno: " + contentsVO.getContentsno());
+        mav.addObject("contentsno", contentsVO.getContentsno()); // redirect parameter 적용
+        // ------------------------------------------------------------------------------
+
+        // MemberVO memberVO = memberProc.readById(id); // 로그인한 회원의 정보 조회
+        session.setAttribute("memberno", memberno);
+        session.setAttribute("mname", mname);
+        
+        mav.addObject("mname", mname);
+
+        // redirect시에 hidden tag로 보낸것들이 전달이 안됨으로 request에 다시 저장
+        mav.addObject("cateno", contentsVO.getCateno()); // redirect parameter 적용
+
+        mav.setViewName("redirect:/contents/tip_by_cateno.do"); // GET 방식 호출, 전달되는 데이터도 URL에 결합됨.
+        
+        return mav; // forward
+    }
+    
+    /**
+     * 공지사항 목록 + 검색 + 페이징 지원
+     * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+     * 
+     * @param cateno
+     * @param word
+     * @param now_page
+     * @return
+     */
+    @RequestMapping(value = "/contents/tip_by_cateno.do", method = RequestMethod.GET)
+    public ModelAndView tip_by_cateno(
+            @RequestParam(value = "cateno", defaultValue = "2") int cateno,                                                                           
+            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpSession session) {
+      System.out.println("--> now_page: " + now_page);
+
+      ModelAndView mav = new ModelAndView();
+
+      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("cateno", cateno); // #{cateno}
+      map.put("word", word); // #{word}
+      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+      // 검색 목록
+      List<ContentsVO> list = contentsProc.tip_by_cateno_search_paging(map);
+      mav.addObject("list", list);
+      
+
+      // 검색된 레코드 갯수
+      int search_count = contentsProc.search_count(map);
+      mav.addObject("search_count", search_count);
+
+      CateVO cateVO = cateProc.read(cateno);
+      mav.addObject("cateVO", cateVO);
+
+      CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+      mav.addObject("categrpVO", categrpVO);
+
+      /*
+       * SPAN태그를 이용한 박스 모델의 지원
+       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+       * 18 19 20 [다음]
+       * @param cateno 카테고리번호
+       * @param search_count 검색(전체) 레코드수
+       * @param now_page 현재 페이지
+       * @param word 검색어
+       * @return 페이징용으로 생성된 HTML tag 문자열
+       */
+      String paging = contentsProc.tip_pagingBox(cateno, search_count, now_page, word);
+//      System.out.println("-> paging: " + paging);
+      mav.addObject("paging", paging);
+
+      mav.addObject("now_page", now_page);
+      
+
+      // /contents/list_by_cateno_table_img1_search_paging.jsp
+      mav.setViewName("/contents/tip_by_cateno");
+
+      return mav;
+    }
 
     /**
      * 상품 정보 수정 폼 사전 준비된 레코드: 관리자 1번, cateno 1번, categrpno 1번을 사용하는 경우 테스트 URL
@@ -949,5 +1281,9 @@ public class ContentsCont {
 
         return mav; // forward
     }
+    
+    
+
+    
 
 }

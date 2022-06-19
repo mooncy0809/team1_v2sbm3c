@@ -29,22 +29,10 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
  
-<DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  ${categrpVO.name } > ${cateVO.name } >
-  글 등록
-</DIV>
-
 <DIV class='content_body'>
-  <ASIDE class="aside_right">
-    <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
-    <span class='menu_divide' >│</span>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }">기본 목록형</A>    
-    <!-- <span class='menu_divide' >│</span> -->
-    <%-- <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A> --%>
-  </ASIDE> 
+ <span style="width:70%; font-size: 1.5em; font-weight: bold;">글쓰기</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+   <br>
   
 <%--     <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='post' action='./list_by_cateno_search_paging.do'>
@@ -68,7 +56,7 @@
   
   <DIV class='menu_line'></DIV>
   
-  <FORM name='frm' method='post' action='./create.do' class="form-horizontal"
+  <FORM name='frm' method='post' action='./notice_create.do' class="form-horizontal"
              enctype="multipart/form-data">
     <input type="hidden" name="categrpno" value="${cateVO.categrpno }"> 
     <input type="hidden" name="cateno" value="${param.cateno }">
@@ -113,7 +101,7 @@
     </div>   
     <div class="content_body_bottom">
       <button type="submit" class="btn btn-primary">등록</button>
-      <button type="button" onclick="location.href='./list.do'" class="btn btn-primary">목록</button>
+      <button type="button" onclick="location.href='./notice_by_cateno.do'" class="btn btn-primary">목록</button>
     </div>
   
   </FORM>

@@ -7,7 +7,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Community</title>
+<title>Diet Tip</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -15,12 +15,10 @@
  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
 
 <script type="text/javascript">
-function btn(sample){  
-    alert(sample); 
-    document.location.href="/member/login.do";
- }  
+ 
   
 </script>
  
@@ -30,20 +28,19 @@ function btn(sample){
 <jsp:include page="../menu/top.jsp" />
 
 <DIV class='content_body'>
-    <span style="width:70%; font-size: 1.5em; font-weight: bold;">
-        <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }">${cateVO.name }</A>
-    </span>
+<span style="width:70%; font-size: 1.5em; font-weight: bold;">DIET TIPS</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
+
   <DIV style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_cateno_search_paging.do'>
-      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
+    <form name='frm' id='frm' method='get' action='./tip_by_cateno.do'>
+      <input type='hidden' name='categrpno' value='${categrpVO.categrpno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
       <button type='submit'>검색</button>
       <c:if test="${param.word.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list_by_cateno_search_paging.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
+                     onclick="location.href='./tip_by_cate.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>
   </DIV>
@@ -52,23 +49,25 @@ function btn(sample){
   
   <table class="table table-striped" style='width: 100%;'>
     <colgroup>
-      <col style="width: 10%;"></col>
+    <col style="width: 30%;"></col>
+    <col style="width: 70%;"></col>
+<%--       <col style="width: 10%;"></col>
       <col style="width: 20%;"></col>
       <col style="width: 30%;"></col>
       <col style="width: 10%;"></col>
       <col style="width: 10%;"></col>
-      <col style="width: 10%;"></col>
+      <col style="width: 10%;"></col> --%>
     </colgroup>
     <%-- table 컬럼 --%>
     <thead>
-      <tr>
+<!--       <tr>
         <th style='text-align: center;'></th>
         <th style='text-align: center;'>제목</th>
         <th style='text-align: center;'>내용</th>
         <th style='text-align: center;'>조회수</th>
         <th style='text-align: center;'>작성자</th>
         <th style='text-align: center;'>기타</th>
-      </tr>
+      </tr> -->
     
     </thead>
     
@@ -92,56 +91,59 @@ function btn(sample){
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
                 <%-- /static/contents/storage/ --%>
-                <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }"><IMG src="/contents/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
+                <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }"><IMG src="/contents/storage/${thumb1 }" style="width: 214px; height: 120px;"></a> 
               </c:when>
               <c:otherwise> <!-- 기본 이미지 출력 -->
-                <IMG src="/contents/images/none1.png" style="width: 120px; height: 80px;">
+                <IMG src="/contents/images/none1.png" style="width: 214px; height: 120px;">
               </c:otherwise>
             </c:choose>
           </td>  
           <td style='vertical-align: middle; text-align: center;'>
             <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
-            <strong>${title} [${replycnt }]</strong> </a> </td>
-          <td style='vertical-align: middle; text-align: center;'>${content} </td> 
+            <strong>${title} </strong> <br> ${content} </a> 
+            <br>
+            <i class="fa-solid fa-eye" > ${cnt } </i> &nbsp; <i class="fa-regular fa-comment-dots"> ${replycnt }</i>
+          </td>
+          <%-- <td style='vertical-align: middle; text-align: center;'>${content} </td>  --%>
           
           <!-- 조회수 -->
-          <td style='vertical-align: middle; text-align: center;'>${cnt } </td>
-          
-          <!-- 작성자 -->
-          <td style='vertical-align: middle; text-align: center;'>${mname } </td>
-          
-          
-          
-          <td style='vertical-align: middle; text-align: center;'>
+          <td style='vertical-align: middle; text-align: center;'> </td>
+
+     
+        <td style='vertical-align: middle; text-align: center;'>
+        <c:choose>
+        <c:when test="${sessionScope.grade < 10}">
             <A href="./update_text.do?contentsno=${contentsno}&now_page=${param.now_page }"><img src="/contents/images/update.png"></A>
             <A href="./delete.do?contentsno=${contentsno}&now_page=${param.now_page }&cateno=${cateno}"><img src="/contents/images/delete.png"></A>
+            </c:when>
+        </c:choose>
           </td>
         </tr>
+           
       </c:forEach>
       
     </tbody>
   </table>
   
-  <div style="text-align:right;">  
+      <div style="text-align:right;">  
   <c:choose>
-  <c:when test="${sessionScope.id == null}">
+  <c:when test="${sessionScope.grade < 10}">
       <button type="button" class="btn btn-primary"
-                            onclick="javascript:btn('로그인 후 이용해주세요.' )">글쓰기</button>
+                            onclick="location.href='./tip_create.do?cateno=${cateVO.cateno }'">글쓰기</button>
                             
   </c:when>
-  <c:otherwise>
+  <%-- <c:otherwise>
+  
   <button type="button" class="btn btn-primary"
                             onclick="location.href='./create.do?cateno=${cateVO.cateno }'">글쓰기</button>
-  </c:otherwise>
+  </c:otherwise> --%>
   </c:choose>
   </div>
+  </DIV>
   
   <!-- 페이지 목록 출력 부분 시작 -->
   <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
   <!-- 페이지 목록 출력 부분 종료 -->
-  
-</DIV>
-
  
 <jsp:include page="../menu/bottom.jsp" />
 </body>

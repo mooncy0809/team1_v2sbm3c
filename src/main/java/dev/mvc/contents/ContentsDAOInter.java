@@ -135,5 +135,15 @@ public interface ContentsDAOInter {
     
     public int update_replycnt(ContentsVO contentsVO);
     
+    /**
+     * 검색 + 페이징 목록
+     * 
+     * @param map
+     * @return
+     */
+    public List<ContentsVO> notice_by_cateno_search_paging(HashMap<String, Object> map);
+    
+    public List<ContentsVO> tip_by_cateno_search_paging(HashMap<String, Object> map);
+    
     
 }
