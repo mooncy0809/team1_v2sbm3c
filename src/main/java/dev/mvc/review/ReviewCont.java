@@ -1,6 +1,8 @@
 package dev.mvc.review;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,12 +14,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.order_item.Order_itemProcInter;
 import dev.mvc.qna.QnaVO;
+import dev.mvc.reply.ReplyMemberVO;
 import dev.mvc.reply.ReplyVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
@@ -136,7 +140,7 @@ public class ReviewCont {
         mav.addObject("rdate", reviewVO.getRdate());
         mav.addObject("productno", reviewVO.getProductno());
         
-        mav.setViewName("redirect:/index.do");
+        mav.setViewName("redirect:../index2.do");
         return mav;
     }
     
@@ -145,7 +149,7 @@ public class ReviewCont {
     * @return
     */
    @ResponseBody
-   @RequestMapping(value = "/review/list_by_productno.do",
+   @RequestMapping(value = "/review/list_by_productsno.do",
                              method = RequestMethod.GET,
                              produces = "text/plain;charset=UTF-8")
    public String list_by_productno(int productno) {
@@ -156,6 +160,69 @@ public class ReviewCont {
   
      return obj.toString(); 
 
+   }
+   
+   // http://localhost:9091/review/read.do?reviewno=3
+   /**
+    * 조회
+    * 
+    * @return
+    */
+   @RequestMapping(value = "/review/read.do", method = RequestMethod.GET)
+   public ModelAndView read(int reviewno) {
+       ModelAndView mav = new ModelAndView();
+       
+       reviewProc.cnt(reviewno);  
+       
+       ReviewVO reviewVO = this.reviewProc.read(reviewno);
+       mav.addObject("reviewVO", reviewVO);
+
+       mav.setViewName("/review/read");
+
+       return mav;
+   }
+   
+   /** http://localhost:9091/review/list_by_productsno_join.do?productno=1
+       * @param contentsno
+       * @return
+       */
+      @ResponseBody
+      @RequestMapping(value = "/review/list_by_productsno_join.do",
+                                  method = RequestMethod.GET,
+                                  produces = "text/plain;charset=UTF-8")
+      public String list_by_productsno_join(int productno) {
+        // String msg="JSON 출력";
+        // return msg;
+        
+        List<ReviewMemberVO> list = reviewProc.list_by_productsno_join(productno);
+        
+        JSONObject obj = new JSONObject();
+        obj.put("list", list);
+     
+        return obj.toString();     
+      }
+   
+   /**
+    * 삭제 
+    * http://localhost:9090/review/delete.do?reviewno=1
+    * {"delete_cnt":0,"passwd_cnt":0}
+    * {"delete_cnt":1,"passwd_cnt":1}
+    * @param reviewno
+    * @param passwd
+    * @return
+    */
+   @ResponseBody
+   @RequestMapping(value = "/review/delete.do", 
+                               method = RequestMethod.POST,
+                               produces = "text/plain;charset=UTF-8")
+   public String delete(int reviewno) {
+     
+     reviewProc.delete(reviewno); // 댓글 삭제
+     
+     JSONObject obj = new JSONObject();
+
+     
+     return obj.toString();
    }
     
 }

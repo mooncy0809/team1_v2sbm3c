@@ -42,5 +42,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE FROM reply
     WHERE replyno=#{replyno}
   </delete>
+  
+  <select id="list_by_contentsno_join_add" resultType="dev.mvc.reply.ReplyMemberVO" parameterType="int">
+    SELECT id, replyno, contentsno, memberno, content, passwd, rdate, r
+    FROM (
+        SELECT id, replyno, contentsno, memberno, content, passwd, rdate, rownum as r
+        FROM (
+            SELECT m.id, r.replyno, r.contentsno, r.memberno, r.content, r.passwd, r.rdate
+            FROM member m,  reply r
+            WHERE (m.memberno = r.memberno) AND r.contentsno= #{contentsno}
+            ORDER BY r.replyno DESC
+        )
+    )
+    WHERE <![CDATA[r <= 1000 ]]>
+  </select>
     
 </mapper> 

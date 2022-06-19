@@ -2,7 +2,11 @@ package dev.mvc.review;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class ReviewVO {
+public class ReviewMemberVO {
+    
+    /** 아이디 */
+    private String id = "";
+    
     /** 댓글 번호 */
     private int reviewno;
     /** 주문 상세 번호 */
@@ -44,6 +48,14 @@ public class ReviewVO {
      * 메인 이미지 크기 단위, 파일 크기 출력
      */
     private String size1_label;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getReviewno() {
         return reviewno;
@@ -157,6 +169,14 @@ public class ReviewVO {
         file1MF = file1mf;
     }
 
+    public int getProductno() {
+        return productno;
+    }
+
+    public void setProductno(int productno) {
+        this.productno = productno;
+    }
+
     public String getSize1_label() {
         return size1_label;
     }
@@ -165,15 +185,6 @@ public class ReviewVO {
         this.size1_label = size1_label;
     }
 
-    public int getProductno() {
-        return productno;
-    }
-
-    public void setProductno(int productno) {
-        this.productno = productno;
-    }
-    
-    
     
     
     

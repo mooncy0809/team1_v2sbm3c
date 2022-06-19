@@ -32,11 +32,26 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+<style type="text/css">
+.star {
+  color:#f90;
+  font-size: 2.3rem;
+}
+</style>
+
 <script type="text/javascript">
   $(function(){
+
+      let review_list; // 댓글 목록
+
+      var frm_review = $('#frm_review');
+      
       //$('#btn_login').on('click', login_ajax);
      // $('#btn_loadDefault').on('click', loadDefault);
-      list_by_productno(); // 댓글 목록
+      list_by_productsno_join(); // 댓글 목록
+
+      $('#btn_add').on('click', list_by_productsno_join_add);  // [더보기] 버튼
+      
   });
 
 
@@ -100,12 +115,12 @@
 
   }
 
-  // contentsno 별 소속된 댓글 목록
-  function list_by_productno() {
+  // contentsno 별 소속된 리뷰 목록
+  function list_by_productsno_join() {
     var params = 'productno=' + ${productno };
 
     $.ajax({
-      url: "../review/list_by_productno.do", // action 대상 주소
+      url: "../review/list_by_productsno_join.do", // action 대상 주소
       type: "get",           // get, post
       cache: false,          // 브러우저의 캐시영역 사용안함.
       async: true,           // true: 비동기
@@ -116,16 +131,38 @@
         var msg = '';
         
         $('#review_list').html(''); // 패널 초기화, val(''): 안됨
+
+     // -------------------- 전역 변수에 리뷰 목록 추가 --------------------
+        review_list = rdata.list;
+        // -------------------- 전역 변수에 리뷰 목록 추가 --------------------
+        // alert('rdata.list.length: ' + rdata.list.length);
         
-        for (i=0; i < rdata.list.length; i++) {
+        var last_index=1; 
+        if (rdata.list.length >= 2 ) { // 글이 2건 이상이라면 2건만 출력
+          last_index = 2
+        }
+        
+        for (i=0; i < last_index; i++) {
           var row = rdata.list[i];
+
+          if (row.score == 1) {
+              msg += "<label for='5-stars' class='star'>&#9733;</label>"
+          } else if (row.score == 2){
+              msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label>";
+          }else if (row.score == 3){
+              msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+          }else if (row.score == 4){
+              msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+          }else if (row.score == 5){
+              msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+          }
           
           msg += "<DIV id='"+row.reviewno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
-          msg += "<span style='font-weight: bold;'>" + "리뷰 제목: " + row.rtitle + " /  "+ "작성자: "+row.mname + "</span>";
+          msg += "<span style='font-weight: bold;'><A href='../review/read.do?reviewno="+ row.reviewno + "'" +" target='_blank' onclick='window.open(this.href, 'popup test', 'width=430, height=500, location=no, status=no, scrollbars=yes'); return false;'>" + row.rtitle + "</A>" + " /  "+ "작성자: "+row.mname + "</span>";
           msg += "  " + row.rdate;
           
           if ('${sessionScope.memberno}' == row.memberno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
-            msg += " <A href='javascript:reply_delete("+row.reviewno+")'><IMG src='/reply/images/delete.png'></A>";
+            msg += " <A href='javascript:review_delete("+row.reviewno+")'><IMG src='/review/images/delete.png'></A>";
           }
           msg += "  " + "<br>";
           msg += "<IMG src='/review/storage/"+row.thumb1 + "'" + 'style="width: 120px; height: 80px;">'
@@ -143,12 +180,143 @@
     });
     
   }
+
+//댓글 삭제 레이어 출력
+  function review_delete(reviewno) {
+    // alert('replyno: ' + replyno);
+    var frm_review_delete = $('#frm_review_delete');
+    $('#reviewno', frm_review_delete).val(reviewno); // 삭제할 댓글 번호 저장
+    $('#modal_panel_delete').modal();             // 삭제폼 다이얼로그 출력
+  }
+
+  // 댓글 삭제 처리
+  function review_delete_proc(reviewno) {
+    // alert('replyno: ' + replyno);
+    var params = $('#frm_review_delete').serialize();
+    $.ajax({
+      url: "../review/delete.do", // action 대상 주소
+      type: "post",           // get, post
+      cache: false,          // 브러우저의 캐시영역 사용안함.
+      async: true,           // true: 비동기
+      dataType: "json",   // 응답 형식: json, xml, html...
+      data: params,        // 서버로 전달하는 데이터
+      success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
+        // alert(rdata);
+        var msg = "";
+        
+        $('#btn_frm_review_delete_close').trigger("click"); // 삭제폼 닫기, click 발생 
+            
+        $('#' + reviewno).remove(); // 태그 삭제
+              
+            return; // 함수 실행 종료
+      },
+      // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+      error: function(request, status, error) { // callback 함수
+        console.log(error);
+      }
+    });
+  }
+
+//// [더보기] 버튼 처리
+  function list_by_productsno_join_add() {
+    // alert('list_by_contentsno_join_add called');
+    
+    let cnt_per_page = 2; // 2건씩 추가
+    let reviewPage=parseInt($("#review_list").attr("data-reviewPage"))+cnt_per_page; // 2
+    $("#review_list").attr("data-reviewPage", reviewPage); // 2
+    
+    var last_index=reviewPage + 2; // 4
+    
+    var msg = '';
+    for (i=reviewPage; i < last_index; i++) {
+      var row = review_list[i];
+
+      if (row.score == 1) {
+          msg += "<label for='5-stars' class='star'>&#9733;</label>"
+      } else if (row.score == 2){
+          msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label>";
+      }else if (row.score == 3){
+          msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+      }else if (row.score == 4){
+          msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+      }else if (row.score == 5){
+          msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+      }
+      
+      msg += "<DIV id='"+row.reviewno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
+      msg += "<span style='font-weight: bold;'><A href='../review/read.do?reviewno="+ row.reviewno + "'" +" target='_blank' onclick='window.open(this.href, 'popup test', 'width=430, height=500, location=no, status=no, scrollbars=yes'); return false;'>" + row.rtitle + "</A>" + " /  "+ "작성자: "+row.mname + "</span>";
+      msg += "<span style='font-weight: bold;'>" + row.id + "</span>";
+      msg += "  " + row.rdate;
+      
+      if ('${sessionScope.memberno}' == row.memberno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
+        msg += " <A href='javascript:review_delete("+row.reviewno+")'><IMG src='/review/images/delete.png'></A>";
+      }
+      msg += "  " + "<br>";
+      msg += "<IMG src='/review/storage/"+row.thumb1 + "'" + 'style="width: 120px; height: 80px;">'
+      msg += "  " + "<br>";     
+      msg += row.rcontent;
+      msg += "</DIV>";
+
+      // alert('msg: ' + msg);
+      $('#review_list').append(msg);
+    }    
+  }
+  
 </script>
  
 </head> 
  
 <body>
 <jsp:include page="../menu/top2.jsp" flush='false' />
+
+<!-- Modal 알림창 시작 -->
+<div class="modal fade" id="modal_panel" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" id="modal_x" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title" id='modal_title'></h4><!-- 제목 -->
+      </div>
+      <div class="modal-body">
+        <p id='modal_content'></p>  <!-- 내용 -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="modal_close" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- Modal 알림창 종료 -->
+
+<!-- -------------------- 리뷰 삭제폼 시작 -------------------- -->
+<div class="modal fade" id="modal_panel_delete" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+<!--       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title">리뷰 삭제</h4>제목
+      </div> -->
+      <div class="modal-body">
+        <form name='frm_review_delete' id='frm_review_delete'>
+          <input type='hidden' name='reviewno' id='reviewno' value=${reviewno }>
+          
+           <h4>리뷰를 삭제하시겠습니까?</h4>
+          
+          <DIV id='modal_panel_delete_msg' style='color: #AA0000; font-size: 1.1em;'></DIV>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type='button' class='btn btn-danger' 
+                     onclick="review_delete_proc(frm_review_delete.reviewno.value); frm_review_delete.passwd.value='';">삭제</button>
+
+        <button type="button" class="btn btn-default" data-dismiss="modal" 
+                     id='btn_frm_review_delete_close'>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- -------------------- 리뷰 삭제폼 종료 -------------------- -->
  
 <DIV class='title_line'>
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
@@ -200,7 +368,7 @@
               </c:otherwise>
             </c:choose>
         </DIV>
-        <DIV style="width: 47%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
+        <DIV style="width: 48%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
           <span style="font-size: 1.5em; font-weight: bold;">${ptitle }</span><br>
           <span style="color: #FF0000; font-size: 2.0em;">${dc} %</span>
           <span style="font-size: 1.5em; font-weight: bold;"><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</span>
@@ -237,14 +405,16 @@
 </DIV>
 
 <!-- ------------------------------ 리뷰 영역 시작 ------------------------------ -->
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 <DIV style='width: 80%; margin: 0px auto;'>
+    <div style="width:70%; font-size: 1.2em; font-weight: bold;">리뷰</div>
     <HR>
-    <DIV id='review_list' data-replypage='1'>  <%-- 댓글 목록 --%>
+    <DIV id='review_list' data-reviewpage='0'>  <%-- 댓글 목록 --%>
     
     </DIV>
-<!--     <DIV id='reply_list_btn' style='border: solid 1px #EEEEEE; margin: 0px auto; width: 100%; background-color: #EEFFFF;'>
+    <DIV id='review_list_btn' style='border: solid 1px #EEEEEE; margin: 0px auto; width: 100%; background-color: #EEFFFF;'>
         <button id='btn_add' style='width: 100%;'>더보기 ▽</button>
-    </DIV>  --> 
+    </DIV> 
   
 </DIV>
 
