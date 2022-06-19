@@ -47,12 +47,6 @@ public class QnaProc implements QnaProcInter{
     }
 
     @Override
-    public List<Member_QnaVO> member_join() {
-        List<Member_QnaVO> list = this.qnaDAO.member_join();
-        return list;
-    }
-
-    @Override
     public int delete(int qnano) {
         int cnt = this.qnaDAO.delete(qnano);
         return cnt;
@@ -173,7 +167,7 @@ public class QnaProc implements QnaProcInter{
       // 현재 3그룹일 경우: (3 - 1) * 10 = 2그룹의 마지막 페이지 20
       int _now_page = (now_grp - 1) * Qtext.PAGE_PER_BLOCK;  
       if (now_grp >= 2){ // 현재 그룹번호가 2이상이면 페이지수가 11페이 이상임으로 이전 그룹으로 갈수 있는 링크 생성 
-        str.append("<span class='span_box_1'><A href='"+Ytext.LIST_FILE+"?&word="+word+"&now_page="+_now_page+"&categrpno="+categrpno+"'>이전</A></span>"); 
+        str.append("<span class='span_box_1'><A href='"+Qtext.LIST_FILE+"?&word="+word+"&now_page="+_now_page+"&categrpno="+categrpno+"'>이전</A></span>"); 
       } 
    
       // 중앙의 페이지 목록
@@ -186,7 +180,7 @@ public class QnaProc implements QnaProcInter{
           str.append("<span class='span_box_2'>"+i+"</span>"); // 현재 페이지, 강조 
         }else{
           // 현재 페이지가 아닌 페이지는 이동이 가능하도록 링크를 설정
-          str.append("<span class='span_box_1'><A href='"+Ytext.LIST_FILE+"?word="+word+"&now_page="+i+"&categrpno="+categrpno+"'>"+i+"</A></span>");   
+          str.append("<span class='span_box_1'><A href='"+Qtext.LIST_FILE+"?word="+word+"&now_page="+i+"&categrpno="+categrpno+"'>"+i+"</A></span>");   
         } 
       } 
    

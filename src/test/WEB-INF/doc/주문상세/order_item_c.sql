@@ -40,7 +40,7 @@ CREATE SEQUENCE order_item_seq
 -- FK(사전에 레코드가 등록되어 있어야함): memberno, order_payno, productno
 -- 예) 3번 회원이 4번 결재를 했으며 구입 상품은 1번인 경우: 3, 4, 1
 INSERT INTO order_item(order_itemno, memberno, order_payno, productno, cnt, tot, stateno, rdate)
-VALUES (order_item_seq.nextval, 3, 4, 1, 1, 10000, 1, sysdate);
+VALUES (order_item_seq.nextval, 1, 1, 1, 1, 10000, 1, sysdate);
 
 commit; 
 

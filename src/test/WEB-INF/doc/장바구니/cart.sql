@@ -36,8 +36,6 @@ SELECT memberno, mname FROM member;  -- 1번 사용 확인
 INSERT INTO cart(cartno, productno, memberno, cnt, rdate)
 VALUES(cart_seq.nextval, 1, 1, 1, sysdate);
 
-INSERT INTO cart(cartno, productno, memberno, cnt, rdate)
-VALUES(cart_seq.nextval, 5, 3, 1, sysdate);
 commit;
 
 -- ERROR

@@ -27,11 +27,7 @@ public interface QnaDAOInter {
      * @return
      */
     public int update(QnaVO qnaVO);
-    /**
-     * 멤버 join
-     * @return
-     */
-    public List<Member_QnaVO> member_join();  
+ 
     
     /**
      * 삭제 처리 

@@ -18,8 +18,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-  $(function(){
-  });
+function btn(sample){  
+    alert(sample); 
+    document.location.href="/member/login.do";
+ }  
 </script>
 </head>
 <body>
@@ -49,12 +51,24 @@
     <tbody>
     <c:forEach var="qnaVO" items="${list}">
       <c:set var="title" value="${qnaVO.title }" />
-      <c:set var="m_id" value="${Member_QnaVO.m_id }" />
+      <c:set var="id" value="${qnaVO.id }" />
       <c:set var="rdate" value="${qnaVO.rdate }" />   
       <TR> 
-        <TD class="td_bs"><a href ="./read.do?qnano=${qnaVO.qnano}">${title}</a></TD>  
-        <TD class="td_bs">${m_id}</TD>     
+        <TD class="td_bs">
+        <c:choose>
+        <c:when test="${sessionScope.grade < 10}">
+                <a href ="./read.do?qnano=${qnaVO.qnano}">${title}</a>     
+        </c:when>
+        <c:otherwise>
+         <a href ="./input_pwd.do?qnano=${qnaVO.qnano}">${title}</a>
+        </c:otherwise>
+        
+        
+        </c:choose>
+        </TD>  
+        <TD class="td_bs">${id}</TD>     
         <TD class="td_bs">${rdate}</TD>   
+        
         
       </TR>   
       
@@ -62,9 +76,19 @@
   </tbody>
 
   </TABLE>
-
-                 <A href='../qna/create.do?categrpno=4&memberno=${sessionScope.memberno}'>등록</A>
-  
+  <div style="text-align:right;">  
+  <c:choose>
+  <c:when test="${sessionScope.id == null}">
+      <button type="button" class="btn btn-primary"
+                            onclick="javascript:btn('로그인 후 이용해주세요.' )">글쓰기</button>
+                            
+  </c:when>
+  <c:otherwise>
+  <button type="button" class="btn btn-primary"
+                            onclick="location.href='./create.do?categrpno=4&memberno=${sessionScope.memberno}'">글쓰기</button>
+  </c:otherwise>
+  </c:choose>
+  </div>
 </DIV>
  
  <jsp:include page="../menu/bottom.jsp" flush='false' />

@@ -10,6 +10,7 @@ CREATE TABLE qna(
 		content                       		VARCHAR2(1000)		 NOT NULL,
 		pwd                           		NUMBER(10)		 NOT NULL,
         rdate                                   DATE             NOT NULL,
+        id                                 VARCHAR2(20)     NULL,
   FOREIGN KEY (MEMBERNO) REFERENCES MEMBER (MEMBERNO),
   FOREIGN KEY (categrpno) REFERENCES categrp (categrpno)
 );
@@ -77,7 +78,7 @@ COMMIT;
  
 5. 삭제
 1) 모두 삭제
-DELETE FROM qna;
+DELETE  FROM  qna;
  
 2) 특정 질문 삭제
 DELETE FROM qna
@@ -90,4 +91,6 @@ SELECT m.memberno as m_memberno, m.id as m_id,
     FROM member m, qna q
     WHERE m.memberno = q.memberno
     
+    
+DROP TABLE QNA  cascade CONSTRAINTS;    
 COMMIT;

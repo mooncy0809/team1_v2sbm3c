@@ -88,8 +88,9 @@ public class QnaCont {
         mav.addObject("content", qnaVO.getContent());
         mav.addObject("pwd", qnaVO.getPwd());
         mav.addObject("rdate", qnaVO.getRdate());
+        mav.addObject("id", qnaVO.getId());
         
-        mav.setViewName("redirect:/qna/member_join.do");
+        mav.setViewName("redirect:/qna/list_search_paging.do");
         return mav;
     }
     
@@ -153,7 +154,7 @@ public class QnaCont {
       
       if (cnt == 1) {
           mav.addObject("categrpno", qnaVO.getCategrpno());
-          mav.setViewName("redirect:/qna/member_join.do");
+          mav.setViewName("redirect:/qna/list_search_paging.do");
       } else {
           mav.addObject("code", "update_fail"); // request에 저장
           mav.addObject("cnt", cnt); // request에 저장
@@ -169,29 +170,7 @@ public class QnaCont {
       return mav;
     }
     
-    @RequestMapping(value="/qna/member_join.do", method=RequestMethod.GET )
-    public ModelAndView member_join(      
-            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
-            @RequestParam(value = "now_page", defaultValue = "1") int now_page
-            ) {
-      ModelAndView mav = new ModelAndView();
-      
-      
-//      HashMap<String, Object> map = new HashMap<String, Object>();        
-//      map.put("word", word); // #{word}
-//      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
-//     
-//      // 검색된 레코드 갯수
-//      int search_count = qnaProc.search_count2(map);
-//      mav.addObject("search_count2", search_count);
-
- 
-      List<Member_QnaVO> list = this.qnaProc.member_join();
-      mav.addObject("list", list); // request.setAttribute("list", list);
-
-      mav.setViewName("/qna/member_join");
-      return mav;
-    }
+   
     
     /**
      * 조회 + 삭제폼 http://localhost:9091/qna/read_delete.do
@@ -233,7 +212,7 @@ public class QnaCont {
       
       if (cnt == 1) {
           mav.addObject("categrpno", qnaVO.getCategrpno());
-          mav.setViewName("redirect:/qna/member_join.do");
+          mav.setViewName("redirect:/qna/list_search_paging.do");
       } else {
           mav.addObject("code", "update_fail"); // request에 저장
           mav.addObject("cnt", cnt);
@@ -243,6 +222,7 @@ public class QnaCont {
           mav.addObject("content", qnaVO.getContent());
           mav.addObject("pwd", qnaVO.getPwd());
           mav.addObject("rdate", qnaVO.getRdate());
+          mav.addObject("id", qnaVO.getId());
           
       }
       
@@ -323,6 +303,7 @@ public class QnaCont {
       mav.addObject("list", list);
 
       int search_count = qnaProc.search_count(map);
+      
       mav.addObject("search_count", search_count);
       
       CategrpVO categrpVO = categrpProc.read(categrpno);

@@ -27,15 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     SET title=#{title}, content=#{content}, pwd=#{pwd}
     WHERE qnano=#{qnano}
     </update>
-    
-
-  <select id="member_join" resultType="dev.mvc.qna.Member_QnaVO">
-    SELECT m.memberno as m_memberno, m.id as m_id,
-               q.qnano, q.title, q.content, q.pwd, q.rdate
-    FROM member m, qna q
-    WHERE m.memberno = q.memberno
-    ORDER BY rdate DESC
-  </select>
+   
   
   
   <delete id="delete" parameterType="int">
@@ -57,11 +49,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
   <select id="list_search_paging" 
              resultType="dev.mvc.qna.QnaVO" parameterType="HashMap">
-   SELECT qnano, categrpno, memberno, title, content, pwd, rdate, r
+   SELECT qnano, categrpno, memberno, title, content, pwd, rdate, id, r
    FROM (
-              SELECT qnano, categrpno, memberno, title, content, pwd, rdate, rownum as r
+              SELECT qnano, categrpno, memberno, title, content, pwd, rdate, id, rownum as r
               FROM (
-                        SELECT qnano, categrpno, memberno, title, content, pwd, rdate
+                        SELECT qnano, categrpno, memberno, title, content, pwd, rdate,id
                         FROM qna
                         <choose>
                           <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->

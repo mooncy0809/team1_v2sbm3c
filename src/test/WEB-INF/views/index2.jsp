@@ -8,6 +8,17 @@
                                  maximum-scale=5.0, width=device-width" /> 
 
 <jsp:include page="./menu/top2.jsp" flush='false' />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sunflower&display=swap" rel="stylesheet">
+ 
+<style type="text/css">
+a{
+    font-family: 'Kdam Thmor Pro', sans-serif;
+
+ font-family: 'Sunflower', sans-serif;
+ }
+</style>
 </head>
 <body>
     <section id="slider"><!--slider-->
@@ -27,10 +38,10 @@
                                     <h1><span>E</span>-SHOPPER</h1>
                                     <h2>Free E-Commerce Template</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                    <button type="button" class="btn btn-default get">보러 가기</button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img src="images/home/girl1.jpg" class="girl img-responsive" alt="" />
+                                    <img src="images/home/indexmain1.png" class="girl img-responsive" alt="" />
                                     <img src="images/home/pricing.png"  class="pricing" alt="" />
                                 </div>
                             </div>
@@ -39,11 +50,11 @@
                                     <h1><span>E</span>-SHOPPER</h1>
                                     <h2>100% Responsive Design</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                    <button type="button" class="btn btn-default get">보러 가기</button>
                                    
                                 </div>
                                 <div class="col-sm-6">
-                                    <img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
+                                    <img src="images/home/indexmain2.png" class="girl img-responsive" alt="" />
                                     <img src="images/home/pricing.png"  class="pricing" alt="" />
                                 </div>
                             </div>
@@ -53,10 +64,10 @@
                                     <h1><span>E</span>-SHOPPER</h1>
                                     <h2>Free Ecommerce Template</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                    <button type="button" class="btn btn-default get">보러 가기</button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
+                                    <img src="images/home/indexmain3.png" class="girl img-responsive" alt="" />
                                     <img src="images/home/pricing.png" class="pricing" alt="" />
                                 </div>
                             </div>
@@ -88,7 +99,7 @@
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
                                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                            Sportswear
+                                            전체 카테고리
                                         </a>
                                     </h4>
                                 </div>
@@ -104,7 +115,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default">
+<!--                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordian" href="#mens">
@@ -129,9 +140,9 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             
-                            <div class="panel panel-default">
+                            <!-- <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordian" href="#womens">
@@ -151,23 +162,23 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Kids</a></h4>
+                                    <h4 class="panel-title"><a href="#">베스트</a></h4>
                                 </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Fashion</a></h4>
+                                    <h4 class="panel-title"><a href="#">특가</a></h4>
                                 </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Households</a></h4>
+                                    <h4 class="panel-title"><a href="#">신상품</a></h4>
                                 </div>
                             </div>
-                            <div class="panel panel-default">
+<!--                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a href="#">Interiors</a></h4>
                                 </div>
@@ -186,20 +197,20 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a href="#">Shoes</a></h4>
                                 </div>
-                            </div>
+                            </div> -->
                         </div><!--/category-products-->
                     
                         <div class="brands_products"><!--brands_products-->
                             <h2>Brands</h2>
                             <div class="brands-name">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="#"> <span class="pull-right">(50)</span>Acne</a></li>
-                                    <li><a href="#"> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-                                    <li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>
-                                    <li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>
-                                    <li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
+                                    <li><a href="#"> <span class="pull-right">(50)</span>맛있닭</a></li>
+                                    <li><a href="#"> <span class="pull-right">(56)</span>굽네</a></li>
+                                    <li><a href="#"> <span class="pull-right">(27)</span>참프레</a></li>
+                                    <li><a href="#"> <span class="pull-right">(32)</span>러브잇</a></li>
+<!--                                     <li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
                                     <li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                                    <li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+                                    <li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li> -->
                                 </ul>
                             </div>
                         </div><!--/brands_products-->
@@ -213,7 +224,7 @@
                         </div><!--/price-range-->
                         
                         <div class="shipping text-center"><!--shipping-->
-                            <img src="images/home/shipping.jpg" alt="" />
+                            <a href="./index.do"><img src="images/home/indexmain4.png" alt=""  /></a>
                         </div><!--/shipping-->
                     
                     </div>

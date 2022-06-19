@@ -17,7 +17,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
- 
+function btn(sample){  
+    alert(sample); 
+    document.location.href="/member/login.do";
+ }  
   
 </script>
  
@@ -62,24 +65,24 @@
     </thead>
     
     <tbody>
-    <c:forEach var="Member_QnaVO" items="${list}">
-      <c:set var="title" value="${Member_QnaVO.title }" />
-      <c:set var="m_id" value="${Member_QnaVO.m_id }" />
-      <c:set var="rdate" value="${Member_QnaVO.rdate }" />   
+    <c:forEach var="qnaVO" items="${list}">
+      <c:set var="title" value="${qnaVO.title }" />
+      <c:set var="id" value="${qnaVO.id }" />
+      <c:set var="rdate" value="${qnaVO.rdate }" />   
       <TR> 
         <TD class="td_bs">
         <c:choose>
         <c:when test="${sessionScope.grade < 10}">
-                <a href ="./read.do?qnano=${Member_QnaVO.qnano}">${title}</a>     
+                <a href ="./read.do?qnano=${qnaVO.qnano}">${title}</a>     
         </c:when>
         <c:otherwise>
-         <a href ="./input_pwd.do?qnano=${Member_QnaVO.qnano}">${title}</a>
+         <a href ="./input_pwd.do?qnano=${qnaVO.qnano}">${title}</a>
         </c:otherwise>
         
         
         </c:choose>
         </TD>  
-        <TD class="td_bs">${m_id}</TD>     
+        <TD class="td_bs">${id}</TD>     
         <TD class="td_bs">${rdate}</TD>   
         
       </TR>   
