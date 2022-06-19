@@ -860,7 +860,7 @@ public class MemberCont {
              SimpleMailMessage simpleMessage = new SimpleMailMessage();
              
              simpleMessage.setFrom("yshg98@gmail.com");
-             simpleMessage.setTo("mooncy0809@naver.com");
+             simpleMessage.setTo(id);
 
              simpleMessage.setSubject("삼대몇? 임시비밀번호 발급");
              simpleMessage.setText("인증번호: " + memberKey);

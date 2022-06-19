@@ -95,7 +95,17 @@
         </c:choose>
       </TD>
       <TD align="center" class="description">${rdate.substring(1,16) }</TD>
-      <TD align="center" class="description"><A href="../review/create.do?order_itemno=${order_itemno}">리뷰 작성</A></TD>   
+      
+    <TD align="center" class="description">
+     <FORM name='frm' method='GET' action='../review/create.do' class="form-horizontal"
+             enctype="multipart/form-data">
+    <input type="hidden" name="order_itemno" value="${order_itemno }">
+    <input type="hidden" name="productno" value="${productno }">
+    
+    <button type="submit" class="btn btn-primary">리뷰 작성</button>      
+      <%-- <A href="../review/create.do?order_itemno=${order_itemno}">리뷰 작성</A> --%>
+      </FORM>  
+    </TD>
     </TR>
     </c:forEach>
   </TABLE>

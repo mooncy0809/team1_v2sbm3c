@@ -1,5 +1,7 @@
 package dev.mvc.review;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,12 @@ public class ReviewProc implements ReviewProcInter {
     public ReviewVO read(int reviewno) {
         ReviewVO reviewVO = this.reviewDAO.read(reviewno);
         return reviewVO;
+    }
+
+    @Override
+    public List<ReviewVO> list_by_productno(int productno) {
+        List<ReviewVO> list = reviewDAO.list_by_productno(productno);
+        return list;
     } 
     
     
