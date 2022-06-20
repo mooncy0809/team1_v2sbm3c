@@ -28,33 +28,31 @@
  
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
- 
-<DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  ${categrpVO.name } > ${cateVO.name } >
-  글 등록
-</DIV>
 
 <DIV class='content_body'>
+
+    <span style="width:70%; font-size: 1.5em; font-weight: bold;"> ${cateVO.name } > 글 등록</span>
+    
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
   <ASIDE class="aside_right">
     <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
     <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' >│</span>
     <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }">기본 목록형</A>    
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
+    <!-- <span class='menu_divide' >│</span> -->
+    <%-- <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A> --%>
   </ASIDE> 
   
-    <DIV style="text-align: right; clear: both;">  
+<%--     <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='post' action='./list_by_cateno_search_paging.do'>
       <input type='hidden' name='cateno' value='${cateVO.cateno }'>
 
       <c:choose>
-        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
+        <c:when test="${param.word != '' }"> 검색하는 경우
           <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
         </c:when>
-        <c:otherwise> <%-- 검색하지 않는 경우 --%>
+        <c:otherwise> 검색하지 않는 경우
           <input type='text' name='word' id='word' value='' style='width: 20%;'>
         </c:otherwise>
       </c:choose>
@@ -64,7 +62,7 @@
                      onclick="location.href='./list_by_cateno_search.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>
-  </DIV>
+  </DIV> --%>
   
   <DIV class='menu_line'></DIV>
   
@@ -78,22 +76,22 @@
     <%-- <input type="hidden" name="adminno" value="1"> 관리자 개발후 변경 필요 --%>
     
     <div class="form-group">
-       <label class="control-label col-md-2">상품명</label>
+       <label class="control-label col-md-2">제목</label>
        <div class="col-md-10">
-         <input type='text' name='title' value='가을 영화' required="required" 
+         <input type='text' name='title' placeholder='제목' required="required" 
                    autofocus="autofocus" class="form-control" style='width: 100%;'>
        </div>
     </div>
     <div class="form-group">
-       <label class="control-label col-md-2">상품 설명</label>
+       <label class="control-label col-md-2">내용</label>
        <div class="col-md-10">
-         <textarea name='content' required="required" class="form-control" rows="12" style='width: 100%;'>가을 단풍보며 멍때리기</textarea>
+         <textarea name='content' required="required" class="form-control" placeholder='내용' rows="12" style='width: 100%;'></textarea>
        </div>
     </div>
     <div class="form-group">
        <label class="control-label col-md-2">검색어</label>
        <div class="col-md-10">
-         <input type='text' name='word' value='월터,벤 스틸러,크리스튼위그,휴먼,도전' required="required" 
+         <input type='text' name='word' value='' placeholder='검색어' required="required" 
                     class="form-control" style='width: 100%;'>
        </div>
     </div>   
@@ -107,7 +105,7 @@
     <div class="form-group">
        <label class="control-label col-md-2">패스워드</label>
        <div class="col-md-10">
-         <input type='password' name='passwd' value='' required="required" 
+         <input type='password' name='passwd' value='' placeholder='패스워드'required="required" 
                     class="form-control" style='width: 50%;'>
        </div>
     </div>   

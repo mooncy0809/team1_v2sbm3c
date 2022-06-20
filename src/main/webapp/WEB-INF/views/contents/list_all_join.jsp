@@ -26,11 +26,14 @@
 <body>
 <jsp:include page="../menu/top.jsp" />
  
-<DIV class='title_line'>
+<!-- <DIV class='title_line'>
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 전체 게시물
-</DIV>
+</DIV> -->
 
 <DIV class='content_body'>
+ <span style="width:70%; font-size: 1.5em; font-weight: bold;">전체 게시물</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+   <br>
   <ASIDE class="aside_right">
     <c:if test="${sessionScope.id != null }"> 
         <A href="./create.do?cateno=${cateVO.cateno }">등록</A>    
@@ -93,6 +96,7 @@
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
         <c:set var="rdate" value="${contentsVO.rdate }" />
+        <c:set var="replycnt" value="${contentsVO.replycnt }" />
         
         <tr> 
           <td style='vertical-align: middle; text-align: center;'>
@@ -112,7 +116,7 @@
           
           <td style='vertical-align: middle; text-align: center;'>
             <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
-          <strong>${title}</strong> </a> </td>
+          <strong>${title} [${replycnt}]</strong> </a> </td>
           
           <td style='vertical-align: middle; text-align: center;'>${content} </td> 
           

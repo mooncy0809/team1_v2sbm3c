@@ -18,9 +18,9 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
 
-<DIV class='title_line'>알림</DIV>
+<DIV class='title_line' style='text-align:center'>알림</DIV>
 
-<DIV class='message'>
+<DIV class='message' style='text-align:center'>
   <fieldset class='fieldset_basic'>
     <UL>
       <c:choose>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.review.ReviewDAOInter">
+    <!-- 상품 별 리뷰 등록 -->
+    <insert id="create" parameterType="dev.mvc.review.ReviewVO">
+    <selectKey keyProperty="reviewno" resultType="int" order="BEFORE">
+      SELECT review_seq.nextval FROM dual
+    </selectKey>
+    
+    INSERT INTO review(reviewno, memberno, order_itemno, rtitle, rcontent, score, file1, file1saved, thumb1, size1, rdate, mname, productno)
+    VALUES(#{reviewno}, #{memberno}, #{order_itemno}, #{rtitle}, #{rcontent}, #{score}, #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate, #{mname}, #{productno})
+    </insert>
+    
+  <select id="list_by_productno" resultType="dev.mvc.review.ReviewVO" parameterType="int">
+    SELECT productno, reviewno, order_itemno, memberno, rtitle, rcontent, score, file1, file1saved, thumb1, size1, rdate, mname
+    FROM review
+    WHERE productno=#{productno}
+  </select>
+  
+  <select id="list_by_productsno_join" resultType="dev.mvc.review.ReviewMemberVO" parameterType="int">
+    SELECT m.id, r.productno, r.reviewno, r.order_itemno, r.memberno, r.rtitle, r.rcontent, r.score, r.file1, r.file1saved, r.thumb1, r.size1, r.rdate, r.mname, r.cnt
+    FROM member m, review r
+    WHERE (m.memberno = r.memberno) AND r.productno=#{productno}
+    ORDER BY r.reviewno DESC
+  </select>
+
+      <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.review.ReviewVO" parameterType="int">
+    SELECT productno, reviewno, order_itemno, memberno, rtitle, rcontent, score, file1, file1saved, thumb1, size1, rdate, mname, cnt
+    FROM review
+    WHERE reviewno = #{reviewno}
+  </select>
+  
+    <!--  조회수  -->
+  <update id="cnt">
+    UPDATE review 
+    SET cnt = cnt + 1
+    WHERE reviewno = #{reviewno}
+  </update>
+  
+    <delete id="delete" parameterType="int">
+    DELETE FROM review
+    WHERE reviewno=#{reviewno}
+  </delete>
+  
+  <select id="list_by_productsno_join_add" resultType="dev.mvc.review.ReviewMemberVO" parameterType="int">
+    SELECT id, productno, reviewno, order_itemno, memberno, rtitle, rcontent, score, file1, file1saved, thumb1, size1, rdate, mname, cnt, r
+    FROM (
+        SELECT id, productno, reviewno, order_itemno, memberno, rtitle, rcontent, score, file1, file1saved, thumb1, size1, rdate, mname, cnt, rownum as r
+        FROM (
+            SELECT m.id, r.productno, r.reviewno, r.order_itemno, r.memberno, r.rtitle, r.rcontent, r.score, r.file1, r.file1saved, r.thumb1, r.size1, r.rdate, r.mname, r.cnt
+            FROM member m,  review r
+            WHERE (m.memberno = r.memberno) AND r.productno=#{productno}
+            ORDER BY r.reviewno DESC
+        )
+    )
+    WHERE <![CDATA[r <= 1000 ]]>
+  </select>
+  
+      
+</mapper> 

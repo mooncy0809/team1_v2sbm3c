@@ -21,6 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class ContentsVO {
     
+    /** 댓글 번호 */
+    private int replyno;
+    
     /** 카테고리 이름 */
     private String name;
     
@@ -224,6 +227,14 @@ public class ContentsVO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getReplyno() {
+        return replyno;
+    }
+
+    public void setReplyno(int replyno) {
+        this.replyno = replyno;
     }
 
 }

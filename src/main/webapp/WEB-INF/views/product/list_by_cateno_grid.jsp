@@ -26,14 +26,22 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/> 
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<style type="text/css">
+    .read{
+        color:white;
+    }
+    .read:hover{
+        color:red;
+    }
+</style>
 <script type="text/javascript">
 
   $(function() {
@@ -109,13 +117,23 @@
 <body>
 <jsp:include page="../menu/top2.jsp" />
 
+<DIV style="text-align: right; clear: both;">  
+    <form name='frm' id='frm' method='get' action='./list_by_cateno_grid.do'>
+      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
+      <input type='text' name='pword' id='pword' value='${param.pword }' style='width: 20%;'>
+      <button type='submit'>검색</button>
+      <c:if test="${param.pword.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='">검색 취소</button>  
+      </c:if>    
+    </form>
+  </DIV>
 
     <input type='hidden' name='cateno' value='${cateVO.cateno }'>
   <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
        <input type="hidden" name="productno" id="productno" value="productno">
     </FORM>
-  <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>
     <section id="advertisement">
         <div class="container">
             <img src="images/shop/advertisement.jpg" alt="" />
@@ -248,7 +266,7 @@
       </div> <%--사진 정렬 --%>
        <div class="product-overlay" style="background: rgba(254,152,15,.8);">
       <div class="overlay-content">
-                
+                <a class="read" href="./read.do?productno=${productno}"><i class="fas fa-door-open  fa-3x"></i></a>
                 <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>
                 <p>${ptitle}</p>
                 <a onclick="cart_ajax(${productno })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -265,12 +283,7 @@
     </c:forEach>
     <!-- 갤러리 Layout 종료 -->
   </div>
-   <ul class="pagination">
-    <li class="active"><a href="">1</a></li>
-    <li><a href="">2</a></li>
-    <li><a href="">3</a></li>
-    <li><a href="">&raquo;</a></li>
-   </ul>
+   <DIV class='bottom_menu'>${paging2 }</DIV>
   </div>
   </div>
   </div>

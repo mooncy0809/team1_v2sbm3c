@@ -314,12 +314,12 @@ public class CategrpCont {
               int cnt = this.categrpProc.delete(categrpno); // 삭제 처리
               mav.addObject("cnt", cnt);  // request 객체에 저장
               
-              mav.setViewName("redirect:/categrp/list.do");
+              mav.setViewName("redirect:/categrp/list2.do");
 
    
       }
       catch(Exception e){
-          mav.setViewName("redirect:/categrp/list.do");
+          mav.setViewName("redirect:/categrp/list2.do");
       }
       return mav;
     }

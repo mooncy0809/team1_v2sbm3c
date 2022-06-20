@@ -26,10 +26,10 @@
 </head> 
  
 <body>
-<jsp:include page="../menu/top.jsp" flush='false' />
+<jsp:include page="../menu/top2.jsp" flush='false' />
  
 <DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
+  <A href="../categrp/list2.do" class='title_link'>카테고리 그룹</A> > 
   ${categrpVO.name } > ${cateVO.name } >
   글 등록
 </DIV>
@@ -69,8 +69,7 @@
   <FORM name='frm' method='POST' action='./create.do' class="form-horizontal"
              enctype="multipart/form-data">
     <input type="hidden" name="categrpno" value="${cateVO.categrpno }"> 
-    <input type="hidden" name="cateno" value="${param.cateno }">
-    
+    <input type="hidden" name="cateno" value="${param.cateno }">    
         
     <div class="form-group">
        <label class="control-label col-md-2">상품명</label>

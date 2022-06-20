@@ -54,20 +54,22 @@ public class CateCont {
 
         return mav; // forward
     }
-
+    
     /**
-     * 등록폼 http://localhost:9091/cate/create.do
-     * http://localhost:9091/cate/create.do?categrpno=2
+     * 새로고침 방지
      * 
      * @return
      */
-    @RequestMapping(value = "/cate/create.do", method = RequestMethod.GET)
-    public ModelAndView create() {
+    @RequestMapping(value = "/cate/msg2.do", method = RequestMethod.GET)
+    public ModelAndView msg2(String url) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/cate/create"); // /webapp/WEB-INF/views/cate/create.jsp
 
-        return mav;
+        mav.setViewName(url); // forward, msg.jsp
+
+        return mav; // forward
     }
+
+  
 
     /**
      * 등록처리 CateVO cateVO 객체안의 필드들이 <form> 태그에 존재하면 자동으로 setter 호출됨. <form> 태그에 존재하는
@@ -106,6 +108,48 @@ public class CateCont {
         mav.addObject("url", "/cate/msg"); // msg.jsp, redirect parameter 적용
 
         mav.setViewName("redirect:/cate/msg.do"); // GET 방식 호출, 전달되는데이터도 URL에 결합됨.
+
+        return mav;
+    }
+    
+    
+    /**
+     * 등록처리 CateVO cateVO 객체안의 필드들이 <form> 태그에 존재하면 자동으로 setter 호출됨. <form> 태그에 존재하는
+     * 값들은 CateVO cateVO 객체안의 필드에 setter를 이용하여 자동 할당됨.
+     * http://localhost:9091/cate/create.do?categrpno=2 Exception: FK 전달이 안됨. Field
+     * error in object 'cateVO' on field 'categrpno': rejected value []; codes
+     * [typeMismatch.cateVO.categrpno,typeMismatch.categrpno,typeMismatch.int,typeMismatch];
+     * arguments
+     * [org.springframework.context.support.DefaultMessageSourceResolvable: codes
+     * [cateVO.categrpno,categrpno]; arguments []; default message [categrpno]];
+     * default message [Failed to convert property value of type 'java.lang.String'
+     * to required type 'int' for property 'categrpno'; nested exception is
+     * java.lang.NumberFormatException: For input string: ""]]
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/cate/create2.do", method = RequestMethod.POST)
+    public ModelAndView create2(CateVO cateVO) {
+        ModelAndView mav = new ModelAndView();
+
+        // System.out.println("-> categrpno: " + cateVO.getCategrpno());
+
+        int cnt = this.cateProc.create(cateVO);
+        // System.out.println("등록 성공");
+
+        // request.setAttribute("code", "create_success");
+        mav.addObject("code", "create_success");
+        mav.addObject("cnt", cnt);
+
+        mav.addObject("categrpno", cateVO.getCategrpno()); // 카테고리 그룹 번호
+        // System.out.println("-> categrpno:" + cateVO.getCategrpno());
+
+        mav.addObject("name", cateVO.getName()); // 카테고리 이름
+
+        // mav.setViewName("/cate/msg"); // /WEB-INF/views/cate/msg.jsp
+        mav.addObject("url", "/cate/msg2"); // msg.jsp, redirect parameter 적용
+
+        mav.setViewName("redirect:/cate/msg2.do"); // GET 방식 호출, 전달되는데이터도 URL에 결합됨.
 
         return mav;
     }
@@ -273,6 +317,36 @@ public class CateCont {
 
         return mav;
     }
+    
+    /**
+     * 수정 처리
+     * 
+     * @param cateVO
+     * @return
+     */
+    @RequestMapping(value = "/cate/update2.do", method = RequestMethod.POST)
+    public ModelAndView update2(CateVO cateVO) {
+        ModelAndView mav = new ModelAndView();
+
+        int cnt = this.cateProc.update(cateVO);
+
+        if (cnt == 1) {
+            mav.addObject("categrpno", cateVO.getCategrpno());
+            mav.setViewName("redirect:/cate/list_by_categrpno2.do");
+        } else {
+            mav.addObject("code", "update_fail"); // request에 저장
+            mav.addObject("cnt", cnt); // request에 저장
+            mav.addObject("cateno", cateVO.getCateno());
+            mav.addObject("categrpno", cateVO.getCategrpno());
+            mav.addObject("name", cateVO.getName());
+            mav.addObject("url", "/cate/msg2"); // /cate/msg -> /cate/msg.jsp로 최종 실행됨.
+
+            mav.setViewName("/cate/msg2"); // /WEB-INF/views/cate/msg.jsp
+
+        }
+
+        return mav;
+    }
 
     /**
      * 조회 + 삭제폼 http://localhost:9091/cate/read_delete.do?cateno=1
@@ -327,6 +401,38 @@ public class CateCont {
             mav.addObject("url", "/cate/msg"); // /cate/msg -> /cate/msg.jsp로 최종 실행됨.
 
             mav.setViewName("/cate/msg"); // /WEB-INF/views/cate/msg.jsp
+
+        }
+
+        return mav;
+    }
+    
+    /**
+     * 삭제 처리
+     * 
+     * @param cateVO
+     * @return
+     */
+    @RequestMapping(value = "/cate/delete2.do", method = RequestMethod.POST)
+    public ModelAndView delete2(int cateno) {
+        ModelAndView mav = new ModelAndView();
+        // 삭제될 레코드 정보를 삭제하기전에 읽음
+        CateVO cateVO = this.cateProc.read(cateno);
+
+        int cnt = this.cateProc.delete(cateno);
+
+        if (cnt == 1) {
+            mav.addObject("categrpno", cateVO.getCategrpno());
+            mav.setViewName("redirect:/cate/list_by_categrpno2.do");
+        } else {
+            mav.addObject("code", "delete_fail"); // request에 저장
+            mav.addObject("cnt", cnt); // request에 저장
+            mav.addObject("cateno", cateVO.getCateno());
+            mav.addObject("categrpno", cateVO.getCategrpno());
+            mav.addObject("name", cateVO.getName());
+            mav.addObject("url", "/cate/msg2"); // /cate/msg -> /cate/msg.jsp로 최종 실행됨.
+
+            mav.setViewName("/cate/msg2"); // /WEB-INF/views/cate/msg.jsp
 
         }
 
