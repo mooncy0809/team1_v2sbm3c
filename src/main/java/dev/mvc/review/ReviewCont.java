@@ -140,7 +140,7 @@ public class ReviewCont {
         mav.addObject("rdate", reviewVO.getRdate());
         mav.addObject("productno", reviewVO.getProductno());
         
-        mav.setViewName("redirect:../index2.do");
+        mav.setViewName("redirect:/review/read.do");
         return mav;
     }
     

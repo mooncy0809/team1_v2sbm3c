@@ -3,7 +3,10 @@ package dev.mvc.contents;
 import java.util.HashMap;
 import java.util.List;
 
+import dev.mvc.you.YouVO;
+
 public interface ContentsProcInter {
+
     /**
      * 등록
      * 
@@ -187,6 +190,10 @@ public interface ContentsProcInter {
     public List<ContentsVO> notice_by_cateno_search_paging(HashMap<String, Object> map);
     
     public List<ContentsVO> tip_by_cateno_search_paging(HashMap<String, Object> map);
+    
+    public List<ContentsVO> index_contents4(HashMap<String, Object> map);
+    
+    public List<ContentsVO> index_contents5(HashMap<String, Object> map);
     
     
 }

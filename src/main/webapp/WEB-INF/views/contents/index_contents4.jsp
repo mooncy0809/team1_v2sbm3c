@@ -6,7 +6,7 @@
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
-<title>Community</title>
+<title>공지사항</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gaegu:wght@300&family=Kdam+Thmor+Pro&family=Kirang+Haerang&family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -60,38 +60,30 @@ h1{
  </style>
 </head> 
   
-<body >
- 
+<body>
 <div class="style1">
   <table class="type04" style='width: 70%;'>
-    <%-- table 컬럼 --%>
     
-    <%-- table 내용 --%>
     <tbody>
-      <c:forEach var="contentsVO" items="${list }">
-        <c:set var="contentsno" value="${contentsVO.contentsno }" />
-        <c:set var="cateno" value="${contentsVO.cateno }" />
-        <c:set var="title" value="${contentsVO.title }" />
-        <c:set var="content" value="${contentsVO.content }" />
-        <c:set var="file1" value="${contentsVO.file1 }" />
-        <c:set var="thumb1" value="${contentsVO.thumb1 }" />
-        <c:set var="memberno" value="${contentsVO.memberno }" />
-        <c:set var="cnt" value="${contentsVO.cnt }" />
-        <c:set var="mname" value="${contentsVO.mname }" />
-        
-        
-        <tr>  
-          <td style='vertical-align: middle; text-align: left;'>
-            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }" target="_top">
-            <strong> ${title}</strong> </a> </td>
-        </tr>
-      </c:forEach>
-      
+    <c:forEach var="contentsVO" items="${list}">
+      <c:set var="title" value="${contentsVO.title }" />
+      <c:set var="content" value="${contentsVO.content }" />
+      <c:set var="mname" value="${contentsVO.mname }" />
+      <c:set var="rdate" value="${contentsVO.rdate }" />   
+      <TR> 
+        <TD  style='vertical-align: middle; text-align: left;'>
+        <a href ="./read.do?contentsno=${contentsVO.contentsno}" target="_top">
+        <strong> ${content}</strong> </a> </td>       
+      </TR>   
+    </c:forEach> 
     </tbody>
-  </table>
-  <a href="../contents/notice_by_cateno.do" target="_top"><h1 style="font-size: 40px">자유게시판<div class="eng">COMMUNITY</div></h1></a>
-  </div>
+   
+  </TABLE>
+
+    <a href="../contents/notice_by_cateno.do" target="_top"><h1 style="font-size: 40px">공지사항<div class="eng">NOTICE</div></h1></a>
  
+</DIV>
+
 </body>
  
 </html>

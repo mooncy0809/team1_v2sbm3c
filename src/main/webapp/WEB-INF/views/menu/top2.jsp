@@ -116,7 +116,7 @@ a{
                     <div class="col-sm-4">
                         <div class="logo pull-left">
 <!--                             <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
- -->                            <a href="../index2.do"><img src="/images/home/logo2.png" alt="" /></a>
+ -->                            <a href="../index2.do"><img src="/images/home/logo2.png" alt=""style="    padding-left: 20px;" /></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">

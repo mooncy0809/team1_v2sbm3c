@@ -31,6 +31,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
 <style type="text/css">
 .star {
@@ -148,24 +149,28 @@
           if (row.score == 1) {
               msg += "<label for='5-stars' class='star'>&#9733;</label>"
           } else if (row.score == 2){
-              msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label>";
+              msg += "<label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
           }else if (row.score == 3){
-              msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+              msg += "<label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
           }else if (row.score == 4){
-              msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+              msg += "<label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
           }else if (row.score == 5){
-              msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+              msg += "<label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
           }
           
           msg += "<DIV id='"+row.reviewno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
           msg += "<span style='font-weight: bold;'><A href='../review/read.do?reviewno="+ row.reviewno + "'" +" target='_blank' onclick='window.open(this.href, 'popup test', 'width=430, height=500, location=no, status=no, scrollbars=yes'); return false;'>" + row.rtitle + "</A>" + " /  "+ "작성자: "+row.mname + "</span>";
+          msg += "&nbsp; <i class='fa-solid fa-eye' >"+ row.cnt + "</i>";
           msg += "  " + row.rdate;
           
           if ('${sessionScope.memberno}' == row.memberno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
             msg += " <A href='javascript:review_delete("+row.reviewno+")'><IMG src='/review/images/delete.png'></A>";
           }
-          msg += "  " + "<br>";
-          msg += "<IMG src='/review/storage/"+row.thumb1 + "'" + 'style="width: 120px; height: 80px;">'
+          
+          if(row.thumb1.length >= 1){
+              msg += "  " + "<br>";
+              msg += "<IMG src='/review/storage/"+row.thumb1 + "'" + 'style="width: 120px; height: 80px;">'
+          }
           msg += "  " + "<br>";
           msg += row.rcontent;
           msg += "</DIV>";
@@ -234,18 +239,19 @@
       if (row.score == 1) {
           msg += "<label for='5-stars' class='star'>&#9733;</label>"
       } else if (row.score == 2){
-          msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label>";
+          msg += "<label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
       }else if (row.score == 3){
-          msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+          msg += "<label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
       }else if (row.score == 4){
-          msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+          msg += "<label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
       }else if (row.score == 5){
-          msg += "<label for='5-stars' class='star'>&#9733;</label>; <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
+          msg += "<label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label> <label for='5-stars' class='star'>&#9733;</label>";
       }
       
       msg += "<DIV id='"+row.reviewno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
       msg += "<span style='font-weight: bold;'><A href='../review/read.do?reviewno="+ row.reviewno + "'" +" target='_blank' onclick='window.open(this.href, 'popup test', 'width=430, height=500, location=no, status=no, scrollbars=yes'); return false;'>" + row.rtitle + "</A>" + " /  "+ "작성자: "+row.mname + "</span>";
-      msg += "<span style='font-weight: bold;'>" + row.id + "</span>";
+      /* msg += "<span style='font-weight: bold;'>" + row.id + "</span>"; */
+      msg += "&nbsp; <i class='fa-solid fa-eye' >"+ row.cnt + "</i>";
       msg += "  " + row.rdate;
       
       if ('${sessionScope.memberno}' == row.memberno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★

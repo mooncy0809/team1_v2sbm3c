@@ -27,11 +27,14 @@
 <body>
 <jsp:include page="../menu/top.jsp" />
  
-<DIV class='title_line'style="width:70%;"><A href="./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno}&word=" class='title_link'>유튜브 그룹</A> > ${categrpVO.name }</DIV>
+<%-- <DIV class='title_line'style="width:70%;"><A href="./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno}&word=" class='title_link'>유튜브 그룹</A> > ${categrpVO.name }</DIV>
+ --%>
+<DIV class='content_body' style="width:58%;">
+<span style="width:70%; font-size: 1.5em; font-weight: bold;">홈트레이닝</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
-<DIV class='content_body'>
 
-  <DIV style="text-align: right; clear: both; width:90%;">  
+  <DIV style="text-align: right; clear: both; ">  
     <form name='frm' id='frm' method='get' action='./list_by_categrpno_grid_search_paging.do'>
       <input type='hidden' name='categrpno' value='${categrpVO.categrpno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
@@ -47,7 +50,7 @@
   <DIV class='menu_line'></DIV>
   
   <fieldset>
-  <DIV class='content_body' style="width:70%;">
+  <DIV class='content_body' style="width:1100px;">
   <ASIDE class="aside_right">&nbsp;
     <A style="color:black;" href="javascript:location.reload();"><i class="fa-solid fa-arrow-rotate-right"></i>&nbsp;새로고침</A>
   </ASIDE> 
@@ -67,7 +70,7 @@
       <a href ="./read.do?youno=${youVO.youno}">
       <DIV style='width: 24%; 
               float: left; 
-              margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: center;'>
+              margin: 0.5%; padding: 0.5%; background-color: #FFDCD3; text-align: center;'>
                 <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
                   <DIV style=' color: black; display: table-cell; vertical-align: middle; text-align: center; font-weight: bold;'> <!-- 수직 가운데 정렬 -->
                    ${url } <br>

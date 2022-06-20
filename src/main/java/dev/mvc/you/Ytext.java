@@ -15,6 +15,9 @@ public class Ytext {
     
     public static int RECORD_PER_PAGE2 = 3;
     public static String LIST_FILE2 = "index_contents2.do";
+    
+    public static int RECORD_PER_PAGE3 = 3;
+    public static String LIST_FILE3 = "index_contents2.do";
 
     /*
      * // Windows, VMWare, AWS cloud 절대 경로 설정 public static synchronized String

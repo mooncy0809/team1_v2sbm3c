@@ -34,8 +34,8 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
  
-<DIV class='title_line'>알림</DIV>
-  <DIV class='message'>
+<DIV class='title_line' style='text-align:center'>알림</DIV>
+  <DIV class='message' style='text-align:center'>
     <fieldset class='fieldset_basic'>
       <ul>
         <li class='li_none'>회원 로그인에 실패했습니다.</li>
