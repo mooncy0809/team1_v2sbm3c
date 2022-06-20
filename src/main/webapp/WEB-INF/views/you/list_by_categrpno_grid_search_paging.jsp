@@ -65,9 +65,7 @@
       </c:if> 
       <!-- 하나의 이미지, 24 * 4 = 96% -->
       <a href ="./read.do?youno=${youVO.youno}">
-      <DIV style='width: 24%; 
-              float: left; 
-              margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: center;'>
+      <DIV style='width: 24%; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: center;'>
                 <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
                   <DIV style=' color: black; display: table-cell; vertical-align: middle; text-align: center; font-weight: bold;'> <!-- 수직 가운데 정렬 -->
                    ${url } <br>

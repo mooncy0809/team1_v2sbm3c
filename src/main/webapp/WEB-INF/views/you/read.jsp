@@ -54,7 +54,7 @@
         </c:choose> 
     ${youVO.ytitle }
     </DIV>
-   <DIV class='menu_line'style="width:50%; font-size: 1.5em; font-weight: bold;">
+   <DIV class='menu_line'style="width:1000px; font-size: 1.5em; font-weight: bold;">
        ${ytitle }<br>
    </DIV>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
