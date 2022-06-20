@@ -330,7 +330,20 @@ public class ContentsProc implements ContentsProcInter {
         map.put("end_num", end_num);
         
         List<ContentsVO> list = this.contentsDAO.list_all_join(map);
-//      return list;
+        
+        for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
+            String content = contentsVO.getContent();
+            if (content.length() > 100) {
+              content = content.substring(0, 100) + "...";
+              contentsVO.setContent(content);
+            }
+            
+            String title = Tool.convertChar(contentsVO.getTitle());  // 특수 문자 변환
+            contentsVO.setTitle(title);
+            
+            content = Tool.convertChar(content);
+            contentsVO.setContent(content);
+          }
       
       return list;
     }

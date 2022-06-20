@@ -122,8 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <update id="update_text" parameterType="dev.mvc.contents.ContentsVO">
     UPDATE contents
-    SET title=#{title}, content=#{content}, word=#{word}, price=#{price},
-        dc=#{dc}, saleprice=#{saleprice}, point=#{point}, salecnt=#{salecnt}
+    SET title=#{title}, content=#{content}, word=#{word}
     WHERE contentsno=#{contentsno}
   </update>
   

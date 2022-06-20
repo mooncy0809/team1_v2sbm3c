@@ -17,11 +17,11 @@
 <c:set var="replycnt" value="${contentsVO.replycnt }" />
  
 <!DOCTYPE html> 
-<html lang="ko">
+<html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>Community</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -33,6 +33,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
 <script type="text/javascript">
+  let reply_list; // 댓글 목록
+  
   $(function(){
       $('#btn_recom').on("click", function() { update_recom_ajax(${contentsno}); });
     $('#btn_login').on('click', login_ajax);
@@ -46,6 +48,8 @@
     $('#modal_close').on('click', reload); // 댓글 수 업데이트 하려면 read페이지 새로고침
 
     list_by_contentsno_join(); // 댓글 목록
+
+    $('#btn_add').on('click', list_by_contentsno_join_add);  // [더보기] 버튼
     // ---------------------------------------- 댓글 관련 종료 ----------------------------------------
     
   });
@@ -133,6 +137,65 @@
 
   }
 
+  <%-- 쇼핑 카트에 상품 추가 --%>
+  function cart_ajax(contentsno) {
+    var f = $('#frm_login');
+    $('#contentsno', f).val(contentsno);  // 쇼핑카트 등록시 사용할 상품 번호를 저장.
+    
+    console.log('-> contentsno: ' + $('#contentsno', f).val()); 
+    
+    // console.log('-> id:' + '${sessionScope.id}');
+    if ('${sessionScope.id}' != '' || $('#login_yn').val() == 'YES') {  // 로그인이 되어 있다면
+      cart_ajax_post();
+    } else { // 로그인 안된 경우
+      $('#div_login').show();
+    }
+
+  }
+
+  <%-- 쇼핑카트 상품 등록 --%>
+  function cart_ajax_post() {
+    var f = $('#frm_login');
+    var contentsno = $('#contentsno', f).val();  // 쇼핑카트 등록시 사용할 상품 번호.
+    
+    var params = "";
+    // params = $('#frm_login').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+    params += 'contentsno=' + contentsno;
+    params += '&${ _csrf.parameterName }=${ _csrf.token }';
+    console.log('-> cart_ajax_post: ' + params);
+    // return;
+    
+    $.ajax(
+      {
+        url: '/cart/create.do',
+        type: 'post',  // get, post
+        cache: false, // 응답 결과 임시 저장 취소
+        async: true,  // true: 비동기 통신
+        dataType: 'json', // 응답 형식: json, html, xml...
+        data: params,      // 데이터
+        success: function(rdata) { // 응답이 온경우
+          var str = '';
+          console.log('-> cart_ajax_post cnt: ' + rdata.cnt);  // 1: 쇼핑카트 등록 성공
+          
+          if (rdata.cnt == 1) {
+            var sw = confirm('선택한 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?');
+            if (sw == true) {
+              // 쇼핑카트로 이동
+              location.href='/cart/list_by_memberno.do';
+            }           
+          } else {
+            alert('선택한 상품을 장바구니에 담지못했습니다.<br>잠시후 다시 시도해주세요.');
+          }
+        },
+        // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+        error: function(request, status, error) { // callback 함수
+          console.log(error);
+        }
+      }
+    );  //  $.ajax END
+
+  }
+
   // 댓글 작성시 로그인 여부 확인
   function check_login() {
     var frm_reply = $('#frm_reply');
@@ -194,7 +257,6 @@
             // global_rdata_cnt = 0; // 목록 출력 글수
             
             list_by_contentsno_join(); // 페이징 댓글
-  
           } else {
             $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
             msg = "댓글 등록에 실패했습니다.";
@@ -203,25 +265,18 @@
           $('#modal_title').html('댓글 등록'); // 제목 
           $('#modal_content').html(msg);     // 내용
           $('#modal_panel').modal();           // 다이얼로그 출력
-
-
         },
         // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
         error: function(request, status, error) { // callback 함수
           console.log(error);
         }
-
       });
-   
     }
-
   }
 
-  // contentsno 별 소속된 댓글 목록
+  // contentsno 별 소속된 댓글 목록, 2건만 출력
   function list_by_contentsno_join() {
     var params = 'contentsno=' + ${contentsVO.contentsno };
-
-    
 
     $.ajax({
       url: "../reply/list_by_contentsno_join.do", // action 대상 주소
@@ -235,8 +290,20 @@
         var msg = '';
         
         $('#reply_list').html(''); // 패널 초기화, val(''): 안됨
+
+        // -------------------- 전역 변수에 댓글 목록 추가 --------------------
+        reply_list = rdata.list;
+        // -------------------- 전역 변수에 댓글 목록 추가 --------------------
+        // alert('rdata.list.length: ' + rdata.list.length);
         
-        for (i=0; i < rdata.list.length; i++) {
+        var last_index=1; 
+        if (rdata.list.length >= 2 ) { // 글이 2건 이상이라면 2건만 출력
+          last_index = 2
+        }
+
+        for (i=0; i < last_index; i++) {
+          // alert('i: ' + i); 
+          
           var row = rdata.list[i];
           
           msg += "<DIV id='"+row.replyno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
@@ -314,11 +381,41 @@
     });
   }
 
+  // // [더보기] 버튼 처리
+  function list_by_contentsno_join_add() {
+    // alert('list_by_contentsno_join_add called');
+    
+    let cnt_per_page = 2; // 2건씩 추가
+    let replyPage=parseInt($("#reply_list").attr("data-replyPage"))+cnt_per_page; // 2
+    $("#reply_list").attr("data-replyPage", replyPage); // 2
+    
+    var last_index=replyPage + 2; // 4
+    // alert('replyPage: ' + replyPage);
+    
+    var msg = '';
+    for (i=replyPage; i < last_index; i++) {
+      var row = reply_list[i];
+      
+      msg = "<DIV id='"+row.replyno+"' style='border-bottom: solid 1px #EEEEEE; margin-bottom: 10px;'>";
+      msg += "<span style='font-weight: bold;'>" + row.id + "</span>";
+      msg += "  " + row.rdate;
+      
+      if ('${sessionScope.memberno}' == row.memberno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
+        msg += " <A href='javascript:reply_delete("+row.replyno+")'><IMG src='/contents/images/delete.png'></A>";
+      }
+      msg += "  " + "<br>";
+      msg += row.content;
+      msg += "</DIV>";
+
+      // alert('msg: ' + msg);
+      $('#reply_list').append(msg);
+    }    
+  }
+
+
   function reload() {
       location.reload();
   }
-
-  
   
   // -------------------- 댓글 관련 종료 --------------------
   
@@ -335,7 +432,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" id="modal_x" class="close" data-dismiss="modal">×</button>
+        <button type="button" class="close" data-dismiss="modal">×</button>
         <h4 class="modal-title" id='modal_title'></h4><!-- 제목 -->
       </div>
       <div class="modal-body">
@@ -354,7 +451,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <button type="button" id="modal_x" class="close" data-dismiss="modal">×</button>
         <h4 class="modal-title">댓글 삭제</h4><!-- 제목 -->
       </div>
       <div class="modal-body">
@@ -379,7 +476,10 @@
 <!-- -------------------- 댓글 삭제폼 종료 -------------------- -->
    
 <DIV class='content_body'>
-    <span style="width:70%; font-size: 1.5em; font-weight: bold;"> ${cateVO.name } </span>
+
+    <span style="width:70%; font-size: 1.5em; font-weight: bold;">
+        <A href="#" onclick="history.go(-1);">${cateVO.name }</A>
+    </span>    
     
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
@@ -395,14 +495,14 @@
     <A href="./delete.do?contentsno=${contentsno}&now_page=${now_page}&cateno=${cateno}&word=${param.word }">삭제</A>  
 </ASIDE>
   
-  <DIV style="text-align: right; clear: both;">  
+<%--   <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_search.do'>
       <input type='hidden' name='cateno' value='${cateVO.cateno }'>
       <c:choose>
-        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
+        <c:when test="${param.word != '' }"> 검색하는 경우
           <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
         </c:when>
-        <c:otherwise> <%-- 검색하지 않는 경우 --%>
+        <c:otherwise> 검색하지 않는 경우
           <input type='text' name='word' id='word' value='' style='width: 20%;'>
         </c:otherwise>
       </c:choose>
@@ -412,7 +512,7 @@
                      onclick="location.href='./list_by_cateno_search.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>
-  </DIV>
+  </DIV> --%>
   
   <DIV class='menu_line'></DIV>
   
@@ -478,16 +578,15 @@
               </c:otherwise>
             </c:choose>
         </DIV>
-        <DIV style="width: 47%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
+        <DIV style="width: 48%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
           <span style="font-size: 1.5em; font-weight: bold;">${title }</span><br>
- 
-          <form>
 
+          <form>
           <button type='button' id="btn_recom" class="btn btn-info">♥(${recom })</button>
           <span id="span_animation"></span>
           </form>
         </DIV> 
-
+        
         <DIV>${content }</DIV>
       </li>
       <li class="li_none">
@@ -515,12 +614,13 @@
         <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'>
         
         <div>댓글수 ${replycnt }</div>
+        
         <textarea name='content' id='content' style='width: 100%; height: 60px;' placeholder="댓글 작성, 로그인해야 등록 할 수 있습니다."></textarea>
         <input type='password' name='passwd' id='passwd' placeholder="비밀번호">
         <button type='button' id='btn_create'>등록</button>
     </FORM>
     <HR>
-    <DIV id='reply_list' data-replypage='1'>  <%-- 댓글 목록 --%>
+    <DIV id='reply_list' data-replyPage='0'>  <%-- 댓글 목록 --%>
     
     </DIV>
     <DIV id='reply_list_btn' style='border: solid 1px #EEEEEE; margin: 0px auto; width: 100%; background-color: #EEFFFF;'>

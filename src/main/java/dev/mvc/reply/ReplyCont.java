@@ -117,7 +117,7 @@ public class ReplyCont {
        "contentsno":1}
     ]
 }
-   * http://localhost:9090/ojt/reply/list_by_contentsno_join.do?contentsno=1
+   * http://localhost:9091/reply/list_by_contentsno_join.do?contentsno=1
    * @param contentsno
    * @return
    */

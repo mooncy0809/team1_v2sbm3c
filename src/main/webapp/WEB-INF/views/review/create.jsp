@@ -24,9 +24,45 @@
   });
 </script>
 
+<style type="text/css">
+/* component */
+
+.star-rating {
+  /* border:solid 1px #ccc; */
+  display:flex;
+  flex-direction: row-reverse;
+  font-size:1.5em;
+  justify-content:space-around;
+  padding:0 .2em;
+  text-align:center;
+  width:5em;
+}
+
+.star-rating input {
+  display:none;
+}
+
+.star-rating label {
+  color:#ccc;
+  cursor:pointer;
+}
+
+.star-rating :checked ~ label {
+  color:#f90;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color:#fc0;
+}
+
+</style>
+
 </head>
 <body>
-<jsp:include page="../menu/top.jsp" flush='false' />
+<jsp:include page="../menu/top2.jsp" flush='false' />
+
+
 
  <DIV class='content_body'>
  <span style="width:70%; font-size: 1.5em; font-weight: bold;">리뷰 쓰기</span>
@@ -50,13 +86,31 @@
     <div class="form-group">
        <label class="control-label col-md-4">리뷰 내용</label>
        <div class="col-md-8">
-         <textarea name='rcontent' required="required" class="form-control" rows="12" style='width: 70%;'></textarea>
+         <textarea name='rcontent' required="required" class="form-control" rows="12" placeholder="내용" style='width: 70%;'></textarea>
       </div>        
 
      </div>
+     <div class="form-group">
+     <label class="control-label col-md-4">별점을 선택해주세요!</label>
+     <div class="col-md-8">
+     <div class="star-rating">
+	  <input type="radio" id="5-stars" name="score" value="5" />
+	  <label for="5-stars" class="star">&#9733;</label>
+	  <input type="radio" id="4-stars" name="score" value="4" />
+	  <label for="4-stars" class="star">&#9733;</label>
+	  <input type="radio" id="3-stars" name="score" value="3" />
+	  <label for="3-stars" class="star">&#9733;</label>
+	  <input type="radio" id="2-stars" name="score" value="2" />
+	  <label for="2-stars" class="star">&#9733;</label>
+	  <input type="radio" id="1-star" name="score" value="1" />
+	  <label for="1-star" class="star">&#9733;</label>
+	</div>
+	</div>
+	</div>
     
-    <div class="form-group">
-        <span>별점을 선택해주세요</span>
+<!--     <div class="form-group">
+        <label class="control-label col-md-4">별점을 선택해주세요</label>
+        <div class="col-md-8">
         <input type="radio" name="score" value="5" id="rate1"><label
             for="rate1">★</label>
         <input type="radio" name="score" value="4" id="rate2"><label
@@ -67,11 +121,12 @@
             for="rate4">★</label>
         <input type="radio" name="score" value="1" id="rate5"><label
             for="rate5">★</label>
-    </div>
+            </div>
+    </div> -->
     
     <div class="form-group">
-       <label class="control-label col-md-2">이미지</label>
-       <div class="col-md-10">
+       <label class="control-label col-md-4">이미지</label>
+       <div class="col-md-6">
          <input type='file' class="form-control" name='file1MF' id='file1MF' 
                     value='' placeholder="파일 선택">
        </div>
@@ -79,7 +134,7 @@
      
     <div class="content_body_bottom" style="padding-right: 20%;">
       <button type="submit" class="btn btn-primary">등록</button>
-      <button type="button" onclick="location.href='./member_join.do'" class="btn btn-primary">목록</button>
+      <button type="button" onclick="location.href='../order_pay/list_by_memberno.do?memberno=${sessionScope.memberno }'" class="btn btn-primary">목록</button>
     </div>      
   
   </FORM>

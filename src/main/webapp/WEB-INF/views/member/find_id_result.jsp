@@ -34,8 +34,8 @@
  
  
  
-<DIV class='title_line'>알림</DIV>
-  <DIV class='message'>
+<DIV class='title_line' style='text-align:center'>알림</DIV>
+  <DIV class='message' style='text-align:center'>
     <fieldset class='fieldset_basic'>
       <ul>
         <c:forEach var="memberVO" items="${list }">

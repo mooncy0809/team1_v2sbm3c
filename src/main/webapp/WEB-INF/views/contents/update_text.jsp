@@ -32,14 +32,19 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
  
-<DIV class='title_line'>
+<%-- <DIV class='title_line'>
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
   <A href="../cate/list_by_categrpno.do?categrpno=${categrpVO.categrpno }" class='title_link'>${categrpVO.name }</A> >
   <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }" class='title_link'>${cateVO.name }</A> >
   ${title } 수정
-</DIV>
+</DIV> --%>
 
 <DIV class='content_body'>
+
+ <span style="width:70%; font-size: 1.5em; font-weight: bold;">글 수정</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+   <br>
+   
    <ASIDE class="aside_right">
       <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
       <span class='menu_divide' >│</span>
@@ -50,7 +55,8 @@
      <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
     </ASIDE> 
   
-    <DIV style="text-align: right; clear: both;">  
+  <br>
+<%--     <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_search_paging.do'>
       <input type='hidden' name='cateno' value='${cateVO.cateno }'>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
@@ -60,7 +66,7 @@
                      onclick="location.href='./list_by_cateno_search_paging.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>
-  </DIV>
+  </DIV> --%>
   
   <DIV class='menu_line'></DIV>
   

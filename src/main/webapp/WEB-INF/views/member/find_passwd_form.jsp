@@ -1,65 +1,40 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
  
-<!DOCTYPE html> 
-<html lang="ko"> 
-<head> 
-<meta charset="UTF-8"> 
-<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>비밀번호 찾기</title>
- 
-<link href="/css/style.css" rel="Stylesheet" type="text/css">
- 
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-    
-<script type="text/javascript">
-var msg = "${msg}";
-
-if (msg != "") {
-    alert(msg);
-}
-</script>
- 
-</head> 
+</head>
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
-
- <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">비밀번호 찾기</h1>
-                                        <p class="mb-4">이름과 아이디를 입력해주세요!</p>
-                                    </div>
-                                    <form class="user" action="./find_passwd.do" method="post">
-                                       <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="mname" name="mname"
-                                                placeholder="이름">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="id" name="id"
-                                                placeholder="아이디">
-                                        </div>
-                                         
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            찾기
-                                        </button>
-                                    </form>
-                                    <hr>
-                                     <a href="/member/login.do" class="btn btn-google btn-user btn-block">
-                                           로그인
-                                        </a>
-                                        <hr>
-                                       <div class="text-center">
-                                        <a class="btn btn-google btn-user btn-block" href="../index.do">메인페이지</a>
-                                    </div>
-</div>
+    <div class="w3-content w3-container w3-margin-top">
+        <div class="w3-container w3-card-4">
+            <form action="./find_passwd.do" method="post">
+                <div class="w3-center w3-large w3-margin-top">
+                    <h3>비밀번호 찾기</h3>
+                </div>
+                <div>
+                    <p>
+                        <label>이름</label>
+                        <input class="w3-input" type="text" id="mname" name="mname" required>
+                    </p>
+                    
+                    <p>
+                        <label>아이디</label>
+                        <input class="w3-input" type="text" id="id" name="id" required>
+                    </p>
+                    <p class="w3-center">
+                        <button type="submit" id=findBtn class="w3-button w3-block w3-orange w3-ripple w3-margin-top w3-round">find</button>
+                        <button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-orange w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
 <jsp:include page="../menu/bottom.jsp" flush='false' />
- 
 </body>
 </html>

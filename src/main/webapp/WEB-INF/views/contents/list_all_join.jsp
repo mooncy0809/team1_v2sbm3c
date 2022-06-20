@@ -26,11 +26,14 @@
 <body>
 <jsp:include page="../menu/top.jsp" />
  
-<DIV class='title_line'>
+<!-- <DIV class='title_line'>
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 전체 게시물
-</DIV>
+</DIV> -->
 
 <DIV class='content_body'>
+ <span style="width:70%; font-size: 1.5em; font-weight: bold;">전체 게시물</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+   <br>
   <ASIDE class="aside_right">
     <c:if test="${sessionScope.id != null }"> 
         <A href="./create.do?cateno=${cateVO.cateno }">등록</A>    
