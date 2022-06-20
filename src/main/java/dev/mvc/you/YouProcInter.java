@@ -3,8 +3,6 @@ package dev.mvc.you;
 import java.util.HashMap;
 import java.util.List;
 
-import dev.mvc.contents.ContentsVO;
-import dev.mvc.dict.DictVO;
 
 
 public interface YouProcInter {
@@ -78,5 +76,7 @@ String pagingBox_t(int categrpno, int search_count, int now_page, String word);
  * @return
  */
 public List<YouVO> index_contents2(HashMap<String, Object> map);
+
+public List<YouVO> index_contents6(HashMap<String, Object> map);
  
 }

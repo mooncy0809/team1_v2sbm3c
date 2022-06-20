@@ -145,5 +145,8 @@ public interface ContentsDAOInter {
     
     public List<ContentsVO> tip_by_cateno_search_paging(HashMap<String, Object> map);
     
+    public List<ContentsVO> index_contents4(HashMap<String, Object> map);
+    
+    public List<ContentsVO> index_contents5(HashMap<String, Object> map);
     
 }

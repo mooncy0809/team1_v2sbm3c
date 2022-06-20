@@ -11,6 +11,9 @@ public class TipContents {
 
     /** 목록 파일명 */
     public static String LIST_FILE = "tip_by_cateno.do";
+    
+    public static int RECORD_PER_PAGE2 = 3;
+    public static String LIST_FILE2 = "index_contents5.do";
 
     // Windows, VMWare, AWS cloud 절대 경로 설정
     public static synchronized String getUploadDir() {

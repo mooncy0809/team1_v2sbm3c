@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import dev.mvc.dict.Dict;
+import dev.mvc.dict.DictVO;
 import dev.mvc.qna.QnaVO;
 import dev.mvc.qna.Qtext;
 import dev.mvc.tool.Tool;
@@ -703,6 +705,117 @@ public class ContentsProc implements ContentsProcInter {
        
       return str.toString(); 
     }
+    
+    
+    
+    
+    @Override
+    public List<ContentsVO> index_contents4(HashMap<String, Object> map) {
+      /*
+      페이지당 10개의 레코드 출력
+      1 page: WHERE r >= 1 AND r <= 10
+      2 page: WHERE r >= 11 AND r <= 20
+      3 page: WHERE r >= 21 AND r <= 30
+        
+      페이지에서 출력할 시작 레코드 번호 계산 기준값, nowPage는 1부터 시작
+      1 페이지 시작 rownum: now_page = 1, (1 - 1) * 10 --> 0 
+      2 페이지 시작 rownum: now_page = 2, (2 - 1) * 10 --> 10
+      3 페이지 시작 rownum: now_page = 3, (3 - 1) * 10 --> 20
+      */
+      int begin_of_page = ((Integer)map.get("now_page") - 1) * NoticeContents.RECORD_PER_PAGE2;
+     
+      // 시작 rownum 결정
+      // 1 페이지 = 0 + 1: 1
+      // 2 페이지 = 10 + 1: 11
+      // 3 페이지 = 20 + 1: 21 
+      int start_num = begin_of_page + 1;
+      
+      //  종료 rownum
+      // 1 페이지 = 0 + 10: 10
+      // 2 페이지 = 0 + 20: 20
+      // 3 페이지 = 0 + 30: 30
+      int end_num = begin_of_page + NoticeContents.RECORD_PER_PAGE2;   
+      /*
+      1 페이지: WHERE r >= 1 AND r <= 10
+      2 페이지: WHERE r >= 11 AND r <= 20
+      3 페이지: WHERE r >= 21 AND r <= 30
+      */
+      map.put("start_num", start_num);
+      map.put("end_num", end_num);
+     
+      List<ContentsVO> list = this.contentsDAO.list_by_cateno_search_paging(map);
+      
+      for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
+        String content = contentsVO.getContent();
+        if (content.length() > 160) {
+          content = content.substring(0, 160) + "...";
+          contentsVO.setContent(content);
+        }
+        
+        String title = Tool.convertChar(contentsVO.getTitle());  // 특수 문자 변환
+        contentsVO.setTitle(title);
+        
+        content = Tool.convertChar(content);
+        contentsVO.setContent(content);
+      }
+      
+      return list;
+    }
+    
+    @Override
+    public List<ContentsVO> index_contents5(HashMap<String, Object> map) {
+      /*
+      페이지당 10개의 레코드 출력
+      1 page: WHERE r >= 1 AND r <= 10
+      2 page: WHERE r >= 11 AND r <= 20
+      3 page: WHERE r >= 21 AND r <= 30
+        
+      페이지에서 출력할 시작 레코드 번호 계산 기준값, nowPage는 1부터 시작
+      1 페이지 시작 rownum: now_page = 1, (1 - 1) * 10 --> 0 
+      2 페이지 시작 rownum: now_page = 2, (2 - 1) * 10 --> 10
+      3 페이지 시작 rownum: now_page = 3, (3 - 1) * 10 --> 20
+      */
+      int begin_of_page = ((Integer)map.get("now_page") - 1) * TipContents.RECORD_PER_PAGE2;
+     
+      // 시작 rownum 결정
+      // 1 페이지 = 0 + 1: 1
+      // 2 페이지 = 10 + 1: 11
+      // 3 페이지 = 20 + 1: 21 
+      int start_num = begin_of_page + 1;
+      
+      //  종료 rownum
+      // 1 페이지 = 0 + 10: 10
+      // 2 페이지 = 0 + 20: 20
+      // 3 페이지 = 0 + 30: 30
+      int end_num = begin_of_page + TipContents.RECORD_PER_PAGE2;   
+      /*
+      1 페이지: WHERE r >= 1 AND r <= 10
+      2 페이지: WHERE r >= 11 AND r <= 20
+      3 페이지: WHERE r >= 21 AND r <= 30
+      */
+      map.put("start_num", start_num);
+      map.put("end_num", end_num);
+     
+      List<ContentsVO> list = this.contentsDAO.list_by_cateno_search_paging(map);
+      
+      for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
+        String content = contentsVO.getContent();
+        if (content.length() > 160) {
+          content = content.substring(0, 160) + "...";
+          contentsVO.setContent(content);
+        }
+        
+        String title = Tool.convertChar(contentsVO.getTitle());  // 특수 문자 변환
+        contentsVO.setTitle(title);
+        
+        content = Tool.convertChar(content);
+        contentsVO.setContent(content);
+      }
+      
+      return list;
+    }
+   
+    
     
     
 }

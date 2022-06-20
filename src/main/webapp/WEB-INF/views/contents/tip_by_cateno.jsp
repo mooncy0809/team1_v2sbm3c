@@ -27,7 +27,7 @@
 <body>
 <jsp:include page="../menu/top.jsp" />
 
-<DIV class='content_body'>
+<DIV class='content_body' style="width:58%;">
 <span style="width:70%; font-size: 1.5em; font-weight: bold;">DIET TIPS</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
