@@ -122,8 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <update id="update_text" parameterType="dev.mvc.contents.ContentsVO">
     UPDATE contents
-    SET title=#{title}, content=#{content}, word=#{word}, price=#{price},
-        dc=#{dc}, saleprice=#{saleprice}, point=#{point}, salecnt=#{salecnt}
+    SET title=#{title}, content=#{content}, word=#{word}
     WHERE contentsno=#{contentsno}
   </update>
   
@@ -174,22 +173,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        2 page: WHERE r >= 11 AND r <= 20;
        3 page: WHERE r >= 21 AND r <= 30; -->
      
-  </select> 
-  
-  
-  <!-- 댓글 수 증가 -->
-   <update id="increaseReplycnt" parameterType="int">
-     UPDATE contents
-     SET replycnt = replycnt + 1
-     WHERE contentsno = #{contentsno}
+  </select>   
+      
+   <!-- 댓글 수 확인 -->
+   <update id = "update_replycnt" parameterType="dev.mvc.contents.ContentsVO">
+    update contents
+    set replycnt = (
+                        SELECT COUNT(replyno) as replycnt
+                        from reply
+                        where contentsno = #{contentsno}
+                    )
+    where contentsno = #{contentsno}
    </update>
 
-   <!-- 댓글 수 감소 -->
-   <update id="decreaseReplycnt" parameterType="int">
-     UPDATE contents
-     SET replycnt = replycnt - 1
-     WHERE contentsno = #{contentsno}
-   </update>
-  
+   <!-- 댓글 수 업데이트 -->
+<!--    <update id = "update_replycnt" parameterType="dev.mvc.contents.ContentsVO">
+   <selectKey keyProperty="replycnt" resultType="int" order="BEFORE">
+    SELECT COUNT(replyno) as replycnt
+    from reply
+    where contentsno = #{contentsno}
+   </selectKey>
+    update contents
+    set replycnt = #{replycnt}
+    where contentsno = #{contentsno}
+   </update> -->
+   
+   <!-- 카테고리별 검색 목록 -->
+  <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
+  <!-- <select id="notice_by_cateno_search_paging" 
+             resultType="dev.mvc.contents.ContentsVO" parameterType="HashMap">
+   SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+              file1, file1saved, thumb1, size1, mname, r
+   FROM (
+              SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+                         file1, file1saved, thumb1, size1, mname, rownum as r
+              FROM (
+                        SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+                                   file1, file1saved, thumb1, mname, size1
+                        FROM contents 
+                        <choose>
+                          <when test="word == null or word == ''"> 검색하지 않는 경우
+                             WHERE cateno=#{cateno}
+                          </when>
+                          <otherwise>
+                            WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || #{word} || '%'  ||: 결합, %첫눈%
+                                                                  OR UPPER(content) LIKE '%' || #{word} || '%' 
+                                                                  OR UPPER(word) LIKE '%' || #{word} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY contentsno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+    1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30;
+     
+  </select>  -->
          
 </mapper> 

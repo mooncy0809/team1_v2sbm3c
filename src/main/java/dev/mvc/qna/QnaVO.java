@@ -15,12 +15,14 @@ public class QnaVO {
     private int pwd;
     /** 작성일 */
     private String rdate;
+    /** 아이디 */
+    private String id;
     
     public QnaVO() {
         
     }
     
-    public QnaVO(int qnano, int categrpno, int memberno, String title, String content, int pwd, String rdate) {
+    public QnaVO(int qnano, int categrpno, int memberno, String title, String content, int pwd, String rdate, String id) {
         super();
         this.qnano = qnano;
         this.categrpno = categrpno;
@@ -29,10 +31,19 @@ public class QnaVO {
         this.content = content;
         this.pwd = pwd;
         this.rdate = rdate;
+        this.id = id;
     }
 
     
     
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public int getQnano() {
         return qnano;
     }

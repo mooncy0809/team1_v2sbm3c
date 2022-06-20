@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Home | 삼대몇? </title>
+    <title>Home | 하루삼끼 </title>
     <link href="/css/bootstrap.min2.css" rel="stylesheet">
     <link href="/css/font-awesome.min2.css" rel="stylesheet">
     <link href="/css/prettyPhoto2.css" rel="stylesheet">
@@ -23,7 +23,9 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sunflower&display=swap" rel="stylesheet">
     
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -31,7 +33,13 @@
     <script src="../js/price-range.js"></script>
     <script src="../js/jquery.prettyPhoto.js"></script>
     <script src="../js/main.js"></script>
-    
+ <style>
+a{
+    font-family: 'Kdam Thmor Pro', sans-serif;
+
+ font-family: 'Sunflower', sans-serif;
+ }
+ </style>
 </head><!--/head-->
 
 <body>
