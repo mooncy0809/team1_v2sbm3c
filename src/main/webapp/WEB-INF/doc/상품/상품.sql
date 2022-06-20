@@ -23,7 +23,7 @@ CREATE TABLE products(
         salecnt                               NUMBER(10)      DEFAULT 0 NULL,  
   FOREIGN KEY (cateno) REFERENCES cate (cateno)
 );
-
+drop table products CASCADE CONSTRAINTS;
 COMMENT ON TABLE products is '컨텐츠-상품';
 COMMENT ON COLUMN products.productno is '컨텐츠 번호';
 COMMENT ON COLUMN products.cateno is '카테고리 번호';
