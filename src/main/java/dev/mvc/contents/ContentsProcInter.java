@@ -6,6 +6,7 @@ import java.util.List;
 import dev.mvc.you.YouVO;
 
 public interface ContentsProcInter {
+
     /**
      * 등록
      * 
