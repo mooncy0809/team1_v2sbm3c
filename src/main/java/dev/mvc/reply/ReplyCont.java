@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -35,7 +36,7 @@ public class ReplyCont {
   
   @ResponseBody
   @RequestMapping(value = "/reply/create.do",
-                            method = RequestMethod.POST,
+                            method = RequestMethod.POST,                            
                             produces = "text/plain;charset=UTF-8")
   public String create(ReplyVO replyVO) {
     int cnt = replyProc.create(replyVO);
@@ -116,7 +117,7 @@ public class ReplyCont {
        "contentsno":1}
     ]
 }
-   * http://localhost:9090/ojt/reply/list_by_contentsno_join.do?contentsno=1
+   * http://localhost:9091/reply/list_by_contentsno_join.do?contentsno=1
    * @param contentsno
    * @return
    */

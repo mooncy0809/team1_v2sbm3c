@@ -16,4 +16,11 @@ public interface ReplyProcInter {
 
   public int delete(int replyno);
   
+  /**
+   * 특정글 관련 전체 댓글 목록
+   * @param contentsno
+   * @return
+   */
+  public List<ReplyMemberVO> list_by_contentsno_join_add(int contentsno);
+  
 }

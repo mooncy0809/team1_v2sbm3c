@@ -69,8 +69,7 @@
   <FORM name='frm' method='POST' action='./create.do' class="form-horizontal"
              enctype="multipart/form-data">
     <input type="hidden" name="categrpno" value="${cateVO.categrpno }"> 
-    <input type="hidden" name="cateno" value="${param.cateno }">
-    
+    <input type="hidden" name="cateno" value="${param.cateno }">    
         
     <div class="form-group">
        <label class="control-label col-md-2">상품명</label>

@@ -40,29 +40,23 @@
  
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
- 
-<DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  <A href="../cate/list_by_categrpno.do?categrpno=${categrpVO.categrpno }" class='title_link'>${categrpVO.name }</A> >
-  <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }" class='title_link'>${cateVO.name }</A>
-</DIV>
 
 <DIV class='content_body'>
+    <span style="width:70%; font-size: 1.5em; font-weight: bold;">
+        <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }">${cateVO.name }</A>
+    </span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+
   <ASIDE class="aside_right">
-    <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
-    <span class='menu_divide' >│</span>
+<%--     <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
+    <span class='menu_divide' >│</span> --%>
     <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }&now_page=${param.now_page}&word=${param.word }">기본 목록형</A>    
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
-    <span class='menu_divide' >│</span>
     <A href="./update_text.do?contentsno=${contentsno}&now_page=${now_page}&word=${param.word }">수정</A>
     <span class='menu_divide' >│</span>
     <A href="./update_file.do?contentsno=${contentsno}&now_page=${now_page}&word=${param.word }">파일 수정</A>  
     <span class='menu_divide' >│</span>
     <A href="./delete.do?contentsno=${contentsno}&now_page=${now_page}&cateno=${cateno}&word=${param.word }">삭제</A>  
-  </ASIDE> 
+</ASIDE>
   
   <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_search_paging.do'>
