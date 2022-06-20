@@ -129,7 +129,7 @@
 <body>
 <jsp:include page="../menu/top.jsp" />
  
-<DIV class='title_line'>
+<DIV class='title_line' >
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
   <A href="../cate/list_by_categrpno.do?categrpno=${categrpVO.categrpno }" class='title_link'>${categrpVO.name }</A> >
   <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }" class='title_link'>${cateVO.name }</A>

@@ -285,11 +285,11 @@ ul.drop > li > a:hover{
 
                 </div>
                 <div id="mySidenav" class="sidenav category-bg"
-                    style="padding-left: 40px; width: 500px; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:65px; box-shadow: 12px 10px 11px 7px gray;">
-                    <li class="menu" style="list-style:none;" >
+                    style="padding-left: 40px; width: 500px; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:65px; box-shadow: 12px 10px 11px 7px gray;  z-index:2;">
+                    <li class="menu" style="list-style:none; " >
                         <ul >                       
-                            <a><li>NOTICE</li></a>
-                            <a><li>DIET TIP</li></a>       
+                            <a href="../contents/notice_by_cateno.do"><li>NOTICE</li></a>
+                            <a href="../contents/tip_by_cateno.do"><li>DIET TIP</li></a>       
                             <a onclick="com(this)" ><li>COMMUNITY</li></a>            
                                         <div class="sub_com" id="sub_com" style="display: none; ">           
                                         <a href="../contents/list_all_join.do"><li>전체</li></a>
@@ -297,8 +297,6 @@ ul.drop > li > a:hover{
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1"><li>팁&노하우</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1"><li>고민&질문</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1"><li>일기</li></a>  
-
-                                       <a href="/qna/member_join.do"> <li>관리자에게</li></a> 
 
                                        <a href="/qna/list_search_paging.do?categrpno=4&memberno=${sessionScope.memberno}"> <li>관리자에게</li></a> 
 

@@ -21,6 +21,7 @@ import dev.mvc.cate.CateProcInter;
 import dev.mvc.cate.CateVO;
 import dev.mvc.categrp.CategrpProcInter;
 import dev.mvc.categrp.CategrpVO;
+import dev.mvc.dict.DictVO;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.member.MemberVO;
 import dev.mvc.tool.Tool;
@@ -35,7 +36,7 @@ public class ContentsCont {
     @Autowired
     @Qualifier("dev.mvc.cate.CateProc")
     private CateProcInter cateProc;
-    
+
     @Autowired
     @Qualifier("dev.mvc.member.MemberProc")
     private MemberProcInter memberProc;
@@ -91,10 +92,8 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/create.do", method = RequestMethod.POST)
-    public ModelAndView create(HttpServletRequest request, 
-                               HttpServletResponse response, 
-                               HttpSession session,
-                               int memberno, String mname, ContentsVO contentsVO) {
+    public ModelAndView create(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+            int memberno, String mname, ContentsVO contentsVO) {
         ModelAndView mav = new ModelAndView();
 
         // ------------------------------------------------------------------------------
@@ -157,11 +156,11 @@ public class ContentsCont {
         // MemberVO memberVO = memberProc.readById(id); // 로그인한 회원의 정보 조회
         session.setAttribute("memberno", memberno);
         session.setAttribute("mname", mname);
-        
+
         mav.addObject("mname", mname);
-        
+
 //        System.out.println("memberno " + memberVO.getMemberno());
-        
+
         if (cnt == 1) {
             mav.addObject("code", "create_success");
             // cateProc.increaseCnt(contentsVO.getCateno()); // 글수 증가
@@ -180,7 +179,7 @@ public class ContentsCont {
 
         return mav; // forward
     }
-    
+
     /**
      * 등록폼 http://localhost:9091/contents/create.do
      * http://localhost:9091/contents/create.do?cateno=1 FK 값 명시
@@ -200,17 +199,15 @@ public class ContentsCont {
 
         return mav;
     }
-    
+
     /**
      * 등록 처리 http://localhost:9091/contents/notice_create.do?cateno=1
      * 
      * @return
      */
     @RequestMapping(value = "/contents/notice_create.do", method = RequestMethod.POST)
-    public ModelAndView notice_create(HttpServletRequest request, 
-                               HttpServletResponse response, 
-                               HttpSession session,
-                               int memberno, String mname, ContentsVO contentsVO) {
+    public ModelAndView notice_create(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+            int memberno, String mname, ContentsVO contentsVO) {
         ModelAndView mav = new ModelAndView();
 
         // ------------------------------------------------------------------------------
@@ -273,17 +270,17 @@ public class ContentsCont {
         // MemberVO memberVO = memberProc.readById(id); // 로그인한 회원의 정보 조회
         session.setAttribute("memberno", memberno);
         session.setAttribute("mname", mname);
-        
+
         mav.addObject("mname", mname);
 
         // redirect시에 hidden tag로 보낸것들이 전달이 안됨으로 request에 다시 저장
         mav.addObject("cateno", contentsVO.getCateno()); // redirect parameter 적용
 
         mav.setViewName("redirect:/contents/notice_by_cateno.do"); // GET 방식 호출, 전달되는 데이터도 URL에 결합됨.
-        
+
         return mav; // forward
     }
-    
+
     /**
      * 공지사항 목록 + 검색 + 페이징 지원
      * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
@@ -294,59 +291,59 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/notice_by_cateno.do", method = RequestMethod.GET)
-    public ModelAndView notice_by_cateno(
-            @RequestParam(value = "cateno", defaultValue = "1") int cateno,                                                                           
-            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
-            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
-            HttpSession session) {
-      System.out.println("--> now_page: " + now_page);
+    public ModelAndView notice_by_cateno(@RequestParam(value = "cateno", defaultValue = "1") int cateno,
+            @RequestParam(value = "word", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page, HttpSession session) {
+        System.out.println("--> now_page: " + now_page);
 
-      ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView();
 
-      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
-      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("cateno", cateno); // #{cateno}
+        map.put("word", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
-      // 검색 목록
-      List<ContentsVO> list = contentsProc.notice_by_cateno_search_paging(map);
-      mav.addObject("list", list);
-      
+        // 검색 목록
+        List<ContentsVO> list = contentsProc.notice_by_cateno_search_paging(map);
+        mav.addObject("list", list);
 
-      // 검색된 레코드 갯수
-      int search_count = contentsProc.search_count(map);
-      mav.addObject("search_count", search_count);
+        // 검색된 레코드 갯수
+        int search_count = contentsProc.search_count(map);
+        mav.addObject("search_count", search_count);
 
-      CateVO cateVO = cateProc.read(cateno);
-      mav.addObject("cateVO", cateVO);
+        CateVO cateVO = cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
 
-      CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
-      mav.addObject("categrpVO", categrpVO);
+        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
 
-      /*
-       * SPAN태그를 이용한 박스 모델의 지원
-       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
-       * 18 19 20 [다음]
-       * @param cateno 카테고리번호
-       * @param search_count 검색(전체) 레코드수
-       * @param now_page 현재 페이지
-       * @param word 검색어
-       * @return 페이징용으로 생성된 HTML tag 문자열
-       */
-      String paging = contentsProc.notice_pagingBox(cateno, search_count, now_page, word);
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17 18
+         * 19 20 [다음]
+         * 
+         * @param cateno 카테고리번호
+         * 
+         * @param search_count 검색(전체) 레코드수
+         * 
+         * @param now_page 현재 페이지
+         * 
+         * @param word 검색어
+         * 
+         * @return 페이징용으로 생성된 HTML tag 문자열
+         */
+        String paging = contentsProc.notice_pagingBox(cateno, search_count, now_page, word);
 //      System.out.println("-> paging: " + paging);
-      mav.addObject("paging", paging);
+        mav.addObject("paging", paging);
 
-      mav.addObject("now_page", now_page);
-      
+        mav.addObject("now_page", now_page);
 
-      // /contents/list_by_cateno_table_img1_search_paging.jsp
-      mav.setViewName("/contents/notice_by_cateno");
+        // /contents/list_by_cateno_table_img1_search_paging.jsp
+        mav.setViewName("/contents/notice_by_cateno");
 
-      return mav;
+        return mav;
     }
-    
+
     /**
      * 등록폼 http://localhost:9091/contents/tip_create.do
      * http://localhost:9091/contents/tip_create.do?cateno=2 FK 값 명시
@@ -366,17 +363,15 @@ public class ContentsCont {
 
         return mav;
     }
-    
+
     /**
      * 등록 처리 http://localhost:9091/contents/notice_create.do?cateno=2
      * 
      * @return
      */
     @RequestMapping(value = "/contents/tip_create.do", method = RequestMethod.POST)
-    public ModelAndView tip_create(HttpServletRequest request, 
-                               HttpServletResponse response, 
-                               HttpSession session,
-                               int memberno, String mname, ContentsVO contentsVO) {
+    public ModelAndView tip_create(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+            int memberno, String mname, ContentsVO contentsVO) {
         ModelAndView mav = new ModelAndView();
 
         // ------------------------------------------------------------------------------
@@ -439,17 +434,17 @@ public class ContentsCont {
         // MemberVO memberVO = memberProc.readById(id); // 로그인한 회원의 정보 조회
         session.setAttribute("memberno", memberno);
         session.setAttribute("mname", mname);
-        
+
         mav.addObject("mname", mname);
 
         // redirect시에 hidden tag로 보낸것들이 전달이 안됨으로 request에 다시 저장
         mav.addObject("cateno", contentsVO.getCateno()); // redirect parameter 적용
 
         mav.setViewName("redirect:/contents/tip_by_cateno.do"); // GET 방식 호출, 전달되는 데이터도 URL에 결합됨.
-        
+
         return mav; // forward
     }
-    
+
     /**
      * 공지사항 목록 + 검색 + 페이징 지원
      * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
@@ -460,57 +455,57 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/tip_by_cateno.do", method = RequestMethod.GET)
-    public ModelAndView tip_by_cateno(
-            @RequestParam(value = "cateno", defaultValue = "2") int cateno,                                                                           
-            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
-            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
-            HttpSession session) {
-      System.out.println("--> now_page: " + now_page);
+    public ModelAndView tip_by_cateno(@RequestParam(value = "cateno", defaultValue = "2") int cateno,
+            @RequestParam(value = "word", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page, HttpSession session) {
+        System.out.println("--> now_page: " + now_page);
 
-      ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView();
 
-      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
-      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("cateno", cateno); // #{cateno}
+        map.put("word", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
-      // 검색 목록
-      List<ContentsVO> list = contentsProc.tip_by_cateno_search_paging(map);
-      mav.addObject("list", list);
-      
+        // 검색 목록
+        List<ContentsVO> list = contentsProc.tip_by_cateno_search_paging(map);
+        mav.addObject("list", list);
 
-      // 검색된 레코드 갯수
-      int search_count = contentsProc.search_count(map);
-      mav.addObject("search_count", search_count);
+        // 검색된 레코드 갯수
+        int search_count = contentsProc.search_count(map);
+        mav.addObject("search_count", search_count);
 
-      CateVO cateVO = cateProc.read(cateno);
-      mav.addObject("cateVO", cateVO);
+        CateVO cateVO = cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
 
-      CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
-      mav.addObject("categrpVO", categrpVO);
+        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
 
-      /*
-       * SPAN태그를 이용한 박스 모델의 지원
-       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
-       * 18 19 20 [다음]
-       * @param cateno 카테고리번호
-       * @param search_count 검색(전체) 레코드수
-       * @param now_page 현재 페이지
-       * @param word 검색어
-       * @return 페이징용으로 생성된 HTML tag 문자열
-       */
-      String paging = contentsProc.tip_pagingBox(cateno, search_count, now_page, word);
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17 18
+         * 19 20 [다음]
+         * 
+         * @param cateno 카테고리번호
+         * 
+         * @param search_count 검색(전체) 레코드수
+         * 
+         * @param now_page 현재 페이지
+         * 
+         * @param word 검색어
+         * 
+         * @return 페이징용으로 생성된 HTML tag 문자열
+         */
+        String paging = contentsProc.tip_pagingBox(cateno, search_count, now_page, word);
 //      System.out.println("-> paging: " + paging);
-      mav.addObject("paging", paging);
+        mav.addObject("paging", paging);
 
-      mav.addObject("now_page", now_page);
-      
+        mav.addObject("now_page", now_page);
 
-      // /contents/list_by_cateno_table_img1_search_paging.jsp
-      mav.setViewName("/contents/tip_by_cateno");
+        // /contents/list_by_cateno_table_img1_search_paging.jsp
+        mav.setViewName("/contents/tip_by_cateno");
 
-      return mav;
+        return mav;
     }
 
     /**
@@ -593,7 +588,6 @@ public class ContentsCont {
 
         return mav; // forward
     }
-    
 
     // http://localhost:9091/contents/read.do?contentsno=3
     /**
@@ -625,127 +619,126 @@ public class ContentsCont {
 //
 //        return mav;
 //    }
-    
-    
- // http://localhost:9091/contents/read.do
+
+    // http://localhost:9091/contents/read.do
     /**
      * 조회
+     * 
      * @return
      */
-    @RequestMapping(value="/contents/read.do", method=RequestMethod.GET )
+    @RequestMapping(value = "/contents/read.do", method = RequestMethod.GET)
     public ModelAndView read_ajax(HttpServletRequest request, int contentsno) {
-      // public ModelAndView read(int contentsno, int now_page) {
-      // System.out.println("-> now_page: " + now_page);
-      
-      ModelAndView mav = new ModelAndView();
-      
-      contentsProc.cnt(contentsno);        
+        // public ModelAndView read(int contentsno, int now_page) {
+        // System.out.println("-> now_page: " + now_page);
 
-      ContentsVO contentsVO = this.contentsProc.read(contentsno);
-      mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
+        ModelAndView mav = new ModelAndView();
 
-      CateVO cateVO = this.cateProc.read(contentsVO.getCateno());
-      mav.addObject("cateVO", cateVO); 
+        contentsProc.cnt(contentsno);
 
-      CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
-      mav.addObject("categrpVO", categrpVO);
-      
-      this.contentsProc.update_replycnt(contentsVO);  
-      
-      
-      // 단순 read
-      // mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
-      
-      // 쇼핑 기능 추가
-      // mav.setViewName("/contents/read_cookie"); // /WEB-INF/views/contents/read_cookie.jsp
-      
-      // 댓글 기능 추가 
-      mav.setViewName("/contents/read_cookie_reply"); // /WEB-INF/views/contents/read_cookie_reply.jsp
-      
-      // -------------------------------------------------------------------------------
-      // 쇼핑 카트 장바구니에 상품 등록전 로그인 폼 출력 관련 쿠기  
-      // -------------------------------------------------------------------------------
-      Cookie[] cookies = request.getCookies();
-      Cookie cookie = null;
+        ContentsVO contentsVO = this.contentsProc.read(contentsno);
+        mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
 
-      String ck_id = ""; // id 저장
-      String ck_id_save = ""; // id 저장 여부를 체크
-      String ck_passwd = ""; // passwd 저장
-      String ck_passwd_save = ""; // passwd 저장 여부를 체크
+        CateVO cateVO = this.cateProc.read(contentsVO.getCateno());
+        mav.addObject("cateVO", cateVO);
 
-      if (cookies != null) {  // Cookie 변수가 있다면
-        for (int i=0; i < cookies.length; i++){
-          cookie = cookies[i]; // 쿠키 객체 추출
-          
-          if (cookie.getName().equals("ck_id")){
-            ck_id = cookie.getValue();                                 // Cookie에 저장된 id
-          }else if(cookie.getName().equals("ck_id_save")){
-            ck_id_save = cookie.getValue();                          // Cookie에 id를 저장 할 것인지의 여부, Y, N
-          }else if (cookie.getName().equals("ck_passwd")){
-            ck_passwd = cookie.getValue();                          // Cookie에 저장된 password
-          }else if(cookie.getName().equals("ck_passwd_save")){
-            ck_passwd_save = cookie.getValue();                  // Cookie에 password를 저장 할 것인지의 여부, Y, N
-          }
+        CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
+
+        this.contentsProc.update_replycnt(contentsVO);
+
+        // 단순 read
+        // mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
+
+        // 쇼핑 기능 추가
+        // mav.setViewName("/contents/read_cookie"); //
+        // /WEB-INF/views/contents/read_cookie.jsp
+
+        // 댓글 기능 추가
+        mav.setViewName("/contents/read_cookie_reply"); // /WEB-INF/views/contents/read_cookie_reply.jsp
+
+        // -------------------------------------------------------------------------------
+        // 쇼핑 카트 장바구니에 상품 등록전 로그인 폼 출력 관련 쿠기
+        // -------------------------------------------------------------------------------
+        Cookie[] cookies = request.getCookies();
+        Cookie cookie = null;
+
+        String ck_id = ""; // id 저장
+        String ck_id_save = ""; // id 저장 여부를 체크
+        String ck_passwd = ""; // passwd 저장
+        String ck_passwd_save = ""; // passwd 저장 여부를 체크
+
+        if (cookies != null) { // Cookie 변수가 있다면
+            for (int i = 0; i < cookies.length; i++) {
+                cookie = cookies[i]; // 쿠키 객체 추출
+
+                if (cookie.getName().equals("ck_id")) {
+                    ck_id = cookie.getValue(); // Cookie에 저장된 id
+                } else if (cookie.getName().equals("ck_id_save")) {
+                    ck_id_save = cookie.getValue(); // Cookie에 id를 저장 할 것인지의 여부, Y, N
+                } else if (cookie.getName().equals("ck_passwd")) {
+                    ck_passwd = cookie.getValue(); // Cookie에 저장된 password
+                } else if (cookie.getName().equals("ck_passwd_save")) {
+                    ck_passwd_save = cookie.getValue(); // Cookie에 password를 저장 할 것인지의 여부, Y, N
+                }
+            }
         }
-      }
-      
-      System.out.println("-> ck_id: " + ck_id);
-      
-      mav.addObject("ck_id", ck_id); 
-      mav.addObject("ck_id_save", ck_id_save);
-      mav.addObject("ck_passwd", ck_passwd);
-      mav.addObject("ck_passwd_save", ck_passwd_save);
-      // -------------------------------------------------------------------------------
-      
-      return mav;
+
+        System.out.println("-> ck_id: " + ck_id);
+
+        mav.addObject("ck_id", ck_id);
+        mav.addObject("ck_id_save", ck_id_save);
+        mav.addObject("ck_passwd", ck_passwd);
+        mav.addObject("ck_passwd_save", ck_passwd_save);
+        // -------------------------------------------------------------------------------
+
+        return mav;
     }
 
-    
     /**
      * Concert + ConcertCate join, 연결 목록
-     * http://localhost:9091/concertcate/list_all_join.do 
+     * http://localhost:9091/concertcate/list_all_join.do
+     * 
      * @return
      */
-    @RequestMapping(value = "/contents/list_all_join.do", method=RequestMethod.GET)
-    public ModelAndView list_all_join(
-            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
-            @RequestParam(value = "now_page", defaultValue = "1") int now_page            
-            ) {
+    @RequestMapping(value = "/contents/list_all_join.do", method = RequestMethod.GET)
+    public ModelAndView list_all_join(@RequestParam(value = "word", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page) {
         ModelAndView mav = new ModelAndView();
-        
-        HashMap<String, Object> map = new HashMap<String, Object>();        
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("word", word); // #{word}
         map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
-        
+
         // 검색된 레코드 갯수
         int search_count = contentsProc.search_count2(map);
         mav.addObject("search_count2", search_count);
-        
-        List<ContentsVO>list = this.contentsProc.list_all_join(map);
+
+        List<ContentsVO> list = this.contentsProc.list_all_join(map);
         mav.addObject("list", list); // request.setAttribute("list", list);
-        
-        
-        
+
         /*
-       * SPAN태그를 이용한 박스 모델의 지원
-       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
-       * 18 19 20 [다음]
-       * @param cateno 카테고리번호
-       * @param search_count 검색(전체) 레코드수
-       * @param now_page 현재 페이지
-       * @param word 검색어
-       * @return 페이징용으로 생성된 HTML tag 문자열
-       */
+         * SPAN태그를 이용한 박스 모델의 지원 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17 18
+         * 19 20 [다음]
+         * 
+         * @param cateno 카테고리번호
+         * 
+         * @param search_count 검색(전체) 레코드수
+         * 
+         * @param now_page 현재 페이지
+         * 
+         * @param word 검색어
+         * 
+         * @return 페이징용으로 생성된 HTML tag 문자열
+         */
         String paging = contentsProc.pagingBox2(search_count, now_page, word);
         System.out.println("-> paging: " + paging);
         mav.addObject("paging", paging);
-    
+
         mav.addObject("now_page", now_page);
-        
+
         mav.setViewName("/contents/list_all_join"); // /WEB-INF/views/concertcate/list_all_join.jsp
         return mav;
     }
-    
 
     /**
      * 목록 + 검색 + 페이징 지원
@@ -757,213 +750,218 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/list_by_cateno_search_paging.do", method = RequestMethod.GET)
-    public ModelAndView list_by_cateno_search_paging(
-            @RequestParam(value = "cateno", defaultValue = "1") int cateno,                                                                           
-            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
-            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
-            HttpSession session) {
-      System.out.println("--> now_page: " + now_page);
+    public ModelAndView list_by_cateno_search_paging(@RequestParam(value = "cateno", defaultValue = "1") int cateno,
+            @RequestParam(value = "word", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page, HttpSession session) {
+        System.out.println("--> now_page: " + now_page);
 
-      ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView();
 
-      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
-      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("cateno", cateno); // #{cateno}
+        map.put("word", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
-      // 검색 목록
-      List<ContentsVO> list = contentsProc.list_by_cateno_search_paging(map);
-      mav.addObject("list", list);
-      
+        // 검색 목록
+        List<ContentsVO> list = contentsProc.list_by_cateno_search_paging(map);
+        mav.addObject("list", list);
 
-      // 검색된 레코드 갯수
-      int search_count = contentsProc.search_count(map);
-      mav.addObject("search_count", search_count);
+        // 검색된 레코드 갯수
+        int search_count = contentsProc.search_count(map);
+        mav.addObject("search_count", search_count);
 
-      CateVO cateVO = cateProc.read(cateno);
-      mav.addObject("cateVO", cateVO);
+        CateVO cateVO = cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
 
-      CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
-      mav.addObject("categrpVO", categrpVO);
+        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
 
-      /*
-       * SPAN태그를 이용한 박스 모델의 지원
-       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
-       * 18 19 20 [다음]
-       * @param cateno 카테고리번호
-       * @param search_count 검색(전체) 레코드수
-       * @param now_page 현재 페이지
-       * @param word 검색어
-       * @return 페이징용으로 생성된 HTML tag 문자열
-       */
-      String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17 18
+         * 19 20 [다음]
+         * 
+         * @param cateno 카테고리번호
+         * 
+         * @param search_count 검색(전체) 레코드수
+         * 
+         * @param now_page 현재 페이지
+         * 
+         * @param word 검색어
+         * 
+         * @return 페이징용으로 생성된 HTML tag 문자열
+         */
+        String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
 //      System.out.println("-> paging: " + paging);
-      mav.addObject("paging", paging);
+        mav.addObject("paging", paging);
 
-      mav.addObject("now_page", now_page);
-      
+        mav.addObject("now_page", now_page);
 
-      // /contents/list_by_cateno_table_img1_search_paging.jsp
-      mav.setViewName("/contents/list_by_cateno_search_paging");
+        // /contents/list_by_cateno_table_img1_search_paging.jsp
+        mav.setViewName("/contents/list_by_cateno_search_paging");
 
-      return mav;
+        return mav;
     }
-    
-    /**
-     * 목록 + 검색 + 페이징 지원
-     * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+
+    /* *//**
+          * 목록 + 검색 + 페이징 지원
+          * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+          * 
+          * @param cateno
+          * @param word
+          * @param now_page
+          * @return
+          
+             @RequestMapping(value = "/contents/index_contents.do", method =RequestMethod.GET) public ModelAndView index_contents(
+             * 
+             * @RequestParam(value = "cateno", defaultValue = "1") int cateno,
+             * 
+             * @RequestParam(value = "word", defaultValue = "") String word,
+             * 
+             * @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+             * HttpSession session) { System.out.println("--> now_page: " + now_page);
+             * 
+             * ModelAndView mav = new ModelAndView();
+             * 
+             * // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용 HashMap<String, Object> map = new
+             * HashMap<String, Object>(); map.put("cateno", cateno); // #{cateno}
+             * map.put("word", word); // #{word} map.put("now_page", now_page); // 페이지에 출력할
+             * 레코드의 범위를 산출하기위해 사용
+             * 
+             * // 검색 목록 List<ContentsVO> list =
+             * contentsProc.list_by_cateno_search_paging(map); mav.addObject("list", list);
+             * 
+             * // 검색된 레코드 갯수 int search_count = contentsProc.search_count(map);
+             * mav.addObject("search_count", search_count);
+             * 
+             * CateVO cateVO = cateProc.read(cateno); mav.addObject("cateVO", cateVO);
+             * 
+             * CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+             * mav.addObject("categrpVO", categrpVO);
+             * 
+             * 
+             * SPAN태그를 이용한 박스 모델의 지원 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17 18
+             * 19 20 [다음]
+             * 
+             * @param cateno 카테고리번호
+             * 
+             * @param search_count 검색(전체) 레코드수
+             * 
+             * @param now_page 현재 페이지
+             * 
+             * @param word 검색어
+             * 
+             * @return 페이징용으로 생성된 HTML tag 문자열
+             * 
+             * String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
+             * // System.out.println("-> paging: " + paging); mav.addObject("paging",
+             * paging);
+             * 
+             * mav.addObject("now_page", now_page);
+             * 
+             * 
+             * // /contents/list_by_cateno_table_img1_search_paging.jsp
+             * mav.setViewName("/contents/index_contents");
+             * 
+             * return mav; }
+             */
+
+    /*
+     * /** 목록 + 검색 + 페이징 + Cookie 지원
+     * http://localhost:9091/contents/list_by_cateno_search_paging.do?cateno=1&word=
+     * 스위스&now_page=1
      * 
      * @param cateno
+     * 
      * @param word
+     * 
      * @param now_page
+     * 
      * @return
-     */
-    @RequestMapping(value = "/contents/index_contents.do", method = RequestMethod.GET)
-    public ModelAndView index_contents(
-            @RequestParam(value = "cateno", defaultValue = "1") int cateno,                                                                           
-            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
-            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
-            HttpSession session) {
-      System.out.println("--> now_page: " + now_page);
-
-      ModelAndView mav = new ModelAndView();
-
-      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
-      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
-
-      // 검색 목록
-      List<ContentsVO> list = contentsProc.list_by_cateno_search_paging(map);
-      mav.addObject("list", list);
-
-      // 검색된 레코드 갯수
-      int search_count = contentsProc.search_count(map);
-      mav.addObject("search_count", search_count);
-
-      CateVO cateVO = cateProc.read(cateno);
-      mav.addObject("cateVO", cateVO);
-
-      CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
-      mav.addObject("categrpVO", categrpVO);
-
-      /*
-       * SPAN태그를 이용한 박스 모델의 지원
-       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
-       * 18 19 20 [다음]
-       * @param cateno 카테고리번호
-       * @param search_count 검색(전체) 레코드수
-       * @param now_page 현재 페이지
-       * @param word 검색어
-       * @return 페이징용으로 생성된 HTML tag 문자열
-       */
-      String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
-//      System.out.println("-> paging: " + paging);
-      mav.addObject("paging", paging);
-
-      mav.addObject("now_page", now_page);
-      
-
-      // /contents/list_by_cateno_table_img1_search_paging.jsp
-      mav.setViewName("/contents/index_contents");
-
-      return mav;
-    }
-
-    /*    /**
-             * 목록 + 검색 + 페이징 + Cookie 지원
-             * http://localhost:9091/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
-             * 
-             * @param cateno
-             * @param word
-             * @param now_page
-             * @return
-             *//*
-                * @RequestMapping(value = "/contents/list_by_cateno_search_paging.do", method =
-                * RequestMethod.GET) public ModelAndView list_by_cateno_search_paging_cookie(
-                * 
-                * @RequestParam(value = "cateno", defaultValue = "1") int cateno,
-                * 
-                * @RequestParam(value = "word", defaultValue = "") String word,
-                * 
-                * @RequestParam(value = "now_page", defaultValue = "1") int now_page,
-                * HttpServletRequest request) {
-                * System.out.println("-> list_by_cateno_search_paging now_page: " + now_page);
-                * 
-                * ModelAndView mav = new ModelAndView();
-                * 
-                * // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용 HashMap<String, Object> map = new
-                * HashMap<String, Object>(); map.put("cateno", cateno); // #{cateno}
-                * map.put("word", word); // #{word} map.put("now_page", now_page); // 페이지에 출력할
-                * 레코드의 범위를 산출하기위해 사용
-                * 
-                * // 검색 목록 List<ContentsVO> list =
-                * contentsProc.list_by_cateno_search_paging(map); mav.addObject("list", list);
-                * 
-                * // 검색된 레코드 갯수 int search_count = contentsProc.search_count(map);
-                * mav.addObject("search_count", search_count);
-                * 
-                * CateVO cateVO = cateProc.read(cateno); mav.addObject("cateVO", cateVO);
-                * 
-                * CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
-                * mav.addObject("categrpVO", categrpVO);
-                * 
-                * 
-                * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
-                * 18 19 20 [다음]
-                * 
-                * @param cateno 카테고리번호
-                * 
-                * @param search_count 검색(전체) 레코드수
-                * 
-                * @param now_page 현재 페이지
-                * 
-                * @param word 검색어
-                * 
-                * @return 페이징 생성 문자열
-                * 
-                * String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
-                * 
-                * mav.addObject("paging", paging);
-                * 
-                * mav.addObject("now_page", now_page);
-                * 
-                * // /views/contents/list_by_cateno_search_paging_cookie.jsp //
-                * mav.setViewName("/contents/list_by_cateno_search_paging_cookie");
-                * mav.setViewName("/contents/list_by_cateno_search_paging_cookie_cart");
-                * 
-                * //
-                * -----------------------------------------------------------------------------
-                * -- // 쇼핑 카트 장바구니에 상품 등록전 로그인 폼 출력 관련 쿠기 //
-                * -----------------------------------------------------------------------------
-                * -- Cookie[] cookies = request.getCookies(); Cookie cookie = null;
-                * 
-                * String ck_id = ""; // id 저장 String ck_id_save = ""; // id 저장 여부를 체크 String
-                * ck_passwd = ""; // passwd 저장 String ck_passwd_save = ""; // passwd 저장 여부를 체크
-                * 
-                * if (cookies != null) { // Cookie 변수가 있다면 for (int i=0; i < cookies.length;
-                * i++){ cookie = cookies[i]; // 쿠키 객체 추출
-                * 
-                * if (cookie.getName().equals("ck_id")){ ck_id = cookie.getValue(); // Cookie에
-                * 저장된 id }else if(cookie.getName().equals("ck_id_save")){ ck_id_save =
-                * cookie.getValue(); // Cookie에 id를 저장 할 것인지의 여부, Y, N }else if
-                * (cookie.getName().equals("ck_passwd")){ ck_passwd = cookie.getValue(); //
-                * Cookie에 저장된 password }else if(cookie.getName().equals("ck_passwd_save")){
-                * ck_passwd_save = cookie.getValue(); // Cookie에 password를 저장 할 것인지의 여부, Y, N }
-                * } }
-                * 
-                * System.out.println("-> ck_id: " + ck_id);
-                * 
-                * mav.addObject("ck_id", ck_id); mav.addObject("ck_id_save", ck_id_save);
-                * mav.addObject("ck_passwd", ck_passwd); mav.addObject("ck_passwd_save",
-                * ck_passwd_save); //
-                * -----------------------------------------------------------------------------
-                * --
-                * 
-                * return mav; }
-                */
+     *//*
+        * @RequestMapping(value = "/contents/list_by_cateno_search_paging.do", method =
+        * RequestMethod.GET) public ModelAndView list_by_cateno_search_paging_cookie(
+        * 
+        * @RequestParam(value = "cateno", defaultValue = "1") int cateno,
+        * 
+        * @RequestParam(value = "word", defaultValue = "") String word,
+        * 
+        * @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+        * HttpServletRequest request) {
+        * System.out.println("-> list_by_cateno_search_paging now_page: " + now_page);
+        * 
+        * ModelAndView mav = new ModelAndView();
+        * 
+        * // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용 HashMap<String, Object> map = new
+        * HashMap<String, Object>(); map.put("cateno", cateno); // #{cateno}
+        * map.put("word", word); // #{word} map.put("now_page", now_page); // 페이지에 출력할
+        * 레코드의 범위를 산출하기위해 사용
+        * 
+        * // 검색 목록 List<ContentsVO> list =
+        * contentsProc.list_by_cateno_search_paging(map); mav.addObject("list", list);
+        * 
+        * // 검색된 레코드 갯수 int search_count = contentsProc.search_count(map);
+        * mav.addObject("search_count", search_count);
+        * 
+        * CateVO cateVO = cateProc.read(cateno); mav.addObject("cateVO", cateVO);
+        * 
+        * CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        * mav.addObject("categrpVO", categrpVO);
+        * 
+        * 
+        * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+        * 18 19 20 [다음]
+        * 
+        * @param cateno 카테고리번호
+        * 
+        * @param search_count 검색(전체) 레코드수
+        * 
+        * @param now_page 현재 페이지
+        * 
+        * @param word 검색어
+        * 
+        * @return 페이징 생성 문자열
+        * 
+        * String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
+        * 
+        * mav.addObject("paging", paging);
+        * 
+        * mav.addObject("now_page", now_page);
+        * 
+        * // /views/contents/list_by_cateno_search_paging_cookie.jsp //
+        * mav.setViewName("/contents/list_by_cateno_search_paging_cookie");
+        * mav.setViewName("/contents/list_by_cateno_search_paging_cookie_cart");
+        * 
+        * //
+        * -----------------------------------------------------------------------------
+        * -- // 쇼핑 카트 장바구니에 상품 등록전 로그인 폼 출력 관련 쿠기 //
+        * -----------------------------------------------------------------------------
+        * -- Cookie[] cookies = request.getCookies(); Cookie cookie = null;
+        * 
+        * String ck_id = ""; // id 저장 String ck_id_save = ""; // id 저장 여부를 체크 String
+        * ck_passwd = ""; // passwd 저장 String ck_passwd_save = ""; // passwd 저장 여부를 체크
+        * 
+        * if (cookies != null) { // Cookie 변수가 있다면 for (int i=0; i < cookies.length;
+        * i++){ cookie = cookies[i]; // 쿠키 객체 추출
+        * 
+        * if (cookie.getName().equals("ck_id")){ ck_id = cookie.getValue(); // Cookie에
+        * 저장된 id }else if(cookie.getName().equals("ck_id_save")){ ck_id_save =
+        * cookie.getValue(); // Cookie에 id를 저장 할 것인지의 여부, Y, N }else if
+        * (cookie.getName().equals("ck_passwd")){ ck_passwd = cookie.getValue(); //
+        * Cookie에 저장된 password }else if(cookie.getName().equals("ck_passwd_save")){
+        * ck_passwd_save = cookie.getValue(); // Cookie에 password를 저장 할 것인지의 여부, Y, N }
+        * } }
+        * 
+        * System.out.println("-> ck_id: " + ck_id);
+        * 
+        * mav.addObject("ck_id", ck_id); mav.addObject("ck_id_save", ck_id_save);
+        * mav.addObject("ck_passwd", ck_passwd); mav.addObject("ck_passwd_save",
+        * ck_passwd_save); //
+        * -----------------------------------------------------------------------------
+        * --
+        * 
+        * return mav; }
+        */
 
     /**
      * Grid 형태의 화면 구성 http://localhost:9091/contents/list_by_cateno_grid.do
@@ -1283,7 +1281,174 @@ public class ContentsCont {
     }
     
     
+    
+    
+    
+    /**
+     * 공지사항 인덱스 iframe
+     * 
+     * @return
+     */
+    
+    
+//    @RequestMapping(value = "/contents/index_contents4.do", method = RequestMethod.GET)
+//    public ModelAndView index_contents4(            
+//            @RequestParam(value = "cateno", defaultValue = "1") int cateno,                                                                           
+//            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+//            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+//            HttpSession session) {
+//        ModelAndView mav = new ModelAndView();
+//
+//        
+//        HashMap<String, Object> map = new HashMap<String, Object>();
+//        map.put("cateno", cateno); // #{categrpno}
+//        map.put("word", word); // #{word}
+//        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+//
+//        List<ContentsVO> list = contentsProc.index_contents4(map);
+//        mav.addObject("list", list);
+//        
+//     // 검색된 레코드 갯수
+//        int search_count = contentsProc.search_count(map);
+//        mav.addObject("search_count", search_count);
+//
+//        CateVO cateVO = cateProc.read(cateno);
+//        mav.addObject("cateVO", cateVO);
+//        
+//        String paging = contentsProc.notice_pagingBox(cateno, search_count, now_page, word);
+//        mav.addObject("paging", paging);
+//
+//        mav.addObject("now_page", now_page);
+//        
+//        mav.setViewName("/contents/index_contents4");
+//        return mav; // forward
+//    }
+    
+    /**
+     * 공지사항 목록 + 검색 + 페이징 지원
+     * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+     * 
+     * @param cateno
+     * @param word
+     * @param now_page
+     * @return
+     */
+    @RequestMapping(value = "/contents/index_contents4.do", method = RequestMethod.GET)
+    public ModelAndView index_contents4(@RequestParam(value = "cateno", defaultValue = "1") int cateno,
+            @RequestParam(value = "word", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page, HttpSession session) {
+
+        ModelAndView mav = new ModelAndView();
+
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("cateno", cateno); // #{cateno}
+        map.put("word", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+        // 검색 목록
+        List<ContentsVO> list = contentsProc.index_contents4(map);
+        mav.addObject("list", list);
+
+        // 검색된 레코드 갯수
+        int search_count = contentsProc.search_count(map);
+        mav.addObject("search_count", search_count);
+
+        CateVO cateVO = cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
+
+        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
+
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17 18
+         * 19 20 [다음]
+         * 
+         * @param cateno 카테고리번호
+         * 
+         * @param search_count 검색(전체) 레코드수
+         * 
+         * @param now_page 현재 페이지
+         * 
+         * @param word 검색어
+         * 
+         * @return 페이징용으로 생성된 HTML tag 문자열
+         */
+        String paging = contentsProc.notice_pagingBox(cateno, search_count, now_page, word);
+//      System.out.println("-> paging: " + paging);
+        mav.addObject("paging", paging);
+
+        mav.addObject("now_page", now_page);
+
+        // /contents/list_by_cateno_table_img1_search_paging.jsp
+        mav.setViewName("/contents/index_contents4");
+
+        return mav;
+    }
 
     
+    /**
+     * 공지사항 목록 + 검색 + 페이징 지원
+     * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+     * 
+     * @param cateno
+     * @param word
+     * @param now_page
+     * @return
+     */
+    @RequestMapping(value = "/contents/index_contents5.do", method = RequestMethod.GET)
+    public ModelAndView index_contents5(@RequestParam(value = "cateno", defaultValue = "2") int cateno,
+            @RequestParam(value = "word", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page, HttpSession session) {
+        System.out.println("--> now_page: " + now_page);
+
+        ModelAndView mav = new ModelAndView();
+
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("cateno", cateno); // #{cateno}
+        map.put("word", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+        // 검색 목록
+        List<ContentsVO> list = contentsProc.index_contents5(map);
+        mav.addObject("list", list);
+
+        // 검색된 레코드 갯수
+        int search_count = contentsProc.search_count(map);
+        mav.addObject("search_count", search_count);
+
+        CateVO cateVO = cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
+
+        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
+
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17 18
+         * 19 20 [다음]
+         * 
+         * @param cateno 카테고리번호
+         * 
+         * @param search_count 검색(전체) 레코드수
+         * 
+         * @param now_page 현재 페이지
+         * 
+         * @param word 검색어
+         * 
+         * @return 페이징용으로 생성된 HTML tag 문자열
+         */
+        String paging = contentsProc.tip_pagingBox(cateno, search_count, now_page, word);
+//      System.out.println("-> paging: " + paging);
+        mav.addObject("paging", paging);
+
+        mav.addObject("now_page", now_page);
+
+        // /contents/list_by_cateno_table_img1_search_paging.jsp
+        mav.setViewName("/contents/index_contents5");
+
+        return mav;
+    }
+
 
 }

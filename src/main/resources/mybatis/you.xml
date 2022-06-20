@@ -155,6 +155,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      
   </select> 
   
+  <select id="index_contents6" 
+             resultType="dev.mvc.you.YouVO" parameterType="HashMap">
+   SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno, r
+   FROM (
+              SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno, rownum as r
+              FROM (
+                        SELECT youno,ytitle,ytext,url,rdate,cnt,categrpno
+                        FROM you
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE categrpno=#{categrpno}
+                          </when>
+                        </choose>
+                        ORDER BY youno DESC
+               )
+    )
+ <choose>
+                                <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                                                WHERE <![CDATA[ r <= 3 ]]>
+                                </when>
+                </choose>
+     
+   <!--  1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30; -->
+     
+  </select> 
+  
   
 </mapper>
 

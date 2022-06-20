@@ -251,7 +251,7 @@ a#scrollUp i{
 
 .mainmenu ul li a:hover, .mainmenu ul li a.active,  .shop-menu ul li a.active{
 	background:none;
-	color:#fdb45e;
+	color:#8DA386;
 }
 
 .search_box input {
@@ -1001,7 +1001,7 @@ h2.title {
 
 .category-tab ul {
   background: #40403E;
-  border-bottom: 1px solid #FE980F;
+/*   border-bottom: 1px solid #FE980F; */
   list-style: none outside none;
   margin: 0 0 30px;
   padding: 0;
@@ -1540,8 +1540,8 @@ h2.title {
 }
 
 .breadcrumbs .breadcrumb li a {
-  background:#FE980F;
-  color: #FFFFFF;
+  background:#E2E8DE;
+  color: #696763;
   padding: 3px 7px;
 }
 

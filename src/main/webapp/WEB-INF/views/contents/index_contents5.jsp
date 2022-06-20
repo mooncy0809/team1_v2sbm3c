@@ -6,7 +6,7 @@
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
-<title>Community</title>
+<title>Diet Tip</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gaegu:wght@300&family=Kdam+Thmor+Pro&family=Kirang+Haerang&family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -58,13 +58,12 @@ h1{
 
  
  </style>
+ 
 </head> 
   
-<body >
- 
+<body>
 <div class="style1">
   <table class="type04" style='width: 70%;'>
-    <%-- table 컬럼 --%>
     
     <%-- table 내용 --%>
     <tbody>
@@ -78,20 +77,24 @@ h1{
         <c:set var="memberno" value="${contentsVO.memberno }" />
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
+        <c:set var="replycnt" value="${contentsVO.replycnt }" />
         
         
-        <tr>  
+        <tr> 
           <td style='vertical-align: middle; text-align: left;'>
             <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }" target="_top">
-            <strong> ${title}</strong> </a> </td>
+            <strong> ${title} </strong></a>
+        </td>
         </tr>
       </c:forEach>
       
     </tbody>
   </table>
-  <a href="../contents/notice_by_cateno.do" target="_top"><h1 style="font-size: 40px">공지사항<div class="eng">NOTICE</div></h1></a>
-  </div>
- 
+  
+      <a href="../contents/tip_by_cateno.do" target="_top"><h1 style="font-size: 40px">다이어트 팁<div class="eng">DIET TIP</div></h1></a>
+  </DIV>
+
+
 </body>
  
 </html>

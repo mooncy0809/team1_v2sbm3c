@@ -31,6 +31,10 @@ COMMENT ON COLUMN cate.rdate is '등록일';
 COMMENT ON COLUMN cate.cnt is '관련 자료수';
 
 INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
+VALUES(2, 2, '다이어트꿀팁', sysdate, 0);
+
+
+INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
 VALUES(cate_seq.nextval, 2, '꿀꿀', sysdate, 0);
 
 INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
@@ -51,6 +55,9 @@ VALUES(cate_seq.nextval, 3, '고민/질문', sysdate, 0);
 INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
 VALUES(cate_seq.nextval, 3, '일기', sysdate, 0);
 
+UPDATE cate
+SET cateno=2
+WHERE NAME='꿀꿀';
 
 SELECT * FROM cate;
 
