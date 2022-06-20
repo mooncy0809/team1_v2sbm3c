@@ -8,7 +8,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>로그아웃</title>
+<title>비밀번호 찾기</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -33,15 +33,16 @@
 <jsp:include page="../menu/top.jsp" flush='false' />
  
  
- 
-<DIV class='title_line'>알림</DIV>
-  <DIV class='message'>
+<DIV class='title_line' style='text-align:center'>알림</DIV>
+  <DIV class='message'style='text-align:center'>
     <fieldset class='fieldset_basic'>
       <ul>
-
+      
+        
         <li class='li_none'>임시비밀번호가 발급되었습니다.</li>
         <li class='li_none'>메일함을 확인해주세요.</li>
         <li class='li_none'>
+        
         
           <button type="button" id="btn_login" class="btn btn-primary btn-md">확인</button>
         </li>
@@ -49,6 +50,7 @@
       </ul>
     </fieldset>    
   </DIV>
+
  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>

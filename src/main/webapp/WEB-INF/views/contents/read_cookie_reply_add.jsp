@@ -476,7 +476,10 @@
 <!-- -------------------- 댓글 삭제폼 종료 -------------------- -->
    
 <DIV class='content_body'>
-    <span style="width:70%; font-size: 1.5em; font-weight: bold;"> ${cateVO.name } </span>
+
+    <span style="width:70%; font-size: 1.5em; font-weight: bold;">
+        <A href="#" onclick="history.go(-1);">${cateVO.name }</A>
+    </span>    
     
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
@@ -492,14 +495,14 @@
     <A href="./delete.do?contentsno=${contentsno}&now_page=${now_page}&cateno=${cateno}&word=${param.word }">삭제</A>  
 </ASIDE>
   
-  <DIV style="text-align: right; clear: both;">  
+<%--   <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_search.do'>
       <input type='hidden' name='cateno' value='${cateVO.cateno }'>
       <c:choose>
-        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
+        <c:when test="${param.word != '' }"> 검색하는 경우
           <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
         </c:when>
-        <c:otherwise> <%-- 검색하지 않는 경우 --%>
+        <c:otherwise> 검색하지 않는 경우
           <input type='text' name='word' id='word' value='' style='width: 20%;'>
         </c:otherwise>
       </c:choose>
@@ -509,7 +512,7 @@
                      onclick="location.href='./list_by_cateno_search.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>
-  </DIV>
+  </DIV> --%>
   
   <DIV class='menu_line'></DIV>
   

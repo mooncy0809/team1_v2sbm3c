@@ -37,6 +37,11 @@
   color:#f90;
   font-size: 2.3rem;
 }
+
+img { 
+    display : block;
+    margin : auto;
+}
 </style>
 
 </head>
@@ -48,7 +53,10 @@
   
   <fieldset class="fieldset_basic">
   
-  <c:if test="${score == 1 }"> <label for="5-stars" class="star">&#9733;</label></c:if>
+  <span style="width:50%; font-size: 1.5em; font-weight: bold;">리뷰</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+   <DIV>
+     <c:if test="${score == 1 }"> <label for="5-stars" class="star">&#9733;</label></c:if>
   <c:if test="${score == 2 }">
         <label for="5-stars" class="star">&#9733;</label> <label for="5-stars" class="star">&#9733;</label>  
   </c:if>
@@ -61,10 +69,7 @@
   <c:if test="${score == 5 }">
         <label for="5-stars" class="star">&#9733;</label>  <label for="5-stars" class="star">&#9733;</label> <label for="5-stars" class="star">&#9733;</label> <label for="5-stars" class="star">&#9733;</label> <label for="5-stars" class="star">&#9733;</label> 
   </c:if>  
-  
-  <span style="width:50%; font-size: 1.5em; font-weight: bold;">리뷰</span>
-   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
-   <DIV>제목: ${rtitle}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;${rdate }&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-eye" > ${cnt } </i></DIV>
+   <strong>${rtitle}</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;${rdate }&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-eye" > ${cnt } </i></DIV>
 <%--    <DIV style="text-align: right;">
         <button type="button" onclick="location.href='./read_update.do?qnano=${qnaVO.qnano}'"  class="btn">수정</button>
         <button type="submit"  onclick="location.href='./read_delete.do?qnano=${qnaVO.qnano}'" class="btn">삭제</button>
@@ -72,7 +77,7 @@
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
    
    
-    <DIV style="width: 60%; float: initial; margin-right: 10px;">
+    <DIV style="width: 60%; float: initial; margin-left:180px">
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
                 <%-- /static/contents/storage/ --%>

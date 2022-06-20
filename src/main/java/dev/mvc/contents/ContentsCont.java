@@ -174,9 +174,9 @@ public class ContentsCont {
         // redirect시에 hidden tag로 보낸것들이 전달이 안됨으로 request에 다시 저장
         mav.addObject("cateno", contentsVO.getCateno()); // redirect parameter 적용
 //        mav.addObject("memberno", contentsVO.getMemberno());
-        mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
+        // mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
 
-        mav.setViewName("redirect:/contents/msg.do"); // GET 방식 호출, 전달되는 데이터도 URL에 결합됨.
+        mav.setViewName("redirect:/contents/read.do"); // GET 방식 호출, 전달되는 데이터도 URL에 결합됨.
 
         return mav; // forward
     }
