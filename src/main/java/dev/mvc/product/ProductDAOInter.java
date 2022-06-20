@@ -49,6 +49,13 @@ public interface ProductDAOInter {
     public int search_count(HashMap<String, Object> hashMap);
     
     /**
+     * 카테고리별 검색 레코드 갯수
+     * @param hashMap
+     * @return
+     */
+    public int search_count2(HashMap<String, Object> hashMap);
+    
+    /**
      * 검색 + 페이징 목록
      * select id="list_by_cateno_search_paging" 
              resultType="dev.mvc.product.ProductVO" parameterType="HashMap"

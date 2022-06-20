@@ -110,7 +110,7 @@
 <jsp:include page="../menu/top2.jsp" />
 
 <DIV style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_cateno_grid.do'>
+    <form name='frm' id='frm' method='get' action='./list_by_cateno_grid_join2.do'>
       <input type='hidden' name='cateno' value='${cateVO.cateno }'>
       <input type='text' name='pword' id='pword' value='${param.pword }' style='width: 20%;'>
       <button type='submit'>검색</button>
@@ -121,10 +121,12 @@
     </form>
   </DIV>
 
-    <input type='hidden' name='cateno' value='${cateVO.cateno }'>
+       
+       <input type='hidden' name='now_page' value='1'>
   <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
-       <input type="hidden" name="productno" id="productno" value="productno">
+       <input type="hidden" name="productno" id="productno" value="${productno }">
+       
     </FORM>
   <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>
     <section id="advertisement">
@@ -203,24 +205,20 @@
                 
   <div class="col-sm-9 padding-right"> <%-- 갤러리 Layout 시작 --%>
   <div class="features_items">
-   <h2 class="title text-center">${cateVO.name } 상품 목록</h2>
-    <c:forEach var="productVO" items="${list }" varStatus="status">
-      <c:set var="productno" value="${productVO.productno }" />
-      <c:set var="ptitle" value="${productVO.ptitle }" />
-      <c:set var="pcontent" value="${productVO.pcontent }" />
-      <c:set var="pfile1" value="${productVO.pfile1 }" />
-      <c:set var="psize1" value="${productVO.psize1 }" />
-      <c:set var="pthumb1" value="${productVO.pthumb1 }" />
-      <c:set var="price" value="${productVO.price }" />
-      <c:set var="dc" value="${productVO.dc }" />
-      <c:set var="saleprice" value="${productVO.saleprice }" />
-      <c:set var="point" value="${productVO.point }" />
+   <h2 class="title text-center">상품 목록</h2>
+    <c:forEach var="cate_productVO" items="${list }" varStatus="status">
+      <c:set var="productno" value="${cate_productVO.productno }" />
+      <c:set var="ptitle" value="${cate_productVO.ptitle }" />
+      <c:set var="pcontent" value="${cate_productVO.pcontent }" />
+      <c:set var="pfile1" value="${cate_productVO.pfile1 }" />
+      <c:set var="psize1" value="${cate_productVO.psize1 }" />
+      <c:set var="pthumb1" value="${cate_productVO.pthumb1 }" />
+      <c:set var="price" value="${cate_productVO.price }" />
+      <c:set var="dc" value="${cate_productVO.dc }" />
+      <c:set var="saleprice" value="${cate_productVO.saleprice }" />
+      <c:set var="point" value="${cate_productVO.point }" />
         
       
-      <%-- 하나의 행에 이미지를 4개씩 출력후 행 변경, index는 0부터 시작 --%>
-      <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
-        <HR class='menu_line'>
-      </c:if>
       <!-- 하나의 이미지, 24 * 4 = 96% -->
       <DIV class="col-sm-4">
       <div class="product-image-wrapper">

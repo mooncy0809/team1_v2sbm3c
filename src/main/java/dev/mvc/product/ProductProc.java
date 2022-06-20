@@ -120,6 +120,12 @@ public class ProductProc implements ProductProcInter {
       int count = productDAO.search_count(hashMap);
       return count;
     }
+    
+    @Override
+    public int search_count2(HashMap<String, Object> hashMap) {
+      int count = productDAO.search_count2(hashMap);
+      return count;
+    }
 
     @Override
     public List<ProductVO> list_by_cateno_search_paging(HashMap<String, Object> map) {
@@ -465,8 +471,8 @@ public class ProductProc implements ProductProcInter {
      * @return 페이징 생성 문자열
      */ 
     @Override
-    public String pagingBox3(int cateno, int search_count, int now_page, String pword){ 
-      int total_page = (int)(Math.ceil((double)search_count/Product3.RECORD_PER_PAGE)); // 전체 페이지 수 
+    public String pagingBox3(int cateno, int search_count2, int now_page, String pword){ 
+      int total_page = (int)(Math.ceil((double)search_count2/Product3.RECORD_PER_PAGE)); // 전체 페이지 수 
       int total_grp = (int)(Math.ceil((double)total_page/Product3.PAGE_PER_BLOCK)); // 전체 그룹  수
       int now_grp = (int)(Math.ceil((double)now_page/Product3.PAGE_PER_BLOCK));  // 현재 그룹 번호
       

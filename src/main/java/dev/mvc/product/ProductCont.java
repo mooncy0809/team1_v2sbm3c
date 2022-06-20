@@ -788,7 +788,7 @@ public class ProductCont {
         mav.addObject("list", list);
 
         // 검색된 레코드 갯수
-        int search_count = productProc.search_count(map);
+        int search_count = productProc.search_count2(map);
         mav.addObject("search_count", search_count);
 
         CateVO cateVO = cateProc.read(cateno);
