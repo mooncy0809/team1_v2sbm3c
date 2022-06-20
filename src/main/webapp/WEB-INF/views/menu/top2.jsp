@@ -129,10 +129,10 @@
                                 <li class="dropdown"><a href="#">전체 카테고리<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="../product/list_by_cateno_grid.do?categrpno=6&cateno=7">닭가슴살</a></li>
-                                        <li><a href="product-details.html">간편요리</a></li> 
-                                        <li><a href="checkout.html">샐러드</a></li> 
-                                        <li><a href="cart.html">건강미용</a></li> 
-                                        <li><a href="login.html">간식</a></li> 
+                                        <li><a href="../product/list_by_cateno_grid.do?categrpno=6&cateno=8">간편요리</a></li> 
+                                        <li><a href="../product/list_by_cateno_grid.do?categrpno=6&cateno=9">샐러드</a></li> 
+                                        <li><a href="../product/list_by_cateno_grid.do?categrpno=6&cateno=10">건강미용</a></li> 
+                                        <li><a href="../product/list_by_cateno_grid.do?categrpno=6&cateno=11">간식</a></li> 
                                     </ul>                                   
                                 </li> 
                                 

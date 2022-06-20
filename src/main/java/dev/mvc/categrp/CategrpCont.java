@@ -317,7 +317,7 @@ public class CategrpCont {
               mav.setViewName("redirect:/categrp/list2.do");
 
    
-      }s
+      }
       catch(Exception e){
           mav.setViewName("redirect:/categrp/list2.do");
       }
