@@ -89,7 +89,7 @@ h1{
       
     </tbody>
   </table>
-  <a href="../contents/notice_by_cateno.do" target="_top"><h1 style="font-size: 40px">공지사항<div class="eng">NOTICE</div></h1></a>
+  <a href="../contents/notice_by_cateno.do" target="_top"><h1 style="font-size: 40px">자유게시판<div class="eng">COMMUNITY</div></h1></a>
   </div>
  
 </body>
