@@ -38,15 +38,6 @@
  <span style="width:70%; font-size: 1.5em; font-weight: bold;">전체 게시물</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
    <br>
-  <ASIDE class="aside_right">
-    <c:if test="${sessionScope.id != null }"> 
-        <A href="./create.do?cateno=${cateVO.cateno }">등록</A>    
-    <span class='menu_divide' >│</span>
-    </c:if>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
-  </ASIDE> 
 
   <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_all_join.do'>
@@ -56,7 +47,7 @@
       <button type='submit'>검색</button>
       <c:if test="${param.word.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list_all_join.do">검색 취소</button>  
+                     onclick="location.href='./list_all_join.do?word='">검색 취소</button>  
       </c:if>    
     </form>
   </DIV>
@@ -67,11 +58,11 @@
     <colgroup>
       <%-- <col style="width: 10%;"></col> --%>
       <col style="width: 10%;"></col>
-      <col style="width: 40%;"></col>
+      <col style="width: 35%;"></col>
       <col style="width: 25%;"></col>
-      <col style="width: 5%;"></col>
+      <col style="width: 7%;"></col>
       <col style="width: 10%;"></col>
-      <col style="width: 10%;"></col>
+      <col style="width: 13%;"></col>
     </colgroup>
     <%-- table 컬럼 --%>
     <thead>

@@ -306,7 +306,7 @@ public class ContentsCont {
       // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
+      map.put("word", word.toUpperCase()); // #{word}
       map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
       // 검색 목록
@@ -339,6 +339,7 @@ public class ContentsCont {
       mav.addObject("paging", paging);
 
       mav.addObject("now_page", now_page);
+      mav.addObject("word", word);
       
 
       // /contents/list_by_cateno_table_img1_search_paging.jsp
@@ -472,7 +473,7 @@ public class ContentsCont {
       // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
+      map.put("word", word.toUpperCase()); // #{word}
       map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
       // 검색 목록
@@ -505,7 +506,7 @@ public class ContentsCont {
       mav.addObject("paging", paging);
 
       mav.addObject("now_page", now_page);
-      
+      mav.addObject("word", word);
 
       // /contents/list_by_cateno_table_img1_search_paging.jsp
       mav.setViewName("/contents/tip_by_cateno");
@@ -717,12 +718,12 @@ public class ContentsCont {
         ModelAndView mav = new ModelAndView();
         
         HashMap<String, Object> map = new HashMap<String, Object>();        
-        map.put("word", word); // #{word}
+        map.put("word", word.toUpperCase()); // #{word}
         map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
         
         // 검색된 레코드 갯수
         int search_count = contentsProc.search_count2(map);
-        mav.addObject("search_count2", search_count);
+        mav.addObject("search_count", search_count);
         
         List<ContentsVO>list = this.contentsProc.list_all_join(map);
         mav.addObject("list", list); // request.setAttribute("list", list);
@@ -744,6 +745,7 @@ public class ContentsCont {
         mav.addObject("paging", paging);
     
         mav.addObject("now_page", now_page);
+        mav.addObject("word", word);
         
         mav.setViewName("/contents/list_all_join"); // /WEB-INF/views/concertcate/list_all_join.jsp
         return mav;
@@ -772,7 +774,7 @@ public class ContentsCont {
       // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
+      map.put("word", word.toUpperCase()); // #{word}
       map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
       // 검색 목록
@@ -805,7 +807,7 @@ public class ContentsCont {
       mav.addObject("paging", paging);
 
       mav.addObject("now_page", now_page);
-      
+      mav.addObject("word", word);
 
       // /contents/list_by_cateno_table_img1_search_paging.jsp
       mav.setViewName("/contents/list_by_cateno_search_paging");
@@ -1060,7 +1062,7 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/update_file.do", method = RequestMethod.GET)
-    public ModelAndView update_file(int contentsno, int now_page) {
+    public ModelAndView update_file(int contentsno) {
         ModelAndView mav = new ModelAndView();
 
         ContentsVO contentsVO = this.contentsProc.read(contentsno);
@@ -1070,7 +1072,7 @@ public class ContentsCont {
         mav.addObject("contentsVO", contentsVO);
         mav.addObject("cateVO", cateVO);
         mav.addObject("categrpVO", categrpVO);
-        mav.addObject("now_page", now_page);
+//        mav.addObject("now_page", now_page);
 
         mav.setViewName("/contents/update_file"); // /WEB-INF/views/contents/update_file.jsp
 
@@ -1083,7 +1085,7 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/update_file.do", method = RequestMethod.POST)
-    public ModelAndView update_file(HttpServletRequest request, ContentsVO contentsVO, int now_page, String word) {
+    public ModelAndView update_file(HttpServletRequest request, ContentsVO contentsVO) {
         ModelAndView mav = new ModelAndView();
 
         // 삭제할 파일 정보를 읽어옴, 기존에 등록된 레코드 저장용
@@ -1174,8 +1176,9 @@ public class ContentsCont {
             mav.setViewName("redirect:/contents/msg.do");
         }
 
-        mav.addObject("word", word);
-        mav.addObject("now_page", now_page);
+        /*
+         * mav.addObject("word", word); mav.addObject("now_page", now_page);
+         */
         mav.addObject("cateno", contentsVO_old.getCateno());
         System.out.println("-> cateno: " + contentsVO_old.getCateno());
 
