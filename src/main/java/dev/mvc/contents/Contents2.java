@@ -11,6 +11,9 @@ public class Contents2 {
 
     /** 목록 파일명 */
     public static String LIST_FILE = "list_all_join.do";
+    
+    public static int RECORD_PER_PAGE2 = 3;
+    public static String LIST_FILE2 = "index_contents.do";
 
     // Windows, VMWare, AWS cloud 절대 경로 설정
     public static synchronized String getUploadDir() {

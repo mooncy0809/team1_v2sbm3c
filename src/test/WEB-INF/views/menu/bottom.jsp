@@ -157,7 +157,7 @@
                     </div>
                     <div class="col-sm-8" style="padding-left: 550px;">
                     
-                    <button type="button" class="btn btn-primary" onclick="location.href='../qna/list_search_paging.do?categrpno=4&memberno=${sessionScope.memberno}' ">관리자에게</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='../qna/list_search_paging.do?categrpno=6&memberno=${sessionScope.memberno}' ">관리자에게</button>
                     </div>
                 </div> 
             </div>

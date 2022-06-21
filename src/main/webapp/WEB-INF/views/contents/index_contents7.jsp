@@ -41,8 +41,9 @@ a:hover{
     color: white;
 }
 .style1{
-    padding : 10px 10px 10px 10px;
+    padding : 10px 10px 10px 168px;
     text-align: center;
+    
 }
 
 h1{

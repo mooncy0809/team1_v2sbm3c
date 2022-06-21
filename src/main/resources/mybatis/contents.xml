@@ -231,5 +231,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        3 page: WHERE r >= 21 AND r <= 30;
      
   </select>  -->
+  
+    <!-- Cate + Contents join, 연결 목록 -->
+  <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
+  <select id="index_contents" 
+             resultType="dev.mvc.contents.ContentsVO" parameterType="Map">
+   SELECT name, contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+              file1, file1saved, thumb1, size1, mname, r
+   FROM (
+              SELECT name, contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+                         file1, file1saved, thumb1, size1, mname, rownum as r
+              FROM (
+                        SELECT name, contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+                                   file1, file1saved, thumb1, mname, size1
+                        FROM testView
+                        ORDER BY contentsno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+   <!--  1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30; -->
+     
+  </select>   
          
 </mapper> 
