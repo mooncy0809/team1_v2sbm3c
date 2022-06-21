@@ -185,7 +185,7 @@ ul.drop > li > a:hover{
                                                                 <li class="dropdown2"><a onclick="com4(this)" class="sub"style="color:white;font-weight:bold;" ><i class="fa fa-gears"></i>하루삼끼 관리자<i class="fa fa-angle-down"></i></a>
                                                                       <ul role="menu" class="drop"  id="sub_com4">
                                                                       <li><a href="/categrp/list2.do">카테고리 관리</a></li><br>
-                                                                      <li><a href="/categrp/list.do">주문 관리</a></li>
+                                                                      <li><a href="../../order_pay/list_by_memberno_search_paging_all.do?memberno=${memberno}&word=">주문 관리</a></li>
                                                                       </ul>
                                                                 </li>
                                                                  
