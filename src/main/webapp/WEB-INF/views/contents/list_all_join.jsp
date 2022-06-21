@@ -47,8 +47,8 @@
       <button type='submit' class="btn btn-primary">검색</button>
       <c:if test="${param.word.length() > 0 }">
 
-        <button type='button' class="btn btn-primary"
-                     onclick="location.href='./list_all_join.do">검색 취소</button>  
+        <button type='button' 
+                     onclick="location.href='./list_all_join.do?word='">검색 취소</button> 
 
       </c:if>    
     </form>
