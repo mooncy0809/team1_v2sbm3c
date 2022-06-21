@@ -8,11 +8,12 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>HomeTraining</title>
- 
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gaegu:wght@300&family=Kdam+Thmor+Pro&family=Kirang+Haerang&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 <style type="text/css">
  table.type04 {
   border-collapse: separate;
@@ -55,41 +56,41 @@ h1{
     font-family: 'Kirang Haerang', cursive;
     font-size:20px;
 }
-
-
-
- 
- </style>
+</style>
  
 </head> 
   
 <body>
-
-  <div class="style1">
+<div class="style1">
   <table class="type04" style='width: 70%;'>
-<!--   <fieldset style="background-color:#FFF2EE">
-  <DIV class='content_body' style="width: 70%;"> -->
-  
-  <tbody>
-    <c:forEach var="youVO" items="${list }" varStatus="status">
+  <tbody> <%-- 갤러리 Layout 시작 --%>  
+    <c:forEach var="youVO" items="${list }" >
       <c:set var="youno" value="${youVO.youno }" />
       <c:set var="ytitle" value="${youVO.ytitle }" />
       <c:set var="url" value="${youVO.url }" />
       <c:set var="cnt" value="${youVO.cnt }" />
-      
-        <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
-        <HR class='menu_line'>
-        </c:if>
-          <tr> 
-          <td style='vertical-align: middle; text-align: center;;'>
-           <a href="./read.do?youno=${youVO.youno}" target="_top">
-         <strong> ${url} </strong></a>
-        </td>
+
+      <!-- 하나의 이미지, 24 * 4 = 96% -->
+      <tr>
+       <td  style='vertical-align: middle; text-align: center;'>
+            <a href ="./read.do?youno=${youVO.youno}"  target="_top">
+                 <strong>${url }</strong><br><br>
+                 <strong>${ytitle }</strong></a> <br><br>
+                 <DIV style="text-align:right;">
+                  <i class="fa-solid fa-eye" >&nbsp;${cnt}</i> <br>  
+                 </DIV> 
+                 
+                  </td>
+                  
         </tr>
-    </c:forEach>
+
+      </c:forEach>  
+
+    <!-- 갤러리 Layout 종료 -->
     </tbody>
-    </table>
-  </DIV>
+  </table>
+</div>
+
 
 
 </body>

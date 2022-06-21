@@ -195,5 +195,6 @@ public interface ContentsProcInter {
     
     public List<ContentsVO> index_contents5(HashMap<String, Object> map);
     
+    public List<ContentsVO> index_contents7(HashMap<String, Object> map);
     
 }

@@ -136,8 +136,7 @@ function create_pTag(){
           <!-- 게시판 카테고리 -->
           
   
-      
-        <div class=notice>
+     
           <td style='vertical-align: middle; text-align: center;'>${name} </td> 
           
           <td style='vertical-align: middle; text-align: center;'>
@@ -154,7 +153,6 @@ function create_pTag(){
           
           <!-- 작성일 -->
           <td style='vertical-align: middle; text-align: center;'>${rdate } </td>
-        </div>
         </tr>
       </c:forEach>
       
@@ -170,10 +168,6 @@ function create_pTag(){
  
 <jsp:include page="../menu/bottom.jsp" />
 </body>
-        <script>
-            if (${cateno} == 1) {
-              create_pTag();
-            }
-         </script>
+
  
 </html>
