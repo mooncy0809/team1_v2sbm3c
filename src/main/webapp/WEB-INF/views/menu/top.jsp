@@ -274,7 +274,7 @@ ul.drop > li > a:hover{
 
                 </div>
                 <div id="mySidenav" class="sidenav category-bg"
-                    style="padding-left: 40px; width: 500px; display: none; background-color: #FFF2EE; position:absolute; top:130px; left:65px; box-shadow: 12px 10px 11px 7px gray;  z-index:2;">
+                    style="padding-left: 40px; width: 500px; display: none; background-color: #FFF2EE; position:absolute; top:130px; box-shadow: 12px 10px 11px 7px gray;  z-index:2;">
                     <li class="menu" style="list-style:none; " >
                         <ul >                       
                             <a href="../contents/notice_by_cateno.do"><li>NOTICE</li></a>

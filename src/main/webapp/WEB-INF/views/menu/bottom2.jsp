@@ -150,7 +150,7 @@
         <div class="footer-bottom" style="    padding-bottom: 50px;">
             <div class="container" style="text-align: left;  height: 100px;">
                  <div class="row" style="    width: 300px;">
-                 <a><img src="/images/home/001.png" alt="" /></a>
+                 <a><img src="/images/home/002.png" alt="" /></a>
                  <div  style=" height: 50px;  width: 250px;">
                  Copyright (c) 2022. soldesk team1 All Rights Reserved.
                     <!--Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a></span></p>-->

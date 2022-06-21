@@ -96,7 +96,7 @@
 </DIV>
 
  
-<jsp:include page="../menu/bottom.jsp" />
+<jsp:include page="../menu/bottom2.jsp" />
 </body>
  
 </html>
