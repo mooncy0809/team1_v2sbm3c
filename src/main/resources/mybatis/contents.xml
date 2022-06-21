@@ -270,5 +270,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        3 page: WHERE r >= 21 AND r <= 30; -->
      
   </select>   
+<!--   
+  <update id="recom_check" parameterType="HashMap">    
+      UPDATE contents
+      SET recom = recom + 1
+      WHERE memberno=#{memberno} AND contentsno=#{contentsno}
+  </update> -->
          
 </mapper> 
