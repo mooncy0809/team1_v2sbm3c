@@ -149,6 +149,18 @@ public interface ProductProcInter {
      */
     String pagingBox3(int cateno, int search_count, int now_page, String pword);
     
+    /**
+     * Cate + Product join, 연결 목록
+     * @return
+     */
+    public List<Cate_ProductVO> list_by_cateno_grid_join_up(HashMap<String, Object> map);
+    
+    /**
+     * Cate + Product join, 연결 목록
+     * @return
+     */
+    public List<Cate_ProductVO> list_by_cateno_grid_join_down(HashMap<String, Object> map);
+    
 }
 
 
