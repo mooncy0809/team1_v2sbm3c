@@ -177,7 +177,7 @@ public interface ContentsProcInter {
      * @param map
      * @return
      */
-    public List<ContentsVO> list_all_join(HashMap<String, Object> map);
+    public List<ContentsVO> list_all_join(HashMap<String, Object> map);  
     
     /**
      * 댓글 수 업데이트

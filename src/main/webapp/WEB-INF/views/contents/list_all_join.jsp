@@ -8,37 +8,17 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>Community</title>
- 
-<link href="/css/style.css" rel="Stylesheet" type="text/css">
- 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/style.css" rel="Stylesheet" type="text/css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-
-function create_pTag(){
-    let tagArea = document.getElementById('test');
-/*     let new_pTag = document.createElement('p'); */
-    
-    tagArea.setAttribute('class', 'pTag');
-    /* new_pTag.innerHTML = pTagCount+". 추가된 p태그"; */
-    
-/*     tagArea.appendChild(new_pTag); */
- }
 </script>
 
 <style type="text/css">
-            
-.pTag{
-  background-color:orange;
-}
-
-.notice{
-  background-color:#fff
-}
-            
+       
 </style>
  
 </head> 
@@ -79,14 +59,14 @@ function create_pTag(){
   
   <DIV class='menu_line'></DIV>
   
-  <table class="table table-striped" style='width: 100%;'>
+  <table class="table" style='width: 100%;'>
     <colgroup>
       <%-- <col style="width: 10%;"></col> --%>
       <col style="width: 10%;"></col>
       <col style="width: 40%;"></col>
-      <col style="width: 30%;"></col>
+      <col style="width: 25%;"></col>
       <col style="width: 5%;"></col>
-      <col style="width: 5%;"></col>
+      <col style="width: 10%;"></col>
       <col style="width: 10%;"></col>
     </colgroup>
     <%-- table 컬럼 --%>
@@ -104,7 +84,9 @@ function create_pTag(){
     </thead>
     
     <%-- table 내용 --%>
+    
     <tbody>
+
       <c:forEach var="contentsVO" items="${list }">
         <c:set var="contentsno" value="${contentsVO.contentsno }" />
         <c:set var="cateno" value="${contentsVO.cateno }" />
@@ -117,29 +99,13 @@ function create_pTag(){
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
         <c:set var="rdate" value="${contentsVO.rdate }" />
-        <c:set var="replycnt" value="${contentsVO.replycnt }" />
-        
-             
-        <tr id='test'> 
-<%--           <td style='vertical-align: middle; text-align: center;'>
-            <c:choose>
-              <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-                /static/contents/storage/
-                <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }"><IMG src="/contents/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
-              </c:when>
-              <c:otherwise> <!-- 기본 이미지 출력 -->
-                <IMG src="/contents/images/none1.png" style="width: 120px; height: 80px;">
-              </c:otherwise>
-            </c:choose>
-          </td>   --%>
+        <c:set var="replycnt" value="${contentsVO.replycnt }" />      
           
-          <!-- 게시판 카테고리 -->
+          <tr <c:if test="${cateno eq 1}"> style='background-color:#FFDCD3; font-weight:bold;' </c:if>>           
           
-  
-     
           <td style='vertical-align: middle; text-align: center;'>${name} </td> 
           
-          <td style='vertical-align: middle; text-align: center;'>
+          <td style='vertical-align: middle; text-align: center; '>
             <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
           <strong>${title} [${replycnt}]</strong> </a> </td>
           

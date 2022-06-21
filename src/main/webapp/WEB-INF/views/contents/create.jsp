@@ -40,7 +40,7 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
 
-<DIV class='content_body'>
+<DIV class='content_body'> 
 
     <span style="width:70%; font-size: 1.5em; font-weight: bold;"> ${cateVO.name } > 글 등록</span>
     
@@ -96,10 +96,10 @@
        <div class="col-md-10">
        <select name="cateno" style="width:160px">
 		    <option value="" selected>=== 게시판 선택 ===</option>
-		    <option value=4>자유게시판</option>
-		    <option value=5>팁/노하우</option>
-		    <option value=6>고민</option>
-		    <option value=7>일기</option>
+		    <option value=4 <c:if test="${cateVO.cateno eq 4}">selected="selected"</c:if>>자유게시판</option>
+		    <option value=5 <c:if test="${cateVO.cateno eq 5}">selected="selected"</c:if>>팁/노하우</option>
+		    <option value=6 <c:if test="${cateVO.cateno eq 6}">selected="selected"</c:if>>고민</option>
+		    <option value=7 <c:if test="${cateVO.cateno eq 7}">selected="selected"</c:if>>일기</option>
        </select>
        </div>
     </div>

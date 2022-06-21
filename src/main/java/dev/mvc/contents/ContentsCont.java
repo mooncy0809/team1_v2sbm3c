@@ -726,7 +726,7 @@ public class ContentsCont {
         
         List<ContentsVO>list = this.contentsProc.list_all_join(map);
         mav.addObject("list", list); // request.setAttribute("list", list);
-        
+                      
         
         
         /*

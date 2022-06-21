@@ -173,7 +173,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        2 page: WHERE r >= 11 AND r <= 20;
        3 page: WHERE r >= 21 AND r <= 30; -->
      
-  </select>   
+  </select>    
       
    <!-- 댓글 수 확인 -->
    <update id = "update_replycnt" parameterType="dev.mvc.contents.ContentsVO">
