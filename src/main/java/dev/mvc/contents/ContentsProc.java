@@ -333,8 +333,8 @@ public class ContentsProc implements ContentsProcInter {
         
         for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
             String content = contentsVO.getContent();
-            if (content.length() > 100) {
-              content = content.substring(0, 100) + "...";
+            if (content.length() > 10) {
+              content = content.substring(0, 10) + "...";
               contentsVO.setContent(content);
             }
             
@@ -871,6 +871,7 @@ public class ContentsProc implements ContentsProcInter {
       
       return list;
     }
+
     
     @Override
     public List<ContentsVO> index_contents(HashMap<String, Object> map) {

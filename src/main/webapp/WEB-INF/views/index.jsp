@@ -30,9 +30,6 @@
 /* .backimg6{
     background: url('./images/home/back8.png') no-repeat;
 } */
-
-
-
 </style>
 </head>
 <body>
@@ -75,7 +72,6 @@ function toggleImg() {
     window.open(
     document.getElementById("logimg").src = "/images/home/back7.png";
     
-
   } 
  </script> -->
 
