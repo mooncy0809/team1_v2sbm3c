@@ -27,17 +27,18 @@
 </script>
 <style>
 .chg{
-    border: 3px solid #FE980F;
-    background-color: #FE980F;
-    color: white; 
+    border: 3px solid #E2E8DE;
+    background-color: #E2E8DE;
+    color: gray; 
     position: relative; 
-    border-radius: 7px;
+    border-radius: 5px;
 }
 .chg:hover{
-    background-color: #fdb45e;
+    background-color: #E2E8DE;
+    color:white;
 }
 .chg:focus{
-    border: 3px solid #FE980F;
+    border: 3px solid #E2E8DE;
     outline:none;
 }
 </style>
@@ -53,8 +54,20 @@
                   <li class="active"><a href="javascript:location.reload();">${sessionScope.id }님 주문 결제내역</a></li>
                 </ol>
             </div>
-  <div class="table-responsive cart_info">  
-  <table class="table table-condensed">
+            
+  <DIV style="text-align: right; clear: both;margin-bottom:15px;">  
+    <form name='frm' id='frm' method='get' action='./list_by_memberno_search_paging.do'>
+      <input type='hidden' name='memberno' value='${memberno }'>
+      <input type='text' placeholder="주문번호" name='word' id='word' value='${param.word }' style='width: 20%;'>
+      <button type='submit'><i class="fas fa-search"></i></button>
+      <c:if test="${param.word.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list_by_memberno_search_paging.do?memberno=${memberno}&word='"><i class="fas fa-times"></i></button>  
+      </c:if>    
+    </form>
+  </DIV>
+  <div class="table-responsive cart_info" style="margin-bottom:20px;">  
+  <table class="table table-condensed" style="margin-bottom:0px;">
     <colgroup>
       <col style='width: 5%;'/>
       <col style='width: 10%;'/>
@@ -113,9 +126,10 @@
     </tbody>
   </TABLE>
   </div>
+    <DIV class='bottom_menu'  style="margin-bottom:20px;">${paging }</DIV> <%-- 페이지 리스트 --%>
   </div>
   </section>
- 
+  
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
  

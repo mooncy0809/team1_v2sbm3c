@@ -76,7 +76,7 @@
     </style>
     
 </head>
-<body>
+<body  style="background-color:#F5F5EE;">
 
 <DIV style='display: none;'>
     <form name='frm' id='frm'>
@@ -87,8 +87,6 @@
         <input type='hidden' name='step5' value='${param.step5 }'>
     </form>
 </DIV>
-
-<DIV class="container">
     <H2>참여해주셔서 감사합니다.</H2>
     <H2>추천 카테고리</H2>
 
@@ -143,19 +141,19 @@
             <TABLE style='margin: 0px auto;'>
                 <TR>
                     <TD class='td_image'>
-                        <img id='img1' src="/recommend/images/v31.jpg" style='float:left; height: 200px'>
+                        <img id='img1' src="/recommend/images/v31.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img2' src="/recommend/images/v32.jpg" style='float:left; height: 200px'>
+                        <img id='img2' src="/recommend/images/v32.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img3' src="/recommend/images/v33.jpg" style='float:left; height: 200px'>
+                        <img id='img3' src="/recommend/images/v33.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img4' src="/recommend/images/v34.jpg" style='float:left; height: 200px'>
+                        <img id='img4' src="/recommend/images/v34.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img5' src="/recommend/images/v35.jpg" style='float:left; height: 200px'>
+                        <img id='img5' src="/recommend/images/v35.jpg" style='float:left; height: 150px'>
                     </TD>
                 </TR>          
             </TABLE>
@@ -165,19 +163,19 @@
             <TABLE style='margin: 0px auto;'>
                 <TR>
                     <TD class='td_image'>
-                        <img id='img1' src="/recommend/images/v41.jpg" style='float:left; height: 200px'>
+                        <img id='img1' src="/recommend/images/v41.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img2' src="/recommend/images/v42.jpg" style='float:left; height: 200px'>
+                        <img id='img2' src="/recommend/images/v42.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img3' src="/recommend/images/v43.jpg" style='float:left; height: 200px'>
+                        <img id='img3' src="/recommend/images/v43.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img4' src="/recommend/images/v44.jpg" style='float:left; height: 200px'>
+                        <img id='img4' src="/recommend/images/v44.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img5' src="/recommend/images/v45.jpg" style='float:left; height: 200px'>
+                        <img id='img5' src="/recommend/images/v45.jpg" style='float:left; height: 150px'>
                     </TD>
                 </TR>          
             </TABLE>
@@ -187,20 +185,20 @@
             <TABLE style='margin: 0px auto;'>
                 <TR>
                     <TD class='td_image'>
-                        <img id='img1' src="/recommend/images/v51.jpg" style='float:left; height: 200px'>
+                        <img id='img1' src="/recommend/images/v51.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img2' src="/recommend/images/v52.jpg" style='float:left; height: 200px'>
+                        <img id='img2' src="/recommend/images/v52.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img3' src="/recommend/images/v53.jpg" style='float:left; height: 200px'>
+                        <img id='img3' src="/recommend/images/v53.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
                     
-                        <img id='img4' src="/recommend/images/v54.jpg" style='float:left; height: 200px'>
+                        <img id='img4' src="/recommend/images/v54.jpg" style='float:left; height: 150px'>
                     </TD>
                     <TD class='td_image'>
-                        <img id='img5' src="/recommend/images/v55.jpg" style='float:left; height: 200px'>
+                        <img id='img5' src="/recommend/images/v55.jpg" style='float:left; height: 150px'>
                     </TD>
                 </TR>          
             </TABLE>
@@ -215,7 +213,6 @@
             <button type='button' id='btn_close' class="btn btn-info">종료</button>
         </DIV>
     </form>
-</DIV>
 </body>
 </html>
 

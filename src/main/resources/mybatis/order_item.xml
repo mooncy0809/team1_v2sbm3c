@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     SELECT i.order_itemno, i.memberno, i.order_payno, i.productno, i.cnt, i.tot, i.stateno, i.rdate,
                p.ptitle, p.saleprice
     FROM order_item i, products p 
-    WHERE (i.productno = p.productno) AND order_payno=#{order_payno} AND memberno = #{memberno}
+    WHERE (i.productno = p.productno) AND order_payno=#{order_payno} 
     ORDER BY order_itemno DESC
   </select>
   

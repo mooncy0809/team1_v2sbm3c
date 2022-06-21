@@ -39,7 +39,7 @@
         color:white;
     }
     .read:hover{
-        color:red;
+        color:green;
     }
 </style>
 <script type="text/javascript">
@@ -117,17 +117,6 @@
 <body>
 <jsp:include page="../menu/top2.jsp" />
 
-<DIV style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_cateno_grid.do'>
-      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
-      <input type='text' name='pword' id='pword' value='${param.pword }' style='width: 20%;'>
-      <button type='submit'>검색</button>
-      <c:if test="${param.pword.length() > 0 }">
-        <button type='button' 
-                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='">검색 취소</button>  
-      </c:if>    
-    </form>
-  </DIV>
 
     <input type='hidden' name='cateno' value='${cateVO.cateno }'>
   <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
@@ -210,6 +199,17 @@
                 
   <div class="col-sm-9 padding-right"> <%-- 갤러리 Layout 시작 --%>
   <div class="features_items">
+  <DIV style="text-align: right; clear: both;padding-right:25px;">  
+    <form name='frm' id='frm' method='get' action='./list_by_cateno_grid.do'>
+      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
+      <input type='text' name='pword' id='pword' value='${param.pword }' style='width: 20%;'>
+      <button type='submit'><i class="fas fa-search"></i></button>
+      <c:if test="${param.pword.length() > 0 }">
+        <button type='button'
+                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='"><i class="fas fa-times"></i></button>  
+      </c:if>    
+    </form>
+  </DIV>
    <h2 class="title text-center">${cateVO.name } 상품 목록</h2>
     <c:forEach var="productVO" items="${list }" varStatus="status">
       <c:set var="productno" value="${productVO.productno }" />
@@ -264,7 +264,7 @@
           </c:otherwise>
         </c:choose>   
       </div> <%--사진 정렬 --%>
-       <div class="product-overlay" style="background: rgba(254,152,15,.8);">
+       <div class="product-overlay" style="background: rgba(76,121,72,.8);">
       <div class="overlay-content">
                 <a class="read" href="./read.do?productno=${productno}"><i class="fas fa-door-open  fa-3x"></i></a>
                 <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>

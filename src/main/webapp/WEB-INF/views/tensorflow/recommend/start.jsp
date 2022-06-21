@@ -20,8 +20,8 @@
       });
     </script>
 </head>
-<body>
-<DIV class="container">
+<body style="background-color:#F5F5EE;">
+<DIV>
     <H2 style="text-align: center;">관심분야 등록</H2>
 
     <DIV style="text-align:center; margin: 50px auto;">
@@ -33,7 +33,6 @@
         <button type='button' id='btn_forward' class='btn btn-info'>관심분야 등록하기</button>
         <button type='button' id='btn_close' class='btn btn-info'>취소</button>
     </DIV>
-
 </DIV>
 </body>
 </html>

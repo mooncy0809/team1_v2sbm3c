@@ -26,7 +26,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -108,27 +109,12 @@
  
 <body>
 <jsp:include page="../menu/top2.jsp" />
-
-<DIV style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_cateno_grid_join2.do'>
-      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
-      <input type='text' name='pword' id='pword' value='${param.pword }' style='width: 20%;'>
-      <button type='submit'>검색</button>
-      <c:if test="${param.pword.length() > 0 }">
-        <button type='button' 
-                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='">검색 취소</button>  
-      </c:if>    
-    </form>
-  </DIV>
-
-       
        <input type='hidden' name='now_page' value='1'>
   <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
        <input type="hidden" name="productno" id="productno" value="${productno }">
        
     </FORM>
-  <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>
     <section id="advertisement">
         <div class="container">
             <img src="images/shop/advertisement.jpg" alt="" />
@@ -205,6 +191,21 @@
                 
   <div class="col-sm-9 padding-right"> <%-- 갤러리 Layout 시작 --%>
   <div class="features_items">
+  
+  <iframe class="backimg" src="../../tensorflow/recommend/start.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
+  
+  <DIV style="text-align: right; clear: both;padding-right:25px;">  
+    <form name='frm' id='frm' method='get' action='./list_by_cateno_grid_join2.do'>
+      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
+      <input type='text' name='pword' id='pword' value='${param.pword }' style='width: 20%;'>
+      <button type='submit'><i class="fas fa-search"></i></button>
+      <c:if test="${param.pword.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='"><i class="fas fa-times"></i></button>  
+      </c:if>    
+    </form>
+  </DIV>
+  
    <h2 class="title text-center">상품 목록</h2>
     <c:forEach var="cate_productVO" items="${list }" varStatus="status">
       <c:set var="productno" value="${cate_productVO.productno }" />

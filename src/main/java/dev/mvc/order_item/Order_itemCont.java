@@ -165,7 +165,7 @@ public class Order_itemCont {
 
       if (cnt == 1) {
           mav.addObject("order_payno", order_itemVO.getOrder_payno());
-          mav.setViewName("redirect:/order_item/list_by_memberno.do");
+          mav.setViewName("redirect:/order_item/list_by_memberno_admin.do");
       } else {
           mav.addObject("code", "update_fail"); // request에 저장
           mav.addObject("cnt", cnt); // request에 저장
@@ -177,7 +177,7 @@ public class Order_itemCont {
           mav.addObject("tot", order_itemVO.getTot());
           mav.addObject("stateno", order_itemVO.getStateno());
           mav.addObject("rdate", order_itemVO.getRdate());
-          mav.setViewName("/order_item/list_by_memberno");
+          mav.setViewName("/order_item/list_by_memberno_admin");
 
       }
 
@@ -214,6 +214,42 @@ public class Order_itemCont {
           mav.addObject("rdate", order_itemVO.getRdate());
 
           mav.setViewName("/order_item/list_by_memberno_admin");
+
+      }
+
+      return mav;
+  }
+  
+  /**
+   * 삭제 처리
+   * 
+   * @param order_itemVO
+   * @return
+   */
+  @RequestMapping(value = "/order_item/delete2.do", method = RequestMethod.POST)
+  public ModelAndView delete2(int order_itemno) {
+      ModelAndView mav = new ModelAndView();
+      // 삭제될 레코드 정보를 삭제하기전에 읽음
+      Order_itemVO order_itemVO = this.order_itemProc.read(order_itemno);
+
+      int cnt = this.order_itemProc.delete(order_itemno);
+
+      if (cnt == 1) {
+          mav.addObject("order_payno", order_itemVO.getOrder_payno());
+          mav.setViewName("redirect:/order_item/list_by_memberno.do");
+      } else {
+          mav.addObject("code", "delete_fail"); // request에 저장
+          mav.addObject("cnt", cnt); // request에 저장
+          mav.addObject("order_itemno", order_itemVO.getOrder_itemno());
+          mav.addObject("order_payno", order_itemVO.getOrder_payno());
+          mav.addObject("memberno", order_itemVO.getMemberno());
+          mav.addObject("productno", order_itemVO.getProductno());
+          mav.addObject("cnt", order_itemVO.getCnt());
+          mav.addObject("tot", order_itemVO.getTot());
+          mav.addObject("stateno", order_itemVO.getStateno());
+          mav.addObject("rdate", order_itemVO.getRdate());
+
+          mav.setViewName("/order_item/list_by_memberno");
 
       }
 

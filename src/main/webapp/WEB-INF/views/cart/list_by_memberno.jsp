@@ -31,17 +31,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
 .chg{
-    border: 3px solid #FE980F;
-    background-color: #FE980F;
-    color: white; 
+    border: 3px solid #E2E8DE;
+    background-color: #E2E8DE;
+    color: gray; 
     position: relative; 
-    border-radius: 7px;
+    border-radius: 5px;
 }
 .chg:hover{
-    background-color: #fdb45e;
+    background-color: #E2E8DE;
+    color:white;
 }
 .chg:focus{
-    border: 3px solid #FE980F;
+    border: 3px solid #E2E8DE;
     outline:none;
 }
 </style>

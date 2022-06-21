@@ -132,9 +132,9 @@ function read_delete_ajax(order_itemno) {
     <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                  <li><a>Order</a></li>
-                  <li class="active"><a href="../order_pay/list_by_memberno.do?memberno=${memberno}">${sessionScope.id }님 주문 결제내역</a></li>
-                  <li class="active"><a href="javascript:location.reload();">${sessionScope.id }님 주문 상세내역</a></li>
+                  <li><a>Manage</a></li>
+                  <li class="active"><a href="../order_pay/list_by_memberno_search_paging_all.do?memberno=${memberno}&word=">주문내역 관리</a></li>
+                  <li class="active"><a href="javascript:location.reload();">주문상태 관리</a></li>
                 </ol>
             </div>
   <div class="table-responsive cart_info" > 
@@ -144,16 +144,21 @@ function read_delete_ajax(order_itemno) {
     <FORM name='frm_update' id='frm_update' method='POST' action='./update.do'>
       
       <label>주문 번호</label>
-      <input type='number' id='order_payno' name='order_payno' value='' 
-                 required="required" min="1" max="100" step="1" autofocus="autofocus" style='width: 10%'><br>
+      <input type='number' id='order_payno' name='order_payno' value='' required="required" style='width:30px' readonly/>
       <label>주문 상세번호</label>
-      <input type='number' id='order_itemno' name='order_itemno' value='' 
-                 required="required" min="1" max="100" step="1" autofocus="autofocus" style='width: 10%'><br>
+      <input type='number' id='order_itemno' name='order_itemno' value='' required="required" style='width: 30px' readonly/>
       <label>배송상태</label>
-      <input type='text' id='stateno' name='stateno' value='' required="required" style='width: 25%;'>
+      <select  id='stateno' name='stateno' style="width:20%;">
+        <option value=1>결제 완료</option>
+        <option value=2>상품 준비중</option>
+        <option value=3>배송 시작</option>
+        <option value=4>배송중</option>
+        <option value=5>오늘 도착</option>
+        <option value=6>배달 완료</option>
+      </select>
   
       <button type="submit" id='submit' class='btn btn-secondary btn-sm'>저장</button>
-      <button type="button" onclick="cancel();" class='btn btn-secondary btn-sm'>취소</button>
+      <button type="button" onclick="cancel();" class='btn btn-secondary btn-sm'>취소</button><br>
       
       <span id='span_animation'></span>
     </FORM>
@@ -162,7 +167,7 @@ function read_delete_ajax(order_itemno) {
     <%-- 삭제폼 --%>
   <DIV id='panel_delete' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; 
           width: 100%; text-align: center; display: none;'>
-    <div class="msg_warning">카테고리를 삭제하면 복구 할 수 없습니다.</div>
+    <div class="msg_warning">주문정보를 삭제하면 복구 할 수 없습니다.</div>
     <FORM name='frm_delete' id='frm_delete' method='POST' action='./delete.do'>
       <input type='hidden' name='order_itemno' id='order_itemno' value=''>
         
@@ -225,7 +230,7 @@ function read_delete_ajax(order_itemno) {
           <c:when test="${stateno == 1}">결제 완료</c:when>
           <c:when test="${stateno == 2}">상품 준비중</c:when>
           <c:when test="${stateno == 3}">배송 시작</c:when>
-          <c:when test="${stateno == 4}">배달중</c:when>
+          <c:when test="${stateno == 4}">배송중</c:when>
           <c:when test="${stateno == 5}">오늘 도착</c:when>
           <c:when test="${stateno == 6}">배달 완료</c:when>
         </c:choose>
