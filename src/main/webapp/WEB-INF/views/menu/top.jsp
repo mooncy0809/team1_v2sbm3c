@@ -106,6 +106,7 @@ ul.drop > li > a:hover{
     color: white;
 }
 
+
 </style>
 
 </head>
@@ -126,6 +127,7 @@ ul.drop > li > a:hover{
                             </ul>
                         </div>
                     </div>
+                    
                         <div class="social-icons pull-right">
                             <!--                             <ul class="nav navbar-nav2">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -138,7 +140,7 @@ ul.drop > li > a:hover{
                                 <c:choose>
                                     <c:when
                                         test="${sessionScope.id == null}">
-                                        <li><a
+                                        <li><a id="menubar"
                                             href="/member/login.do"><i
                                                 class="fa fa-sign-in"></i>
                                                 로그인</a></li>
