@@ -89,28 +89,24 @@
     <%-- <c:if test="${cateVO.cateno == 4}"> --%>
     
     
-    <div class="form-group">
-       <label class="control-label col-md-2">
-       
-       </label>
-       <div class="col-md-10">
-       <select name="cateno" style="width:160px">
-		    <option value="" selected>=== 게시판 선택 ===</option>
-		    <option value=4 <c:if test="${cateVO.cateno eq 4}">selected="selected"</c:if>>자유게시판</option>
-		    <option value=5 <c:if test="${cateVO.cateno eq 5}">selected="selected"</c:if>>팁/노하우</option>
-		    <option value=6 <c:if test="${cateVO.cateno eq 6}">selected="selected"</c:if>>고민</option>
-		    <option value=7 <c:if test="${cateVO.cateno eq 7}">selected="selected"</c:if>>일기</option>
-       </select>
-       </div>
-    </div>
+    <br>
     
     <div class="form-group">
        <label class="control-label col-md-2">
         제목       
        </label>
-       <div class="col-md-10">
+       <div class="col-md-8">
          <input type='text' name='title' placeholder='제목' required="required" 
                    autofocus="autofocus" class="form-control" style='width: 100%;'>
+       </div>
+       <div class="col-md-2">
+       <select name="cateno" style="width:160px; background-color:#FFDCD3;">
+            <option value="" selected>=== 게시판 선택 ===</option>
+            <option value=4 <c:if test="${cateVO.cateno eq 4}">selected="selected"</c:if>>자유게시판</option>
+            <option value=5 <c:if test="${cateVO.cateno eq 5}">selected="selected"</c:if>>팁/노하우</option>
+            <option value=6 <c:if test="${cateVO.cateno eq 6}">selected="selected"</c:if>>고민</option>
+            <option value=7 <c:if test="${cateVO.cateno eq 7}">selected="selected"</c:if>>일기</option>
+       </select>
        </div>
     </div>
     <div class="form-group">
@@ -140,7 +136,7 @@
                     class="form-control" style='width: 50%;'>
        </div>
     </div>   
-    <div class="content_body_bottom">
+    <div class="content_body_bottom" style="text-align:right;">
       <button type="submit" class="btn btn-primary">등록</button>
       <button type="button" onclick="location.href='./list.do'" class="btn btn-primary">목록</button>
     </div>
