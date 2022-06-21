@@ -163,7 +163,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
               FROM (
                         SELECT name, contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
                                    file1, file1saved, thumb1, mname, size1
-                        FROM testView                       
+                        FROM testView
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE 1=1
+                          </when>
+                          <otherwise>
+                            WHERE 1=1 AND (UPPER(title) LIKE '%' || #{word} || '%'  <!-- ||: 결합, %첫눈% -->
+                                                                  OR UPPER(content) LIKE '%' || #{word} || '%' 
+                                                                  OR UPPER(word) LIKE '%' || #{word} || '%')
+                          </otherwise>
+                        </choose>                       
                         ORDER BY DECODE(cateno, 1, 1), contentsno DESC 
                )
     )

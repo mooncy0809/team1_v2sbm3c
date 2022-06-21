@@ -33,7 +33,7 @@
     <script src="../js/price-range.js"></script>
     <script src="../js/jquery.prettyPhoto.js"></script>
     <script src="../js/main.js"></script>
- <style>
+ <style  type="text/css">
 a{
     font-family: 'Kdam Thmor Pro', sans-serif;
 
@@ -124,7 +124,7 @@ ul.drop > li > a:hover{
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+
                         <div class="social-icons pull-right">
 <!--                             <ul class="nav navbar-nav2">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -136,21 +136,21 @@ ul.drop > li > a:hover{
                             <ul class="nav navbar-nav2">
                                     <c:choose>
                                     <c:when test="${sessionScope.id == null}">
-                                        <li><a href="/member/login.do"><i class="fa fa-sign-in"></i> 로그인</a></li>
+                                        <li><a id="menubar" href="/member/login.do"><i class="fa fa-sign-in"></i> 로그인</a></li>
                                     </c:when>                                   
                                     
                                     <c:otherwise>
-                                        <li><a href="/member/logout.do"><i class="fa fa-sign-out"></i>${sessionScope.id } 로그아웃</a></li>
+                                        <li id="menubar"><a id="menubar"href="/member/logout.do"><i class="fa fa-sign-out"></i>${sessionScope.id } 로그아웃</a></li>
                                     </c:otherwise>                                                                                                          
                                     
                                 </c:choose>                               
                                 
                                 <c:choose>
                                     <c:when test="${sessionScope.id == null}">
-                                        <li><a href="/member/create.do"><i class="fa fa-plus"></i>회원 가입</a></li>
+                                        <li id="menubar"><a href="/member/create.do"><i class="fa fa-plus"></i>회원 가입</a></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><a href="/member/read2.do?memberno=${sessionScope.memberno}"><i class="fa fa-user"></i>${sessionScope.id } 내 정보</a></li>
+                                        <li id="menubar"><a id="menubar" href="/member/read2.do?memberno=${sessionScope.memberno}"><i class="fa fa-user"></i>${sessionScope.id } 내 정보</a></li>
                                     </c:otherwise>
                                 </c:choose>
                                 
@@ -158,23 +158,33 @@ ul.drop > li > a:hover{
                                     <c:when
                                         test="${sessionScope.grade < 10}">
                                         <%-- 로그인 한 경우 --%>
-                                                <div class="nav navbar-nav2">
+                                                <div class="social-icons pull-right">
                                                     <ul class="nav navbar-nav collapse navbar-collapse">
-                                                        <li class="dropdown"><a href="#"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
-                                                            <ul role="menu" class="sub-menu">
-                                                                <li><a href="/categrp/list.do"><i class="fa fa-gears"></i>삼대몇 관리자</a></li>
-                                                                <li><a href="/categrp/list2.do"><i class="fa fa-gears"></i>하루삼끼 관리자</a></li>
-                                                                <li><a href="../../you/list_by_categrpno.do?categrpno=4"><i class="fa fa-gears"></i>홈트레이닝</a></li> 
+                                                        <li><a onclick="com2(this)" style="cursor:pointer;" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
+                                                            <ul role="menu" class="sub" id="sub_com2" style="font-size:small;">
+                                                                <li class="dropdown2"><a onclick="com3(this)" class="sub" style="color:white;font-weight:bold;"><i class="fa fa-gears"></i>삼대몇 관리자<i class="fa fa-angle-down"></i></a>
+                                                                      <ul role="menu"class="drop" id="sub_com3" >
+                                                                      <li><a href="/categrp/list.do">카테고리 관리</a></li><br>
+                                                                      <li> <a href="../you/list_by_categrpno_search_paging.do?categrpno=4">홈트레이닝 관리</a></li>
+                                                                      </ul>
+                                                                </li>
+                                                                <li class="dropdown2"><a onclick="com4(this)" class="sub"style="color:white;font-weight:bold;" ><i class="fa fa-gears"></i>하루삼끼 관리자<i class="fa fa-angle-down"></i></a>
+                                                                      <ul role="menu" class="drop"  id="sub_com4">
+                                                                      <li><a href="/categrp/list2.do">카테고리 관리</a></li><br>
+                                                                      <li><a href="/categrp/list.do">주문 관리</a></li>
+                                                                      </ul>
+                                                                </li>
+                                                                 
                                                             </ul>
                                                         </li>
-                                                     </ul>
-                                                </div>         
+                                                     </ul>   
+                                       </div>
                                     </c:when>
                                 </c:choose>
                                 
                             </ul>
                         </div>
-                    </div>
+                
                 </div>
             </div>
         </div><!--/header_top-->

@@ -88,8 +88,8 @@
           <br>
           <FORM name='frm' method='POST' action='./update_file.do' enctype="multipart/form-data">
             <input type="hidden" name="contentsno" value="${contentsno }">
-            <input type="hidden" name="now_page" value="${now_page }">
-            <input type="hidden" name="word" value="${param.word }">
+<%--             <input type="hidden" name="now_page" value="${now_page }">
+            <input type="hidden" name="word" value="${param.word }"> --%>
             
             <br><br> 
             변경 이미지 선택<br>  

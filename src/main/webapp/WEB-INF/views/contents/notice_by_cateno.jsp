@@ -39,9 +39,9 @@ function btn(sample){
       <input type='hidden' name='categrpno' value='${categrpVO.categrpno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
-      <button type='submit'>검색</button>
+      <button type='submit' class="btn btn-primary">검색</button>
       <c:if test="${param.word.length() > 0 }">
-        <button type='button' 
+        <button type='button' class="btn btn-primary"
                      onclick="location.href='./notice_by_cateno.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>

@@ -27,7 +27,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
 <script type="text/javascript">
@@ -41,7 +41,7 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
 
-<DIV class='content_body'>
+<DIV class='content_body' style="width:70%;">
     <span style="width:70%; font-size: 1.5em; font-weight: bold;">
         <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }">${cateVO.name }</A>
     </span>

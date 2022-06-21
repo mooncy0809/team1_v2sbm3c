@@ -104,7 +104,7 @@
         </c:choose>
         
         <%-- <a href="./list_by_cateno.do?cateno=${param.cateno}" class="btn btn-primary">목록</a> --%>
-        <button type="button" onclick="location.href='./member_join.do'" class="btn btn-primary">목록</button> 
+        <button type="button" onclick="location.href='./list_search_page.do'" class="btn btn-primary">목록</button> 
         <%-- <button type='button' onclick="location.href='./list_by_cateno_search.do?cateno=${param.cateno}'" class="btn btn-primary">목록</button> --%>
         <%-- <button type='button' onclick="location.href='./list_by_cateno_search_paging.do?cateno=${param.cateno}'" class="btn btn-primary">목록</button> --%>
 
