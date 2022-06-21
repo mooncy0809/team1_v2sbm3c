@@ -6,7 +6,9 @@
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
-<title>Community</title>
+<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
+<title>HomeTraining</title>
+ 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gaegu:wght@300&family=Kdam+Thmor+Pro&family=Kirang+Haerang&family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -58,40 +60,38 @@ h1{
 
  
  </style>
+ 
 </head> 
   
-<body >
- 
-<div class="style1">
+<body>
+
+  <div class="style1">
   <table class="type04" style='width: 70%;'>
-    <%-- table 컬럼 --%>
-    
-    <%-- table 내용 --%>
-    <tbody>
-      <c:forEach var="contentsVO" items="${list }">
-        <c:set var="contentsno" value="${contentsVO.contentsno }" />
-        <c:set var="cateno" value="${contentsVO.cateno }" />
-        <c:set var="title" value="${contentsVO.title }" />
-        <c:set var="content" value="${contentsVO.content }" />
-        <c:set var="file1" value="${contentsVO.file1 }" />
-        <c:set var="thumb1" value="${contentsVO.thumb1 }" />
-        <c:set var="memberno" value="${contentsVO.memberno }" />
-        <c:set var="cnt" value="${contentsVO.cnt }" />
-        <c:set var="mname" value="${contentsVO.mname }" />
-        
-        
-        <tr>  
-          <td style='vertical-align: middle; text-align: left;'>
-            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }" target="_top">
-            <strong> ${title}</strong> </a> </td>
-        </tr>
-      </c:forEach>
+<!--   <fieldset style="background-color:#FFF2EE">
+  <DIV class='content_body' style="width: 70%;"> -->
+  
+  <tbody>
+    <c:forEach var="youVO" items="${list }" varStatus="status">
+      <c:set var="youno" value="${youVO.youno }" />
+      <c:set var="ytitle" value="${youVO.ytitle }" />
+      <c:set var="url" value="${youVO.url }" />
+      <c:set var="cnt" value="${youVO.cnt }" />
       
+        <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
+        <HR class='menu_line'>
+        </c:if>
+          <tr> 
+          <td style='vertical-align: middle; text-align: center;;'>
+           <a href="./read.do?youno=${youVO.youno}" target="_top">
+         <strong> ${url} </strong></a>
+        </td>
+        </tr>
+    </c:forEach>
     </tbody>
-  </table>
-  <a href="../contents/notice_by_cateno.do" target="_top"><h1 style="font-size: 40px">자유게시판<div class="eng">COMMUNITY</div></h1></a>
-  </div>
- 
+    </table>
+  </DIV>
+
+
 </body>
  
 </html>

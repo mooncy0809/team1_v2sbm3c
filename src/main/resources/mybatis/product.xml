@@ -108,6 +108,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </otherwise>
     </choose>
   </select>    
+  
+  <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count2" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as pcnt
+    FROM products p, cate c
+    <choose>
+      <when test="pword == null or pword == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE p.cateno=c.cateno
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE p.cateno=c.cateno AND (UPPER(ptitle) LIKE '%' || #{pword} || '%' 
+                                                     OR UPPER(pcontent) LIKE '%' || #{pword} || '%' 
+                                                     OR UPPER(pword) LIKE '%' || #{pword} || '%')
+      </otherwise>
+    </choose>
+  </select>    
 
   <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
   <select id="list_by_cateno_search_paging" 
@@ -182,8 +198,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                                      p.pfile1, p.pfile1saved, p.pthumb1, p.psize1, p.rdate
     FROM cate c, products p
     WHERE c.cateno = p.cateno
-    ORDER BY cateno ASC
+    ORDER BY productno DESC
   </select>
+  
+   <select id="list_by_cateno_grid_join2" 
+             resultType="dev.mvc.product.Cate_ProductVO" parameterType="HashMap">
+   SELECT c_cateno, productno, cateno, ptitle, pcontent, ppasswd, pword,
+                                     pfile1, pfile1saved, pthumb1, psize1, rdate , r
+   FROM (
+               SELECT c_cateno, productno, cateno, ptitle, pcontent, ppasswd, pword,
+                                     pfile1, pfile1saved, pthumb1, psize1, rdate  , ROWNUM as r
+               FROM (
+                        SELECT c.cateno as c_cateno,
+                         p.productno, p.cateno, p.ptitle, p.pcontent, p.ppasswd, p.pword,
+                                     p.pfile1, p.pfile1saved, p.pthumb1, p.psize1, p.rdate
+                        FROM cate c, products p                        
+                        <choose>
+                          <when test="pword == null or pword == ''">   <!--   검색하지 않는 경우 -->
+                             WHERE c.cateno = p.cateno
+                          </when>
+                          <otherwise>
+                            WHERE c.cateno=p.cateno AND (UPPER(ptitle) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pcontent) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pword) LIKE '%' || #{pword} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY p.productno DESC
+               ) 
+               
+    )         
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]> 
+       
+    <!--SELECT r , X.*
+   FROM (
+               SELECT  ROWNUM as r, Z.*
+               FROM (
+                        SELECT c.cateno as c_cateno,
+                         p.productno, p.cateno, p.ptitle, p.pcontent, p.ppasswd, p.pword,
+                                     p.pfile1, p.pfile1saved, p.pthumb1, p.psize1, p.rdate
+                        FROM cate c, products p                        
+                        <choose>
+                          <when test="pword == null or pword == ''">   검색하지 않는 경우
+                             WHERE c.cateno = p.cateno
+                          </when>
+                          <otherwise>
+                            WHERE c.cateno=p.cateno AND (UPPER(ptitle) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pcontent) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pword) LIKE '%' || #{pword} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY p.productno DESC
+               ) Z
+    )X 
+    
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]> -->
+    
+    
+    <!--  1 page: WHERE r >= 1 AND r <= 10; 
+            2 page: WHERE r >= 11 AND r <= 20;
+            3 page: WHERE r >= 21 AND r <= 30; -->
+     
+  </select>   
+  
   
 </mapper> 
 

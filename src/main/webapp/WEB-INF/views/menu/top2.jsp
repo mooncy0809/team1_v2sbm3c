@@ -116,7 +116,7 @@ a{
                     <div class="col-sm-4">
                         <div class="logo pull-left">
 <!--                             <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
- -->                            <a href="../index2.do"><img src="/images/home/logo2.png" alt="" /></a>
+ -->                            <a href="../index2.do"><img src="/images/home/logo2.png" alt=""style="    padding-left: 20px;" /></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -148,7 +148,8 @@ a{
                                 
                                 <li><a href="../../product/list_by_cateno_grid.do?cateno=1">베스트</a></li>
                                 <li><a href="../../product/list_by_cateno_grid.do?cateno=19">특가</a></li>
-                                <li><a href="../../product/list_by_cateno_grid.do?cateno=3">신상품</a></li>  
+                                <li><a href="../../product/list_by_cateno_grid.do?cateno=3">신상품</a></li>
+                                <li><a href="../../product/list_by_cateno_grid_join2.do">전체상품</a></li>  
                                 <li><a href="/cart/list_by_memberno.do"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
                             </ul>
                         </div>
