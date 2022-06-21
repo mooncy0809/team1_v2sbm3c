@@ -170,7 +170,7 @@ function com4() {
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
                                 <li><a id="menubar" href="../index.do">삼대몇?</a></li>
-                                <li><a  id="menubar" href="../index2.do">하루삼끼</a></li>
+                                <li><a  id="menubar" href="../index2.do"  style=" color:balck; background-color:#F5F5EE;">하루삼끼</a></li>
                             </ul>
                         </div>
                     </div>
@@ -185,21 +185,21 @@ function com4() {
                             <ul class="nav navbar-nav2">
                                     <c:choose>
                                     <c:when test="${sessionScope.id == null}">
-                                        <li><a href="/member/login.do"><i class="fa fa-sign-in"></i> 로그인</a></li>
+                                        <li><a id="menubar" href="/member/login.do"><i class="fa fa-sign-in"></i> 로그인</a></li>
                                     </c:when>                                   
                                     
                                     <c:otherwise>
-                                        <li><a href="/member/logout.do"><i class="fa fa-sign-out"></i>${sessionScope.id } 로그아웃</a></li>
+                                        <li id="menubar"><a id="menubar" href="/member/logout.do"><i class="fa fa-sign-out"></i>${sessionScope.id } 로그아웃</a></li>
                                     </c:otherwise>                                                                                                          
                                     
                                 </c:choose>                               
                                 
                                 <c:choose>
                                     <c:when test="${sessionScope.id == null}">
-                                        <li><a href="/member/create.do"><i class="fa fa-plus"></i>회원 가입</a></li>
+                                        <li id="menubar"><a id="menubar" href="/member/create.do"><i class="fa fa-plus"></i>회원 가입</a></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><a href="/member/read2.do?memberno=${sessionScope.memberno}"><i class="fa fa-user"></i>${sessionScope.id } 내 정보</a></li>
+                                        <li id="menubar"><a id="menubar" href="/member/read2.do?memberno=${sessionScope.memberno}"><i class="fa fa-user"></i>${sessionScope.id } 내 정보</a></li>
                                     </c:otherwise>
                                 </c:choose>
                                 

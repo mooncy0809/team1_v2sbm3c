@@ -423,7 +423,7 @@
 
 <!-- ------------------------------ 리뷰 영역 종료 ------------------------------  -->
  
-<jsp:include page="../menu/bottom.jsp" flush='false' />
+<jsp:include page="../menu/bottom2.jsp" flush='false' />
 </body>
  
 </html>

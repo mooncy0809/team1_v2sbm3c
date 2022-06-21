@@ -260,6 +260,6 @@ function read_delete_ajax(order_itemno) {
   </div>
   </section>
  </div>
-<jsp:include page="../menu/bottom.jsp" flush='false' />
+<jsp:include page="../menu/bottom2.jsp" flush='false' />
  </body>
 </html>
