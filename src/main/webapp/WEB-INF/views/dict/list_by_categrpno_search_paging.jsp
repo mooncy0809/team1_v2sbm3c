@@ -12,8 +12,12 @@
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="/css/bootstrap.min.css" rel="stylesheet"> 
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -25,19 +29,21 @@
   
 <body>
 <jsp:include page="../menu/top.jsp" />
- 
+<%--  
     <DIV class='title_line'>
     <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
     <c:choose>
-    <c:when test="${sessionScope.grade < 10}"> <%-- 로그인 한 경우 --%>
+    <c:when test="${sessionScope.grade < 10}"> 로그인 한 경우
     <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
     </c:when>
     </c:choose>${categrpVO.name }
-   </DIV>
+   </DIV> --%>
 
 <DIV class='content_body'  style="width:58%;">
+<span style="width:70%; font-size: 1.5em; font-weight: bold;">칼로리 사전</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
-  <DIV style="text-align: center; clear: both;">  
+  <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_categrpno_search_paging.do'>
       <input type='hidden' name='categrpno' value='${categrpVO.categrpno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
@@ -50,8 +56,8 @@
     </form>
   </DIV>
    <br>
-   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
-   <c:choose>
+<!--    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+  -->  <c:choose>
    <c:when test="${param.word.length() > 0 }">
    <span style="width:50%; font-size: 1.5em; font-weight:bold;">검색 결과</span>
    </c:when>

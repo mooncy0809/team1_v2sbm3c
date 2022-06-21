@@ -39,6 +39,75 @@ a{
 
  font-family: 'Sunflower', sans-serif;
  }
+ 
+ #menubar:hover{
+
+    color:white;
+}
+#menubar:hover >.sub-menu {
+    display:none;
+}
+.nav>li>a:hover, .nav>li>a:focus {
+    text-decoration: none;
+}
+#menubar:active{
+
+    color:white;
+}
+.menu li:hover{
+    color: white;
+}
+.sub_com li:hover{
+    color: white;
+}
+.imgbtn{
+    cursor:pointer;
+    position: relative;
+}
+.menu li{
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 50px;
+    cursor:pointer;
+    color: black;
+}
+.sub_com li{
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 20px;
+    cursor:pointer;
+    color: black;
+}
+.drop{
+    color:white;
+    position: relative;
+    list-style-type: none;
+    padding-left: 44px;
+    display: none;
+    margin: 0 auto
+}
+ul.sub {
+    cursor:pointer;
+    position: absolute;
+    top: 36px;
+    left: 0;
+    background: rgba(255, 200, 200, 90%);
+    list-style: none;
+    padding:10px 0px 10px 0px;
+    margin: 0;
+    width: 200px;
+    -webkit-box-shadow: 0 3px 3px rgb(0 0 0 / 10%);
+    box-shadow: 0 3px 3px rgb(0 0 0 / 10%);
+    display: none;
+    line-height: 20px;
+    }
+ul.sub > li > a:hover{
+    cursor:pointer;
+    color: white;
+}
+ul.drop > li > a:hover{
+    cursor:pointer;
+    color: white;
+}
+ 
  </style>
 </head><!--/head-->
 
@@ -50,8 +119,8 @@ a{
                     <div class="col-sm-6">
                         <div class="contactinfo">
                             <ul class="nav nav-pills">
-                                <li><a href="../index.do">삼대몇?</a></li>
-                                <li><a href="../index2.do">하루삼끼</a></li>
+                                <li><a id="menubar" href="../index.do">삼대몇?</a></li>
+                                <li><a  id="menubar" href="../index2.do" style=" background-color:#F5F5EE;">하루삼끼</a></li>
                             </ul>
                         </div>
                     </div>
@@ -116,7 +185,7 @@ a{
                     <div class="col-sm-4">
                         <div class="logo pull-left">
 <!--                             <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
- -->                            <a href="../index2.do"><img src="/images/home/logo2.png" alt="" /></a>
+ -->                            <a href="../index2.do"><img src="/images/home/logo2.png" alt=""style="    padding-left: 20px;" /></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -146,7 +215,8 @@ a{
                                 
                                 <li><a href="../../product/list_by_cateno_grid.do?cateno=1">베스트</a></li>
                                 <li><a href="../../product/list_by_cateno_grid.do?cateno=19">특가</a></li>
-                                <li><a href="../../product/list_by_cateno_grid.do?cateno=3">신상품</a></li>  
+                                <li><a href="../../product/list_by_cateno_grid.do?cateno=3">신상품</a></li>
+                                <li><a href="../../product/list_by_cateno_grid_join2.do">전체상품</a></li>  
                                 <li><a href="/cart/list_by_memberno.do"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
                             </ul>
                         </div>

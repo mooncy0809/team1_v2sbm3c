@@ -58,6 +58,8 @@ public interface YouDAOInter {
    * @return
    */
   public List<YouVO> index_contents2(HashMap<String, Object> map);
+  
+  public List<YouVO> index_contents6(HashMap<String, Object> map);
 }
 
 

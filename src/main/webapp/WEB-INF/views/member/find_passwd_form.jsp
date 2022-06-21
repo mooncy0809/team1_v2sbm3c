@@ -28,8 +28,8 @@
                         <input class="w3-input" type="text" id="id" name="id" required>
                     </p>
                     <p class="w3-center">
-                        <button type="submit" id=findBtn class="w3-button w3-block w3-orange w3-ripple w3-margin-top w3-round">find</button>
-                        <button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-orange w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
+                        <button type="submit" id=findBtn class="btn btn-info">찾기</button>
+                        <button type="button" onclick="history.go(-1);" class="btn btn-info">취소</button>
                     </p>
                 </div>
             </form>

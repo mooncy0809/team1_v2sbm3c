@@ -765,5 +765,163 @@ public class ProductCont {
       return mav;
     }  
     
+    /**
+     * Grid 형태의 화면 구성 http://localhost:9091/product/list_by_cateno_grid.do
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/product/list_by_cateno_grid_join2.do", method = RequestMethod.GET)
+    public ModelAndView list_by_cateno_grid_join2(@RequestParam(value = "cateno", defaultValue = "1") int cateno,
+            @RequestParam(value = "pword", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("cateno", cateno); // #{cateno}
+        map.put("pword", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+        // 검색 목록
+        List<Cate_ProductVO> list = productProc.list_by_cateno_grid_join2(map);
+        mav.addObject("list", list);
+
+        // 검색된 레코드 갯수
+        int search_count = productProc.search_count2(map);
+        mav.addObject("search_count", search_count);
+
+        CateVO cateVO = cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
+
+        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
+
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+         * 18 19 20 [다음]
+         * @param cateno 카테고리번호
+         * @param search_count 검색(전체) 레코드수
+         * @param now_page 현재 페이지
+         * @param word 검색어
+         * @return 페이징 생성 문자열
+         */
+        String paging3 = productProc.pagingBox3(cateno, search_count, now_page, word);
+       
+        mav.addObject("paging3", paging3);
+
+        mav.addObject("now_page", now_page);
+
+      // 테이블 이미지 기반, /webapp/product/list_by_cateno_grid.jsp
+      mav.setViewName("/product/list_by_cateno_grid_join2");
+
+      return mav; // forward
+    }
+    
+    /**
+     * Grid 형태의 화면 구성 http://localhost:9091/product/list_by_cateno_grid.do
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/product/list_by_cateno_grid_join_up.do", method = RequestMethod.GET)
+    public ModelAndView list_by_cateno_grid_join_up(@RequestParam(value = "cateno", defaultValue = "1") int cateno,
+            @RequestParam(value = "pword", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("cateno", cateno); // #{cateno}
+        map.put("pword", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+        // 검색 목록
+        List<Cate_ProductVO> list = productProc.list_by_cateno_grid_join_up(map);
+        mav.addObject("list", list);
+
+        // 검색된 레코드 갯수
+        int search_count = productProc.search_count2(map);
+        mav.addObject("search_count", search_count);
+
+        CateVO cateVO = cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
+
+        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
+
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+         * 18 19 20 [다음]
+         * @param cateno 카테고리번호
+         * @param search_count 검색(전체) 레코드수
+         * @param now_page 현재 페이지
+         * @param word 검색어
+         * @return 페이징 생성 문자열
+         */
+        String paging3 = productProc.pagingBox3(cateno, search_count, now_page, word);
+       
+        mav.addObject("paging3", paging3);
+
+        mav.addObject("now_page", now_page);
+
+      // 테이블 이미지 기반, /webapp/product/list_by_cateno_grid.jsp
+      mav.setViewName("/product/list_by_cateno_grid_join2");
+
+      return mav; // forward
+    }
+    
+    /**
+     * Grid 형태의 화면 구성 http://localhost:9091/product/list_by_cateno_grid.do
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/product/list_by_cateno_grid_join_down.do", method = RequestMethod.GET)
+    public ModelAndView list_by_cateno_grid_join_down(@RequestParam(value = "cateno", defaultValue = "1") int cateno,
+            @RequestParam(value = "pword", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("cateno", cateno); // #{cateno}
+        map.put("pword", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+        // 검색 목록
+        List<Cate_ProductVO> list = productProc.list_by_cateno_grid_join_down(map);
+        mav.addObject("list", list);
+
+        // 검색된 레코드 갯수
+        int search_count = productProc.search_count2(map);
+        mav.addObject("search_count", search_count);
+
+        CateVO cateVO = cateProc.read(cateno);
+        mav.addObject("cateVO", cateVO);
+
+        CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+        mav.addObject("categrpVO", categrpVO);
+
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+         * 18 19 20 [다음]
+         * @param cateno 카테고리번호
+         * @param search_count 검색(전체) 레코드수
+         * @param now_page 현재 페이지
+         * @param word 검색어
+         * @return 페이징 생성 문자열
+         */
+        String paging3 = productProc.pagingBox3(cateno, search_count, now_page, word);
+       
+        mav.addObject("paging3", paging3);
+
+        mav.addObject("now_page", now_page);
+
+      // 테이블 이미지 기반, /webapp/product/list_by_cateno_grid.jsp
+      mav.setViewName("/product/list_by_cateno_grid_join2");
+
+      return mav; // forward
+    }
 
 }

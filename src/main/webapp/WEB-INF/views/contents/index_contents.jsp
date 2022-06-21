@@ -19,8 +19,10 @@
   margin:auto;
   padding-top: 20px;
   line-height: 0.5;
-  font-size: 13px;
-  
+  font-size: 11px;
+  font-weight: bold;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-family: 'Gaegu', cursive;
 }
 table.type04 td {
   width: 350px;
@@ -33,7 +35,7 @@ a{
     text-decoration: none;
     font-family: 'Kdam Thmor Pro', sans-serif;
    font-family: 'Gaegu', cursive;
-   font-size: 12px;
+   font-size: 11px;
     
     
 }
@@ -48,6 +50,12 @@ a:hover{
 h1{
     font-family: 'Kirang Haerang', cursive;
 }
+
+.eng{
+    font-family: 'Kirang Haerang', cursive;
+    font-size:20px;
+}
+
 
 
  
@@ -64,7 +72,7 @@ h1{
     <tbody>
       <c:forEach var="contentsVO" items="${list }">
         <c:set var="contentsno" value="${contentsVO.contentsno }" />
-        <c:set var="cateno" value="${contentsVO.cateno }" />
+        <c:set var="name" value="${contentsVO.name }" />
         <c:set var="title" value="${contentsVO.title }" />
         <c:set var="content" value="${contentsVO.content }" />
         <c:set var="file1" value="${contentsVO.file1 }" />
@@ -72,18 +80,26 @@ h1{
         <c:set var="memberno" value="${contentsVO.memberno }" />
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
+        <c:set var="rdate" value="${contentsVO.rdate }" />
+        <c:set var="replycnt" value="${contentsVO.replycnt }" />
         
-        
-        <tr>  
-          <td style='vertical-align: middle; text-align: left;'>
-            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }" target="_top">
-            <strong> ${title}</strong> </a> </td>
+        <tr> 
+          
+          <!-- 게시판 카테고리 -->
+          <td style='vertical-align: middle; text-align: center;'>${name} </td> 
+          
+          <td style='vertical-align: middle; text-align: center;'>
+            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
+         
+          <strong>[${replycnt}]</strong>
+           <strong>${title} <%-- ${replycnt}] --%></strong> </a> </td>
+
         </tr>
       </c:forEach>
       
     </tbody>
   </table>
-  <a href="../contents/list_by_cateno_search_paging.do?cateno=4&now_page=1" target="_top"><h1 style="font-size: 40px">자유게시판</h1></a>
+  <a href="../contents/list_all_join.do" target="_top"><h1 style="font-size: 40px">커뮤니티<div class="eng">COMMUNITY</div></h1></a>
   </div>
  
 </body>

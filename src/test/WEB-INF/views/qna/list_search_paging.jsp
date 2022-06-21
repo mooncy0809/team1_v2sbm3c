@@ -101,7 +101,7 @@ function btn(sample){
   </c:when>
   <c:otherwise>
   <button type="button" class="btn btn-primary"
-                            onclick="location.href='./create.do?categrpno=4&memberno=${sessionScope.memberno}'">글쓰기</button>
+                            onclick="location.href='./create.do?categrpno=6&memberno=${sessionScope.memberno}'">글쓰기</button>
   </c:otherwise>
   </c:choose>
   </div>

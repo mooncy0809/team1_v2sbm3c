@@ -68,6 +68,7 @@ public interface ContentsDAOInter {
      * @return
      */
     public List<ContentsVO> list_by_cateno_search_paging(HashMap<String, Object> map);
+   
 
     /**
      * 패스워드 체크
@@ -145,5 +146,11 @@ public interface ContentsDAOInter {
     
     public List<ContentsVO> tip_by_cateno_search_paging(HashMap<String, Object> map);
     
+    public List<ContentsVO> index_contents4(HashMap<String, Object> map);
+    
+    public List<ContentsVO> index_contents5(HashMap<String, Object> map);
+    
+    public List<ContentsVO> index_contents7(HashMap<String, Object> map);
+    public List<ContentsVO> index_contents(HashMap<String, Object> map);
     
 }

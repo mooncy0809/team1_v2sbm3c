@@ -324,14 +324,11 @@
 </div>
 <!-- -------------------- 리뷰 삭제폼 종료 -------------------- -->
  
-<DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  <A href="../cate/list_by_categrpno.do?categrpno=${categrpVO.categrpno }" class='title_link'>${categrpVO.name }</A> >
-  <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }" class='title_link'>${cateVO.name }</A>
-</DIV>
+
 
 <DIV class='content_body'>
   <ASIDE class="aside_right">
+    <A href="javascript:history.back();">뒤로가기</A>
     <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
   </ASIDE> 

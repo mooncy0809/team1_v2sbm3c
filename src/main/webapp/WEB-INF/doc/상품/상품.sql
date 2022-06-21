@@ -23,7 +23,7 @@ CREATE TABLE products(
         salecnt                               NUMBER(10)      DEFAULT 0 NULL,  
   FOREIGN KEY (cateno) REFERENCES cate (cateno)
 );
-
+drop table products CASCADE CONSTRAINTS;
 COMMENT ON TABLE products is '컨텐츠-상품';
 COMMENT ON COLUMN products.productno is '컨텐츠 번호';
 COMMENT ON COLUMN products.cateno is '카테고리 번호';
@@ -58,6 +58,9 @@ DROP SEQUENCE products_seq;
 --삽입
 INSERT INTO products(productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, ppasswd, pword, rdate, price, dc, saleprice, point, salecnt)
 VALUES(products_seq.nextval, 19, '아임웰 훈제 닭가슴살', '아주 맛있는 훈제 닭가슴살', 0, 0, 0, '123', '닭가슴살', sysdate,2000, 10, 1800, 100, 500);
+
+INSERT INTO products(productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, ppasswd, pword, rdate, price, dc, saleprice, point, salecnt)
+VALUES(products_seq.nextval, 1, '아임웰 훈제 닭가슴살', '아주 맛있는 훈제 닭가슴살', 0, 0, 0, '123', '닭가슴살', sysdate,2000, 10, 1800, 100, 500);
 
 SELECT * FROM products;
 

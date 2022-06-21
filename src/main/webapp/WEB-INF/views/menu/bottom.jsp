@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
- 
+
     <footer id="footer" ><!--Footer-->
         <div class="footer-top" >
             <div class="container" >
@@ -149,17 +149,19 @@
         
         <div class="footer-bottom" >
        
-            <div class="container">
-                 <div class="row"     style="padding-bottom: 50px;">
-                 <div class="col-sm-4">
+            <div class="container" style="padding-bottom: 50px;">
+                 <div class="row" style="    width: 500px;">
+                 <div  style=" height: 50px;  width: 250px;">
                  Copyright (c) 2022. soldesk team1 All Rights Reserved.
                     <!--Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a></span></p>-->
+                    </div> </div> 
+                    <div class="row2" style="width: 500px;">
+                    <div  style=" height: 50px;  width: 300px;">
+                    <a>문의사항은 관리자에게 게시판으로 문의 주시면 <br>빠른 시일내에 회신 드리도록 하겠습니다.</a>
+                <button type="button" class="btn btn-primary" onclick="location.href='../qna/list_search_paging.do?categrpno=6&memberno=${sessionScope.memberno}' ">관리자에게</button>
                     </div>
-                    <div class="col-sm-8" style="padding-left: 550px;">
-                    
-                    <button type="button" class="btn btn-primary" onclick="location.href='../qna/list_search_paging.do?categrpno=4&memberno=${sessionScope.memberno}' ">관리자에게</button>
                     </div>
-                </div> 
+               
             </div>
         </div>
         

@@ -10,7 +10,8 @@
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -43,10 +44,13 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
  
-<DIV class='title_line'>로그인</DIV>
+<!-- <DIV class='title_line'>로그인</DIV> -->
+<DIV class='title_line'><span style="text-align: center; width:50%; font-weight: bold;">로그인</span></DIV>
+   <hr align="center" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 70%;">
+
 
 <DIV class='content_body'>
-  <DIV id='div_login' style='display: ;'>
+  <DIV id='div_login' style='display: ; padding-left: 80px;'>
     <div style='width: 100%; margin: 0px 0px 0px 0px;'>
         <FORM name='frm_login' id='frm_login' method='post' action='./login.do' class="form-horizontal">
           <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
