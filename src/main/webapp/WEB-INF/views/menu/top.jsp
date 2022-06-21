@@ -105,8 +105,6 @@ ul.drop > li > a:hover{
     cursor:pointer;
     color: white;
 }
-
-
 </style>
 
 </head>
@@ -187,7 +185,7 @@ ul.drop > li > a:hover{
                                                                 <li class="dropdown2"><a onclick="com4(this)" class="sub"style="color:white;font-weight:bold;" ><i class="fa fa-gears"></i>하루삼끼 관리자<i class="fa fa-angle-down"></i></a>
                                                                       <ul role="menu" class="drop"  id="sub_com4">
                                                                       <li><a href="/categrp/list2.do">카테고리 관리</a></li><br>
-                                                                      <li><a href="/categrp/list.do">주문 관리</a></li>
+                                                                      <li><a href="../../order_pay/list_by_memberno_search_paging_all.do?memberno=${memberno}&word=">주문 관리</a></li>
                                                                       </ul>
                                                                 </li>
                                                                  
@@ -289,7 +287,7 @@ ul.drop > li > a:hover{
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1"><li>고민&질문</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1"><li>일기</li></a>  
 
-                                       <a href="/qna/list_search_paging.do?categrpno=6&memberno=${sessionScope.memberno}"> <li>관리자에게</li></a> 
+                                       <a href="/qna/list_search_paging.do?categrpno=6&memberno=${sessionScope.memberno}"> <li>관리자에게</li></a> 
 
                                         </div>
                             <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4&now_page=1"><li>HOME TRAINING</li></a>
@@ -343,22 +341,18 @@ ul.drop > li > a:hover{
         $("#mySidenav").slideUp(500);
       }
     });
-
 function openNav() {
     if ($('#mySidenav').css('display') == 'block'){
         $("#mySidenav").slideUp(500);
-
         
        
         } 
     
     else{
         $("#mySidenav").slideDown(500);
-
             
             }
   } 
-
 /* $('body').click(function(){
     $("#mySidenav").slideUp(500);
    
@@ -367,18 +361,14 @@ function openNav() {
 $(document).click(function(e){ //문서 body를 클릭했을때         
     if(e.target.className =="openNav"){return false} //내가 클릭한 요소(target)를 기준으로 상위요소에 .share-pop이 없으면 (갯수가 0이라면)       
     $("openNav").slideUp(500)
-
     });
  */
-
-
 function com() {
     if ($('#sub_com').css('display') == 'block'){
         $("#sub_com").slideUp(500);
         } 
     else{
         $("#sub_com").slideDown(500);
-
             }
   } 
 function com2() {

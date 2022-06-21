@@ -128,7 +128,6 @@
     <tbody>
     <c:forEach var="dictVO" items="${list}">
       <c:set var="dictno" value="${dictVO.dictno }" />
-      
       <TR>
       <c:choose>
       <c:when test="${param.word.length() > 0 }">

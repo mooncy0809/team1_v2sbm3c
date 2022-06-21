@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.cart.CartProcInter;
 import dev.mvc.cart.CartVO;
+import dev.mvc.categrp.CategrpVO;
 import dev.mvc.order_item.Order_itemProcInter;
 import dev.mvc.order_item.Order_itemVO;
 import dev.mvc.product.ProductProcInter;
@@ -173,34 +174,97 @@ public class Order_payCont {
     
     mav.addObject("memberno", memberno);
     
-    mav.setViewName("redirect:/order_pay/list_by_memberno.do");  // 참일 경우만 발생한다고 결정, 에러 페이지 이동 생략 
+    mav.setViewName("redirect:/order_pay/list_by_memberno_search_paging.do");  // 참일 경우만 발생한다고 결정, 에러 페이지 이동 생략 
 
     return mav; // forward
   }
 
   /**
    * 회원별 전체 목록, 로그인이 안되어 있으면 로그인 후 목록 출력
-   * http://localhost:9091/order_pay/list_by_memberno.do 
+   * http://localhost:9091/order_pay/list_by_memberno_search_paging.do 
    * @return
    */
-  @RequestMapping(value="/order_pay/list_by_memberno.do", method=RequestMethod.GET )
-  public ModelAndView list_by_memberno(HttpSession session) {
+  @RequestMapping(value="/order_pay/list_by_memberno_search_paging.do", method=RequestMethod.GET )
+  public ModelAndView list_by_memberno_search_paging(
+          @RequestParam(value = "memberno") int memberno,                                                                           
+          @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+          @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+          HttpSession session) {
     ModelAndView mav = new ModelAndView();
-    
+    // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("memberno", memberno); // #{memberno}
+    map.put("word", word); // #{word}
+    map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+  
     if (session.getAttribute("memberno") != null) { // 회원으로 로그인을 했다면 쇼핑카트로 이동
-      int memberno = (int)session.getAttribute("memberno");
+      memberno = (int)session.getAttribute("memberno");
       
-      List<Order_payVO> list = this.order_payProc.list_by_memberno(memberno);
-      mav.addObject("list", list); // request.setAttribute("list", list);
+      List<Order_payVO> list = order_payProc.list_by_memberno_search_paging(map);
+      mav.addObject("list", list);  
+      
+      // 검색된 레코드 갯수
+      int search_count = order_payProc.search_count(map);
+      mav.addObject("search_count", search_count);
+      
+      String paging = order_payProc.pagingBox(memberno, search_count, now_page, word);
+      mav.addObject("paging", paging);
 
-      mav.setViewName("/order_pay/list_by_memberno"); // /views/order_pay/list_by_memberno.jsp   
+      mav.addObject("now_page", now_page);
+      
+      mav.setViewName("/order_pay/list_by_memberno_search_paging"); // /views/order_pay/list_by_memberno_search_paging.jsp   
       
     } else { // 회원으로 로그인하지 않았다면
-      mav.addObject("return_url", "/order_pay/list_by_memberno.do"); // 로그인 후 이동할 주소 ★
+      mav.addObject("return_url", "/order_pay/list_by_memberno_search_paging.do"); // 로그인 후 이동할 주소 ★
       
       mav.setViewName("redirect:/member/login.do"); // /WEB-INF/views/member/login_ck_form.jsp
     }
 
     return mav;
   }
+  /**
+   * 회원별 전체 목록, 로그인이 안되어 있으면 로그인 후 목록 출력
+   * 관리자용
+   * http://localhost:9091/order_pay/list_by_memberno_search_paging.do 
+   * @return
+   */
+  @RequestMapping(value="/order_pay/list_by_memberno_search_paging_all.do", method=RequestMethod.GET )
+  public ModelAndView list_by_memberno_search_paging_all(
+          @RequestParam(value = "memberno") int memberno,                                                                           
+          @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+          @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+          HttpSession session) {
+    ModelAndView mav = new ModelAndView();
+    // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("memberno", memberno); // #{memberno}
+    map.put("word", word); // #{word}
+    map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+  
+    if (session.getAttribute("memberno") != null) { // 회원으로 로그인을 했다면 쇼핑카트로 이동
+      memberno = (int)session.getAttribute("memberno");
+      
+      List<Order_payVO> list = order_payProc.list_by_memberno_search_paging_all(map);
+      mav.addObject("list", list);  
+      
+      // 검색된 레코드 갯수
+      int search_count2 = order_payProc.search_count2(map);
+      mav.addObject("search_count2", search_count2);
+      
+      String paging = order_payProc.pagingBox2(memberno, search_count2, now_page, word);
+      mav.addObject("paging", paging);
+
+      mav.addObject("now_page", now_page);
+      
+      mav.setViewName("/order_pay/list_by_memberno_search_paging_all"); // /views/order_pay/list_by_memberno_search_paging.jsp   
+      
+    } else { // 회원으로 로그인하지 않았다면
+      mav.addObject("return_url", "/order_pay/list_by_memberno_search_paging_all.do"); // 로그인 후 이동할 주소 ★
+      
+      mav.setViewName("redirect:/member/login.do"); // /WEB-INF/views/member/login_ck_form.jsp
+    }
+
+    return mav;
+  }
+
 }

@@ -23,4 +23,23 @@ public class Order_itemProc implements Order_itemProcInter {
     list = this.order_itemDAO.list_by_memberno(map);
     return list;
   } 
+  
+  @Override
+  public Order_itemVO read(int order_itemno) {
+      Order_itemVO order_itemVO = this.order_itemDAO.read(order_itemno);
+      return order_itemVO;
+  }
+  
+  @Override
+  public int update(Order_itemVO order_itemVO) {
+      int cnt = this.order_itemDAO.update(order_itemVO);
+      return cnt;
+  }
+  
+
+  @Override
+  public int delete(int order_itemno) {
+      int cnt = this.order_itemDAO.delete(order_itemno);
+      return cnt;
+  }
 }
