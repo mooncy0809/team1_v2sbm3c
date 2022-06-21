@@ -38,10 +38,6 @@
 <script type="text/javascript">
 
   $(function() {
-    // var productno = 0;
-    // $('#btn_cart').on('click', function() { cart_ajax(productno)});
-    //$('#btn_login').on('click', login_ajax);
-    //$('#btn_loadDefault').on('click', loadDefault);
   });
 
   <%-- 쇼핑 카트에 상품 추가 --%>
@@ -109,6 +105,24 @@
  
 <body>
 <jsp:include page="../menu/top2.jsp" />
+<DIV class='title_line' style="text-align: right;">
+  <A href="./list_by_cateno_grid_join_up.do" class='title_link'>높은 가격순</A> | 
+  <A href="./list_by_cateno_grid_join_down.do" class='title_link'>낮은 가격순</A> 
+</DIV>
+
+<DIV style="text-align: right; clear: both;">  
+    <form name='frm' id='frm' method='get' action='./list_by_cateno_grid_join2.do'>
+      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
+      <input type='text' name='pword' id='pword' value='${param.pword }' style='width: 20%;'>
+      <button type='submit'>검색</button>
+      <c:if test="${param.pword.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='">검색 취소</button>  
+      </c:if>    
+    </form>
+  </DIV>
+
+       
        <input type='hidden' name='now_page' value='1'>
   <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">

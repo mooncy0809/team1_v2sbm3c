@@ -168,7 +168,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                              WHERE categrpno=#{categrpno}
                           </when>
                         </choose>
-                        ORDER BY youno DESC
+                        ORDER BY rdate DESC
                )
     )
  <choose>

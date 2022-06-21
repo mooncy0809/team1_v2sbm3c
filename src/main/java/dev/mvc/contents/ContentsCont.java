@@ -306,7 +306,7 @@ public class ContentsCont {
       // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
+      map.put("word", word.toUpperCase()); // #{word}
       map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
       // 검색 목록
@@ -339,6 +339,7 @@ public class ContentsCont {
       mav.addObject("paging", paging);
 
       mav.addObject("now_page", now_page);
+      mav.addObject("word", word);
       
 
       // /contents/list_by_cateno_table_img1_search_paging.jsp
@@ -472,7 +473,7 @@ public class ContentsCont {
       // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
+      map.put("word", word.toUpperCase()); // #{word}
       map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
       // 검색 목록
@@ -505,7 +506,7 @@ public class ContentsCont {
       mav.addObject("paging", paging);
 
       mav.addObject("now_page", now_page);
-      
+      mav.addObject("word", word);
 
       // /contents/list_by_cateno_table_img1_search_paging.jsp
       mav.setViewName("/contents/tip_by_cateno");
@@ -717,16 +718,16 @@ public class ContentsCont {
         ModelAndView mav = new ModelAndView();
         
         HashMap<String, Object> map = new HashMap<String, Object>();        
-        map.put("word", word); // #{word}
+        map.put("word", word.toUpperCase()); // #{word}
         map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
         
         // 검색된 레코드 갯수
         int search_count = contentsProc.search_count2(map);
-        mav.addObject("search_count2", search_count);
+        mav.addObject("search_count", search_count);
         
         List<ContentsVO>list = this.contentsProc.list_all_join(map);
         mav.addObject("list", list); // request.setAttribute("list", list);
-        
+                      
         
         
         /*
@@ -744,6 +745,7 @@ public class ContentsCont {
         mav.addObject("paging", paging);
     
         mav.addObject("now_page", now_page);
+        mav.addObject("word", word);
         
         mav.setViewName("/contents/list_all_join"); // /WEB-INF/views/concertcate/list_all_join.jsp
         return mav;
@@ -772,7 +774,7 @@ public class ContentsCont {
       // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
+      map.put("word", word.toUpperCase()); // #{word}
       map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
       // 검색 목록
@@ -805,7 +807,7 @@ public class ContentsCont {
       mav.addObject("paging", paging);
 
       mav.addObject("now_page", now_page);
-      
+      mav.addObject("word", word);
 
       // /contents/list_by_cateno_table_img1_search_paging.jsp
       mav.setViewName("/contents/list_by_cateno_search_paging");
@@ -813,67 +815,67 @@ public class ContentsCont {
       return mav;
     }
     
-    /**
-     * 목록 + 검색 + 페이징 지원
-     * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
-     * 
-     * @param cateno
-     * @param word
-     * @param now_page
-     * @return
-     */
-    @RequestMapping(value = "/contents/index_contents.do", method = RequestMethod.GET)
-    public ModelAndView index_contents(
-            @RequestParam(value = "cateno", defaultValue = "1") int cateno,                                                                           
-            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
-            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
-            HttpSession session) {
-      System.out.println("--> now_page: " + now_page);
-
-      ModelAndView mav = new ModelAndView();
-
-      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
-      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
-
-      // 검색 목록
-      List<ContentsVO> list = contentsProc.list_by_cateno_search_paging(map);
-      mav.addObject("list", list);
-
-      // 검색된 레코드 갯수
-      int search_count = contentsProc.search_count(map);
-      mav.addObject("search_count", search_count);
-
-      CateVO cateVO = cateProc.read(cateno);
-      mav.addObject("cateVO", cateVO);
-
-      CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
-      mav.addObject("categrpVO", categrpVO);
-
-      /*
-       * SPAN태그를 이용한 박스 모델의 지원
-       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
-       * 18 19 20 [다음]
-       * @param cateno 카테고리번호
-       * @param search_count 검색(전체) 레코드수
-       * @param now_page 현재 페이지
-       * @param word 검색어
-       * @return 페이징용으로 생성된 HTML tag 문자열
-       */
-      String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
-//      System.out.println("-> paging: " + paging);
-      mav.addObject("paging", paging);
-
-      mav.addObject("now_page", now_page);
-      
-
-      // /contents/list_by_cateno_table_img1_search_paging.jsp
-      mav.setViewName("/contents/index_contents");
-
-      return mav;
-    }
+//    /**
+//     * 목록 + 검색 + 페이징 지원
+//     * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+//     * 
+//     * @param cateno
+//     * @param word
+//     * @param now_page
+//     * @return
+//     */
+//    @RequestMapping(value = "/contents/index_contents.do", method = RequestMethod.GET)
+//    public ModelAndView index_contents(
+//            @RequestParam(value = "cateno", defaultValue = "1") int cateno,                                                                           
+//            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+//            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+//            HttpSession session) {
+//      System.out.println("--> now_page: " + now_page);
+//
+//      ModelAndView mav = new ModelAndView();
+//
+//      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+//      HashMap<String, Object> map = new HashMap<String, Object>();
+//      map.put("cateno", cateno); // #{cateno}
+//      map.put("word", word); // #{word}
+//      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+//
+//      // 검색 목록
+//      List<ContentsVO> list = contentsProc.list_by_cateno_search_paging(map);
+//      mav.addObject("list", list);
+//
+//      // 검색된 레코드 갯수
+//      int search_count = contentsProc.search_count(map);
+//      mav.addObject("search_count", search_count);
+//
+//      CateVO cateVO = cateProc.read(cateno);
+//      mav.addObject("cateVO", cateVO);
+//
+//      CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+//      mav.addObject("categrpVO", categrpVO);
+//
+//      /*
+//       * SPAN태그를 이용한 박스 모델의 지원
+//       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+//       * 18 19 20 [다음]
+//       * @param cateno 카테고리번호
+//       * @param search_count 검색(전체) 레코드수
+//       * @param now_page 현재 페이지
+//       * @param word 검색어
+//       * @return 페이징용으로 생성된 HTML tag 문자열
+//       */
+//      String paging = contentsProc.pagingBox(cateno, search_count, now_page, word);
+////      System.out.println("-> paging: " + paging);
+//      mav.addObject("paging", paging);
+//
+//      mav.addObject("now_page", now_page);
+//      
+//
+//      // /contents/list_by_cateno_table_img1_search_paging.jsp
+//      mav.setViewName("/contents/index_contents");
+//
+//      return mav;
+//    }
 
     /*    /**
              * 목록 + 검색 + 페이징 + Cookie 지원
@@ -1060,7 +1062,7 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/update_file.do", method = RequestMethod.GET)
-    public ModelAndView update_file(int contentsno, int now_page) {
+    public ModelAndView update_file(int contentsno) {
         ModelAndView mav = new ModelAndView();
 
         ContentsVO contentsVO = this.contentsProc.read(contentsno);
@@ -1070,7 +1072,7 @@ public class ContentsCont {
         mav.addObject("contentsVO", contentsVO);
         mav.addObject("cateVO", cateVO);
         mav.addObject("categrpVO", categrpVO);
-        mav.addObject("now_page", now_page);
+//        mav.addObject("now_page", now_page);
 
         mav.setViewName("/contents/update_file"); // /WEB-INF/views/contents/update_file.jsp
 
@@ -1083,7 +1085,7 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/update_file.do", method = RequestMethod.POST)
-    public ModelAndView update_file(HttpServletRequest request, ContentsVO contentsVO, int now_page, String word) {
+    public ModelAndView update_file(HttpServletRequest request, ContentsVO contentsVO) {
         ModelAndView mav = new ModelAndView();
 
         // 삭제할 파일 정보를 읽어옴, 기존에 등록된 레코드 저장용
@@ -1174,8 +1176,9 @@ public class ContentsCont {
             mav.setViewName("redirect:/contents/msg.do");
         }
 
-        mav.addObject("word", word);
-        mav.addObject("now_page", now_page);
+        /*
+         * mav.addObject("word", word); mav.addObject("now_page", now_page);
+         */
         mav.addObject("cateno", contentsVO_old.getCateno());
         System.out.println("-> cateno: " + contentsVO_old.getCateno());
 
@@ -1414,5 +1417,110 @@ public class ContentsCont {
     }
 
     
+    /**
+     * 공지사항 목록 + 검색 + 페이징 지원
+     * http://localhost:9090/contents/list_by_cateno_search_paging.do?cateno=1&word=스위스&now_page=1
+     * 
+     * @param cateno
+     * @param word
+     * @param now_page
+     * @return
+     */
+    @RequestMapping(value = "/contents/index_contents7.do", method = RequestMethod.GET)
+    public ModelAndView index_contents7(
+            @RequestParam(value = "cateno", defaultValue = "2") int cateno,                                                                           
+            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
+            HttpSession session) {
+      System.out.println("--> now_page: " + now_page);
+
+      ModelAndView mav = new ModelAndView();
+
+      // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("cateno", cateno); // #{cateno}
+      map.put("word", word); // #{word}
+      map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+      // 검색 목록
+      List<ContentsVO> list = contentsProc.index_contents7(map);
+      mav.addObject("list", list);
+      
+
+      // 검색된 레코드 갯수
+      int search_count = contentsProc.search_count(map);
+      mav.addObject("search_count", search_count);
+
+      CateVO cateVO = cateProc.read(cateno);
+      mav.addObject("cateVO", cateVO);
+
+      CategrpVO categrpVO = categrpProc.read(cateVO.getCategrpno());
+      mav.addObject("categrpVO", categrpVO);
+
+      /*
+       * SPAN태그를 이용한 박스 모델의 지원
+       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+       * 18 19 20 [다음]
+       * @param cateno 카테고리번호
+       * @param search_count 검색(전체) 레코드수
+       * @param now_page 현재 페이지
+       * @param word 검색어
+       * @return 페이징용으로 생성된 HTML tag 문자열
+       */
+      String paging = contentsProc.tip_pagingBox(cateno, search_count, now_page, word);
+//      System.out.println("-> paging: " + paging);
+      mav.addObject("paging", paging);
+
+      mav.addObject("now_page", now_page);
+      
+
+      // /contents/list_by_cateno_table_img1_search_paging.jsp
+      mav.setViewName("/contents/index_contents7");
+
+      return mav;
+    }
+    
+    /**
+     * Concert + ConcertCate join, 연결 목록
+     * http://localhost:9091/concertcate/list_all_join.do 
+     * @return
+     */
+    @RequestMapping(value = "/contents/index_contents.do", method=RequestMethod.GET)
+    public ModelAndView index_contents(
+            @RequestParam(value = "word", defaultValue = "") String word,                                                                           
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page     
+            ) {
+        ModelAndView mav = new ModelAndView();
+        
+        HashMap<String, Object> map = new HashMap<String, Object>();        
+        map.put("word", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+        
+        // 검색된 레코드 갯수
+        int search_count = contentsProc.search_count2(map);
+        mav.addObject("search_count2", search_count);
+        
+        List<ContentsVO>list = this.contentsProc.index_contents(map);
+        mav.addObject("list", list); // request.setAttribute("list", list);
+     
+        /*
+       * SPAN태그를 이용한 박스 모델의 지원
+       * 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+       * 18 19 20 [다음]
+       * @param cateno 카테고리번호
+       * @param search_count 검색(전체) 레코드수
+       * @param now_page 현재 페이지
+       * @param word 검색어
+       * @return 페이징용으로 생성된 HTML tag 문자열
+       */
+        String paging = contentsProc.pagingBox2(search_count, now_page, word);
+        System.out.println("-> paging: " + paging);
+        mav.addObject("paging", paging);
+    
+        mav.addObject("now_page", now_page);
+        
+        mav.setViewName("/contents/index_contents"); // /WEB-INF/views/concertcate/list_all_join.jsp
+        return mav;
+    }
 
 }

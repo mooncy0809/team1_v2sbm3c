@@ -8,18 +8,22 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>Community</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<link href="/css/bootstrap.min.css" rel="stylesheet"> 
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
- 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
- 
-  
 </script>
+
+<style type="text/css">
+       
+</style>
  
 </head> 
   
@@ -30,49 +34,42 @@
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 전체 게시물
 </DIV> -->
 
-<DIV class='content_body'>
+<DIV class='content_body' style="width:58%;">
  <span style="width:70%; font-size: 1.5em; font-weight: bold;">전체 게시물</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
    <br>
-  <ASIDE class="aside_right">
-    <c:if test="${sessionScope.id != null }"> 
-        <A href="./create.do?cateno=${cateVO.cateno }">등록</A>    
-    <span class='menu_divide' >│</span>
-    </c:if>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
-  </ASIDE> 
 
   <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_all_join.do'>
       
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
-      <button type='submit'>검색</button>
+      <button type='submit' class="btn btn-primary">검색</button>
       <c:if test="${param.word.length() > 0 }">
+
         <button type='button' 
-                     onclick="location.href='./list_all_join.do">검색 취소</button>  
+                     onclick="location.href='./list_all_join.do?word='">검색 취소</button> 
+
       </c:if>    
     </form>
   </DIV>
   
   <DIV class='menu_line'></DIV>
   
-  <table class="table table-striped" style='width: 100%;'>
+  <table class="table" style='width: 100%;'>
     <colgroup>
+      <%-- <col style="width: 10%;"></col> --%>
       <col style="width: 10%;"></col>
+      <col style="width: 35%;"></col>
+      <col style="width: 25%;"></col>
+      <col style="width: 7%;"></col>
       <col style="width: 10%;"></col>
-      <col style="width: 10%;"></col>
-      <col style="width: 30%;"></col>
-      <col style="width: 10%;"></col>
-      <col style="width: 10%;"></col>
-      <col style="width: 10%;"></col>
+      <col style="width: 13%;"></col>
     </colgroup>
     <%-- table 컬럼 --%>
     <thead>
       <tr>
-        <th style='text-align: center;'></th>
+        <!-- <th style='text-align: center;'></th> -->
         <th style='text-align: center;'>카테고리</th>
         <th style='text-align: center;'>제목</th>
         <th style='text-align: center;'>내용</th>
@@ -84,9 +81,12 @@
     </thead>
     
     <%-- table 내용 --%>
+    
     <tbody>
+
       <c:forEach var="contentsVO" items="${list }">
         <c:set var="contentsno" value="${contentsVO.contentsno }" />
+        <c:set var="cateno" value="${contentsVO.cateno }" />
         <c:set var="name" value="${contentsVO.name }" />
         <c:set var="title" value="${contentsVO.title }" />
         <c:set var="content" value="${contentsVO.content }" />
@@ -96,25 +96,13 @@
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
         <c:set var="rdate" value="${contentsVO.rdate }" />
-        <c:set var="replycnt" value="${contentsVO.replycnt }" />
-        
-        <tr> 
-          <td style='vertical-align: middle; text-align: center;'>
-            <c:choose>
-              <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-                <%-- /static/contents/storage/ --%>
-                <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }"><IMG src="/contents/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
-              </c:when>
-              <c:otherwise> <!-- 기본 이미지 출력 -->
-                <IMG src="/contents/images/none1.png" style="width: 120px; height: 80px;">
-              </c:otherwise>
-            </c:choose>
-          </td>  
+        <c:set var="replycnt" value="${contentsVO.replycnt }" />      
           
-          <!-- 게시판 카테고리 -->
+          <tr <c:if test="${cateno eq 1}"> style='background-color:#FFDCD3; font-weight:bold;' </c:if>>           
+          
           <td style='vertical-align: middle; text-align: center;'>${name} </td> 
           
-          <td style='vertical-align: middle; text-align: center;'>
+          <td style='vertical-align: middle; text-align: center; '>
             <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
           <strong>${title} [${replycnt}]</strong> </a> </td>
           
@@ -128,7 +116,6 @@
           
           <!-- 작성일 -->
           <td style='vertical-align: middle; text-align: center;'>${rdate } </td>
-
         </tr>
       </c:forEach>
       
@@ -144,5 +131,6 @@
  
 <jsp:include page="../menu/bottom.jsp" />
 </body>
+
  
 </html>

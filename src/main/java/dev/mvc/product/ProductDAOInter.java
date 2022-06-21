@@ -110,6 +110,18 @@ public interface ProductDAOInter {
      * @return
      */
     public List<Cate_ProductVO> list_by_cateno_grid_join2(HashMap<String, Object> map);  
+    
+    /**
+     * Cate + Product join, 연결 목록
+     * @return
+     */
+    public List<Cate_ProductVO> list_by_cateno_grid_join_up(HashMap<String, Object> map);
+    
+    /**
+     * Cate + Product join, 연결 목록
+     * @return
+     */
+    public List<Cate_ProductVO> list_by_cateno_grid_join_down(HashMap<String, Object> map);
 }
 
 

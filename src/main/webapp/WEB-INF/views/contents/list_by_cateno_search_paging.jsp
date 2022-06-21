@@ -10,10 +10,15 @@
 <title>Community</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
- 
+
+ <link href="/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -29,7 +34,7 @@ function btn(sample){
 <body>
 <jsp:include page="../menu/top.jsp" />
 
-<DIV class='content_body'>
+<DIV class='content_body' style="width:58%;">
     <span style="width:70%; font-size: 1.5em; font-weight: bold;">
         <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }">${cateVO.name }</A>
     </span>
@@ -40,9 +45,9 @@ function btn(sample){
       <input type='hidden' name='cateno' value='${cateVO.cateno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
-      <button type='submit'>검색</button>
+      <button type='submit' class="btn btn-primary">검색</button>
       <c:if test="${param.word.length() > 0 }">
-        <button type='button' 
+        <button type='button' class="btn btn-primary"
                      onclick="location.href='./list_by_cateno_search_paging.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>

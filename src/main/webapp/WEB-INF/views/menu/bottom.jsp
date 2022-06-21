@@ -157,8 +157,8 @@
                     </div> </div> 
                     <div class="row2" style="width: 500px;">
                     <div  style=" height: 50px;  width: 300px;">
-                    <a>문의사항은 관리자에게 게시판으로 문의 주시면 <br>빠른 시일내에 회신 드리도록 하겠습니다.</a>
-                <button type="button" class="btn btn-primary" onclick="location.href='../qna/list_search_paging.do?categrpno=4&memberno=${sessionScope.memberno}' ">관리자에게</button>
+                    문의사항은 관리자에게 게시판으로 문의 주시면 <br>빠른 시일내에 회신 드리도록 하겠습니다.
+                <button type="button" class="btn btn-primary" onclick="location.href='../qna/list_search_paging.do?categrpno=6&memberno=${sessionScope.memberno}' ">관리자에게</button>
                     </div>
                     </div>
                
