@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
 <!DOCTYPE html>
 <html lang="ko">
@@ -230,8 +232,8 @@ a{
                     </div>
                 </div>
                 
-                <div class="col-sm-9 padding-right">
-                    <div class="features_items"><!--features_items-->
+                <!-- <div class="col-sm-9 padding-right">
+                    <div class="features_items">features_items
                         <h2 class="title text-center">Features Items</h2>
                         <div class="col-sm-4">
 
@@ -258,11 +260,80 @@ a{
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
+                        </div> -->
+                        <div class="col-sm-9 padding-right"> <%-- 갤러리 Layout 시작 --%>
+  <div class="features_items">
+   <h2 class="title text-center">상품 목록</h2>
+    <c:forEach var="cate_productVO" items="${list }" varStatus="status">
+      <c:set var="productno" value="${cate_productVO.productno }" />
+      <c:set var="ptitle" value="${cate_productVO.ptitle }" />
+      <c:set var="pcontent" value="${cate_productVO.pcontent }" />
+      <c:set var="pfile1" value="${cate_productVO.pfile1 }" />
+      <c:set var="psize1" value="${cate_productVO.psize1 }" />
+      <c:set var="pthumb1" value="${cate_productVO.pthumb1 }" />
+      <c:set var="price" value="${cate_productVO.price }" />
+      <c:set var="dc" value="${cate_productVO.dc }" />
+      <c:set var="saleprice" value="${cate_productVO.saleprice }" />
+      <c:set var="point" value="${cate_productVO.point }" />
+        
+      
+      <!-- 하나의 이미지, 24 * 4 = 96% -->
+      <DIV class="col-sm-4">
+      <div class="product-image-wrapper">
+      <div class="single-products">
+      <div class="productinfo text-center">
+        <c:choose>
+          <c:when test="${psize1 > 0}"> <!-- 파일이 존재하면 -->
+            <c:choose> 
+              <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
+                <a href="./product/read.do?productno=${productno}">               
+                  <IMG src="./product/storage/${pthumb1 }" style='width: 230px; height:230px ;'>
+                </a>
+                <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
+                <span style="color: #FF0000; font-size: 1.0em;">${dc} %</span>
+                <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>
+                <p>${ptitle}</p>
+                <a onclick="cart_ajax(${productno })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+              </c:when>
+              <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
+                <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
+                  <DIV style='display: table-cell; vertical-align: middle; text-align: center;'> <!-- 수직 가운데 정렬 -->
+                    <a href="./read.do?productno=${productno}">${pfile1}</a><br>
+                  </DIV>
+                </DIV>
+                ${title} (${cnt})              
+              </c:otherwise>
+            </c:choose>
+          </c:when>
+          <c:otherwise> <%-- 파일이 없는 경우 기본 이미지 출력 --%>
+            <a href="./product/read.do?productno=${productno}">
+              <img src='/product/images/none1.png' style='width: 100%; height: 150px;'>
+            </a><br>
+            이미지를 등록해주세요.
+          </c:otherwise>
+        </c:choose>   
+      </div> <%--사진 정렬 --%>
+      <!-- <div class="product-overlay" style="background: rgba(254,152,15,.8);">
+      <div class="overlay-content">
+                
+                <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>
+                <p>${ptitle}</p>
+                <a onclick="cart_ajax(${productno })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+      </div>  
+      </div>-->
+      </div><%--add cart 구역 전 --%>
+      <div class="choose">
+        <ul style="margin:5px auto;padding-left:5px;">
+        <li><a href=""><i class="fa fa-plus-square"></i>위시리스트</a></li>
+        </ul>
+      </div>
+      </div>      
+      </DIV>
+    </c:forEach>
+    <!-- 갤러리 Layout 종료 -->
+  </div>
+  </div>
+                                    <!-- <div class="productinfo text-center">
                                         <img src="images/home/product2.jpg" alt="" />
                                         <h2>$56</h2>
                                         <p>Easy Polo Black Edition</p>
@@ -383,13 +454,13 @@ a{
                                         <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
                                         <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         
                     </div><!--features_items-->
                     
-                    <div class="category-tab"><!--category-tab-->
+                    <!-- <!-- <div class="category-tab">category-tab
                         <div class="col-sm-12">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
@@ -675,9 +746,9 @@ a{
                                 </div>
                             </div>
                         </div>
-                    </div><!--/category-tab-->
+                    </div>/category-tab -->
                     
-                    <div class="recommended_items"><!--recommended_items-->
+                  <div class="recommended_items">
                         <h2 class="title text-center">recommended items</h2>
                         
                         <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
@@ -772,7 +843,7 @@ a{
                                 <i class="fa fa-angle-right"></i>
                               </a>          
                         </div>
-                    </div><!--/recommended_items-->
+                    </div>
                     
                 </div>
             </div>

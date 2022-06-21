@@ -37,10 +37,6 @@
 <script type="text/javascript">
 
   $(function() {
-    // var productno = 0;
-    // $('#btn_cart').on('click', function() { cart_ajax(productno)});
-    //$('#btn_login').on('click', login_ajax);
-    //$('#btn_loadDefault').on('click', loadDefault);
   });
 
   <%-- 쇼핑 카트에 상품 추가 --%>
