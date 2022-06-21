@@ -30,6 +30,22 @@
 /* .backimg6{
     background: url('./images/home/back8.png') no-repeat;
 } */
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
 </style>
 </head>
 <body>
@@ -55,8 +71,8 @@
   </DIV>
   <DIV style='width: 850px; margin: 30px auto; text-align: center;     height: 600px;'>
               <div style="text-align: center;">
-                                   <iframe class="backimg6" src="./you/index_contents6.do"  align="left" scrolling="no" style="border:0px; width:400px; height:600px; " ></iframe>
-                                              <iframe class="backimg6" src="./contents/index_contents7.do"  align="left" scrolling="no" style="border:0px; width:400px; height:550px; " ></iframe>
+                                   <iframe class="backimg6" src="./you/index_contents6.do"  align="left" scrolling="no"style="border:0px; width:400px; height:600px; " ></iframe>
+                                              <iframe class="backimg6" src="./contents/index_contents7.do"  align="left"  scrolling="no"style="border:0px; width:400px; height:550px; " ></iframe>
    
            </div>
            </DIV>

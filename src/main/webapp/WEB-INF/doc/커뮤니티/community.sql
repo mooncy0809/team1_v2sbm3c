@@ -101,4 +101,9 @@ select replyCnt
 from contents
 where contentsno=5;
 
-
+create view testView
+as
+SELECT c.*, m.name
+FROM contents c, cate m
+WHERE  1=1 AND c.cateno = m.cateno
+ORDER BY contentsno DESC;

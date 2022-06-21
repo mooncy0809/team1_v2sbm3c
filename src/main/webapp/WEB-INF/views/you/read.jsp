@@ -19,11 +19,10 @@
 <title>삼대몇</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
- 
+ <link href="/css/bootstrap.min.css" rel="stylesheet"> 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -40,25 +39,18 @@
 
 
 <DIV class='content_body' style="width:70%;">
+      <span style="width:70%; font-size: 1.5em; font-weight: bold;">
+       <A href="./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno }">${categrpVO.name }</A>
+</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
   
   <fieldset class="fieldset_basic">
-    <DIV class='title_line'>
-    <A href="./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno}&word=" class='title_link'>홈트레이닝</A> >
-       <c:choose>
-                                    <c:when
-                                        test="${sessionScope.grade < 10}">
-                                        <%-- 로그인 한 경우 --%>
-                                       <a href="../../you/list_by_categrpno_search_paging.do?categrpno=4&word=">
-                                                홈트레이닝(관리자 전용 링크)</a>   >              
-                                    </c:when>
-        </c:choose> 
-    ${youVO.ytitle }
-    </DIV>
+
    <DIV class='menu_line'style="width:50%; font-size: 1.5em; font-weight: bold;">
        ${ytitle }<br>
    </DIV>
-   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
-   <DIV>${rdate }&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;조회수: ${cnt }</DIV>
+<!--    <hr align="right" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;"> -->
+   <DIV style="text-align: right;">${rdate }&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;조회수: ${cnt }</DIV>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
    <DIV align="center">${url }</DIV>
    <br>

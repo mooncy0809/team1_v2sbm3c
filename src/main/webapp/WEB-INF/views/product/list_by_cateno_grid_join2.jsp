@@ -109,6 +109,11 @@
 <body>
 <jsp:include page="../menu/top2.jsp" />
 
+<DIV class='title_line' style="text-align: right;">
+  <A href="./list_by_cateno_grid_join_up.do" class='title_link'>높은 가격순</A> | 
+  <A href="./list_by_cateno_grid_join_down.do" class='title_link'>낮은 가격순</A> 
+</DIV>
+
 <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_grid_join2.do'>
       <input type='hidden' name='cateno' value='${cateVO.cateno }'>

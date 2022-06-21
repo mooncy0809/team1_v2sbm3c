@@ -37,7 +37,7 @@ $(function(){
        <div class="col-md-8">
        <input name='pwd' type='password'/></input>
 
-       <button type="submit" onclick="./read.do?qnano=${Member_QnaVO.qnano}" class="btn btn-primary">등록</button>
+       <button type="submit" onclick="./read.do?qnano=${QnaVO.qnano}" class="btn btn-primary">등록</button>
 
    </div>       
    </div> 
