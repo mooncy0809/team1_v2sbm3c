@@ -58,8 +58,8 @@ function btn(sample){
    
     <thead>  
     <TR>
-      <TH class="th_bs">제목</TH>
-      <TH class="th_bs">작성자</TH>
+      <TH class="th_bs" style='vertical-align: middle; text-align: center;'>제목</TH>
+      <TH class="th_bs" style='vertical-align: middle; text-align: center;'>작성자</TH>
       <TH class="th_bs" style='vertical-align: middle; text-align: center;'>작성일</TH>
     </TR>
     </thead>
@@ -70,12 +70,12 @@ function btn(sample){
       <c:set var="mname" value="${contentsVO.mname }" />
       <c:set var="rdate" value="${contentsVO.rdate }" />   
       <TR> 
-        <TD class="td_bs">
+        <TD class="td_bs" style='vertical-align: middle; text-align: center;'>
 
         <a href ="./read.do?contentsno=${contentsVO.contentsno}">${title}</a>     
 
         </TD>  
-        <TD class="td_bs">${mname}</TD>     
+        <TD class="td_bs" style='vertical-align: middle; text-align: center;'>${mname}</TD>     
         <TD class="td_bs" style='vertical-align: middle; text-align: center;'>${rdate}</TD>   
         
       </TR>   

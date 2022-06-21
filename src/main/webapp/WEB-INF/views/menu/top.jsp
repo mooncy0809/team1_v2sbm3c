@@ -283,7 +283,7 @@ ul.drop > li > a:hover{
                                         <div class="sub_com" id="sub_com" style="display: none; ">           
                                         <a href="../contents/list_all_join.do"><li>전체</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=4&now_page=1"><li>자유게시판</li></a>
-                                        <a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1"><li>팁&노하우</li></a>
+                                        <a href="../contents/list_by_grid.do"><li>팁&노하우</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1"><li>고민&질문</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1"><li>일기</li></a>  
 

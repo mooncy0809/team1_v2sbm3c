@@ -475,15 +475,17 @@
 </div>
 <!-- -------------------- 댓글 삭제폼 종료 -------------------- -->
    
-<DIV class='content_body'>
+<DIV class='content_body' style="width:70%;">
 
     <span style="width:70%; font-size: 1.5em; font-weight: bold;">
         <A href="#" onclick="history.go(-1);">${cateVO.name }</A>
     </span>    
     
-   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
-  <ASIDE class="aside_right">
+    <DIV>제목: ${title}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;${contentsVO.rdate }</DIV>
+
+  <DIV style="text-align: right;">
 <%--     <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
     <span class='menu_divide' >│</span> --%>
     <A href="javascript:location.reload();">새로고침</A>
@@ -493,26 +495,10 @@
     <A href="./update_file.do?contentsno=${contentsno}&now_page=${now_page}&word=${param.word }">파일 수정</A>  
     <span class='menu_divide' >│</span>
     <A href="./delete.do?contentsno=${contentsno}&now_page=${now_page}&cateno=${cateno}&word=${param.word }">삭제</A>  
-</ASIDE>
+    </DIV>
+    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
   
-<%--   <DIV style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_cateno_search.do'>
-      <input type='hidden' name='cateno' value='${cateVO.cateno }'>
-      <c:choose>
-        <c:when test="${param.word != '' }"> 검색하는 경우
-          <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
-        </c:when>
-        <c:otherwise> 검색하지 않는 경우
-          <input type='text' name='word' id='word' value='' style='width: 20%;'>
-        </c:otherwise>
-      </c:choose>
-      <button type='submit'>검색</button>
-      <c:if test="${param.word.length() > 0 }">
-        <button type='button' 
-                     onclick="location.href='./list_by_cateno_search.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
-      </c:if>    
-    </form>
-  </DIV> --%>
+  <br>
   
   <DIV class='menu_line'></DIV>
   
@@ -579,8 +565,8 @@
             </c:choose>
         </DIV>
         <DIV style="width: 48%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
-          <span style="font-size: 1.5em; font-weight: bold;">${title }</span><br>
-
+            
+          <br>
           <form>
           <button type='button' id="btn_recom" class="btn btn-info">♥(${recom })</button>
           <span id="span_animation"></span>
