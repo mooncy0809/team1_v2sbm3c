@@ -747,8 +747,8 @@ public class ContentsProc implements ContentsProcInter {
       
       for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
         String content = contentsVO.getContent();
-        if (content.length() > 160) {
-          content = content.substring(0, 160) + "...";
+        if (content.length() > 13) {
+          content = content.substring(0, 13) + "...";
           contentsVO.setContent(content);
         }
         
