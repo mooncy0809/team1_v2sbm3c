@@ -17,9 +17,29 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
- 
-  
+
+function create_pTag(){
+    let tagArea = document.getElementById('test');
+/*     let new_pTag = document.createElement('p'); */
+    
+    tagArea.setAttribute('class', 'pTag');
+    /* new_pTag.innerHTML = pTagCount+". 추가된 p태그"; */
+    
+/*     tagArea.appendChild(new_pTag); */
+ }
 </script>
+
+<style type="text/css">
+            
+.pTag{
+  background-color:orange;
+}
+
+.notice{
+  background-color:#fff
+}
+            
+</style>
  
 </head> 
   
@@ -61,18 +81,18 @@
   
   <table class="table table-striped" style='width: 100%;'>
     <colgroup>
+      <%-- <col style="width: 10%;"></col> --%>
       <col style="width: 10%;"></col>
-      <col style="width: 10%;"></col>
-      <col style="width: 10%;"></col>
+      <col style="width: 40%;"></col>
       <col style="width: 30%;"></col>
-      <col style="width: 10%;"></col>
-      <col style="width: 10%;"></col>
+      <col style="width: 5%;"></col>
+      <col style="width: 5%;"></col>
       <col style="width: 10%;"></col>
     </colgroup>
     <%-- table 컬럼 --%>
     <thead>
       <tr>
-        <th style='text-align: center;'></th>
+        <!-- <th style='text-align: center;'></th> -->
         <th style='text-align: center;'>카테고리</th>
         <th style='text-align: center;'>제목</th>
         <th style='text-align: center;'>내용</th>
@@ -87,6 +107,7 @@
     <tbody>
       <c:forEach var="contentsVO" items="${list }">
         <c:set var="contentsno" value="${contentsVO.contentsno }" />
+        <c:set var="cateno" value="${contentsVO.cateno }" />
         <c:set var="name" value="${contentsVO.name }" />
         <c:set var="title" value="${contentsVO.title }" />
         <c:set var="content" value="${contentsVO.content }" />
@@ -98,20 +119,25 @@
         <c:set var="rdate" value="${contentsVO.rdate }" />
         <c:set var="replycnt" value="${contentsVO.replycnt }" />
         
-        <tr> 
-          <td style='vertical-align: middle; text-align: center;'>
+             
+        <tr id='test'> 
+<%--           <td style='vertical-align: middle; text-align: center;'>
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-                <%-- /static/contents/storage/ --%>
+                /static/contents/storage/
                 <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }"><IMG src="/contents/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
               </c:when>
               <c:otherwise> <!-- 기본 이미지 출력 -->
                 <IMG src="/contents/images/none1.png" style="width: 120px; height: 80px;">
               </c:otherwise>
             </c:choose>
-          </td>  
+          </td>   --%>
           
           <!-- 게시판 카테고리 -->
+          
+  
+      
+        <div class=notice>
           <td style='vertical-align: middle; text-align: center;'>${name} </td> 
           
           <td style='vertical-align: middle; text-align: center;'>
@@ -128,7 +154,7 @@
           
           <!-- 작성일 -->
           <td style='vertical-align: middle; text-align: center;'>${rdate } </td>
-
+        </div>
         </tr>
       </c:forEach>
       
@@ -144,5 +170,10 @@
  
 <jsp:include page="../menu/bottom.jsp" />
 </body>
+        <script>
+            if (${cateno} == 1) {
+              create_pTag();
+            }
+         </script>
  
 </html>

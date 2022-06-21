@@ -22,6 +22,17 @@
   $(function(){
  
   });
+
+  function check_submit()
+  {
+
+   if(frm.cateno.value == ""){
+	 alert("카테고리를 선택해주세요.");
+	 frm.cateno.focus();
+     return false;
+   }
+  }
+  
 </script>
  
 </head> 
@@ -67,16 +78,36 @@
   <DIV class='menu_line'></DIV>
   
   <FORM name='frm' method='post' action='./create.do' class="form-horizontal"
-             enctype="multipart/form-data">
+             enctype="multipart/form-data" onsubmit="return check_submit();">
     <input type="hidden" name="categrpno" value="${cateVO.categrpno }"> 
-    <input type="hidden" name="cateno" value="${param.cateno }">
+    <%-- <input type="hidden" name="cateno" value="${param.cateno }"> --%>
     <%-- <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }"> --%>
     <input type="hidden" name="memberno" id="memberno" value="${sessionScope.memberno}">
     <input type="hidden" name="mname" id="mname" value="${sessionScope.mname}">
     <%-- <input type="hidden" name="adminno" value="1"> 관리자 개발후 변경 필요 --%>
     
+    <%-- <c:if test="${cateVO.cateno == 4}"> --%>
+    
+    
     <div class="form-group">
-       <label class="control-label col-md-2">제목</label>
+       <label class="control-label col-md-2">
+       
+       </label>
+       <div class="col-md-10">
+       <select name="cateno" style="width:160px">
+		    <option value="" selected>=== 게시판 선택 ===</option>
+		    <option value=4>자유게시판</option>
+		    <option value=5>팁/노하우</option>
+		    <option value=6>고민</option>
+		    <option value=7>일기</option>
+       </select>
+       </div>
+    </div>
+    
+    <div class="form-group">
+       <label class="control-label col-md-2">
+        제목       
+       </label>
        <div class="col-md-10">
          <input type='text' name='title' placeholder='제목' required="required" 
                    autofocus="autofocus" class="form-control" style='width: 100%;'>

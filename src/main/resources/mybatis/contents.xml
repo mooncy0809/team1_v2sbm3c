@@ -163,8 +163,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
               FROM (
                         SELECT name, contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
                                    file1, file1saved, thumb1, mname, size1
-                        FROM testView
-                        ORDER BY contentsno DESC
+                        FROM testView                       
+                        ORDER BY DECODE(cateno, 1, 1), contentsno DESC 
                )
     )
     WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
