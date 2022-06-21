@@ -390,7 +390,7 @@ public class YouProc implements YouProcInter {
     map.put("start_num", start_num);
     map.put("end_num", end_num);
    
-    List<YouVO> list = this.youDAO.index_contents2(map);
+    List<YouVO> list = this.youDAO.list_by_categrpno_grid_search_paging(map);
     
     return list;
   }
@@ -429,7 +429,13 @@ public class YouProc implements YouProcInter {
     map.put("start_num", start_num);
     map.put("end_num", end_num);
    
-    List<YouVO> list = this.youDAO.index_contents6(map);
+    List<YouVO> list = this.youDAO.list_by_categrpno_grid_search_paging(map);
+    
+    for(YouVO youVO : list) {
+        String url = youVO.getUrl();
+        url = Tool.youtube(url, 350, 200);
+        youVO.setUrl(url);
+    }
     
     return list;
   }

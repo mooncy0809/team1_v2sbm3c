@@ -59,6 +59,9 @@ DROP SEQUENCE products_seq;
 INSERT INTO products(productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, ppasswd, pword, rdate, price, dc, saleprice, point, salecnt)
 VALUES(products_seq.nextval, 19, '아임웰 훈제 닭가슴살', '아주 맛있는 훈제 닭가슴살', 0, 0, 0, '123', '닭가슴살', sysdate,2000, 10, 1800, 100, 500);
 
+INSERT INTO products(productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, ppasswd, pword, rdate, price, dc, saleprice, point, salecnt)
+VALUES(products_seq.nextval, 1, '아임웰 훈제 닭가슴살', '아주 맛있는 훈제 닭가슴살', 0, 0, 0, '123', '닭가슴살', sysdate,2000, 10, 1800, 100, 500);
+
 SELECT * FROM products;
 
 PRODUCTNO     CATENO PTITLE                                                                                                                                                                                                                                                                                                       PCONTENT                                                                             PRECOM       PCNT  PREPLYCNT PPASSWD         PWORD                                                                                                                                                                                                                                                                                                        RDATE               PFILE1                                                                                               PFILE1SAVED

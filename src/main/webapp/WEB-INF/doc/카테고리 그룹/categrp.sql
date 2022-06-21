@@ -46,6 +46,9 @@ VALUES(categrp_seq.nextval, '홈트레이닝', 4, 'Y', sysdate);
 INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
 VALUES(categrp_seq.nextval, '칼로리사전', 5, 'Y', sysdate);
 
+Insert into categrp (CATEGRPNO,NAME,SEQNO,VISIBLE,RDATE) values (6,'관리자에게',1,'N',sysdate);
+Insert into categrp (CATEGRPNO,NAME,SEQNO,VISIBLE,RDATE) values (7,'전체카테고리',1,'N',sysdate);
+
 INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
 VALUES(categrp_seq.nextval, '추천상품', 6, 'Y', sysdate);
 

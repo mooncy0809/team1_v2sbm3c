@@ -120,8 +120,8 @@ ul.drop > li > a:hover{
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="contactinfo">
-                            <ul class="nav nav-pills">
-                                <li><a id="menubar" href="../index.do">삼대몇?</a></li>
+                            <ul class="nav nav-pills">                       
+                                <li><a id="menubar" href="../index.do" style=" color:balck; background-color:#FFF2EE;"}>삼대몇?</a></li>
                                 <li><a  id="menubar" href="../index2.do">하루삼끼</a></li>
                             </ul>
                         </div>
@@ -169,22 +169,10 @@ ul.drop > li > a:hover{
                                     </c:otherwise>
                                 </c:choose>
 
-                                <c:choose>
+                                 <c:choose>
                                     <c:when test="${sessionScope.grade < 10}">
                                         <%-- 로그인 한 경우 --%>
                                         <div class="social-icons pull-right">
-                                        <ul class="nav navbar-nav collapse navbar-collapse">
-
-                        <li><a class="dropdown" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
-                                                            <ul role="menu" class="sub-menu" style="font-size:small;">
-                                                                <li><a  id="menubar" class="dropdown2" href="#"  ><i class="fa fa-gears"></i>삼대몇 관리자<i class="fa fa-angle-down"></i></a>
-                                                                      <ul class="sub-menu" ><li class="drop"><a href="/categrp/list.do">카테고리 관리</a></li>
-                                                                      <li class="drop"><a href="../you/list_by_categrpno_search_paging.do?categrpno=4">홈트레이닝 관리</a></li>
-                                                                      </ul></li>
-                                                                <li><a href="/categrp/list2.do"><i class="fa fa-gears"></i>하루삼끼 관리자<i class="fa fa-angle-down"></i></a>
-                                                                      <ul class="drop"><li><a href="/categrp/list.do">카테고리 관리</a></li>
-                                                                      
-                                                                </ul></li>
                                                     <ul class="nav navbar-nav collapse navbar-collapse">
                                                         <li><a onclick="com2(this)" style="cursor:pointer;" id="menubar"><i class="fa fa-user"></i>관리자<i class="fa fa-angle-down"></i></a>
                                                             <ul role="menu" class="sub" id="sub_com2" style="font-size:small;">
@@ -203,10 +191,11 @@ ul.drop > li > a:hover{
                                                                  
                                                             </ul>
                                                         </li>
-                                                       </ul>
-                                                </div>
+                                                     </ul>   
+                                       </div>
                                     </c:when>
                                 </c:choose>
+
 
                             </ul>
                         </div>
@@ -298,7 +287,7 @@ ul.drop > li > a:hover{
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1"><li>고민&질문</li></a>
                                         <a href="../contents/list_by_cateno_search_paging.do?cateno=7&now_page=1"><li>일기</li></a>  
 
-                                       <a href="/qna/list_search_paging.do?categrpno=4&memberno=${sessionScope.memberno}"> <li>관리자에게</li></a> 
+                                       <a href="/qna/list_search_paging.do?categrpno=6&memberno=${sessionScope.memberno}"> <li>관리자에게</li></a> 
 
                                         </div>
                             <a href="../you/list_by_categrpno_grid_search_paging.do?categrpno=4&now_page=1"><li>HOME TRAINING</li></a>
@@ -346,6 +335,13 @@ ul.drop > li > a:hover{
 </body>
 
 <script>
+    $(document).mouseup(function (e){
+      var LayerPopup = $("#mySidenav");
+      if(LayerPopup.has(e.target).length === 0){
+        $("#mySidenav").slideUp(500);
+      }
+    });
+
 function openNav() {
     if ($('#mySidenav').css('display') == 'block'){
         $("#mySidenav").slideUp(500);

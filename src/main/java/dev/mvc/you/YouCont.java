@@ -419,7 +419,7 @@ public class YouCont {
      */
     @RequestMapping(value = "/you/index_contents6.do", method = RequestMethod.GET)
     public ModelAndView index_contents6(
-            @RequestParam(value = "categrpno", defaultValue = "4") int categrpno,                                                                           
+            @RequestParam(value = "categrpno", defaultValue = "4") int categrpno,   
             @RequestParam(value = "word", defaultValue = "") String word,                                                                           
             @RequestParam(value = "now_page", defaultValue = "1") int now_page,
             HttpSession session) {

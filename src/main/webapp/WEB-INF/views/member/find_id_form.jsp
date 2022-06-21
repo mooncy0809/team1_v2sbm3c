@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>아이디 찾기</title>
+
 </head>
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
@@ -28,8 +29,8 @@
                         <input class="w3-input" type="text" id="tel" name="tel" required>
                     </p>
                     <p class="w3-center">
-                        <button type="submit" id=findBtn class="w3-button w3-block w3-orange w3-ripple w3-margin-top w3-round">find</button>
-                        <button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-orange w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
+                        <button type="submit" id=findBtn   class="btn btn-info">찾기</button>
+                        <button type="button" onclick="history.go(-1);" class="btn btn-info">취소</button>
                     </p>
                 </div>
             </form>
