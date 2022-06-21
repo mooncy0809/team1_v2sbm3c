@@ -115,7 +115,7 @@
                     </TD>
                 </TR>          
             </TABLE>
-            <h2>닭가슴살 카테고리에서 쇼핑추천!</h2>
+            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=7">닭가슴살</a> 카테고리에서 쇼핑추천!</h2>
         </DIV>
         <DIV id='two' style='display: none;'>  <!-- 간편요리 추천 -->
             <TABLE style='margin: 0px auto;'>
@@ -137,7 +137,7 @@
                     </TD>
                 </TR>          
             </TABLE>
-            <h2>간편요리 카테고리에서 쇼핑추천!</h2>
+            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=8">간편요리</a> 카테고리에서 쇼핑추천!</h2>
         </DIV>
         <DIV id='three' style='display: none;'> <!-- 샐러드 추천 필요 -->
             <TABLE style='margin: 0px auto;'>
@@ -159,7 +159,7 @@
                     </TD>
                 </TR>          
             </TABLE>
-            <h2>샐러드 카테고리에서 쇼핑추천!</h2>
+            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=9">샐러드</a> 카테고리에서 쇼핑추천!</h2>
         </DIV>
         <DIV id='four' style='display: none;'> <!-- 건강미용 추천 필요 -->
             <TABLE style='margin: 0px auto;'>
@@ -181,7 +181,7 @@
                     </TD>
                 </TR>          
             </TABLE>
-            <h2>건강미용 카테고리에서 쇼핑추천!</h2>
+            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=10">건강미용</a> 카테고리에서 쇼핑추천!</h2>
         </DIV>
         <DIV id='five' style='display: none;'> <!-- 간식 추천 필요 -->
             <TABLE style='margin: 0px auto;'>
@@ -204,7 +204,7 @@
                     </TD>
                 </TR>          
             </TABLE>
-            <h2>간식 카테고리에서 쇼핑추천!</h2>
+            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=11">간식</a> 카테고리에서 쇼핑추천!</h2>
         </DIV>
     </DIV>
     

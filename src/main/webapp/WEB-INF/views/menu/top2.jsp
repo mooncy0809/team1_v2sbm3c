@@ -133,8 +133,10 @@ a{
                             <ul class="nav navbar-nav collapse navbar-collapse">
 <!--                            <li><a href="#"><i class="fa fa-star"></i> 위시리스트</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> 결제 </a></li> -->  
-                                <li><a href="../../product/list_by_cateno_grid.do?cateno=1"class="active">추천시스템</a></li>                           
-                                <li class="dropdown"><a href="#">전체 카테고리<i class="fa fa-angle-down"></i></a>
+<!--                                 <li><a href="../../product/list_by_cateno_grid.do?cateno=1"class="active">추천시스템</a></li>                           
+ -->
+                                    <li><a href="../../tensorflow/recommend/start.do"class="active" target="_blank">추천시스템</a></li>
+                                    <li class="dropdown"><a href="#">전체 카테고리<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="../product/list_by_cateno_grid.do?categrpno=6&cateno=7">닭가슴살</a></li>
                                         <li><a href="../product/list_by_cateno_grid.do?categrpno=6&cateno=8">간편요리</a></li> 
