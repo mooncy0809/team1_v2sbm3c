@@ -52,6 +52,13 @@ public interface ProductProcInter {
      * @param hashMap
      * @return
      */
+    public int search_count_main(HashMap<String, Object> hashMap);
+    
+    /**
+     * 카테고리별 검색 레코드 갯수
+     * @param hashMap
+     * @return
+     */
     public int search_count2(HashMap<String, Object> hashMap);
     
     /**
