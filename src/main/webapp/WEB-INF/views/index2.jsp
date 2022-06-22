@@ -20,7 +20,8 @@ a{
 
  font-family: 'Sunflower', sans-serif;
  }
-</style>
+
+ </style>
 </head>
 <body>
     <section id="slider"><!--slider-->
@@ -35,43 +36,18 @@ a{
                         </ol>
                            
                         <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>Free E-Commerce Template</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">보러 가기</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="images/home/indexmain1.png" class="girl img-responsive" alt="" />
-                                    <img src="images/home/pricing.png"  class="pricing" alt="" />
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>100% Responsive Design</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">보러 가기</button>
-                                   
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="images/home/indexmain2.png" class="girl img-responsive" alt="" />
-                                    <img src="images/home/pricing.png"  class="pricing" alt="" />
-                                </div>
+                       
+                            <div class="item active"> 
+                    
+                          <IMG src='/images/home/004.png' style="width:100%;">
                             </div>
                             
                             <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>Free Ecommerce Template</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">보러 가기</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="images/home/indexmain3.png" class="girl img-responsive" alt="" />
-                                    <img src="images/home/pricing.png" class="pricing" alt="" />
-                                </div>
+                             <img src="images/home/005.png" style="width:100%;">                
+                                                            </div> 
+                            <div class="item">
+                                <img src="images/home/006.png" style="width:100%;"> 
+                              <!-- <button type="button" class="btn btn-default get">보러 가기</button> -->
                             </div>
                             
                         </div>

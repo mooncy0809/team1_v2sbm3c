@@ -14,22 +14,21 @@
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
-<script type="text/javascript">
- 
-  
-</script>
  
 </head> 
  
 <body>
 <jsp:include page="../menu/top.jsp" />
  
-<DIV class='title_line'>카테고리 그룹</DIV>
 
-<DIV class='content_body'>
+<DIV class='content_body' style="width:58%;">
+<span style="width:70%; font-size: 1.5em; font-weight: bold;">카테고리 그룹</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+
+
   <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
     <FORM name='frm_create' id='frm_create' method='POST' action='./create.do'>
       <label>그룹 이름</label>
