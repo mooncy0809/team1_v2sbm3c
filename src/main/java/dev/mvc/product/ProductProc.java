@@ -122,6 +122,12 @@ public class ProductProc implements ProductProcInter {
     }
     
     @Override
+    public int search_count_main(HashMap<String, Object> hashMap) {
+      int count = productDAO.search_count_main(hashMap);
+      return count;
+    }
+    
+    @Override
     public int search_count2(HashMap<String, Object> hashMap) {
       int count = productDAO.search_count2(hashMap);
       return count;
