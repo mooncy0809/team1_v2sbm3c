@@ -33,23 +33,21 @@
 <%-- <DIV class='title_line'style="width:70%;"><A href="./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno}&word=" class='title_link'>유튜브 그룹</A> > ${categrpVO.name }</DIV>
  --%>
 <DIV class='content_body' style="width:58%;">
-<span style="width:70%; font-size: 1.5em; font-weight: bold;">홈트레이닝</span>
+<span style="width:70%; font-size: 1.5em; font-weight: bold;">
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
->>>>>>> c6cb065c6a4e519c19529d398143c0b56f773892
 
-
-<<<<<<< HEAD
+</span>
   <DIV style="text-align: right; clear: both; width:1220px; margin-right:0px;">  
-=======
   <DIV style="text-align: right; clear: both; ">  
->>>>>>> c6cb065c6a4e519c19529d398143c0b56f773892
     <form name='frm' id='frm' method='get' action='./list_by_categrpno_grid_search_paging.do'>
       <input type='hidden' name='categrpno' value='${categrpVO.categrpno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 200px;'>
       <button type='submit'>검색</button>
+      <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
+      <button type='submit' class="btn btn-primary">검색</button>
       <c:if test="${param.word.length() > 0 }">
-        <button type='button' 
+        <button type='button' class="btn btn-primary"
                      onclick="location.href='./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno}&word='">검색 취소</button>  
       </c:if>    
     </form>
@@ -77,10 +75,8 @@
       <a href ="./read.do?youno=${youVO.youno}">
 
       <DIV style='width: 24%; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: center;'>
-      <DIV style='width: 24%; 
-              float: left; 
-              margin: 0.5%; padding: 0.5%; background-color: #FFDCD3; text-align: center;'>
-                <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
+      <DIV style='float: left; margin: 0.5%; padding: 0.5%; background-color: #FFDCD3; text-align: center;'>
+                <DIV style='width: 100%; height: 150px; display: table; border: solid 2px #FF8B6E;'>
                   <DIV style=' color: black; display: table-cell; vertical-align: middle; text-align: center; font-weight: bold;'> <!-- 수직 가운데 정렬 -->
                    ${url } <br>
                    ${ytitle} <br>

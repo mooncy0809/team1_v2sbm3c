@@ -78,6 +78,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        3 page: WHERE r >= 21 AND r <= 30; -->
      
   </select> 
+  
+    <!-- 카테고리별 검색 목록 -->
+  <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
+  <select id="list_by_grid" 
+             resultType="dev.mvc.contents.ContentsVO" parameterType="HashMap">
+   SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+              file1, file1saved, thumb1, size1, mname, r
+   FROM (
+              SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+                         file1, file1saved, thumb1, size1, mname, rownum as r
+              FROM (
+                        SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
+                                   file1, file1saved, thumb1, mname, size1
+                        FROM contents 
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE cateno=#{cateno}
+                          </when>
+                          <otherwise>
+                            WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || #{word} || '%'  <!-- ||: 결합, %첫눈% -->
+                                                                  OR UPPER(content) LIKE '%' || #{word} || '%' 
+                                                                  OR UPPER(word) LIKE '%' || #{word} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY contentsno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+   <!--  1 page: WHERE r >= 1 AND r <= 10; 
+       2 page: WHERE r >= 11 AND r <= 20;
+       3 page: WHERE r >= 21 AND r <= 30; -->
+     
+  </select> 
    
   <!-- 카테고리별 검색 레코드 갯수 -->
   <select id="search_count" resultType="int" parameterType="HashMap">
@@ -106,6 +140,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </when>
       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
         WHERE 1=1 AND (UPPER(title) LIKE '%' || #{word} || '%' 
+                                                     OR UPPER(content) LIKE '%' || #{word} || '%' 
+                                                     OR UPPER(word) LIKE '%' || #{word} || '%')
+      </otherwise>
+    </choose>
+  </select>
+  
+      <!-- 테이블 갯수의 검색 레코드 갯수 -->
+  <select id="grid_search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM contents
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE cateno=#{cateno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || #{word} || '%' 
                                                      OR UPPER(content) LIKE '%' || #{word} || '%' 
                                                      OR UPPER(word) LIKE '%' || #{word} || '%')
       </otherwise>
@@ -163,7 +213,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
               FROM (
                         SELECT name, contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
                                    file1, file1saved, thumb1, mname, size1
-                        FROM testView                       
+                        FROM testView
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                             WHERE 1=1
+                          </when>
+                          <otherwise>
+                            WHERE 1=1 AND (UPPER(title) LIKE '%' || #{word} || '%'  <!-- ||: 결합, %첫눈% -->
+                                                                  OR UPPER(content) LIKE '%' || #{word} || '%' 
+                                                                  OR UPPER(word) LIKE '%' || #{word} || '%')
+                          </otherwise>
+                        </choose>                       
                         ORDER BY DECODE(cateno, 1, 1), contentsno DESC 
                )
     )
@@ -186,51 +246,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     where contentsno = #{contentsno}
    </update>
 
-   <!-- 댓글 수 업데이트 -->
-<!--    <update id = "update_replycnt" parameterType="dev.mvc.contents.ContentsVO">
-   <selectKey keyProperty="replycnt" resultType="int" order="BEFORE">
-    SELECT COUNT(replyno) as replycnt
-    from reply
-    where contentsno = #{contentsno}
-   </selectKey>
-    update contents
-    set replycnt = #{replycnt}
-    where contentsno = #{contentsno}
-   </update> -->
-   
-   <!-- 카테고리별 검색 목록 -->
-  <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
-  <!-- <select id="notice_by_cateno_search_paging" 
-             resultType="dev.mvc.contents.ContentsVO" parameterType="HashMap">
-   SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
-              file1, file1saved, thumb1, size1, mname, r
-   FROM (
-              SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
-                         file1, file1saved, thumb1, size1, mname, rownum as r
-              FROM (
-                        SELECT contentsno, memberno, cateno, title, content, recom, cnt, replycnt, rdate,
-                                   file1, file1saved, thumb1, mname, size1
-                        FROM contents 
-                        <choose>
-                          <when test="word == null or word == ''"> 검색하지 않는 경우
-                             WHERE cateno=#{cateno}
-                          </when>
-                          <otherwise>
-                            WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || #{word} || '%'  ||: 결합, %첫눈%
-                                                                  OR UPPER(content) LIKE '%' || #{word} || '%' 
-                                                                  OR UPPER(word) LIKE '%' || #{word} || '%')
-                          </otherwise>
-                        </choose>
-                        ORDER BY contentsno DESC
-               )
-    )
-    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
-     
-    1 page: WHERE r >= 1 AND r <= 10; 
-       2 page: WHERE r >= 11 AND r <= 20;
-       3 page: WHERE r >= 21 AND r <= 30;
-     
-  </select>  -->
   
     <!-- Cate + Contents join, 연결 목록 -->
   <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   

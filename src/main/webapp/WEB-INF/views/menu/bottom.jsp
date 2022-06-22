@@ -147,22 +147,25 @@
             </div>
         </div>
         
-        <div class="footer-bottom" >
-       
-            <div class="container" style="padding-bottom: 50px;">
-                 <div class="row" style="    width: 500px;">
+        <div class="footer-bottom" style="    padding-bottom: 50px;">
+            <div class="container" style="text-align: left;  height: 100px;">
+                 <div class="row" style="    width: 300px;">
+                 <a><img src="/images/home/001.png" alt="" /></a>
                  <div  style=" height: 50px;  width: 250px;">
                  Copyright (c) 2022. soldesk team1 All Rights Reserved.
                     <!--Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a></span></p>-->
                     </div> </div> 
-                    <div class="row2" style="width: 500px;">
-                    <div  style=" height: 50px;  width: 300px;">
-                    <a>문의사항은 관리자에게 게시판으로 문의 주시면 <br>빠른 시일내에 회신 드리도록 하겠습니다.</a>
+                     </div>
+                    <div class="container2" style=" text-align: right; width: 450px">
+                    <div class="row2  ">
+                    <div  style=" height: 100px;  width: 1400px;">
+                    문의사항은 관리자에게 게시판으로 문의 주시면 <br>빠른 시일내에 회신 드리도록 하겠습니다.<br><br>
+               
                 <button type="button" class="btn btn-primary" onclick="location.href='../qna/list_search_paging.do?categrpno=6&memberno=${sessionScope.memberno}' ">관리자에게</button>
                     </div>
                     </div>
-               
-            </div>
+                    </div>
+                   
         </div>
         
     </footer><!--/Footer-->

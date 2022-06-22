@@ -287,7 +287,7 @@ public class QnaCont {
      */
     @RequestMapping(value = "/qna/list_search_paging.do", method = RequestMethod.GET)
     public ModelAndView list_search_paging(
-            @RequestParam(value = "categrpno", defaultValue = "4") int categrpno,                                                                           
+            @RequestParam(value = "categrpno", defaultValue = "6") int categrpno,                                                                           
             @RequestParam(value = "word", defaultValue = "") String word,                                                                           
             @RequestParam(value = "now_page", defaultValue = "1") int now_page,
             HttpSession session) {

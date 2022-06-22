@@ -27,17 +27,18 @@
 </script>
 <style>
 .chg{
-    border: 3px solid #FE980F;
-    background-color: #FE980F;
-    color: white; 
+    border: 3px solid #E2E8DE;
+    background-color: #E2E8DE;
+    color: gray; 
     position: relative; 
-    border-radius: 7px;
+    border-radius: 5px;
 }
 .chg:hover{
-    background-color: #fdb45e;
+    background-color: #E2E8DE;
+    color:white;
 }
 .chg:focus{
-    border: 3px solid #FE980F;
+    border: 3px solid #E2E8DE;
     outline:none;
 }
 </style>
@@ -49,12 +50,24 @@
     <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                  <li><a>Order</a></li>
-                  <li class="active"><a href="javascript:location.reload();">${sessionScope.id }님 주문 결제내역</a></li>
+                  <li><a>Manage</a></li>
+                  <li class="active"><a href="javascript:location.reload();">주문내역 관리</a></li>
                 </ol>
             </div>
-  <div class="table-responsive cart_info">  
-  <table class="table table-condensed">
+            
+  <DIV style="text-align: right; clear: both;margin-bottom:15px;">  
+    <form name='frm' id='frm' method='get' action='./list_by_memberno_search_paging_all.do'>
+      <input type='hidden' name='memberno' value='${memberno }'>
+      <input type='text' placeholder="주문번호" name='word' id='word' value='${param.word }' style='width: 20%;'>
+      <button type='submit'><i class="fas fa-search"></i></button>
+      <c:if test="${param.word.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list_by_memberno_search_paging_all.do?memberno=${memberno}&word='"><i class="fas fa-times"></i></button>  
+      </c:if>    
+    </form>
+  </DIV>
+  <div class="table-responsive cart_info" style="margin-bottom:20px;">  
+  <table class="table table-condensed" style="margin-bottom:0px;">
     <colgroup>
       <col style='width: 5%;'/>
       <col style='width: 10%;'/>
@@ -105,7 +118,7 @@
       <TD align="center"  class="cart_description"><p><fmt:formatNumber value="${amount }" pattern="#,###" /></p></TD>
       <TD align="center" class="cart_description">${rdate.substring(1,16) }</TD>
       <TD align="center"  class="cart_description">
-        <A href="/order_item/list_by_memberno.do?order_payno=${order_payno}"><i class="fas fa-search-plus"></i></A>
+        <A href="/order_item/list_by_memberno_admin.do?order_payno=${order_payno}"><i class="fas fa-search-plus"></i></A>
       </TD>
       
     </TR>
@@ -113,10 +126,11 @@
     </tbody>
   </TABLE>
   </div>
+    <DIV class='bottom_menu'  style="margin-bottom:20px;">${paging }</DIV> <%-- 페이지 리스트 --%>
   </div>
   </section>
- 
-<jsp:include page="../menu/bottom.jsp" flush='false' />
+  
+<jsp:include page="../menu/bottom2.jsp" flush='false' />
 </body>
  
 </html>

@@ -65,6 +65,14 @@ public interface ContentsProcInter {
      * @return
      */
     public int search_count2(HashMap<String, Object> hashMap);
+    
+    /**
+     * 전체 게시물 카테고리별 검색 레코드 갯수
+     * 
+     * @param hashMap
+     * @return
+     */
+    public int grid_search_count(HashMap<String, Object> hashMap);
 
     /**
      * 검색 + 페이징 목록
@@ -105,6 +113,8 @@ public interface ContentsProcInter {
     public String notice_pagingBox(int cateno, int search_count, int now_page, String word);
     
     public String tip_pagingBox(int cateno, int search_count, int now_page, String word);
+    
+    public String grid_pagingBox(int cateno, int search_count, int now_page, String word);
     
     
     /**
@@ -190,6 +200,8 @@ public interface ContentsProcInter {
     public List<ContentsVO> notice_by_cateno_search_paging(HashMap<String, Object> map);
     
     public List<ContentsVO> tip_by_cateno_search_paging(HashMap<String, Object> map);
+    
+    public List<ContentsVO> list_by_grid(HashMap<String, Object> map);
     
     public List<ContentsVO> index_contents4(HashMap<String, Object> map);
     

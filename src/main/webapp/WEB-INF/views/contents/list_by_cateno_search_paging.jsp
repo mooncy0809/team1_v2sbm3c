@@ -26,8 +26,20 @@ function btn(sample){
     alert(sample); 
     document.location.href="/member/login.do";
  }  
-  
+
+
+function changeSize() {
+    document.getElementsByClassName("size")[0].style.width = "200px";
+    document.getElementsByClassName("size")[0].style.height = "150px";
+  }
 </script>
+ 
+<style type="text/css">
+.size{
+    width: 120px; 
+    height: 80px;
+}
+</style>
  
 </head> 
   
@@ -40,14 +52,18 @@ function btn(sample){
     </span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 
+    <A href="javascript:location.reload();">새로고침</A>
+    <span class='menu_divide' >│</span>
+    <A href="./list_by_grid.do?cateno=${param.cateno }" onclick="changeSize()"">갤러리형</A>
+
   <DIV style="text-align: right; clear: both;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_search_paging.do'>
       <input type='hidden' name='cateno' value='${cateVO.cateno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
-      <button type='submit'>검색</button>
+      <button type='submit' class="btn btn-primary">검색</button>
       <c:if test="${param.word.length() > 0 }">
-        <button type='button' 
+        <button type='button' class="btn btn-primary"
                      onclick="location.href='./list_by_cateno_search_paging.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>
@@ -93,14 +109,14 @@ function btn(sample){
         
         
         <tr> 
-          <td style='vertical-align: middle; text-align: center;'>
+          <td style='vertical-align: middle; text-align: center; '>
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
                 <%-- /static/contents/storage/ --%>
-                <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }"><IMG src="/contents/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
+                <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }"><IMG class='size' src="/contents/storage/${thumb1 }" ></a> 
               </c:when>
               <c:otherwise> <!-- 기본 이미지 출력 -->
-                <IMG src="/contents/images/none1.png" style="width: 120px; height: 80px;">
+                <IMG class='size' src="/contents/images/none1.png" ">
               </c:otherwise>
             </c:choose>
           </td>  

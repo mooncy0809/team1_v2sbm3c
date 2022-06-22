@@ -29,7 +29,7 @@
 <jsp:include page="../menu/top.jsp" flush='false' />
 
 
- <DIV class='content_body'>
+ <DIV class='content_body' style="width:58%;">
  <span style="width:70%; font-size: 1.5em; font-weight: bold;">글쓰기</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
    <br>
@@ -49,7 +49,7 @@
     <div class="form-group">
        <label class="control-label col-md-4">질문 내용</label>
        <div class="col-md-8">
-         <textarea name='content' required="required" class="form-control" rows="12" style='width: 70%;'></textarea>
+         <textarea name='content' required="required" class="form-control" placeholder="내용" rows="12" style='width: 70%;'></textarea>
       </div>        
 
      </div>
@@ -60,7 +60,7 @@
        <input name='pwd'  type='password' required="required">
         <div class="content_body_bottom" style="padding-right: 20%;">
        <button type="submit" class="btn btn-primary">등록</button>
-      <button type="button" onclick="location.href='./member_join.do'" class="btn btn-primary">목록</button>
+      <button type="button" onclick="location.href='./list_search_paging.do'" class="btn btn-primary">목록</button>
       </div>
    </div>       
    </div> 

@@ -54,8 +54,8 @@
     </style>
     
 </head>
-<body>
-<DIV class="container">
+<body  style="background-color:#F5F5EE;">
+<DIV>
     <H2>3/5 단계입니다.</H2>
     <DIV id='panel' style='display: none; margin: 10px auto; width: 90%;'></DIV>
     <form id='frm' name='frm' action='/tensorflow/recommend/form4.do' method='GET'>
@@ -65,19 +65,19 @@
         <TABLE style='margin: 0px auto;'>
             <TR>
                 <TD class='td_image'>
-                    <img id='img1' src="/recommend/images/v13.jpg" style='float:left; height: 200px'>
+                    <img id='img1' src="/recommend/images/v13.jpg" style='float:left; height: 150px'>
                 </TD>
                 <TD class='td_image'>
-                    <img id='img2' src="/recommend/images/v23.jpg" style='float:left; height: 200px'>
+                    <img id='img2' src="/recommend/images/v23.jpg" style='float:left; height: 150px'>
                 </TD>
                 <TD class='td_image'>
-                    <img id='img3' src="/recommend/images/v33.jpg" style='float:left; height: 200px'>
+                    <img id='img3' src="/recommend/images/v33.jpg" style='float:left; height: 150px'>
                 </TD>
                 <TD class='td_image'>
-                    <img id='img4' src="/recommend/images/v43.jpg" style='float:left; height: 200px'>
+                    <img id='img4' src="/recommend/images/v43.jpg" style='float:left; height: 150px'>
                 </TD>
                 <TD class='td_image'>
-                    <img id='img5' src="/recommend/images/v53.jpg" style='float:left; height: 200px'>
+                    <img id='img5' src="/recommend/images/v53.jpg" style='float:left; height: 150px'>
                 </TD>
             </TR>
             <TR>
