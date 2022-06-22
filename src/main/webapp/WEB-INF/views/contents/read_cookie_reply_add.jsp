@@ -5,7 +5,7 @@
 <c:set var="contentsno" value="${contentsVO.contentsno }" />
 <c:set var="cateno" value="${contentsVO.cateno }" />
 <c:set var="title" value="${contentsVO.title }" />        
-
+<c:set var="memberno" value="${contentsVO.memberno }"/>
 <c:set var="file1" value="${contentsVO.file1 }" />
 <c:set var="file1saved" value="${contentsVO.file1saved }" />
 <c:set var="thumb1" value="${contentsVO.thumb1 }" />
@@ -55,6 +55,7 @@
   });
 
   function update_recom_ajax(contentsno) {
+
     // console.log('-> contentsno:' + contentsno);
     var params = "";
     // params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
@@ -70,7 +71,7 @@
         success: function(rdata) { // 응답이 온경우
           // console.log('-> rdata: '+ rdata);
           var str = '';
-          if (rdata.cnt == 1) {
+          if (rdata.recom == 1) {
             // console.log('-> btn_recom: ' + $('#btn_recom').val());  // X
             // console.log('-> btn_recom: ' + $('#btn_recom').html());
             $('#btn_recom').html('♥('+rdata.recom+')');
@@ -90,6 +91,46 @@
     $('#span_animation').html("<img src='/contents/images/ani04.gif' style='width: 8%;'>");
     $('#span_animation').show(); // 숨겨진 태그의 출력
   }
+
+  function like_func(){
+
+      var frm_read = $('#frm_read');
+      var contentsno = $('#contentsno', frm_read).val();
+      var memberno = $('#memberno', frm_read).val();
+           
+      var params = "";
+      // params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+      params = 'contentsno=' + contentsno; // 공백이 값으로 있으면 안됨.    
+      
+      $.ajax({
+        url: "../liketo/like.do",
+        type: "GET",
+        cache: false,
+        dataType: "json",
+        data: 'contentsno=' +contentsno+ '&memberno=' +memberno,
+        success: function(data) {
+          var msg = '';
+          var like_img = '';
+          msg += data.msg;
+          alert(msg);
+          
+          if(data.like_check == 0){
+            like_img = "/contents/images/heart_e.png";
+          } else {
+            like_img = "/contents/images/heart.png";
+          }
+
+          /* $('#span_animation').hide(); */
+                
+          /* $('#like_img', frm_read).attr('src', like_img); */
+          $('#like_cnt').html(data.like_cnt);
+          $('#like_check').html(data.like_check);
+        },
+        error: function(request, status, error){
+          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+      });
+    }
 
   function loadDefault() {
     $('#id').val('user1');
@@ -567,10 +608,25 @@
         <DIV style="width: 48%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
             
           <br>
-          <form>
+         
+<%--        <form name='frm_read' id='frm_read' method="get" action="../liketo/like.do">
+          
+        <input type='hidden' name='contentsno' id='contentsno' value='${param.contentsno}'>
+        <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'>
+          
+          <c:choose>
+            <c:when test="${memberno ne null}">
+             <a href='javascript: like_func();'><img src='/contents/images/heart_e.png' id='like_img'></a>
+            </c:when>
+             <c:otherwise>
+             <a href='javascript: login_need();'><img src='/contents/images/heart_e.png'></a>
+            </c:otherwise>
+           </c:choose>
+          
+        
           <button type='button' id="btn_recom" class="btn btn-info">♥(${recom })</button>
-          <span id="span_animation"></span>
-          </form>
+          <span id="span_animation"></span> 
+          </form>--%>
         </DIV> 
         
         <DIV>${content }</DIV>

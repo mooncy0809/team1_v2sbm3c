@@ -2,6 +2,7 @@ package dev.mvc.contents;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -1083,6 +1084,18 @@ public class ContentsProc implements ContentsProcInter {
           }
       
       return list;
+    }
+
+    @Override
+    public int like_cnt_up(int contentsno) {
+        int count = contentsDAO.like_cnt_up(contentsno);
+        return count;
+    }
+
+    @Override
+    public int like_cnt_down(int contentsno) {
+        int count = contentsDAO.like_cnt_down(contentsno);
+        return count;
     }
     
 }

@@ -2,6 +2,7 @@ package dev.mvc.contents;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dev.mvc.you.YouVO;
 
@@ -158,6 +159,10 @@ public interface ContentsDAOInter {
     
     public List<ContentsVO> list_by_grid(HashMap<String, Object> map);
     
+    public int like_cnt_up(int contentsno);
+    
+    public int like_cnt_down(int contentsno);
+     
     
     public List<ContentsVO> index_contents4(HashMap<String, Object> map);
     

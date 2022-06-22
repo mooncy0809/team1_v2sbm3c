@@ -2,18 +2,21 @@ package dev.mvc.contents;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +26,7 @@ import dev.mvc.categrp.CategrpProcInter;
 import dev.mvc.categrp.CategrpVO;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.member.MemberVO;
+import dev.mvc.reply.ReplyMemberVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 import dev.mvc.you.YouVO;
@@ -1587,5 +1591,35 @@ public class ContentsCont {
         mav.setViewName("/contents/index_contents"); // /WEB-INF/views/concertcate/list_all_join.jsp
         return mav;
     }
+    
+//    @ResponseBody
+//    @RequestMapping(value = "/contents/update_recom_ajax.do", 
+//                                method = RequestMethod.POST)
+//    public String update_recome_ajax(int contentsno, HttpSession session) {
+//        
+//      int memberno = (int)session.getAttribute("memberno");                
+//      
+//      HashMap<String, Object> map = new HashMap<String, Object>();     
+//      map.put("contentsno", contentsno);
+//      map.put("memberno", memberno);
+//      
+//      ContentsVO contentsVO = contentsProc.read(contentsno);      
+//      
+//      int recom = contentsVO.getRecom();
+//      
+//      if(recom == 0) {
+//          contentsProc.recom_check(map);
+//      } else {
+//          contentsProc.recom_check_cancel(map);          
+//      }
+//         
+//      JSONObject obj = new JSONObject();
+//
+//      obj.put("contetnsno", contentsno);
+//
+//      
+//      return obj.toString();
+//    }
+    
 
 }
