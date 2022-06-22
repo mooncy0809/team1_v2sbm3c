@@ -109,6 +109,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </choose>
   </select>    
   
+  <select id="search_count_main" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as pcnt
+    FROM products
+  </select>    
+  
   <!-- 카테고리별 검색 레코드 갯수 -->
   <select id="search_count2" resultType="int" parameterType="HashMap">
     SELECT COUNT(*) as pcnt
@@ -195,7 +200,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="list_by_cateno_grid_join" resultType="dev.mvc.product.Cate_ProductVO">
     SELECT c.cateno as c_cateno,
                p.productno, p.cateno, p.ptitle, p.pcontent, p.ppasswd, p.pword,
-                                     p.pfile1, p.pfile1saved, p.pthumb1, p.psize1, p.rdate
+                                     p.pfile1, p.pfile1saved, p.pthumb1, p.psize1, p.rdate, p.price , p.dc, p.saleprice, p.point
     FROM cate c, products p
     WHERE c.cateno = p.cateno
     ORDER BY productno DESC

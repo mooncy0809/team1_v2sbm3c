@@ -70,10 +70,15 @@ public class HomeCont {
       // 검색 목록
       List<Cate_ProductVO> list = productProc.list_by_cateno_grid_join2(map);
       mav.addObject("list", list);
+      List<Cate_ProductVO> list2 = productProc.list_by_cateno_grid_join();
+      mav.addObject("list2", list2);
 
       // 검색된 레코드 갯수
       int search_count = productProc.search_count2(map);
       mav.addObject("search_count", search_count);
+      
+      int search_count_main = productProc.search_count_main(map);
+      mav.addObject("search_count_main", search_count_main);
 
       CateVO cateVO = cateProc.read(cateno);
       mav.addObject("cateVO", cateVO);
@@ -93,6 +98,8 @@ public class HomeCont {
       String paging3 = productProc.pagingBox3(cateno, search_count, now_page, word);
      
       mav.addObject("paging3", paging3);
+      
+      
 
       mav.addObject("now_page", now_page);
 
