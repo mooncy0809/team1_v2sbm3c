@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sunflower&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
  
 <style type="text/css">
 a{
@@ -198,6 +199,11 @@ a{
                                     <h4 class="panel-title"><a href="#">Shoes</a></h4>
                                 </div>
                             </div> -->
+                            <a style="display:scroll;position:fixed;bottom:100px;right:40px;" href="#" onClick="window.open('http://localhost:9091/tensorflow/chatbot/chatting.do', '챗봇', 'left=1000, top=350, width=400, height=430')">
+                            <i class="fa-solid fa-comment-dots"style="font-size:70px;"></i></a>
+                            
+                            
+
                         </div><!--/category-products-->
                     
                         <div class="brands_products"><!--brands_products-->
