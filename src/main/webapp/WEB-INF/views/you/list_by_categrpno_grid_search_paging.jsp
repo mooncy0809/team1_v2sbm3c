@@ -21,6 +21,29 @@
  
   
 </script>
+
+<style>
+.circle {
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    background:#transparent;
+    font-size:18px;
+    text-align:center;
+    line-height:110px;
+    color:#FF8B6E;
+    font-family:'Open Sans';
+    font-weight:bold;    
+}
+
+iframe {
+    width:200px;
+    height:200px;
+	border-radius:50%;
+	box-shadow: 20px 20px 20px 20px grey;	
+}
+
+</style>
  
 </head> 
   
@@ -56,7 +79,7 @@
   </ASIDE> 
   <DIV class='menu_line'></DIV>
   
-  <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>  
+  <div style='width: 100%; '> <%-- 갤러리 Layout 시작 --%>  
     <c:forEach var="youVO" items="${list }" varStatus="status">
       <c:set var="youno" value="${youVO.youno }" />
       <c:set var="ytitle" value="${youVO.ytitle }" />
@@ -68,17 +91,28 @@
       </c:if> 
       <!-- 하나의 이미지, 24 * 4 = 96% -->
       <a href ="./read.do?youno=${youVO.youno}">
-      <DIV style='float: left; 
-              margin: 0.5%; padding: 0.5%; background-color: #FFDCD3; text-align: center;'>
-                <DIV style='width: 100%; height: 150px; display: table; border: solid 2px #FF8B6E;'>
-                  <DIV style=' color: black; display: table-cell; vertical-align: middle; text-align: center; font-weight: bold;'> <!-- 수직 가운데 정렬 -->
-                   ${url } <br>
-                   ${ytitle} <br>
-                   <DIV style="text-align:right;">
-                   <i class="fa-solid fa-eye" >&nbsp;${cnt}</i> <br></DIV>   
-                  </DIV>      
-      </DIV>  
-</DIV></a>
+      <DIV class='circle' style='float: left; margin:0.5%; padding:0.5%;'>
+        <div class="product-image-wrapper " style='width:200px; height:200px;border-radius:50%; margin:0.5%; padding:0.5%;'>
+	      <div class="single-products" style='width:200px; height:200px; border-radius:50%; margin:0.5%; padding:0.5%; '> <!-- 수직 가운데 정렬 -->
+	      <div class="productinfo text-centerv" style='margin:0.5%; padding:0.5%;'>
+		       ${url }<br>
+		  </div>
+		  
+		  <div class="product-overlay" style="background: rgba(255,242,238,.9); border-radius:50%;  transition: all 180ms ease-in-out; margin:0.5%; padding:0.5%;">
+          <div class="overlay-content" style="width:100%;border-radius:50%;">           
+            
+            <div style="width:100%; word-wrap: break-word;">
+                ${ytitle} <br>     
+                <i class="fa-solid fa-eye" >&nbsp; ${cnt} <br> </i>
+            </div>
+      </div>  
+      </div>
+		  
+	     </DIV>
+	      </DIV>  
+        </DIV></a>
+        
+
     </c:forEach>
     <!-- 갤러리 Layout 종료 -->
     <br><br>
