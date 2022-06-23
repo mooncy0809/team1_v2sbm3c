@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.liketo.LiketoDAOInter">
+
+  <select id="countbyLike" resultType="int" parameterType="HashMap">
+    SELECT COUNT(likeno) as cnt
+    FROM liketo
+    WHERE contentsno=#{contentsno} AND memberno=#{memberno}
+  </select>
+
+  <insert id="create" parameterType="HashMap"> 
+      <selectKey keyProperty="likeno" resultType="int" order="BEFORE">
+          SELECT liketo_seq.nextval FROM dual
+      </selectKey>
+      
+        INSERT INTO liketo(likeno, contentsno, memberno, like_check) 
+        VALUES (#{likeno}, #{contentsno}, #{memberno}, 0)
+  </insert>
+    
+  <update id="like_check" parameterType="HashMap">
+    UPDATE liketo
+    SET like_check = like_check + 1 
+    WHERE memberno=#{memberno} AND contentsno=#{contentsno}
+  </update>
+  
+  <update id="like_check_cancel" parameterType="HashMap">
+    UPDATE liketo
+    SET like_check = like_check - 1
+    WHERE memberno=#{memberno} AND contentsno=#{contentsno}
+  </update>
+  
+  <select id="read" resultType="dev.mvc.liketo.LiketoVO" parameterType="HashMap">
+    SELECT likeno, contentsno, memberno, like_check 
+    FROM liketo
+    WHERE contentsno=#{contentsno} AND memberno=#{memberno}
+  </select>
+  
+<!--   <delete id="deletebyBoardno" parameterType="int">
+    DELETE FROM liketo
+    WHERE contentsno=#{contentsno}
+  </delete>
+  
+  <delete id="deletebyMno" parameterType="int">
+    DELETE FROM liketo
+    WHERE memberno=#{memberno}
+  </delete> -->
+  
+</mapper>

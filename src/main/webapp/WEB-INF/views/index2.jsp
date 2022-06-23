@@ -17,10 +17,8 @@
 <style type="text/css">
 a{
     font-family: 'Kdam Thmor Pro', sans-serif;
-
  font-family: 'Sunflower', sans-serif;
  }
-
  </style>
 </head>
 <body>
@@ -220,7 +218,6 @@ a{
                     <div class="features_items">features_items
                         <h2 class="title text-center">Features Items</h2>
                         <div class="col-sm-4">
-
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                         <div class="productinfo text-center">
