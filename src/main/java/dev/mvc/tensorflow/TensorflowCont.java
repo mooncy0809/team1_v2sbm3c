@@ -73,6 +73,15 @@ public class TensorflowCont {
     
     return mav;
   }
+  
+  // http://localhost:9091/tensorflow/chatbot/chatting.do
+  @RequestMapping(value = {"/tensorflow/chatbot/chatting.do"}, method = RequestMethod.GET)
+  public ModelAndView chatting() {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/tensorflow/chatbot/chatting");  // /WEB-INF/views/tensorflow/chatbot/chatting.jsp
+    
+    return mav;
+  }
 
   @RequestMapping(value = {"/tensorflow/recommend/recommend_product.do"}, method = RequestMethod.GET)
   public ModelAndView recommend_product() {

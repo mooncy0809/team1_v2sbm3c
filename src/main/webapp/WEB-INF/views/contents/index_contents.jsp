@@ -58,6 +58,7 @@ h1{
 
 
 
+
  
  </style>
 </head> 
@@ -86,12 +87,11 @@ h1{
         <tr> 
           
           <!-- 게시판 카테고리 -->
-          <td style='vertical-align: middle; text-align: center;'>${name} </td> 
+          <td style='vertical-align: middle; text-align: center; '>[${name}] </td> 
           
           <td style='vertical-align: middle; text-align: center;'>
-            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
-         
-          <strong>[${replycnt}]</strong>
+            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }"  target="_top">
+ 
            <strong>${title} <%-- ${replycnt}] --%></strong> </a> </td>
 
         </tr>

@@ -104,7 +104,7 @@ public class YouProc implements YouProcInter {
       ytext = Tool.convertChar(ytext);
       youVO.setYtext(ytext);
       String url = youVO.getUrl();
-      url = Tool.youtube(url, 200, 100); 
+      url = Tool.youtube(url, 160, 80); 
       youVO.setUrl(url);
     }
     
@@ -153,12 +153,11 @@ public class YouProc implements YouProcInter {
     str.append("  }"); 
     str.append("  .span_box_2{"); 
     str.append("    text-align: center;");    
-    str.append("    background-color: #668db4;"); 
+    str.append("    background-color:  #FF8B6E;"); 
     str.append("    color: #FFFFFF;"); 
     str.append("    font-size: 1em;"); 
     str.append("    border: 1px;"); 
     str.append("    border-style: solid;"); 
-    str.append("    border-color: #cccccc;"); 
     str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
     str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
     str.append("  }"); 
@@ -254,7 +253,7 @@ public class YouProc implements YouProcInter {
       youVO.setYtext(ytext);
       
       String url = youVO.getUrl();
-      url = Tool.youtube(url, 240, 120); 
+      url = Tool.youtube(url, 280, 120); 
       youVO.setUrl(url);
     }
     
@@ -303,12 +302,12 @@ public class YouProc implements YouProcInter {
     str.append("  }"); 
     str.append("  .span_box_2{"); 
     str.append("    text-align: center;");    
-    str.append("    background-color: #668db4;"); 
+    str.append("    background-color: #FFDCD3;"); 
     str.append("    color: #FFFFFF;"); 
     str.append("    font-size: 1em;"); 
     str.append("    border: 1px;"); 
     str.append("    border-style: solid;"); 
-    str.append("    border-color: #cccccc;"); 
+    str.append("    border-color: #FFDCD3;"); 
     str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
     str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
     str.append("  }"); 

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
     <meta charset="UTF-8">
     <title>관심분야 등록</title>
     <link href="/css/style.css" rel="Stylesheet" type="text/css"> <%-- /static 기준 --%>

@@ -16,7 +16,7 @@
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet"> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -64,7 +64,7 @@
 
 
 
- <DIV class='content_body'>
+ <DIV class='content_body' style="width:70%;">
  <span style="width:70%; font-size: 1.5em; font-weight: bold;">리뷰 쓰기</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
    <br>
@@ -128,14 +128,13 @@
        <label class="control-label col-md-4">이미지</label>
        <div class="col-md-6">
          <input type='file' class="form-control" name='file1MF' id='file1MF' 
-                    value='' placeholder="파일 선택">
+                    value='' placeholder="파일 선택" style="    width: 510px;">
        </div>
     </div>   
      
-    <div class="content_body_bottom" style="padding-right: 20%;">
+    <div class="content_body_bottom" style="padding-right: 20%; text-align:right;">
       <button type="submit" class="btn btn-primary">등록</button>
-      <button type="button" onclick="location.href='../order_pay/list_by_memberno.do?memberno=${sessionScope.memberno }'" class="btn btn-primary">목록</button>
-    </div>      
+   </div>      
   
   </FORM>
   

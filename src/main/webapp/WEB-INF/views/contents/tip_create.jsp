@@ -29,7 +29,7 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
 
-<DIV class='content_body'>
+<DIV class='content_body'  style="width:70%;">
  <span style="width:70%; font-size: 1.5em; font-weight: bold;">글쓰기</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
    <br>
@@ -99,7 +99,7 @@
                     class="form-control" style='width: 50%;'>
        </div>
     </div>   
-    <div class="content_body_bottom">
+    <div class="content_body_bottom" style="text-align: right;">
       <button type="submit" class="btn btn-primary">등록</button>
       <button type="button" onclick="location.href='./tip_by_cateno.do'" class="btn btn-primary">목록</button>
     </div>

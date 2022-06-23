@@ -57,7 +57,8 @@
 }
 
 .grid__card {
-  background-color: #f5f5f5;
+  background-color:#FFF2EE;
+  border: solid 3px #ffdcd3;
   text-decoration: none;
   height: 100%;
   display: flex;

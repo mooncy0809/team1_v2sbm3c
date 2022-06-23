@@ -32,7 +32,7 @@
 } */
 
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 10px;
 }
 
 /* Track */
@@ -43,7 +43,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: gray;
+  background: #E96D53;
   border-radius: 10px;
 }
 </style>
@@ -54,8 +54,8 @@
    <iframe class="backimg" src="./contents/index_contents4.do?cateno=1" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
        <iframe class="backimg2" src="./contents/index_contents5.do?cateno=2" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
                   <iframe class="backimg4" src="./contents/index_contents.do" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
-            <iframe class="backimg5" src="./you/index_contents2.do?categrpno=4" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
-                  <iframe class="backimg3" src="./dict/index_contents3.do?categrpno=5" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
+            <iframe class="backimg3" src="./you/index_contents2.do?categrpno=4" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
+                  <iframe class="backimg5" src="./dict/index_contents3.do?categrpno=5" align="left" scrolling="no" style="border:0px; width:280px; height:300px; " ></iframe>
                 <c:choose>
                 <c:when test="${sessionScope.id == null}">
                  <a href="./member/login.do" target="_top"><IMG id="logimg" src='/images/home/back6.png'></a>

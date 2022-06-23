@@ -270,5 +270,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        3 page: WHERE r >= 21 AND r <= 30; -->
      
   </select>   
+  
+   <update id="like_cnt_up" parameterType="int">
+    UPDATE contents
+    SET recom = recom + 1
+    WHERE contentsno = #{contentsno}
+  </update>
+  
+  <update id="like_cnt_down" parameterType="int">
+    UPDATE contents
+    SET recom = recom - 1
+    WHERE contentsno = #{contentsno}
+  </update>
+  
+    <select id="read_like_join" resultType="dev.mvc.contents.Liketo_ContentsVO" parameterType="HashMap">
+    SELECT l.like_check, c.contentsno, c.memberno, c.cateno, c.title, c.content, c.recom, c.cnt, c.replycnt, c.rdate,
+                                   c.file1, c.file1saved, c.thumb1, c.mname, c.size1
+    FROM liketo l, contents c
+    WHERE l.contentsno = c.contentsno AND l.memberno=#{memberno} AND c.contentsno=#{contentsno}
+  </select>
+  
+  <!-- Liketo + Contents join, 연결 목록 -->
+<!--   <select id="read_like_join" resultType="dev.mvc.contents.Liketo_ContentsVO" parameterType="HashMap">
+    SELECT l.like_check, l.memberno as l_memberno, c.contentsno, c.memberno, c.cateno, c.title, c.content, c.recom, c.cnt, c.replycnt, c.rdate,
+                                   c.file1, c.file1saved, c.thumb1, c.mname, c.size1
+    FROM liketo l, contents c
+    WHERE l.contentsno = c.contentsno AND l.memberno=#{l_memberno} AND c.contentsno=#{contentsno}
+  </select> -->
+  
          
 </mapper> 
