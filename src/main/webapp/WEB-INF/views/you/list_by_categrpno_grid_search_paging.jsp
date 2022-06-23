@@ -21,46 +21,29 @@
  
   
 </script>
-
-<style>
-.circle {
-    width:200px;
-    height:200px;
-    border-radius:50%;
-    background:#transparent;
-    font-size:18px;
-    text-align:center;
-    line-height:110px;
-    color:#FF8B6E;
-    font-family:'Open Sans';
-    font-weight:bold;    
-}
-
-iframe {
-    width:200px;
-    height:200px;
-	border-radius:50%;
-	box-shadow: 20px 20px 20px 20px grey;	
-}
-
-</style>
  
 </head> 
   
 <body>
 <jsp:include page="../menu/top.jsp" />
  
+<<<<<<< HEAD
+<DIV class='title_line'style="width:1100px;"><A href="./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno}&word=" class='title_link'>유튜브 그룹</A> > ${categrpVO.name }</DIV>
+=======
 <%-- <DIV class='title_line'style="width:70%;"><A href="./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno}&word=" class='title_link'>유튜브 그룹</A> > ${categrpVO.name }</DIV>
  --%>
 <DIV class='content_body' style="width:58%;">
 <span style="width:70%; font-size: 1.5em; font-weight: bold;">
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
-</span>
 
+</span>
+  <DIV style="text-align: right; clear: both; width:1220px; margin-right:0px;">  
   <DIV style="text-align: right; clear: both; ">  
     <form name='frm' id='frm' method='get' action='./list_by_categrpno_grid_search_paging.do'>
       <input type='hidden' name='categrpno' value='${categrpVO.categrpno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
+      <input type='text' name='word' id='word' value='${param.word }' style='width: 200px;'>
+      <button type='submit'>검색</button>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
       <button type='submit' class="btn btn-primary">검색</button>
       <c:if test="${param.word.length() > 0 }">
@@ -70,16 +53,15 @@ iframe {
     </form>
   </DIV>
   
-  <DIV class='menu_line'></DIV>
+
   
   <fieldset>
   <DIV class='content_body' style="width:1100px;">
   <ASIDE class="aside_right">&nbsp;
     <A style="color:black;" href="javascript:location.reload();"><i class="fa-solid fa-arrow-rotate-right"></i>&nbsp;새로고침</A>
   </ASIDE> 
-  <DIV class='menu_line'></DIV>
   
-  <div style='width: 100%; '> <%-- 갤러리 Layout 시작 --%>  
+  <div style='width: 1000px;'> <%-- 갤러리 Layout 시작 --%>  
     <c:forEach var="youVO" items="${list }" varStatus="status">
       <c:set var="youno" value="${youVO.youno }" />
       <c:set var="ytitle" value="${youVO.ytitle }" />
@@ -87,33 +69,23 @@ iframe {
       <c:set var="cnt" value="${youVO.cnt }" />
       
      <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
-        <HR class='menu_line'>
+        <HR class='menu_line' >
       </c:if> 
       <!-- 하나의 이미지, 24 * 4 = 96% -->
       <a href ="./read.do?youno=${youVO.youno}">
-      <DIV class='circle' style='float: left; margin:0.5%; padding:0.5%;'>
-        <div class="product-image-wrapper " style='width:200px; height:200px;border-radius:50%; margin:0.5%; padding:0.5%;'>
-	      <div class="single-products" style='width:200px; height:200px; border-radius:50%; margin:0.5%; padding:0.5%; '> <!-- 수직 가운데 정렬 -->
-	      <div class="productinfo text-centerv" style='margin:0.5%; padding:0.5%;'>
-		       ${url }<br>
-		  </div>
-		  
-		  <div class="product-overlay" style="background: rgba(255,242,238,.9); border-radius:50%;  transition: all 180ms ease-in-out; margin:0.5%; padding:0.5%;">
-          <div class="overlay-content" style="width:100%;border-radius:50%;">           
-            
-            <div style="width:100%; word-wrap: break-word;">
-                ${ytitle} <br>     
-                <i class="fa-solid fa-eye" >&nbsp; ${cnt} <br> </i>
-            </div>
-      </div>  
-      </div>
-		  
-	     </DIV>
-	      </DIV>  
-        </DIV></a>
-        
 
-    </c:forEach>
+      <DIV style='width: 24%; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: center;'>
+      <DIV style='float: left; margin: 0.5%; padding: 0.5%; background-color: #FFDCD3; text-align: center;'>
+                <DIV style='width: 100%; height: 150px; display: table; border: solid 2px #FF8B6E;'>
+                  <DIV style=' color: black; display: table-cell; vertical-align: middle; text-align: center; font-weight: bold;'> <!-- 수직 가운데 정렬 -->
+                   ${url } <br>
+                   ${ytitle} <br>
+                   <DIV style="text-align:right;">
+                   <i class="fa-solid fa-eye" >&nbsp;${cnt}</i> <br></DIV>   
+                  </DIV>      
+      </DIV>  </a>
+</DIV>
+   </c:forEach>
     <!-- 갤러리 Layout 종료 -->
     <br><br>
   </div>

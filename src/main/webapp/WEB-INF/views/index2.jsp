@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sunflower&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
  
 <style type="text/css">
 a{
@@ -197,8 +198,20 @@ a{
                                     <h4 class="panel-title"><a href="#">Shoes</a></h4>
                                 </div>
                             </div> -->
+
                         </div><!--/category-products-->
-                    
+                     <c:choose>
+                       <c:when test="${sessionScope.grade > 1}">
+                                        <%-- 로그인 한 경우 --%>
+                            <div>   
+                            <a class="imgbtn"  style="display:scroll;position:fixed;bottom:70px;right:10px; z-index:1;" onclick="openNav(this)" >
+                                <i class="fa-solid fa-comment-dots"style="font-size:45px; " ></i></a>  
+                                   <div id="mySidenav2" style=" display:scroll;position:fixed; width: 398px; display: none; top:200px; left:1250px; box-shadow: 12px 10px 11px 7px gray;  z-index:1;">
+                                            <iframe src="http://localhost:9091/tensorflow/chatbot/chatting.do" scrolling="no" style="border:0px; width:398px; height:492px; " ></iframe>
+                                   </div> 
+                           </div>
+                           </c:when>
+                       </c:choose>               
                         <div class="brands_products"><!--brands_products-->
                             <h2>Brands</h2>
                             <div class="brands-name">
@@ -417,4 +430,19 @@ a{
     </section>
  <jsp:include page="./menu/bottom2.jsp" flush='false' />
 </body>
+<script>
+function openNav() {
+    if ($('#mySidenav2').css('display') == 'none'){
+        $("#mySidenav2").slideDown(1);
+        
+        
+       
+        } 
+    
+    else{
+        $("#mySidenav2").slideUp(1);
+            
+            }
+  } 
+</script>
 </html>

@@ -2,6 +2,7 @@
 /**********************************/
 /* Table Name: 질문게시판 */
 /**********************************/
+drop table qna;
 CREATE TABLE qna(
 		qnano                         		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		categrpno                        		NUMBER(10)		 NULL ,

@@ -60,6 +60,10 @@
             $('#panel').html("<img src='/recommend/ani04.gif' style='width: 10%;'>");
             $('#panel').show(); // 숨겨진 태그의 출력
           }
+
+        function recommend_product(memberno){
+            location.href='http://127.0.0.1:8000/recommend_product/' + memberno;
+          }
     </script>
 
     <style>
@@ -210,6 +214,7 @@
         <br>
         <DIV style="text-align:center;">
             <button type='button' id='btn_previous' class="btn btn-info">이전</button>
+            <button type='button' id='btn_next' class="btn btn-info" onclick=' javascript: recommend_product(${sessionScope.memberno })'>등록하고 추천상품 보기</button>
             <button type='button' id='btn_close' class="btn btn-info">종료</button>
         </DIV>
     </form>
