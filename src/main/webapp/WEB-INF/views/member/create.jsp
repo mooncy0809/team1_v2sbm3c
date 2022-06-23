@@ -158,14 +158,15 @@
   </DIV>
 
   <DIV class='content_body'>
+     <hr align="center" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 70%;">
 
-  <ASIDE class="aside_right">
+<!--   <ASIDE class="aside_right">
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' >│</span> 
     <A href='./create.do'>회원 가입</A>
     <span class='menu_divide' >│</span> 
     <A href='./list.do'>목록</A>
-  </ASIDE> 
+  </ASIDE>  -->
 
   <div class='menu_line'></div>
   

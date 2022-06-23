@@ -31,8 +31,7 @@
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet"> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
 
@@ -220,7 +219,8 @@
       <button type='submit'><i class="fas fa-search"></i></button>
       <c:if test="${param.pword.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='"><i class="fas fa-times"></i></button>  
+                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='"><i class="fas fa-times" style="background-color: #E2E8DE;
+    border-color: #E2E8DE;"></i></button>  
       </c:if>    
     </form>
 <DIV class='title_line' style="text-align: right; margin-right:0;font-size:16px;">
@@ -298,7 +298,7 @@
     </c:forEach>
     <!-- 갤러리 Layout 종료 -->
   </div>
-   <DIV class='bottom_menu'>${paging3    }</DIV>
+   <DIV class='bottom_menu' style="    text-align: center; padding-bottom: 45px;">${paging3    }</DIV>
   </div>
   </div>
   </div>

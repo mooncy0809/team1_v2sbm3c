@@ -7,14 +7,14 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>삼대몇 | 비밀번호 찾기</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
   $(function() { // 자동 실행
@@ -78,13 +78,7 @@
   </DIV>
 
   <DIV class='content_body'>
-    <ASIDE class="aside_right">
-      <A href="javascript:location.reload();">새로고침</A>
-      <span class='menu_divide' >│</span> 
-      <A href='./create.do'>회원 가입</A>
-      <span class='menu_divide' >│</span> 
-      <A href='./list.do'>목록</A>
-    </ASIDE> 
+    
    
     <div class='menu_line'></div>
       
@@ -97,7 +91,7 @@
         <div class="col-md-7">
           <input type='password' class="form-control" name='current_passwd' 
                     id='current_passwd' value='' required="required" 
-                    style='width: 30%;' placeholder="패스워드">
+                    style='width: 30%;' placeholder="현재 패스워드">
         </div>
       </div>   
                       
@@ -106,7 +100,7 @@
         <div class="col-md-7">
           <input type='password' class="form-control" name='new_passwd' 
                     id='new_passwd' value='' required="required" 
-                    style='width: 30%;' placeholder="패스워드">
+                    style='width: 30%;' placeholder="새로운 패스워드">
         </div>
       </div>   
    
@@ -115,14 +109,14 @@
         <div class="col-md-7">
           <input type='password' class="form-control" name='new_passwd2' 
                     id='new_passwd2' value='' required="required" 
-                    style='width: 30%;' placeholder="패스워드">
+                    style='width: 30%;' placeholder="새로운 패스워드 확인">
         </div>
       </div>   
       
       <div class="form-group">
         <div class="col-md-offset-5 col-md-7">
           <button type="button" id='btn_send' class="btn btn-primary btn-md">변경</button>
-          <button type="button" onclick="location.href='./list.do'" class="btn btn-primary btn-md">취소</button>
+          <button type="button" onclick="location.href='./read.do?memberno=${sessionScope.memberno}'" class="btn btn-primary btn-md">취소</button>
    
         </div>
       </div>   

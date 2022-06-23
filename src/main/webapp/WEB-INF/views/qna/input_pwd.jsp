@@ -11,7 +11,7 @@
 <title>관리자에게</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
- 
+ <link href="/css/bootstrap.min.css" rel="stylesheet"> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -26,7 +26,7 @@ $(function(){
 
 <body>
 <jsp:include page="../menu/top.jsp" />
-<DIV class='content_body'>
+<DIV class='content_body' style="width: 70%;">
 <span style="width:70%; font-size: 1.5em; font-weight: bold;">관리자에게</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 

@@ -22,8 +22,7 @@
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet"> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -244,7 +243,7 @@
 </DIV>
 
 <!-- ------------------------------ 댓글 영역 시작 ------------------------------ -->
-<DIV style='width: 80%; margin: 0px auto;'>
+<DIV style='width: 70%; margin: 0px auto;'>
     <HR>
     <FORM name='frm_qna_reply' id='frm_qna_reply'> <%-- 댓글 등록 폼 --%>
         <input type='hidden' name='qnano' id='qnano' value='${qnano}'>

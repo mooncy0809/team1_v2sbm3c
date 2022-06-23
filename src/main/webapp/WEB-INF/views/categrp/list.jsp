@@ -8,28 +8,27 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>삼대몇 | 카테고리 관리</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
-<script type="text/javascript">
- 
-  
-</script>
  
 </head> 
  
 <body>
 <jsp:include page="../menu/top.jsp" />
  
-<DIV class='title_line'>카테고리 그룹</DIV>
 
-<DIV class='content_body'>
+<DIV class='content_body' style="width:70%;">
+<span style="width:70%; font-size: 1.5em; font-weight: bold;">카테고리 그룹</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+
+
   <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
     <FORM name='frm_create' id='frm_create' method='POST' action='./create.do'>
       <label>그룹 이름</label>

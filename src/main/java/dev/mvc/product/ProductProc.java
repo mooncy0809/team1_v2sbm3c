@@ -122,6 +122,12 @@ public class ProductProc implements ProductProcInter {
     }
     
     @Override
+    public int search_count_main(HashMap<String, Object> hashMap) {
+      int count = productDAO.search_count_main(hashMap);
+      return count;
+    }
+    
+    @Override
     public int search_count2(HashMap<String, Object> hashMap) {
       int count = productDAO.search_count2(hashMap);
       return count;
@@ -221,12 +227,12 @@ public class ProductProc implements ProductProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #8DA386;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -314,12 +320,12 @@ public class ProductProc implements ProductProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #8DA386;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -500,12 +506,12 @@ public class ProductProc implements ProductProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #8DA386;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 

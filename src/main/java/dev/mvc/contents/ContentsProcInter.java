@@ -2,6 +2,7 @@ package dev.mvc.contents;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dev.mvc.you.YouVO;
 
@@ -203,6 +204,22 @@ public interface ContentsProcInter {
     
     public List<ContentsVO> list_by_grid(HashMap<String, Object> map);
     
+    public int like_cnt_up(int contentsno);
+    
+    public int like_cnt_down(int contentsno);
+    
+    /**
+     * Liketo + Contents join, 연결 목록
+     * @return
+     */
+//    public List<Liketo_ContentsVO> read_like_join();
+    
+    /**
+     * Liketo + Contents join, 연결 목록
+     * @return
+     */
+    public Liketo_ContentsVO read_like_join(HashMap<String, Object> map); 
+   
     public List<ContentsVO> index_contents4(HashMap<String, Object> map);
     
     public List<ContentsVO> index_contents5(HashMap<String, Object> map);
