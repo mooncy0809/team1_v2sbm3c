@@ -108,10 +108,12 @@
         dataType: "json",
         data: 'contentsno=' +contentsno+ '&memberno=' +memberno,
         success: function(data) {
-          var msg = '';
+
           var like_img = '';
+
+          /*  var msg = '';
           msg += data.msg;
-          alert(msg);
+          alert(msg); */
           
           if(data.like_check == 0){
             like_img = "/contents/images/heart_e.png";
