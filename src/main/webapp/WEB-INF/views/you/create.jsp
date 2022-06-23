@@ -27,13 +27,14 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
  
-<DIV class='title_line'style="width:70%;">
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  <A href="./list_by_categrpno_search_paging.do?categrpno=4" class='title_link'>홈트레이닝</A> > 
-     유튜브 등록 
-</DIV>
 
 <DIV class='content_body'style="width:70%;">
+<span style="width:50%; font-size: 1.2em; font-weight: bold;">
+  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
+  <A href="./list_by_categrpno_search_paging.do?categrpno=4" class='title_link'>홈트레이닝</A>
+</span>
+   <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+
   <FORM name='frm' method='POST' action='./create.do' class="form-horizontal">
     <input type="hidden" name="categrpno" value="${param.categrpno }"> 
     

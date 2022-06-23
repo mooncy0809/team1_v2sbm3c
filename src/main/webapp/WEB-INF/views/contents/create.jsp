@@ -40,7 +40,7 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
 
-<DIV class='content_body'> 
+<DIV class='content_body'  style="width:70%;"> 
 
     <span style="width:70%; font-size: 1.5em; font-weight: bold;"> ${cateVO.name } > 글 등록</span>
     

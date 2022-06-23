@@ -28,7 +28,7 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet"> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
   $(function(){
@@ -145,12 +145,16 @@ table.caltable td {
 <DIV class='content_body' style="width:58%;">
 <fieldset class="fieldset_basic">
     <DIV class='title_line'>
-    <a href="../../dict/list_by_categrpno_search_paging.do?categrpno=5&word=">칼로리 사전</a>   >
+    <span style="width:70%; font-size: 1.2em; font-weight: bold;">
+    <a href="../../dict/list_by_categrpno_search_paging.do?categrpno=5&word=">칼로리 사전</a>
+    </span>
     <c:choose>
     <c:when test="${sessionScope.grade < 10}"> <%-- 로그인 한 경우 --%>
-    <a href="../../dict/list_by_categrpno_search_paging.do?categrpno=5&word=">칼로리 사전</a>   >  
+    <span style="width:70%; font-size: 1.2em; font-weight: bold;">
+    <a href="../../dict/list_by_categrpno_search_paging.do?categrpno=5&word=">칼로리 사전</a> 
+    </span>
     </c:when>
-    </c:choose>${dictVO.fname }
+    </c:choose>
    </DIV>
     <DIV style="text-align: center; clear: both;">
     <form name='frm' id='frm' method='get' action='./list_by_categrpno_search_paging.do'>
