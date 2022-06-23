@@ -57,15 +57,14 @@
 
   }
 
-  function openNav() {
-          
-          $("#mySidenav2").slideDown(1);
-
+  function openNav() {    
+      $("#imgstart").css('display', 'none');   
+      $("#mySidenav2").slideDown(500);     
     } 
   function closeNav() {
-      
       $("#mySidenav2").slideUp(1);
-
+      $('#imgstart').show();
+      location.reload();
 } 
   <%-- 쇼핑카트 상품 등록 --%>
   function cart_ajax_post() {
@@ -200,15 +199,16 @@
                 
   <div class="col-sm-9 padding-right"> <%-- 갤러리 Layout 시작 --%>
   <div class="features_items">
-  
-  <iframe class="backimg" src="../../tensorflow/recommend/start.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
-                <a class="imgbtn"  style="display:scroll;position:fixed;bottom:558px;right:525px; z-index:1;" onclick="openNav(this)" >
-                <i class="fa-solid fa-square-plus"style="font-size:25px; " ></i></a>
-     
-                <a class="imgbtn"  style="display:scroll;position:fixed;bottom:558px;right:500px; z-index:1;" onclick="closeNav(this)" >
-                <i class="fa-solid fa-square-minus"style="font-size:25px; " ></i></a>
-  <div id="mySidenav2" style=" display:scroll;position:relative; width: 800px; display: none; top:100px; left:0px; box-shadow: 12px 10px 11px 7px gray;">  
-        <iframe class="backimg" src="../../tensorflow/recommend/start.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
+  <div>
+        <div id="imgstart" style="text-align:center;margin:10px auto">
+            <a class="imgbtn"onclick="openNav(this)" >
+            <img width="210px" height="100px;"src="/recommend/recom.png" alt="추천시스템 시작"></a>
+        </div>                             
+  <div id="mySidenav2" style="position:relative; width:100%; display: none;">  
+        <a class="imgbtn"  style="display:scroll; position:absolute; right:30px; z-index:1;" onclick="closeNav(this)" >
+        <i class="fa-solid fa-square-minus"style="font-size:25px;"></i>
+        </a><iframe class="backimg" src="../../tensorflow/recommend/form1.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
+  </div>
   </div>
 
   <DIV style="text-align: right; clear: both;padding-right:25px;">  
@@ -222,7 +222,7 @@
     border-color: #E2E8DE;"></i></button>  
       </c:if>    
     </form>
-<DIV class='title_line' style="text-align: right; margin-right:0;font-size:16px;">
+<DIV class='title_line' style="text-align: right; margin-right:0;padding-top:10px;font-size:16px;">
   <A href="./list_by_cateno_grid_join_up.do" class='title_link'>높은 가격순</A> | 
   <A href="./list_by_cateno_grid_join_down.do" class='title_link'>낮은 가격순</A> 
 </DIV>
