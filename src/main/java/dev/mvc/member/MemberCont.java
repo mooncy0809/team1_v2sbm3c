@@ -253,7 +253,8 @@ public class MemberCont {
       */
      @RequestMapping(value="/member/passwd_update.do", method=RequestMethod.GET)
      public ModelAndView passwd_update(int memberno){
-       ModelAndView mav = new ModelAndView();
+       ModelAndView mav = new ModelAndView();      
+       
        mav.setViewName("/member/passwd_update"); // passwd_update.jsp
        
        return mav;
@@ -367,7 +368,7 @@ public class MemberCont {
        
        mav.addObject("url", "/member/logout_msg"); // logout_msg.jsp, redirect parameter 적용
        
-       mav.setViewName("redirect:/member/msg.do"); // 새로고침 방지
+       mav.setViewName("redirect:../index.do"); // 새로고침 방지
        
        return mav;
      }

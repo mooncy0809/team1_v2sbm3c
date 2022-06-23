@@ -101,7 +101,6 @@
         <DIV style="text-align:center;">
             <button type='button' id='btn_previous' class="btn btn-info">이전</button>
             <button type='button' id='btn_next' class="btn btn-info">다음</button>
-            <button type='button' id='btn_close' class="btn btn-info">취소</button>
         </DIV>
     </form>
 </DIV>

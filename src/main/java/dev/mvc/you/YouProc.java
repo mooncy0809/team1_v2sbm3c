@@ -104,7 +104,7 @@ public class YouProc implements YouProcInter {
       ytext = Tool.convertChar(ytext);
       youVO.setYtext(ytext);
       String url = youVO.getUrl();
-      url = Tool.youtube(url, 200, 100); 
+      url = Tool.youtube(url, 160, 80); 
       youVO.setUrl(url);
     }
     
@@ -253,7 +253,7 @@ public class YouProc implements YouProcInter {
       youVO.setYtext(ytext);
       
       String url = youVO.getUrl();
-      url = Tool.youtube(url, 240, 120); 
+      url = Tool.youtube(url, 280, 120); 
       youVO.setUrl(url);
     }
     

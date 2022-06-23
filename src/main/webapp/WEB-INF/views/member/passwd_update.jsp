@@ -91,7 +91,7 @@
         <div class="col-md-7">
           <input type='password' class="form-control" name='current_passwd' 
                     id='current_passwd' value='' required="required" 
-                    style='width: 30%;' placeholder="패스워드">
+                    style='width: 30%;' placeholder="현재 패스워드">
         </div>
       </div>   
                       
@@ -100,7 +100,7 @@
         <div class="col-md-7">
           <input type='password' class="form-control" name='new_passwd' 
                     id='new_passwd' value='' required="required" 
-                    style='width: 30%;' placeholder="패스워드">
+                    style='width: 30%;' placeholder="새로운 패스워드">
         </div>
       </div>   
    
@@ -109,14 +109,14 @@
         <div class="col-md-7">
           <input type='password' class="form-control" name='new_passwd2' 
                     id='new_passwd2' value='' required="required" 
-                    style='width: 30%;' placeholder="패스워드">
+                    style='width: 30%;' placeholder="새로운 패스워드 확인">
         </div>
       </div>   
       
       <div class="form-group">
         <div class="col-md-offset-5 col-md-7">
           <button type="button" id='btn_send' class="btn btn-primary btn-md">변경</button>
-          <button type="button" onclick="location.href='./list.do'" class="btn btn-primary btn-md">취소</button>
+          <button type="button" onclick="location.href='./read.do?memberno=${sessionScope.memberno}'" class="btn btn-primary btn-md">취소</button>
    
         </div>
       </div>   
