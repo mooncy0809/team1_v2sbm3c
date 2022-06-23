@@ -274,7 +274,7 @@
  
 <body>
 <jsp:include page="../menu/top2.jsp" flush='false' />
-
+<DIV class='content_body' style="width:70%;">
 <!-- Modal 알림창 시작 -->
 <div class="modal fade" id="modal_panel" role="dialog">
   <div class="modal-dialog">
@@ -327,7 +327,7 @@
 
 
 <DIV class='content_body'>
-  <ASIDE class="aside_right">
+  <ASIDE class="aside_right" > 
     <A href="javascript:history.back();">뒤로가기</A>
     <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
@@ -344,9 +344,11 @@
           <input type='text' name='pword' id='pword' value='' style='width: 20%;'>
         </c:otherwise>
       </c:choose>
-      <button type='submit'>검색</button>
+      <button type='submit' style="background-color: #E2E8DE;
+    border-color: #E2E8DE;">검색</button>
       <c:if test="${param.pword.length() > 0 }">
-        <button type='button' 
+        <button type='button'  style="background-color: #E2E8DE;
+    border-color: #E2E8DE;"
                      onclick="location.href='./list_by_cateno_search_paging.do?cateno=${cateVO.cateno}&word='">검색 취소</button>  
       </c:if>    
     </form>
@@ -364,31 +366,33 @@
             <c:choose>
               <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}">
                 <%-- /static/product/storage/ --%>
-                <IMG src="/product/storage/${pfile1saved }" style="width: 100%;"> 
+                <IMG src="/product/storage/${pfile1saved }" style="width: 90%;"> 
               </c:when>
               <c:otherwise> <!-- 기본 이미지 출력 -->
-                <IMG src="/product/images/none1.png" style="width: 100%;"> 
+                <IMG src="/product/images/none1.png" style="width: 90%;"> 
               </c:otherwise>
             </c:choose>
         </DIV>
-        <DIV style="width: 48%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
-          <span style="font-size: 1.5em; font-weight: bold;">${ptitle }</span><br>
-          <span style="color: #FF0000; font-size: 2.0em;">${dc} %</span>
+        <DIV style="/* width: 48%; height: 260px; float: left; */ margin-right: 10px; margin-bottom: 30px;">
+          <span style="font-size: 1.5em; font-weight: bold;">${ptitle }</span><br><hr style="border-top: 1px solid #bbb;">
+          판매가격 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <span style="font-size: 1.5em; font-weight: bold;"><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</span>
-          <del><fmt:formatNumber value="${price}" pattern="#,###" /> 원</del><br>
-          <span style="font-size: 1.2em;">포인트: <fmt:formatNumber value="${point}" pattern="#,###" /> 원</span><br>
-          <span style="font-size: 1.0em;">(보유수량: <fmt:formatNumber value="${salecnt}" pattern="#,###" /> 개)</span><br>
+                    <del><fmt:formatNumber value="${price}" pattern="#,###" /> 원</del>&nbsp;&nbsp;<span style="color: #FF0000; font-size: 2.0em;">${dc} %</span>
+                    <br><hr style="border-top: 1px solid #bbb;">
+          포인트 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 1.2em;"> <fmt:formatNumber value="${point}" pattern="#,###" /> 원</span><br>
+<%--           <span style="font-size: 1.0em;">(보유수량: <fmt:formatNumber value="${salecnt}" pattern="#,###" /> 개)</span><br>
+    --%>       <hr style="border-top: 1px solid #bbb;">
           <span style="font-size: 1.0em;">수량</span><br>
           <form>
           <input type='number' name='ordercnt' value='1' required="required" 
                      min="1" max="99999" step="1" class="form-control" style='width: 30%;'><br>
-          <button type='button' onclick="cart_ajax(${productno })" class="btn btn-info">장바 구니</button>           
+          <button type='button' onclick="cart_ajax(${productno })" class="btn btn-info">장바구니</button>           
           <button type='button' onclick="" class="btn btn-info">바로 구매</button>
           <button type='button' onclick="" class="btn btn-info">관심 상품</button>
           </form>
         </DIV> 
 
-        <DIV>${pcontent }</DIV>
+<%--         <DIV>${pcontent }</DIV>
       </li>
       <li class="li_none">
         <DIV style='text-decoration: none;'>
@@ -401,7 +405,7 @@
             첨부 파일: <A href='/download?dir=/product/storage&filename=${pfile1saved}&downname=${pfile1}'>${pfile1}</A> (${psize1_label})  
           </c:if>
         </DIV>
-      </li>   
+      </li>  --%>  
     </ul>
   </fieldset>
 
@@ -420,7 +424,7 @@
     </DIV> 
   
 </DIV>
-
+</DIV>
 <!-- ------------------------------ 리뷰 영역 종료 ------------------------------  -->
  
 <jsp:include page="../menu/bottom2.jsp" flush='false' />

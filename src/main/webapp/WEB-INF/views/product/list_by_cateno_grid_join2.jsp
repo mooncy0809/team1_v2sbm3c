@@ -198,7 +198,8 @@
       <button type='submit'><i class="fas fa-search"></i></button>
       <c:if test="${param.pword.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='"><i class="fas fa-times"></i></button>  
+                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='"><i class="fas fa-times" style="background-color: #E2E8DE;
+    border-color: #E2E8DE;"></i></button>  
       </c:if>    
     </form>
 <DIV class='title_line' style="text-align: right; margin-right:0;font-size:16px;">

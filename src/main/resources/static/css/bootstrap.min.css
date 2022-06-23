@@ -1066,9 +1066,9 @@ fieldset[disabled] .btn-danger.active{background-color:#d9534f;border-color:#d43
 .btn-success:focus,.btn-success.disabled:active,.btn-success[disabled]:active,fieldset[disabled] 
 .btn-success:active,.btn-success.disabled.active,.btn-success[disabled].active,fieldset[disabled] 
 .btn-success.active{background-color:#5cb85c;border-color:#4cae4c}.btn-success 
-.badge{color:#5cb85c;background-color:#fff}.btn-info{color:#fff;background-color:#FF8B6E;border-color:#FFDCD3}
+.badge{color:#5cb85c;background-color:#fff}.btn-info{color:#fff;background-color:#FF8B6E;/* border-color:#FFDCD3 */}
 .btn-info:hover,.btn-info:focus,.btn-info:active,.btn-info.active,.open .dropdown-toggle.btn-info
-{color:#fff;background-color:#FFDCD3;border-color:#FF8B6E;}.btn-info:active,.btn-info.active,.open 
+{color:#fff;background-color:#FFDCD3;}.btn-info:active,.btn-info.active,.open 
 .dropdown-toggle.btn-info{background-image:none}.btn-info.disabled,.btn-info[disabled],
 fieldset[disabled] .btn-info,.btn-info.disabled:hover,.btn-info[disabled]:hover,
 fieldset[disabled] .btn-info:hover,.btn-info.disabled:focus,.btn-info[disabled]:focus,fieldset[disabled] 

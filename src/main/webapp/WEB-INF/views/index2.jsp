@@ -25,7 +25,7 @@ a{
 </head>
 <body>
     <section id="slider"><!--slider-->
-        <div class="container">
+        <div class="container" style='width: 1200px; margin: 30px auto; text-align: center;     height: 390px;'>
             <div class="row">
                 <div class="col-sm-12">
                     <div id="slider-carousel" class="carousel slide" data-ride="carousel">
@@ -39,33 +39,27 @@ a{
                        
                             <div class="item active"> 
                     
-                          <IMG src='/images/home/004.png' style="width:100%;">
+                          <IMG src='/images/home/005.png' style="width:100%; padding-top: 20px; box-shadow: 3px 4px 8px grey;">
                             </div>
                             
                             <div class="item">
-                             <img src="images/home/005.png" style="width:100%;">                
+                             <img src="images/home/004.png" style="width:100%; padding-top: 20px; box-shadow: 3px 4px 8px grey;">                
                                                             </div> 
                             <div class="item">
-                                <img src="images/home/006.png" style="width:100%;"> 
-                              <!-- <button type="button" class="btn btn-default get">보러 가기</button> -->
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>여기다가 상품 나와야하는건가</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">보러 가기</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="product/storage/77ㅓ억_1.png" class="girl img-responsive" alt="" />
-                                    <img src="images/home/pricing.png" class="pricing" alt="" />
-                                </div>
+                                <img src="images/home/006.png" style="width:100%; padding-top: 20px; box-shadow: 3px 4px 8px grey;"> 
+
                             </div>
                             
                         </div>
                         
-                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
+                                                                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev" style="width: 40px;
+    height: 40px;       top: 185px;
+    right: 1151px;box-shadow: 3px 4px 8px grey;">
+                            <i class="fa fa-angle-left" style="padding-bottom:100px;"></i>
                         </a>
-                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next" style="width: 40px; top: 185px;
+    left: 1151px;
+    height: 40px; box-shadow: 3px 4px 8px grey;">
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </div>
@@ -75,7 +69,7 @@ a{
         </div>
     </section><!--/slider-->
     
-    <section>
+        <section>
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
@@ -85,35 +79,39 @@ a{
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+                                    
+                                        <a data-toggle="collapse" data-parent="#accordian" href="#mens">
+                                            <span class="badge pull-right"><i class="fa fa-minus"></i></span>
+                                        </a>
+                                        <a href="#sportswear" data-toggle="collapse" data-parent="#accordian" >
                                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                                             전체 카테고리
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="sportswear" class="panel-collapse collapse">
+                                <div id="sportswear" id='demo' class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul>
-                                            <li><a href="#">Nike </a></li>
-                                            <li><a href="#">Under Armour </a></li>
-                                            <li><a href="#">Adidas </a></li>
-                                            <li><a href="#">Puma</a></li>
-                                            <li><a href="#">ASICS </a></li>
+                                            <li><a href="#">닭가슴살</a></li>
+                                            <li><a href="#">간편요리 </a></li>
+                                            <li><a href="#">샐러드 </a></li>
+                                            <li><a href="#">건강미용</a></li>
+                                            <li><a href="#">간식 </a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-<!--                             <div class="panel panel-default">
+                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#mens">
+<!--                                         <a data-toggle="collapse" data-parent="#accordian" href="#mens">
                                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                                             Mens
-                                        </a>
+                                        </a> -->
                                     </h4>
                                 </div>
                                 <div id="mens" class="panel-collapse collapse">
-                                    <div class="panel-body">
+                                    <!-- <div class="panel-body">
                                         <ul>
                                             <li><a href="#">Fendi</a></li>
                                             <li><a href="#">Guess</a></li>
@@ -126,9 +124,9 @@ a{
                                             <li><a href="#">Chanel</a></li>
                                             <li><a href="#">Gucci</a></li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                 </div>
-                            </div> -->
+                            </div>
                             
                             <!-- <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -267,22 +265,23 @@ a{
       <DIV class="col-sm-4" >
       <div class="product-image-wrapper" >
       <div class="single-products"  >
-      <div class="productinfo text-center" >
+      <div class="productinfo text-center">
         <c:choose>
           <c:when test="${psize1 > 0}"> <!-- 파일이 존재하면 -->
             <c:choose> 
               <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
                 <a href="./product/read.do?productno=${productno}">               
-                  <IMG src="./product/storage/${pthumb1 }" style='width: 230px; height:230px ;'>
+                  <IMG src="./product/storage/${pthumb1 }" style='width: 230px; height:230px ; border: 1px solid; border-radius:20px;'>
                 </a>
-                <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
+                <br><br>
+                <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>                
                 <span style="color: #FF0000; font-size: 1.0em;">${dc} %</span>
                 <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>
                 <p>${ptitle}</p>
                 <a onclick="cart_ajax(${productno })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
               </c:when>
               <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
-                <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
+                <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC; border-radius:20px;'>
                   <DIV style='display: table-cell; vertical-align: middle; text-align: center;'> <!-- 수직 가운데 정렬 -->
                     <a href="./read.do?productno=${productno}">${pfile1}</a><br>
                   </DIV>
@@ -350,7 +349,7 @@ a{
                                             <c:choose> 
                                               <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
                                                 <a href="./product/read.do?productno=${productno}">               
-                                                  <IMG src="./product/storage/${pthumb1 }" alt="" style='width: 230px; height:230px ;'>
+                                                  <IMG src="./product/storage/${pthumb1 }" alt="" style='width: 230px; height:230px ; border-radius:50%;'>
                                                 </a>
                                                 <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
                                                 <span style="color: #FF0000; font-size: 1.0em;">${dc} %</span>
@@ -359,7 +358,7 @@ a{
                                                 <a onclick="cart_ajax(${productno })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                               </c:when>
                                               <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
-                                                <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
+                                                <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC; border-radius:50%;'>
                                                   <DIV style='display: table-cell; vertical-align: middle; text-align: center;'> <!-- 수직 가운데 정렬 -->
                                                     <a href="./read.do?productno=${productno}">${pfile1}</a><br>
                                                   </DIV>
@@ -391,10 +390,12 @@ a{
     
                   </div>      
              </div>
-         <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+         <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev" style="width: 40px;
+    height: 40px;">
           <i class="fa fa-angle-left"></i>
           </a>
-          <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+          <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next" style="width: 40px;
+    height: 40px;">
             <i class="fa fa-angle-right"></i>
           </a>  
                                       
