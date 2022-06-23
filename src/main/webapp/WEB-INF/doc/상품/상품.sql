@@ -55,6 +55,7 @@ CREATE SEQUENCE products_seq
 DROP TABLE products;
 DROP SEQUENCE products_seq;
 
+DELETE FROM products WHERE productno=1;
 --삽입
 INSERT INTO products(productno, cateno, ptitle, pcontent, precom, pcnt, preplycnt, ppasswd, pword, rdate, price, dc, saleprice, point, salecnt)
 VALUES(products_seq.nextval, 19, '아임웰 훈제 닭가슴살', '아주 맛있는 훈제 닭가슴살', 0, 0, 0, '123', '닭가슴살', sysdate,2000, 10, 1800, 100, 500);
