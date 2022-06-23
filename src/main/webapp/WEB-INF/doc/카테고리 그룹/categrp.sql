@@ -32,19 +32,27 @@ drop sequence cate_seq;
 
 -- Create, 등록
 INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
-VALUES(categrp_seq.nextval, '공지사항', 1, 'Y', sysdate);
+VALUES(1, '공지사항', 1, 'Y', sysdate);
 
 INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
-VALUES(categrp_seq.nextval, '다이어트 꿀팁', 2, 'Y', sysdate);
+VALUES(2, '다이어트 꿀팁', 2, 'Y', sysdate);
 
 INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
-VALUES(categrp_seq.nextval, '커뮤니티', 3, 'Y', sysdate);
+VALUES(3, '커뮤니티', 3, 'Y', sysdate);
 
 INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
-VALUES(categrp_seq.nextval, '홈트레이닝', 4, 'Y', sysdate);
+VALUES(4, '홈트레이닝', 4, 'Y', sysdate);
 
 INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
-VALUES(categrp_seq.nextval, '칼로리사전', 5, 'Y', sysdate);
+VALUES(5, '칼로리사전', 5, 'Y', sysdate);
+
+INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
+VALUES(6, '관리자에게', 6, 'Y', sysdate);
+
+INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
+VALUES(7, '전체 카테고리', 7, 'Y', sysdate);
+
+commit;
 
 Insert into categrp (CATEGRPNO,NAME,SEQNO,VISIBLE,RDATE) values (6,'관리자에게',1,'N',sysdate);
 Insert into categrp (CATEGRPNO,NAME,SEQNO,VISIBLE,RDATE) values (7,'전체카테고리',1,'N',sysdate);

@@ -41,17 +41,17 @@ public class LiketoProc implements LiketoProcInter {
       return liketoVO;
     }
 
-    @Override
-    public int deletebyBoardno(int contentsno) {
-        int count = liketoDAO.deletebyBoardno(contentsno);
-        return count;
-    }
-
-    @Override
-    public int deletebyMno(int memberno) {
-        int count = liketoDAO.deletebyMno(memberno);
-        return count;
-    }
+//    @Override
+//    public int deletebyBoardno(int contentsno) {
+//        int count = liketoDAO.deletebyBoardno(contentsno);
+//        return count;
+//    }
+//
+//    @Override
+//    public int deletebyMno(int memberno) {
+//        int count = liketoDAO.deletebyMno(memberno);
+//        return count;
+//    }
     
     
 

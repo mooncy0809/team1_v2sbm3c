@@ -639,13 +639,28 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value="/contents/read.do", method=RequestMethod.GET )
-    public ModelAndView read_ajax(HttpServletRequest request, int contentsno) {
+    public ModelAndView read_ajax(HttpServletRequest request, int contentsno, HttpSession session) {
       // public ModelAndView read(int contentsno, int now_page) {
       // System.out.println("-> now_page: " + now_page);
       
       ModelAndView mav = new ModelAndView();
       
-      contentsProc.cnt(contentsno);        
+      int memberno = 0;
+      
+      if(session.getAttribute("memberno") == null) {
+          memberno = 99999999;
+      } else {
+          memberno = (int)session.getAttribute("memberno");
+      }
+          
+      HashMap <String, Object> hashMap = new HashMap<String, Object>();
+      hashMap.put("contentsno", contentsno);
+      hashMap.put("memberno", memberno); 
+      
+      contentsProc.cnt(contentsno);    
+      
+      Liketo_ContentsVO liketo_contentsVO = this.contentsProc.read_like_join(hashMap);
+      mav.addObject("liketo_contentsVO", liketo_contentsVO); // request.setAttribute("list", list);
 
       ContentsVO contentsVO = this.contentsProc.read(contentsno);
       mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
@@ -656,9 +671,9 @@ public class ContentsCont {
       CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
       mav.addObject("categrpVO", categrpVO);
       
-      this.contentsProc.update_replycnt(contentsVO);  
+      this.contentsProc.update_replycnt(contentsVO);
       
-      
+     
       // 단순 read
       // mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
       

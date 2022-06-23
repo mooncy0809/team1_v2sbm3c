@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dev.mvc.cate.Categrp_CateVO;
 import dev.mvc.you.YouVO;
 
 public interface ContentsDAOInter {
@@ -162,8 +163,19 @@ public interface ContentsDAOInter {
     public int like_cnt_up(int contentsno);
     
     public int like_cnt_down(int contentsno);
-     
     
+    /**
+     * Liketo + Contents join, 연결 목록
+     * @return
+     */
+//    public List<Liketo_ContentsVO> read_like_join();  
+    
+    /**
+     * Liketo + Contents join, 연결 목록
+     * @return
+     */
+    public Liketo_ContentsVO read_like_join(HashMap<String, Object> map); 
+        
     public List<ContentsVO> index_contents4(HashMap<String, Object> map);
     
     public List<ContentsVO> index_contents5(HashMap<String, Object> map);

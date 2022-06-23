@@ -15,6 +15,9 @@
 <c:set var="size1_label" value="${contentsVO.size1_label }" />
  
 <c:set var="replycnt" value="${contentsVO.replycnt }" />
+
+<c:set var="like_check" value="${liketo_contentsVO.like_check }" />
+
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -97,10 +100,6 @@
       var frm_read = $('#frm_read');
       var contentsno = $('#contentsno', frm_read).val();
       var memberno = $('#memberno', frm_read).val();
-           
-      var params = "";
-      // params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
-      params = 'contentsno=' + contentsno; // 공백이 값으로 있으면 안됨.    
       
       $.ajax({
         url: "../liketo/like.do",
@@ -122,7 +121,7 @@
 
           /* $('#span_animation').hide(); */
                 
-          /* $('#like_img', frm_read).attr('src', like_img); */
+          $('#like_img', frm_read).attr('src', like_img);
           $('#like_cnt').html(data.like_cnt);
           $('#like_check').html(data.like_check);
         },
@@ -457,10 +456,40 @@
   function reload() {
       location.reload();
   }
+
+  function btn(sample){  
+      alert(sample); 
+      document.location.href="/member/login.do";
+   }  
   
   // -------------------- 댓글 관련 종료 --------------------
   
 </script>
+
+<style type="text/css">
+
+.lb-wrap {
+  width: 100%;
+  margin: 10px auto;
+/*   border: 1px solid #000000; */
+  position: relative;
+}
+.lb-wrap img {
+  width: 100%;
+  vertical-align: middle;
+}
+.lb-text {
+/*   padding: 10px 20px; */
+/*   border-radius: 10px; */
+/*   background-color: #FFEEBC; */
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+</style>
  
 </head> 
  
@@ -536,8 +565,58 @@
     <A href="./update_file.do?contentsno=${contentsno}&now_page=${now_page}&word=${param.word }">파일 수정</A>  
     <span class='menu_divide' >│</span>
     <A href="./delete.do?contentsno=${contentsno}&now_page=${now_page}&cateno=${cateno}&word=${param.word }">삭제</A>  
+    
+    <br>
+    <div style='float : right; text-align:center;'>
+    <div style='width:70px; height:70px; float : right;'>
+    
+    <form name='frm_read' id='frm_read' method="get" action="../liketo/like.do">
+      
+    <input type='hidden' name='contentsno' id='contentsno' value='${param.contentsno}'>
+    <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'>
+    
+    <div class="lb-wrap">
+    <div class="lb-text"> <h5 style='color:white'><span id='like_cnt'>${recom }</span></h5> </div>
+    <div class="lb-image">
+       <c:choose>
+          <%-- <c:when test="${memberno ne null }" > --%>
+          <c:when test="${sessionScope.id ne null}">       
+          
+              <c:if test="${like_check != 1}">
+	              <a href='javascript: like_func();'>
+	                <img style='width:100%;' src='/contents/images/heart_e.png' id='like_img'>
+	              </a>
+              </c:if>
+              <c:if test="${like_check == 1}">
+	              <a href='javascript: like_func();'>
+	                <img style='width:100%;' src='/contents/images/heart.png' id='like_img'>
+	              </a>
+              </c:if>
+          </c:when>
+
+          <c:otherwise>
+              <a href='javascript: btn("로그인 후 이용해주세요.");'>
+                <img style='width:100%;' src='/contents/images/heart_e.png'>
+              </a>
+          </c:otherwise>
+        </c:choose>
+        </div>
+    </div>
+    
+    </form>    
+    
+    </div>
+    
+    <h5>Like</h5>  
+    
+    </div>
+    
+    
+    <br><br><br>
+    
     </DIV>
     <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
+
   
   <br>
   
@@ -594,7 +673,7 @@
     <ul>
       <li class="li_none">
         <c:set var="file1saved" value="${file1saved.toLowerCase() }" />
-        <DIV style="width: 50%; float: left; margin-right: 10px;">
+        <DIV style="width: 50%; float: left; margin-right: 10px; margin-left:210px">
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
                 <%-- /static/contents/storage/ --%>
@@ -605,32 +684,21 @@
               </c:otherwise>
             </c:choose>
         </DIV>
-        <DIV style="width: 48%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
+       </li>
+      </ul>
             
-          <br>
-         
-<%--        <form name='frm_read' id='frm_read' method="get" action="../liketo/like.do">
-          
-        <input type='hidden' name='contentsno' id='contentsno' value='${param.contentsno}'>
-        <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'>
-          
-          <c:choose>
-            <c:when test="${memberno ne null}">
-             <a href='javascript: like_func();'><img src='/contents/images/heart_e.png' id='like_img'></a>
-            </c:when>
-             <c:otherwise>
-             <a href='javascript: login_need();'><img src='/contents/images/heart_e.png'></a>
-            </c:otherwise>
-           </c:choose>
-          
-        
-          <button type='button' id="btn_recom" class="btn btn-info">♥(${recom })</button>
-          <span id="span_animation"></span> 
-          </form>--%>
-        </DIV> 
-        
-        <DIV>${content }</DIV>
-      </li>
+      <br>
+                
+  </fieldset>
+     
+    <br> <br> 
+       
+    <DIV style='word-wrap: break-word;'>${content }</DIV>
+
+    <br><br>
+    
+    <div style='text-align:left; margin-top:100px;'>
+    <ul style='padding-left:0px;'>
       <li class="li_none">
         <DIV style='text-decoration: none;'>
           검색어(키워드): ${word }
@@ -642,9 +710,10 @@
             첨부 파일: <A href='/download?dir=/contents/storage&filename=${file1saved}&downname=${file1}'>${file1}</A> (${size1_label})  
           </c:if>
         </DIV>
-      </li>   
-    </ul>
-  </fieldset>
+      </li> 
+      
+      </ul>
+      </div>
 
 </DIV>
 

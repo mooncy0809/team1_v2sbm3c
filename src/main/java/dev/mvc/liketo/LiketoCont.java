@@ -21,14 +21,14 @@ public class LiketoCont {
     
     @Autowired
     @Qualifier("dev.mvc.liketo.LiketoProc")
-    private LiketoProcInter liketoProc = null;
+    private LiketoProcInter liketoProc;
     
     @Autowired
     @Qualifier("dev.mvc.contents.ContentsProc")
-    private ContentsProcInter contentsProc = null;
+    private ContentsProcInter contentsProc;
     
     public LiketoCont() {
-      System.out.println("-> liketoCont() created");
+      System.out.println("-> liketoCont created");
     }
     
     
@@ -37,12 +37,13 @@ public class LiketoCont {
     public String like(int contentsno, HttpSession session){
 
       int memberno = (int)session.getAttribute("memberno");
+      
       JSONObject obj = new JSONObject();
 
       ArrayList<String> msgs = new ArrayList<String>();
       HashMap <String, Object> hashMap = new HashMap<String, Object>();
       hashMap.put("contentsno", contentsno);
-      hashMap.put("memberno", memberno);
+      hashMap.put("memberno", memberno);    
       
       if(liketoProc.countbyLike(hashMap)==0){
           liketoProc.create(hashMap);
@@ -58,14 +59,14 @@ public class LiketoCont {
       if(like_check == 0) {
         msgs.add("좋아요!");
         liketoProc.like_check(hashMap);
-//        like_check++;
-//        like_cnt++;
+        like_check++;
+        like_cnt++;
         contentsProc.like_cnt_up(contentsno);   //좋아요 갯수 증가
       } else {
         msgs.add("좋아요 취소");
         liketoProc.like_check_cancel(hashMap);
-//        like_check--;
-//        like_cnt--;
+        like_check--;
+        like_cnt--;
         contentsProc.like_cnt_down(contentsno);   //좋아요 갯수 감소
       }
       obj.put("contentsno", contentsno);

@@ -21,6 +21,7 @@ a{
  font-family: 'Sunflower', sans-serif;
  }
 </style>
+
 </head>
 <body>
     <section id="slider"><!--slider-->
@@ -99,13 +100,17 @@ a{
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+                                    
+                                        <a data-toggle="collapse" data-parent="#accordian" href="#mens">
+                                            <span class="badge pull-right"><i class="fa fa-minus"></i></span>
+                                        </a>
+                                        <a href="#sportswear" data-toggle="collapse" data-parent="#accordian" >
                                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                                             전체 카테고리
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="sportswear" class="panel-collapse collapse">
+                                <div id="sportswear" id='demo' class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul>
                                             <li><a href="#">Nike </a></li>
@@ -117,17 +122,17 @@ a{
                                     </div>
                                 </div>
                             </div>
-<!--                             <div class="panel panel-default">
+                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#mens">
+<!--                                         <a data-toggle="collapse" data-parent="#accordian" href="#mens">
                                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                                             Mens
-                                        </a>
+                                        </a> -->
                                     </h4>
                                 </div>
                                 <div id="mens" class="panel-collapse collapse">
-                                    <div class="panel-body">
+                                    <!-- <div class="panel-body">
                                         <ul>
                                             <li><a href="#">Fendi</a></li>
                                             <li><a href="#">Guess</a></li>
@@ -140,9 +145,9 @@ a{
                                             <li><a href="#">Chanel</a></li>
                                             <li><a href="#">Gucci</a></li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                 </div>
-                            </div> -->
+                            </div>
                             
                             <!-- <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -281,15 +286,16 @@ a{
       <DIV class="col-sm-4" >
       <div class="product-image-wrapper" >
       <div class="single-products"  >
-      <div class="productinfo text-center" >
+      <div class="productinfo text-center">
         <c:choose>
           <c:when test="${psize1 > 0}"> <!-- 파일이 존재하면 -->
             <c:choose> 
               <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
                 <a href="./product/read.do?productno=${productno}">               
-                  <IMG src="./product/storage/${pthumb1 }" style='width: 230px; height:230px ;'>
+                  <IMG src="./product/storage/${pthumb1 }" style='width: 230px; height:230px ; border: 1px solid;'>
                 </a>
-                <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
+                <br><br>
+                <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>                
                 <span style="color: #FF0000; font-size: 1.0em;">${dc} %</span>
                 <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>
                 <p>${ptitle}</p>

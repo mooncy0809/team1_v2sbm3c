@@ -26,10 +26,10 @@ public interface LiketoProcInter {
     /* 조회 */
     public LiketoVO read(HashMap<String, Object> hashmap);
    
-    /* 게시판의 좋아요 삭제 */
-    public int deletebyBoardno(int contentsno);
-    
-    /* 회원의 좋아요 삭제 */
-    public int deletebyMno(int memberno); 
+//    /* 게시판의 좋아요 삭제 */
+//    public int deletebyBoardno(int contentsno);
+//    
+//    /* 회원의 좋아요 삭제 */
+//    public int deletebyMno(int memberno); 
     
 }
