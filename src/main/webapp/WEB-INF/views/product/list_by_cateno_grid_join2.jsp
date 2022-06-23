@@ -277,7 +277,7 @@
     </c:forEach>
     <!-- 갤러리 Layout 종료 -->
   </div>
-   <DIV class='bottom_menu'>${paging3    }</DIV>
+   <DIV class='bottom_menu' style="    text-align: center; padding-bottom: 45px;">${paging3    }</DIV>
   </div>
   </div>
   </div>

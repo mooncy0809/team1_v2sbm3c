@@ -213,12 +213,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -397,12 +397,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -538,12 +538,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -673,12 +673,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -816,12 +816,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 

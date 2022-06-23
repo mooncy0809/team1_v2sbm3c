@@ -8,7 +8,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>삼대몇 | 카테고리 관리</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -24,7 +24,7 @@
 <jsp:include page="../menu/top.jsp" />
  
 
-<DIV class='content_body' style="width:58%;">
+<DIV class='content_body' style="width:70%;">
 <span style="width:70%; font-size: 1.5em; font-weight: bold;">카테고리 그룹</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
 

@@ -8,7 +8,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>쇼핑몰 관리자</title>
+<title>삼대몇 | 카테고리 관리</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -186,8 +186,8 @@
         <option value='N' selected="selected">N</option>
       </select>
        
-      <button type="submit" id='submit' class='btn'>등록</button>
-      <button type="button" id='btn_create_cancel' class='btn'>취소</button>
+      <button type="submit" id='submit' class='btn' style="background-color:#E2E8DE;">등록</button>
+      <button type="button" id='btn_create_cancel' class='btn' style="background-color:#E2E8DE;">취소</button>
     </FORM>
   </DIV>
   
@@ -294,7 +294,7 @@
                 <TD class="td_bs">
               <A href="./update_visible2.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open2.png"></A>
               <TD class="td_bs">
-          <A href="../cate/create.do?categrpno=${categrpno }" title="${name } 등록"><i class="fa-solid fa-pen-to-square"></i></A>
+          <A href="../cate/create.do?categrpno=${categrpno }" title="${name } 등록"><i class="fa-solid fa-pen-to-square" "></i></A>
           <A href="javascript: read_update_ajax(${categrpno })" title="수정"><i class="fa-regular fa-pen-to-square"></i></A>
           <A href="javascript: read_delete_ajax(${categrpno })" title="삭제"><i class="fa-solid fa-eraser"></i></A>
           <A href="./update_seqno_up2.do?categrpno=${categrpno }" title="우선순위 상향"><i class="fa-solid fa-angle-up"></i></A>

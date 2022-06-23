@@ -156,7 +156,7 @@ table.caltable td {
     </c:when>
     </c:choose>
    </DIV>
-    <DIV style="text-align: center; clear: both;">
+    <DIV style="text-align: right; clear: both;">
     <form name='frm' id='frm' method='get' action='./list_by_categrpno_search_paging.do'>
       <input type='hidden' name='categrpno' value='${categrpVO.categrpno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>

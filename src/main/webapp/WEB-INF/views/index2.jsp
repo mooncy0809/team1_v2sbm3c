@@ -19,6 +19,21 @@ a{
     font-family: 'Kdam Thmor Pro', sans-serif;
  font-family: 'Sunflower', sans-serif;
  }
+ ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:  #4A773D;
+  border-radius: 10px;
+
  </style>
 </head>
 <body>

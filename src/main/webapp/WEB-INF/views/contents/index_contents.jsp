@@ -90,7 +90,7 @@ h1{
           <td style='vertical-align: middle; text-align: center; '>[${name}] </td> 
           
           <td style='vertical-align: middle; text-align: center;'>
-            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
+            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }"  target="_top">
  
            <strong>${title} <%-- ${replycnt}] --%></strong> </a> </td>
 

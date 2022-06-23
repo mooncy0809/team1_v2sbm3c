@@ -7,14 +7,14 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>삼대몇 | 비밀번호 찾기</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
   $(function() { // 자동 실행
@@ -78,13 +78,7 @@
   </DIV>
 
   <DIV class='content_body'>
-    <ASIDE class="aside_right">
-      <A href="javascript:location.reload();">새로고침</A>
-      <span class='menu_divide' >│</span> 
-      <A href='./create.do'>회원 가입</A>
-      <span class='menu_divide' >│</span> 
-      <A href='./list.do'>목록</A>
-    </ASIDE> 
+    
    
     <div class='menu_line'></div>
       
