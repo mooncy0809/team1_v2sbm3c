@@ -190,7 +190,6 @@
   <div class="features_items">
   
   <iframe class="backimg" src="../../tensorflow/recommend/start.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
-  
 
   <DIV style="text-align: right; clear: both;padding-right:25px;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_grid_join2.do'>

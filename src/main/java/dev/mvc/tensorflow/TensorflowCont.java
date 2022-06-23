@@ -74,6 +74,14 @@ public class TensorflowCont {
     return mav;
   }
 
+  @RequestMapping(value = {"/tensorflow/recommend/recommend_product.do"}, method = RequestMethod.GET)
+  public ModelAndView recommend_product() {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/tensorflow/recommend/recommend_product"); 
+    
+    return mav;
+  }
+  
 }
 
 
