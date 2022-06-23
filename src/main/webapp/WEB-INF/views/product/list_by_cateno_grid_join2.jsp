@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
- 
+ <%!  int cnt=0;   %>
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -34,11 +34,13 @@
  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
 
 <script type="text/javascript">
 
   $(function() {
   });
+  
 
   <%-- 쇼핑 카트에 상품 추가 --%>
   function cart_ajax(productno) {
@@ -56,6 +58,16 @@
 
   }
 
+  function openNav() {
+          
+          $("#mySidenav2").slideDown(1);
+
+    } 
+  function closeNav() {
+      
+      $("#mySidenav2").slideUp(1);
+
+} 
   <%-- 쇼핑카트 상품 등록 --%>
   function cart_ajax_post() {
     var f = $('#frm_login');
@@ -104,6 +116,7 @@
 </head> 
  
 <body>
+
 <jsp:include page="../menu/top2.jsp" />
        
        <input type='hidden' name='now_page' value='1'>
@@ -188,9 +201,17 @@
                 
   <div class="col-sm-9 padding-right"> <%-- 갤러리 Layout 시작 --%>
   <div class="features_items">
-  
-  <iframe class="backimg" src="../../tensorflow/recommend/start.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
-  
+
+                <a class="imgbtn"  style="display:scroll;position:fixed;bottom:558px;right:525px; z-index:1;" onclick="openNav(this)" >
+                <i class="fa-solid fa-square-plus"style="font-size:25px; " ></i></a>
+     
+                <a class="imgbtn"  style="display:scroll;position:fixed;bottom:558px;right:500px; z-index:1;" onclick="closeNav(this)" >
+                <i class="fa-solid fa-square-minus"style="font-size:25px; " ></i></a>
+
+             
+  <div id="mySidenav2" style=" display:scroll;position:relative; width: 800px; display: none; top:100px; left:0px; box-shadow: 12px 10px 11px 7px gray;">  
+        <iframe class="backimg" src="../../tensorflow/recommend/start.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
+  </div>
 
   <DIV style="text-align: right; clear: both;padding-right:25px;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_grid_join2.do'>
