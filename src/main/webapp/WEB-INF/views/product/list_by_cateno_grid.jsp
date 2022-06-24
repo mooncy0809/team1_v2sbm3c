@@ -45,10 +45,6 @@
 <script type="text/javascript">
 
   $(function() {
-    // var productno = 0;
-    // $('#btn_cart').on('click', function() { cart_ajax(productno)});
-    //$('#btn_login').on('click', login_ajax);
-    //$('#btn_loadDefault').on('click', loadDefault);
   });
 
   <%-- 쇼핑 카트에 상품 추가 --%>
@@ -225,7 +221,7 @@
         
       
       <%-- 하나의 행에 이미지를 4개씩 출력후 행 변경, index는 0부터 시작 --%>
-      <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
+      <c:if test="${status.index % 6 == 0 && status.index != 0 }"> 
         <HR class='menu_line'>
       </c:if>
       <!-- 하나의 이미지, 24 * 4 = 96% -->
@@ -273,11 +269,11 @@
       </div>  
       </div>
       </div><%--add cart 구역 전 --%>
-      <div class="choose">
+     <!--  <div class="choose">
         <ul style="margin:5px auto;padding-left:5px;">
         <li><a href=""><i class="fa fa-plus-square"></i>위시리스트</a></li>
         </ul>
-      </div>
+      </div> -->
       </div>      
       </DIV>
     </c:forEach>

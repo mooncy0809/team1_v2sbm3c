@@ -305,6 +305,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      
   </select>
   
+  <select id="list_by_cateno_grid_join_dc" 
+             resultType="dev.mvc.product.Cate_ProductVO" parameterType="HashMap">
+   SELECT c_cateno, productno, cateno, ptitle, pcontent, ppasswd, pword,
+                                     pfile1, pfile1saved, pthumb1, psize1, rdate ,price , dc, saleprice, point, r
+   FROM (
+               SELECT c_cateno, productno, cateno, ptitle, pcontent, ppasswd, pword,
+                                     pfile1, pfile1saved, pthumb1, psize1, rdate ,price , dc, saleprice, point, ROWNUM as r
+               FROM (
+                        SELECT c.cateno as c_cateno,
+                         p.productno, p.cateno, p.ptitle, p.pcontent, p.ppasswd, p.pword,
+                                     p.pfile1, p.pfile1saved, p.pthumb1, p.psize1, p.rdate, p.price , p.dc, p.saleprice, p.point
+                        FROM cate c, products p                        
+                        <choose>
+                          <when test="pword == null or pword == ''">   <!--   검색하지 않는 경우 -->
+                             WHERE c.cateno = p.cateno
+                          </when>
+                          <otherwise>
+                            WHERE c.cateno=p.cateno AND (UPPER(ptitle) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pcontent) LIKE '%' || #{pword} || '%' 
+                                                                  OR UPPER(pword) LIKE '%' || #{pword} || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY p.dc DESC
+               ) 
+               
+    )         
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]> 
+    <!--  1 page: WHERE r >= 1 AND r <= 10; 
+            2 page: WHERE r >= 11 AND r <= 20;
+            3 page: WHERE r >= 21 AND r <= 30; -->
+     
+  </select>   
+  
 </mapper> 
 
 

@@ -175,7 +175,7 @@
         <c:otherwise>
           <tr>
             <td colspan="6" style="text-align: center; font-size: 1.3em; padding:30px;">장바구니 상품을 담아보세요.<br>
-            <a href=" /product/list_by_cateno_grid.do?categrpno=6&cateno=7"><button class="chg" type="button">상품 구경하러 가기</button></a></td>     
+            <a href=" /product/list_by_cateno_grid_join2.do"><button class="chg" type="button">상품 구경하러 가기</button></a></td>     
           </tr>
         </c:otherwise>
       </c:choose>
