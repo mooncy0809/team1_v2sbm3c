@@ -11,6 +11,10 @@ public class QnaVO {
     private String title;
     /** 질문답변 내용*/
     private String content;
+    /** 댓글 번호 */
+    private int qna_replyno;
+    /** 댓글수 */
+    private int replycnt = 0;
     /** 질문답변 비밀번호*/
     private int pwd;
     /** 작성일 */
@@ -22,13 +26,15 @@ public class QnaVO {
         
     }
     
-    public QnaVO(int qnano, int categrpno, int memberno, String title, String content, int pwd, String rdate, String id) {
+    public QnaVO(int qnano, int categrpno, int memberno, String title, String content,int qna_replyno, int replycnt, int pwd, String rdate, String id) {
         super();
         this.qnano = qnano;
         this.categrpno = categrpno;
         this.memberno = memberno;
         this.title = title;
         this.content = content;
+        this.qna_replyno = qna_replyno;
+        this.replycnt = replycnt;
         this.pwd = pwd;
         this.rdate = rdate;
         this.id = id;
@@ -36,6 +42,22 @@ public class QnaVO {
 
     
     
+    public int getQna_replyno() {
+        return qna_replyno;
+    }
+
+    public void setQna_replyno(int qna_replyno) {
+        this.qna_replyno = qna_replyno;
+    }
+
+    public int getReplycnt() {
+        return replycnt;
+    }
+
+    public void setReplycnt(int replycnt) {
+        this.replycnt = replycnt;
+    }
+
     public String getId() {
         return id;
     }

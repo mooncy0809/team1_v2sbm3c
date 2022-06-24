@@ -9,6 +9,7 @@ CREATE TABLE qna(
 		MEMBERNO                      		NUMBER(10)		 NULL ,
 		title                         		VARCHAR2(50)		 NOT NULL,
 		content                       		VARCHAR2(1000)		 NOT NULL,
+        REPLYCNT                      		NUMBER(7)		 DEFAULT 0         NOT NULL,
 		pwd                           		NUMBER(10)		 NOT NULL,
         rdate                                   DATE             NOT NULL,
         id                                 VARCHAR2(20)     NULL,
@@ -22,6 +23,7 @@ COMMENT ON COLUMN qna.categrpno is '카테고리 번호';
 COMMENT ON COLUMN qna.MEMBERNO is '회원 번호';
 COMMENT ON COLUMN qna.title is '질문답변 제목';
 COMMENT ON COLUMN qna.content is '질문답변 내용';
+COMMENT ON COLUMN qna.REPLYCNT is '댓글수';
 COMMENT ON COLUMN qna.pwd is '질문답변 비밀번호';
 COMMENT ON COLUMN qna.rdate is '작성일';
 
@@ -54,8 +56,8 @@ WHERE id='user1';
  --INSERT INTO cate(cateno, categrpno, name, rdate, cnt)
 -- VALUES(cate_seq.nextval, 4, '자신없어', sysdate, 0);
 
-INSERT INTO qna(qnano, categrpno, memberno, title, content, pwd, rdate)
-VALUES ( qna_seq.nextval, 4 , 1,  '질문', '질문내용', 1234, sysdate );
+INSERT INTO qna(qnano, categrpno, memberno, title, content, replycnt, pwd, rdate)
+VALUES ( qna_seq.nextval, 4 , 1,  '질문', '질문내용', 0, 1234, sysdate );
 
 2. 목록
 - 검색을 하지 않는 경우, 전체 목록 출력
@@ -85,6 +87,14 @@ DELETE  FROM  qna;
 DELETE FROM qna
 WHERE qnano=1;
 
+
+update qna
+    set replycnt = (
+                        SELECT COUNT(qna_replyno) as replycnt
+                        from qna_reply
+                        where qnano = 1
+                    )
+    where qnano = 1;
 
 
 SELECT m.memberno as m_memberno, m.id as m_id,

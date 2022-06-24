@@ -491,6 +491,21 @@
   transform: translate(-50%, -50%);
 }
 
+ ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #E96D53;
+  border-radius: 10px;
+}
 </style>
  
 </head> 

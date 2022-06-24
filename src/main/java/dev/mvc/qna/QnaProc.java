@@ -6,10 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import dev.mvc.contents.Contents;
-import dev.mvc.contents.ContentsVO;
+
 import dev.mvc.tool.Tool;
-import dev.mvc.you.Ytext;
+
 
 
 
@@ -188,13 +187,19 @@ public class QnaProc implements QnaProcInter{
       // 현재 페이지 5일경우 -> 현재 1그룹: (1 * 10) + 1 = 2그룹의 시작페이지 11
       // 현재 페이지 15일경우 -> 현재 2그룹: (2 * 10) + 1 = 3그룹의 시작페이지 21
       // 현재 페이지 25일경우 -> 현재 3그룹: (3 * 10) + 1 = 4그룹의 시작페이지 31
-      _now_page = (now_grp * Contents.PAGE_PER_BLOCK)+1; //  최대 페이지수 + 1 
+      _now_page = (now_grp * Qtext.PAGE_PER_BLOCK)+1; //  최대 페이지수 + 1 
       if (now_grp < total_grp){ 
         str.append("<span class='span_box_1'><A href='"+Qtext.LIST_FILE+"?&word="+word+"&now_page="+_now_page+"&categrpno="+categrpno+"'>다음</A></span>"); 
       } 
       str.append("</DIV>"); 
        
       return str.toString(); 
+    }
+
+    @Override
+    public int update_replycnt(QnaVO qnaVO) {
+        int cnt = this.qnaDAO.update_replycnt(qnaVO);
+        return cnt;
     }
     
 

@@ -61,23 +61,24 @@ width: 120px;
 
 .img-wrapper {
   width: 120px; 
+  margin:0.5%; padding:0.5%;
     height: 80px;
-  position:absolute;
   cursor:pointer;
 }
 
 .img-wrapper img {
   box-shadow: 0 1px 10px rgba(0,0,0,0.4);
-  width:inherit;
-  height:inherit;
+   width: 200px; 
+  margin:0.5%; padding:0.5%;
+    height: 120px;
 }
 
 .darkness {
-
-  top:0;
-  left:0;
-    width: 120px; 
-    height: 80px;
+  top:150px;
+  left:50px;
+   width: 200px; 
+  margin:0.5%; padding:0.5%;
+    height: 120px;
   background:#000000;
   /* 추가된 부분 */
   opacity:0;
@@ -85,11 +86,10 @@ width: 120px;
 }
 
 .btn-plus {
-  position:absolute;
-  top:50px;
-  left:70px;
-  width:55px;
-  height:55px;
+border-radius:50%;
+   width: 120px; 
+  margin:0.5%; padding:0.5%;
+    height: 80px;
   background:white;
   text-align:center;
   /* 추가된 부분 */
@@ -186,24 +186,24 @@ width: 120px;
         
         
         <tr> 
+        <div class="img-wrapper img1">
+        <div class="darkness"></div>
+         <div class="btn-plus">
+         <img src="/contents/images/heart_e2.png" /></div>
           <td style='vertical-align: middle; text-align: center; '>
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-                <%-- /static/contents/storage/ --%>
-                <div class="img-wrapper img1">
+                <%-- /static/contents/storage/ --%>               
                 <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }">
                 <IMG src="/contents/storage/${thumb1 }" ></a>
-                <div class="darkness"></div>
-                <div class="btn-plus">
-                <img src="/contents/images/heart_e2.png" /></div>
-                </div>
-              </c:when>
+                </c:when>
               <c:otherwise> <!-- 기본 이미지 출력 -->
                 <IMG class='size' src="/contents/images/none1.png">
                  <!-- <img  class='size2' src="/contents/images/heart_e.png" /> -->
               </c:otherwise>
             </c:choose>
-          </td>  
+          </td> 
+          </div>
           <td style='vertical-align: middle; text-align: center;'>
          <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
             <strong>${title} [${replycnt }]</strong> </a> </td>
@@ -222,6 +222,7 @@ width: 120px;
             <A href="./delete.do?contentsno=${contentsno}&now_page=${param.now_page }&cateno=${cateno}"><img src="/contents/images/delete.png"></A>
           </td>
         </tr>
+        
       </c:forEach>
       
     </tbody>
