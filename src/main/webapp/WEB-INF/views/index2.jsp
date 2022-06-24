@@ -14,6 +14,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sunflower&display=swap" rel="stylesheet">
  
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+
 <style type="text/css">
 a{
     font-family: 'Kdam Thmor Pro', sans-serif;
@@ -21,8 +29,80 @@ a{
  font-family: 'Sunflower', sans-serif;
  }
 </style>
+
+<script type="text/javascript">
+
+  $(function() {
+  });
+
+  <%-- 쇼핑 카트에 상품 추가 --%>
+  function cart_ajax(productno) {
+    var f = $('#frm_login');
+    $('#productno', f).val(productno);  // 쇼핑카트 등록시 사용할 상품 번호를 저장.
+    
+    // console.log('-> productno: ' + $('#productno', f).val()); 
+    
+    // console.log('-> id:' + '${sessionScope.id}');
+    if ('${sessionScope.id}' != '' || $('#login_yn').val() == 'YES') {  // 로그인이 되어 있다면
+        cart_ajax_post();  // 쇼핑카트에 바로 상품을 담음
+    } else { // 로그인 안된 경우
+        location.href='/cart/list_by_memberno.do';
+    }
+
+  }
+
+  <%-- 쇼핑카트 상품 등록 --%>
+  function cart_ajax_post() {
+    var f = $('#frm_login');
+    var productno = $('#productno', f).val();  // 쇼핑카트 등록시 사용할 상품 번호.
+    
+    var params = "";
+    // params = $('#frm_login').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+    params += 'productno=' + productno;
+    params += '&${ _csrf.parameterName }=${ _csrf.token }';
+    // console.log('-> cart_ajax_post: ' + params);
+    // return;
+    
+    $.ajax(
+      {
+        url: '/cart/create.do',
+        type: 'post',  // get, post
+        cache: false, // 응답 결과 임시 저장 취소
+        async: true,  // true: 비동기 통신
+        dataType: 'json', // 응답 형식: json, html, xml...
+        data: params,      // 데이터
+        success: function(rdata) { // 응답이 온경우
+          var str = '';
+          
+          if (rdata.cnt == 1) {
+            var sw = confirm('선택한 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?');
+            if (sw == true) {
+              // 쇼핑카트로 이동
+              location.href='/cart/list_by_memberno.do';
+            }           
+          } else {
+            alert('선택한 상품을 장바구니에 담지못했습니다.<br>잠시후 다시 시도해주세요.');
+          }
+        },
+        // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+        error: function(request, status, error) { // callback 함수
+          console.log(error);
+        }
+      }
+    );  //  $.ajax END
+
+  }
+
+  
+</script>
+
 </head>
 <body>
+        <input type='hidden' name='cateno' value='${cateVO.cateno }'>
+      <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
+           <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
+           <input type="hidden" name="productno" id="productno" value="productno">
+        </FORM>
     <section id="slider"><!--slider-->
         <div class="container">
             <div class="row">
@@ -313,20 +393,20 @@ a{
           </c:otherwise>
         </c:choose>   
       </div> <%--사진 정렬 --%>
-      <!-- <div class="product-overlay" style="background: rgba(254,152,15,.8);">
+      <div class="product-overlay" style="background: rgba(76,121,72,.8);">
       <div class="overlay-content">
-                
+                <a class="read" href="./product/read.do?productno=${productno}"><i class="fas fa-door-open  fa-3x"></i></a>
                 <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>
                 <p>${ptitle}</p>
                 <a onclick="cart_ajax(${productno })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
       </div>  
-      </div>-->
+      </div>
       </div><%--add cart 구역 전 --%>
-      <div class="choose">
+      <!-- <div class="choose">
         <ul style="margin:5px auto;padding-left:5px;">
         <li><a href=""><i class="fa fa-plus-square"></i>위시리스트</a></li>
         </ul>
-      </div>
+      </div> -->
       </div>      
       </DIV>
     </c:forEach>
@@ -358,13 +438,13 @@ a{
                                     <div class="col-sm-4">
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
-                                                <div class="productinfo text-center" style="width: 240px;">
+                                                <div class="productinfo text-center" style="width: 240px; height:430px;">
                                                     <c:choose>
                                           <c:when test="${psize1 > 0}"> <!-- 파일이 존재하면 -->
                                             <c:choose> 
                                               <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
                                                 <a href="./product/read.do?productno=${productno}">               
-                                                  <IMG src="./product/storage/${pthumb1 }" alt="" style='width: 230px; height:230px ;'>
+                                                  <IMG src="./product/storage/${pthumb1 }" alt="" style='width: 100%; height:230px ;'>
                                                 </a>
                                                 <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
                                                 <span style="color: #FF0000; font-size: 1.0em;">${dc} %</span>

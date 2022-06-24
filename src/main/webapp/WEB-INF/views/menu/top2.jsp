@@ -274,9 +274,8 @@ function com4() {
                                 </li> 
                                 
                                 <li><a href="../../product/list_by_cateno_grid.do?cateno=8">베스트</a></li>
-                                <li><a href="../../product/list_by_cateno_grid.do?cateno=9">특가</a></li>
-                                <li><a href="../../product/list_by_cateno_grid.do?cateno=10">신상품</a></li>
-                                <li><a href="../../product/list_by_cateno_grid_join2.do">전체상품</a></li>  
+                                <li><a href="../../product/list_by_cateno_grid_join_dc.do">특가</a></li>
+                                <li><a href="../../product/list_by_cateno_grid_join2.do">신상품</a></li>  
                                 <li><a href="/cart/list_by_memberno.do"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
                             </ul>
                         </div>

@@ -16,7 +16,7 @@ CREATE TABLE cate(
 DROP SEQUENCE cate_seq;
 
 CREATE SEQUENCE cate_seq
-  START WITH 1              -- 시작 번호
+  START WITH 13              -- 시작 번호
   INCREMENT BY 1          -- 증가값
   MAXVALUE 9999999999 -- 최대값: 999999999 --> NUMBER(10) 대응
   CACHE 2                       -- 2번은 메모리에서만 계산
@@ -30,14 +30,46 @@ COMMENT ON COLUMN cate.name is '카테고리 이름';
 COMMENT ON COLUMN cate.rdate is '등록일';
 COMMENT ON COLUMN cate.cnt is '관련 자료수';
 
-Insert into TEAM1.CATE (CATENO,CATEGRPNO,NAME,RDATE,CNT) values (1,1,'공지사항',to_date('2022-06-19 01:15:42','YYYY-MM-DD HH:MI:SS'),0);
-Insert into TEAM1.CATE (CATENO,CATEGRPNO,NAME,RDATE,CNT) values (2,2,'다이어트 꿀팁',to_date('2022-06-19 01:15:42','YYYY-MM-DD HH:MI:SS'),0);
-Insert into TEAM1.CATE (CATENO,CATEGRPNO,NAME,RDATE,CNT) values (3,3,'전체',to_date('2022-06-19 01:15:42','YYYY-MM-DD HH:MI:SS'),0);
-Insert into TEAM1.CATE (CATENO,CATEGRPNO,NAME,RDATE,CNT) values (4,3,'자유게시판',to_date('2022-06-19 01:15:42','YYYY-MM-DD HH:MI:SS'),0);
-Insert into TEAM1.CATE (CATENO,CATEGRPNO,NAME,RDATE,CNT) values (5,3,'팁/노하우',to_date('2022-06-19 01:15:42','YYYY-MM-DD HH:MI:SS'),0);
-Insert into TEAM1.CATE (CATENO,CATEGRPNO,NAME,RDATE,CNT) values (6,3,'고민/질문',to_date('2022-06-19 01:15:42','YYYY-MM-DD HH:MI:SS'),0);
-Insert into TEAM1.CATE (CATENO,CATEGRPNO,NAME,RDATE,CNT) values (7,3,'일기',to_date('2022-06-19 01:15:42','YYYY-MM-DD HH:MI:SS'),0);
+-----------------------------------------------
 
+-- cate insert
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(1, 1, '공지사항', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(2, 2, '다이어트 꿀팁', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(3, 3, '전체', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(4, 3, '자유게시판', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(5, 3, '팁/노하우', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(6, 3, '고민/질문', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(7, 3, '일기', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(8, 7, '닭가슴살', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(9, 7, '간편요리', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(10, 7, '샐러드', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(11, 7, '건강미용', sysdate, 0);
+
+INSERT INTO cate(CATENO,CATEGRPNO,NAME,RDATE,CNT)
+VALUES(12, 7, '간식', sysdate, 0);
+
+commit;
 UPDATE cate
 SET cateno=2
 WHERE NAME='꿀꿀';
