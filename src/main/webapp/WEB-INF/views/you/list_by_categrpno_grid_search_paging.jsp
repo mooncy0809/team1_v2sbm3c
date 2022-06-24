@@ -24,11 +24,11 @@
 
 <style>
 .circle {
-    width:200px;
-    height:200px;
+    width:300px;
+    height:300px;
     border-radius:50%;
     background:#transparent;
-    font-size:18px;
+    font-size:25px;
     text-align:center;
     line-height:110px;
     color:#FF8B6E;
@@ -37,10 +37,10 @@
 }
 
 iframe {
-    width:200px;
-    height:200px;
+    width:300px;
+    height:300px;
     border-radius:50%;
-    box-shadow: 20px 20px 20px 20px grey;   
+    box-shadow: 40px 40px 40px 40px grey;   
 }
 
 </style>
@@ -87,20 +87,20 @@ iframe {
       <c:set var="url" value="${youVO.url }" />
       <c:set var="cnt" value="${youVO.cnt }" />
       
-     <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
+     <c:if test="${status.index % 3 == 0 && status.index != 0 }"> 
         <HR class='menu_line' >
       </c:if> 
       <!-- 하나의 이미지, 24 * 4 = 96% -->
       <a href ="./read.do?youno=${youVO.youno}">
 
       <DIV class='circle' style='float: left; margin:0.5%; padding:0.5%;'>
-        <div class="product-image-wrapper " style='width:200px; height:200px;border-radius:50%; margin:0.5%; padding:0.5%;'>
-          <div class="single-products" style='width:200px; height:200px; border-radius:50%; margin:0.5%; padding:0.5%; '> <!-- 수직 가운데 정렬 -->
+        <div class="product-image-wrapper " style='width:300px; height:300px;border-radius:50%; margin:0.5%; padding:0.5%;'>
+          <div class="single-products" style='width:300px; height:300px; border-radius:50%; margin:0.5%; padding:0.5%; '> <!-- 수직 가운데 정렬 -->
           <div class="productinfo text-centerv" style='margin:0.5%; padding:0.5%;'>
                ${url }<br>
           </div>
           
-          <div class="product-overlay" style="background: rgba(255,242,238,.9); border-radius:50%;  transition: all 180ms ease-in-out; margin:0.5%; padding:0.5%;">
+          <div class="product-overlay" style="background: rgba(255,242,238,.9); border-radius:50%;  transition: all 300ms ease-in-out; margin:0.5%; padding:0.5%;">
           <div class="overlay-content" style="width:100%;border-radius:50%;">           
             
             <div style="width:100%; word-wrap: break-word;">

@@ -138,7 +138,7 @@
     </div>   
     <div class="content_body_bottom" style="text-align:right;">
       <button type="submit" class="btn btn-primary">등록</button>
-      <button type="button" onclick="location.href='./list.do'" class="btn btn-primary">목록</button>
+      <button type="button" onclick="history.go(-1);" class="btn btn-primary">목록</button>
     </div>
   
   </FORM>

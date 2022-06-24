@@ -85,6 +85,8 @@
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
         <c:set var="replycnt" value="${contentsVO.replycnt }" />
+        <c:set var="recom" value="${contentsVO.recom }" />
+        
         
         
         <tr> 
@@ -100,10 +102,19 @@
             </c:choose>
           </td>  
           <td style='vertical-align: middle; text-align: center;'>
-            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
-            <strong>${title} </strong> <br> ${content} </a> 
+            <h4><a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
+            <strong>${title} </strong> <br>  </a> </h4>
+            
+            <div style='text-align: left;'>${content}</div>
+            
             <br>
-            <i class="fa-solid fa-eye" > ${cnt } </i> &nbsp; <i class="fa-regular fa-comment-dots"> ${replycnt }</i>
+                        
+            
+            <DIV style="text-align:right;">
+                   <i class="fa-solid fa-eye" > ${cnt } </i> &nbsp; <i class="fa-regular fa-comment-dots"> ${replycnt }</i> &nbsp; <i class="fa-solid fa-heart">&nbsp;${recom }</i> 
+            </DIV>      
+            
+            <%-- <i class="fa-solid fa-eye" > ${cnt } </i> &nbsp; <i class="fa-regular fa-comment-dots"> ${replycnt }</i> --%>
           </td>
           <%-- <td style='vertical-align: middle; text-align: center;'>${content} </td>  --%>
           
