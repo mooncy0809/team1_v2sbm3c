@@ -20,7 +20,7 @@ COMMENT ON COLUMN categrp.visible is '출력 모드';
 COMMENT ON COLUMN categrp.rdate is '그룹 생성일';
 
 CREATE SEQUENCE categrp_seq
-  START WITH 8          -- 시작 번호
+  START WITH 1           -- 시작 번호
   INCREMENT BY 1       -- 증가값
   MAXVALUE 99999999 -- 최대값: 99999999 --> NUMBER(8) 대응
   CACHE 2                  -- 2번은 메모리에서만 계산
@@ -30,9 +30,7 @@ drop sequence categrp_seq;
 
 drop sequence cate_seq;
 
-
-
--- categrp insert
+-- Create, 등록
 INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
 VALUES(1, '공지사항', 1, 'Y', sysdate);
 
@@ -56,20 +54,29 @@ VALUES(7, '전체 카테고리', 7, 'Y', sysdate);
 
 commit;
 
+Insert into categrp (CATEGRPNO,NAME,SEQNO,VISIBLE,RDATE) values (6,'관리자에게',1,'N',sysdate);
+Insert into categrp (CATEGRPNO,NAME,SEQNO,VISIBLE,RDATE) values (7,'전체카테고리',1,'N',sysdate);
+
+INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
+VALUES(categrp_seq.nextval, '추천상품', 6, 'Y', sysdate);
+
+INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
+VALUES(categrp_seq.nextval, '베스트', 7, 'Y', sysdate);
+commit;
+
 -- List, 목록
 SELECT categrpno, name, seqno, visible, rdate
 FROM categrp
 ORDER BY categrpno ASC;
 
- CATEGRPNO NAME                                                    SEQNO V RDATE              
----------- -------------------------------------------------- ---------- - -------------------
-         1 공지사항                                                    1 Y 2022-06-23 12:48:02
-         2 다이어트 꿀팁                                               2 Y 2022-06-23 12:48:03
-         3 커뮤니티                                                    3 Y 2022-06-23 12:48:03
-         4 홈트레이닝                                                  4 Y 2022-06-23 12:48:03
-         5 칼로리사전                                                  5 Y 2022-06-23 12:48:03
-         6 관리자에게                                                  6 Y 2022-06-23 12:48:03
-         7 전체 카테고리                                               7 Y 2022-06-23 12:48:03
+ CATEGRPNO NAME                                                    SEQNO V RDATE   
+---------- -------------------------------------------------- ---------- - --------
+         1 공지사항                                                    1 Y 22/06/03
+         2 다이어트 꿀팁                                               2 Y 22/06/03
+         3 커뮤니티                                                    3 Y 22/06/03
+         4 홈트레이닝                                                  4 Y 22/06/03
+         5 칼로리사전                                                  5 Y 22/06/03
+         6 추천상품                                                    6 N 22/06/03
 
 -- Read, 조회
 SELECT categrpno, name, seqno, visible, rdate
@@ -78,4 +85,4 @@ WHERE categrpno = 1;
 
  CATEGRPNO NAME                                                    SEQNO V RDATE              
 ---------- -------------------------------------------------- ---------- - -------------------
-         1 공지사항                                                    1 Y 2022-06-23 12:48:02
+         1 공지사항                                                    1 Y 2022-06-03 05:34:26

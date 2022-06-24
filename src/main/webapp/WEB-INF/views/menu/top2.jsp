@@ -121,13 +121,14 @@ window.onload = function() {
 }
 function recommend(){
   var url = '../../tensorflow/recommend/start.do';
-  var win = window.open(url, 'AI 서비스', 'width=850px, height=400px');
+  var win = window.open(url, 'AI 서비스', 'width=1000px, height=600px ');
 
   var x = (screen.width - 1000) / 2;
   var y = (screen.height - 800) / 2;
 
   win.moveTo(x, y); // 화면 중앙으로 이동
 }
+
 </script>
 <script type="text/javascript">
 function com2() {

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
- 
+ <%!  int cnt=0;   %>
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -31,14 +31,15 @@
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet"> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
 
 <script type="text/javascript">
 
   $(function() {
   });
+  
 
   <%-- 쇼핑 카트에 상품 추가 --%>
   function cart_ajax(productno) {
@@ -56,6 +57,15 @@
 
   }
 
+  function openNav() {    
+      $("#imgstart").css('display', 'none');   
+      $("#mySidenav2").slideDown(500);     
+    } 
+  function closeNav() {
+      $("#mySidenav2").slideUp(1);
+      $('#imgstart').show();
+      location.reload();
+} 
   <%-- 쇼핑카트 상품 등록 --%>
   function cart_ajax_post() {
     var f = $('#frm_login');
@@ -104,6 +114,7 @@
 </head> 
  
 <body>
+
 <jsp:include page="../menu/top2.jsp" />
        
        <input type='hidden' name='now_page' value='1'>
@@ -188,9 +199,17 @@
                 
   <div class="col-sm-9 padding-right"> <%-- 갤러리 Layout 시작 --%>
   <div class="features_items">
-  
-  <iframe class="backimg" src="../../tensorflow/recommend/start.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
-  
+  <div>
+        <div id="imgstart" style="text-align:center;margin:10px auto">
+            <a class="imgbtn"onclick="openNav(this)" >
+            <img width="210px" height="100px;"src="/recommend/recom.png" alt="추천시스템 시작"></a>
+        </div>                             
+  <div id="mySidenav2" style="position:relative; width:100%; display: none;">  
+        <a class="imgbtn"  style="display:scroll; position:absolute; right:30px; z-index:1;" onclick="closeNav(this)" >
+        <i class="fa-solid fa-square-minus"style="font-size:25px;"></i>
+        </a><iframe class="backimg" src="../../tensorflow/recommend/form1.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
+  </div>
+  </div>
 
   <DIV style="text-align: right; clear: both;padding-right:25px;">  
     <form name='frm' id='frm' method='get' action='./list_by_cateno_grid_join2.do'>
@@ -199,10 +218,11 @@
       <button type='submit'><i class="fas fa-search"></i></button>
       <c:if test="${param.pword.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='"><i class="fas fa-times"></i></button>  
+                     onclick="location.href='./list_by_cateno_grid.do?cateno=${cateVO.cateno}&pword='"><i class="fas fa-times" style="background-color: #E2E8DE;
+    border-color: #E2E8DE;"></i></button>  
       </c:if>    
     </form>
-<DIV class='title_line' style="text-align: right; margin-right:0;font-size:16px;">
+<DIV class='title_line' style="text-align: right; margin-right:0;padding-top:10px;font-size:16px;">
   <A href="./list_by_cateno_grid_join_up.do" class='title_link'>높은 가격순</A> | 
   <A href="./list_by_cateno_grid_join_down.do" class='title_link'>낮은 가격순</A> 
 </DIV>
@@ -279,7 +299,7 @@
     </c:forEach>
     <!-- 갤러리 Layout 종료 -->
   </div>
-   <DIV class='bottom_menu'>${paging3    }</DIV>
+   <DIV class='bottom_menu' style="    text-align: center; padding-bottom: 45px;">${paging3    }</DIV>
   </div>
   </div>
   </div>

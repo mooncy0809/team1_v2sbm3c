@@ -223,8 +223,8 @@ a#scrollUp i{
 
 
 .header-bottom {
-  padding-bottom: 30px;
-  padding-top: 30px;
+/*   padding-bottom: 30px;
+  padding-top: 30px; */
 }
 
 .navbar-collapse.collapse{
@@ -232,7 +232,7 @@ a#scrollUp i{
 }
 
 .mainmenu ul li{
-  padding-right: 15px;
+  padding-right: 0px;
   padding-left: 15px;
 }
 
@@ -322,7 +322,7 @@ ul.sub-menu {
 }
 
 .navbar-nav li ul.sub-menu li a:hover{
-    color: #FDB45E;
+    color: #8DA386;
 }
 
 .fa-angle-down{
@@ -572,6 +572,7 @@ ul.sub-menu {
 
 #slider {
   padding-bottom: 45px;
+ background: url('./images/home/back4.png') no-repeat;
 }
 
 .carousel-indicators li {
@@ -583,7 +584,7 @@ ul.sub-menu {
 }
 
 .item {
-  padding-left: 100px;
+
 }
 
 
@@ -642,12 +643,30 @@ ul.sub-menu {
   background: #8DA386;
 }
 
+/* .control-carousel {
+  position: absolute;
+ 
+   top: 102%;
+  right: 5%;
+  font-size: 27px;
+    background-color: #8DA386;
+    background-color: white;
+    border-radius:50%;
+    color: #8DA386;
+} */
+
 .control-carousel {
   position: absolute;
-  top: 50%;
-  font-size: 60px;
-  color: #C2C2C1;
+ 
+/*   top: 102%;
+  right: 5%; */
+  font-size: 27px;
+   /*  background-color: #8DA386; */
+    background-color: white;
+    border-radius:50%;
+    color: #8DA386;
 }
+
 
 .control-carousel:hover{
   color: #8DA386 ;
@@ -843,7 +862,7 @@ h2.title {
   font-family: 'Sunflower', sans-serif;
   font-size: 18px;
   font-weight: 700;
-  margin: 0 15px;
+/*   margin: 0 15px; */
   text-transform: uppercase;
   margin-bottom: 30px;
   position: relative;
@@ -1052,8 +1071,9 @@ h2.title {
 }
 
 .recommended-item-control {
-  position: absolute;
-  top: 41%;
+  position: relative;
+    bottom: 480px;
+    left:760px;
 }
 
 .recommended-item-control i {

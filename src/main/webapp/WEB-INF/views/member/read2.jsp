@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>장바구니 | 하루삼끼</title>
+    <title>하루삼끼 | 장바구니</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -34,7 +34,7 @@
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
  
 <script type="text/javascript">
@@ -47,12 +47,13 @@
 <body>
 <jsp:include page="../menu/top2.jsp" flush='false' />
     <div class="container">
-            <div class="breadcrumbs">
+<!--             <div class="breadcrumbs">
                 <ol class="breadcrumb">
                   <li><a>마이페이지</a></li>
                   <li class="active"><a style="content:none;"href="javascript:location.reload();">회원 정보 조회 및 수정</a></li>
-                </ol>
+                </ol> -->
             </div>
+            <br><br><br>
     </div> 
     <div class="container" >
     <ASIDE class="aside_right">

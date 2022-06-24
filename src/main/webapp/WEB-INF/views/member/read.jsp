@@ -6,13 +6,27 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>내 정보</title>
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">  
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>  
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
  
  
@@ -30,23 +44,40 @@
   </DIV>
 
   <DIV class='content_body'>    
-    <ASIDE class="aside_right">
+    <ASIDE class="aside_right" style="text-align: center;">
+          <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>&nbsp;
+      <span class='menu_divide'><i class="fas fa-user-edit"></i></span>
+   
       <A href="javascript:location.reload();">내 정보 변경</A>
-      <span class='menu_divide' >│</span> 
+      <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>&nbsp;
+      <span class='menu_divide' ><i class="fas fa-key"></i></span> 
+ 
       <A href='./passwd_update.do?memberno=${memberVO.memberno }'>비밀번호 변경</A>
-      <span class='menu_divide' >│</span>       
+        <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>  &nbsp;
+      <span class='menu_divide'><i class="fas fa-id-badge"></i></span>
+     
       <A href='#'>내 활동 정보</A>
-      <span class='menu_divide' >│</span> 
+        <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span> &nbsp;
+      <span class='menu_divide'><i class="fas fa-coins"></i></span>
+   
       <A href='#'>적립금</A>
-      <span class='menu_divide' >│</span> 
+        <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>&nbsp; 
+      <span class='menu_divide'><i class="fas fa-wallet"></i></span>
+
       <A href='#'>쿠폰</A>
-      <span class='menu_divide' >│</span> 
+      < <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span> &nbsp;
+      <span class='menu_divide'><i class="fas fa-question"></i></span>
+
       <A href='#'>1:1문의</A>
-      <span class='menu_divide' >│</span> 
+       <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>&nbsp;
+      <span class='menu_divide'><i class="fas fa-history"></i></span> 
+
       <A href='#'>최근본상품</A>
-      <span class='menu_divide' >│</span> 
+       <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span> &nbsp;
+      <span class='menu_divide'><i class="fas fa-truck"></i></span>
+
       <A href='#'>배송지 관리</A>
-    </ASIDE> 
+    </ASIDE> <br>
    
     <div class='menu_line'></div>
     

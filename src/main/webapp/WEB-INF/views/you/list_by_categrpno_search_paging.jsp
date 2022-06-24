@@ -7,13 +7,13 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>HomeTraining</title>
+<title>삼대몇 | 홈트레이닝 관리</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ <link href="/css/bootstrap.min.css" rel="stylesheet"> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -26,13 +26,14 @@
 <body>
 <jsp:include page="../menu/top.jsp" />
  
-<DIV class='title_line'>
+
+
+<DIV class='content_body' style="width:70%;">
+<span style="width:70%; font-size: 1.2em; font-weight: bold;">
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
   <%-- <A href="../cate/list_by_categrpno.do?categrpno=${categrpVO.categrpno }" class='title_link'>${categrpVO.name }</A> > --%>
   <A href="./list_by_categrpno_search_paging.do?categrpno=4" class='title_link'>${categrpVO.name }</A>
-</DIV>
-
-<DIV class='content_body'>
+</span>
   <ASIDE class="aside_right">
     <c:if test="${sessionScope.id != null }"> 
         <A href="./create.do?categrpno=${categrpVO.categrpno }">등록</A>    
@@ -47,9 +48,9 @@
       <input type='hidden' name='categrpno' value='${categrpVO.categrpno }'>
       <input type='hidden' name='now_page' value='1'> <%-- 최초 검색시 시작 페이지 지정 --%>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
-      <button type='submit'>검색</button>
+      <button type='submit' class="btn btn-primary">검색</button>
       <c:if test="${param.word.length() > 0 }">
-        <button type='button' 
+        <button type='button' class="btn btn-primary"
                      onclick="location.href='./list_by_categrpno_search_paging.do?categrpno=${categrpVO.categrpno}&word='">검색 취소</button>  
       </c:if>    
     </form>

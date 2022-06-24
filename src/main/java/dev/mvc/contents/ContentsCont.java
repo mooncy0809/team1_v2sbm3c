@@ -2,18 +2,21 @@ package dev.mvc.contents;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +26,7 @@ import dev.mvc.categrp.CategrpProcInter;
 import dev.mvc.categrp.CategrpVO;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.member.MemberVO;
+import dev.mvc.reply.ReplyMemberVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 import dev.mvc.you.YouVO;
@@ -635,13 +639,28 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value="/contents/read.do", method=RequestMethod.GET )
-    public ModelAndView read_ajax(HttpServletRequest request, int contentsno) {
+    public ModelAndView read_ajax(HttpServletRequest request, int contentsno, HttpSession session) {
       // public ModelAndView read(int contentsno, int now_page) {
       // System.out.println("-> now_page: " + now_page);
       
       ModelAndView mav = new ModelAndView();
       
-      contentsProc.cnt(contentsno);        
+      int memberno = 0;
+      
+      if(session.getAttribute("memberno") == null) {
+          memberno = 99999999;
+      } else {
+          memberno = (int)session.getAttribute("memberno");
+      }
+          
+      HashMap <String, Object> hashMap = new HashMap<String, Object>();
+      hashMap.put("contentsno", contentsno);
+      hashMap.put("memberno", memberno); 
+      
+      contentsProc.cnt(contentsno);    
+      
+      Liketo_ContentsVO liketo_contentsVO = this.contentsProc.read_like_join(hashMap);
+      mav.addObject("liketo_contentsVO", liketo_contentsVO); // request.setAttribute("list", list);
 
       ContentsVO contentsVO = this.contentsProc.read(contentsno);
       mav.addObject("contentsVO", contentsVO); // request.setAttribute("contentsVO", contentsVO);
@@ -652,9 +671,9 @@ public class ContentsCont {
       CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
       mav.addObject("categrpVO", categrpVO);
       
-      this.contentsProc.update_replycnt(contentsVO);  
+      this.contentsProc.update_replycnt(contentsVO);
       
-      
+     
       // 단순 read
       // mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
       
@@ -1216,7 +1235,9 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/delete.do", method = RequestMethod.POST)
-    public ModelAndView delete(HttpServletRequest request, ContentsVO contentsVO, int now_page,
+    public ModelAndView delete(HttpServletRequest request, ContentsVO contentsVO, 
+            
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
             @RequestParam(value = "word", defaultValue = "") String word) {
         ModelAndView mav = new ModelAndView();
         int contentsno = contentsVO.getContentsno();
@@ -1587,5 +1608,35 @@ public class ContentsCont {
         mav.setViewName("/contents/index_contents"); // /WEB-INF/views/concertcate/list_all_join.jsp
         return mav;
     }
+    
+//    @ResponseBody
+//    @RequestMapping(value = "/contents/update_recom_ajax.do", 
+//                                method = RequestMethod.POST)
+//    public String update_recome_ajax(int contentsno, HttpSession session) {
+//        
+//      int memberno = (int)session.getAttribute("memberno");                
+//      
+//      HashMap<String, Object> map = new HashMap<String, Object>();     
+//      map.put("contentsno", contentsno);
+//      map.put("memberno", memberno);
+//      
+//      ContentsVO contentsVO = contentsProc.read(contentsno);      
+//      
+//      int recom = contentsVO.getRecom();
+//      
+//      if(recom == 0) {
+//          contentsProc.recom_check(map);
+//      } else {
+//          contentsProc.recom_check_cancel(map);          
+//      }
+//         
+//      JSONObject obj = new JSONObject();
+//
+//      obj.put("contetnsno", contentsno);
+//
+//      
+//      return obj.toString();
+//    }
+    
 
 }

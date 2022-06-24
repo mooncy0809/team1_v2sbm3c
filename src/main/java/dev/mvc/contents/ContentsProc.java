@@ -2,6 +2,7 @@ package dev.mvc.contents;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -212,12 +213,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -396,12 +397,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -537,12 +538,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -672,12 +673,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -815,12 +816,12 @@ public class ContentsProc implements ContentsProcInter {
       str.append("  }"); 
       str.append("  .span_box_2{"); 
       str.append("    text-align: center;");    
-      str.append("    background-color: #668db4;"); 
+      str.append("    background-color: #FF8B6E;"); 
       str.append("    color: #FFFFFF;"); 
       str.append("    font-size: 1em;"); 
       str.append("    border: 1px;"); 
       str.append("    border-style: solid;"); 
-      str.append("    border-color: #cccccc;"); 
+      /* str.append("    border-color: #cccccc;"); */
       str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
       str.append("  }"); 
@@ -1070,8 +1071,8 @@ public class ContentsProc implements ContentsProcInter {
         
         for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
             String title = contentsVO.getTitle();
-            if (title.length() > 4) {
-              title = title.substring(0, 4) + "...";
+            if (title.length() > 7) {
+              title = title.substring(0, 7) + "...";
               contentsVO.setTitle(title);
             }
             
@@ -1084,5 +1085,30 @@ public class ContentsProc implements ContentsProcInter {
       
       return list;
     }
+
+    @Override
+    public int like_cnt_up(int contentsno) {
+        int count = contentsDAO.like_cnt_up(contentsno);
+        return count;
+    }
+
+    @Override
+    public int like_cnt_down(int contentsno) {
+        int count = contentsDAO.like_cnt_down(contentsno);
+        return count;
+    }
+    
+    @Override
+    public Liketo_ContentsVO read_like_join(HashMap<String, Object> hashmap) {
+        Liketo_ContentsVO liketo_contentsVO = contentsDAO.read_like_join(hashmap);
+        return liketo_contentsVO;
+    }
+    
+
+//    @Override
+//    public List<Liketo_ContentsVO> read_like_join() {
+//        List<Liketo_ContentsVO> list = contentsDAO.read_like_join();
+//        return list;
+//    }
     
 }

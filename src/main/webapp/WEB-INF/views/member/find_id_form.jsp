@@ -6,12 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>아이디 찾기</title>
 
 </head>
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
+
     <div class="w3-content w3-container w3-margin-top">
         <div class="w3-container w3-card-4">
             <form action="./find_id.do" method="post">

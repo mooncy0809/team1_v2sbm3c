@@ -45,7 +45,19 @@
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">
   
   <fieldset class="fieldset_basic">
-
+    <DIV class='title_line'>
+    <A href="./list_by_categrpno_grid_search_paging.do?categrpno=${categrpVO.categrpno}&word=" class='title_link'>홈트레이닝</A> >
+       <c:choose>
+                                    <c:when
+                                        test="${sessionScope.grade < 10}">
+                                        <%-- 로그인 한 경우 --%>
+                                       <a href="../../you/list_by_categrpno_search_paging.do?categrpno=4&word=">
+                                                홈트레이닝(관리자 전용 링크)</a>   >              
+                                    </c:when>
+        </c:choose> 
+    ${youVO.ytitle }
+    </DIV>
+   <DIV class='menu_line'style="width:1000px; font-size: 1.5em; font-weight: bold;">
    <DIV class='menu_line'style="width:50%; font-size: 1.5em; font-weight: bold;">
        ${ytitle }<br>
    </DIV>

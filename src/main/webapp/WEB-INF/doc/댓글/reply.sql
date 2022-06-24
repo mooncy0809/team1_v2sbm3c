@@ -1,18 +1,34 @@
 /**********************************/
 /* Table Name: 댓글 */
 /**********************************/
-DROP TABLE reply;
+DROP TABLE reply CASCADE CONSTRAINTS;
 
 CREATE TABLE reply(
         replyno                                NUMBER(10)         NOT NULL         PRIMARY KEY,
-        contentsno                           NUMBER(10)    NOT     NULL ,
-        memberno                            NUMBER(6)         NOT NULL ,
+        contentsno                           NUMBER(10)    NOT     NULL  REFERENCES contents(contentsno) ON DELETE CASCADE  ,
+        memberno                            NUMBER(6)         NOT NULL REFERENCES member(memberno) ON DELETE CASCADE ,
         content                               VARCHAR2(1000)         NOT NULL,
         passwd                                VARCHAR2(20)         NOT NULL,
         rdate                              DATE NOT NULL,
   FOREIGN KEY (contentsno) REFERENCES contents (contentsno),
   FOREIGN KEY (memberno) REFERENCES member (memberno)
 );
+
+SELECT *
+FROM USER_CONSTRAINTS
+WHERE TABLE_NAME = 'reply';
+
+ALTER TABLE feed DROP FOREIGN KEY feed_ibfk_3;
+
+ALTER TABLE REPLY DROP FOREIGN KEY CONTENTSNO;
+
+ALTER TABLE reply ADD CONSTRAINT contentsno
+FOREIGN KEY (contentsno) REFERENCES contents(contentsno)
+ON DELETE CASCADE;
+
+ALTER TABLE reply ADD CONSTRAINT contentsno
+FOREIGN KEY (contentsno) REFERENCES contents(contentsno)
+ON DELETE CASCADE;
 
 COMMENT ON TABLE reply is '댓글';
 COMMENT ON COLUMN reply.replyno is '댓글번호';
