@@ -10,13 +10,17 @@
                  src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
     <script type="text/javascript">
         $(function() {
             send();  // Django ajax 호출
             $('#btn_previous').on('click', function() { history.back(); });   // 이전
-            $('#btn_close').on('click', function() { window.close(); });      // 윈도우 닫기
+            $('#btn_redo').on('click', function() { location.href='http://localhost:9091/tensorflow/recommend/form1.do'; });      // 윈도우 닫기
         });
 
         function send() {
@@ -30,7 +34,6 @@
               dataType: 'json', // 응답 형식: json, html, xml...
               data: params,      // 데이터
               success: function(rdata) { // 응답이 온경우
-               print(rdata.index);
                 if (rdata.index == 0) {        // 닭가슴살 추천 
                     $('#one').css('display',''); // show
                 } else if(rdata.index == 1) { // 간편요리 추천 
@@ -57,12 +60,21 @@
             });
 
             // $('#panel').html('처리중입니다....');  // 텍스트를 출력하는 경우
-            $('#panel').html("<img src='/recommend/ani04.gif' style='width: 10%;'>");
+            $('#panel').html("<img src='/contents/images/ani02.gif' style='width: 30%;'>");
             $('#panel').show(); // 숨겨진 태그의 출력
           }
 
-        function recommend_product(memberno){
-            location.href='http://127.0.0.1:8000/recommend_product/' + memberno;
+        function recommend_product(memberno){            
+            if(memberno==null){
+                alert('로그인 해주세요.');
+                top.location.href='http://localhost:9091/member/login.do';
+            }else{
+                var url ='http://127.0.0.1:8000/recommend_product/' + memberno;
+                var win = window.open(url, 'AI 서비스', 'width=850px, height=670px ');
+                var x = (screen.width - 500) / 2;
+                var y = (screen.height - 670) / 2;
+                win.moveTo(x, y); // 화면 중앙으로 이동
+            }
           }
     </script>
 
@@ -91,131 +103,34 @@
         <input type='hidden' name='step5' value='${param.step5 }'>
     </form>
 </DIV>
-    <H2>참여해주셔서 감사합니다.</H2>
-    <H2>추천 카테고리</H2>
-
+    <div>
+    <button type='button' id='btn_previous'  class="btn btn-dark btn-sm" style="margin-bottom:13px;"><i class="fas fa-caret-left fa-lg"></i></button>
+    &nbsp;<span style="font-family: 'Luckiest Guy', cursive; font-size:30px;">RESULT</span>&nbsp;
+    <button type='button' id='btn_redo' class="btn btn-dark btn-sm" style="margin-bottom:13px;"><i class="fas fa-redo-alt"></i></button>
+    </div>
     <DIV id='panel' style='margin: 30px auto; width: 90%;'></DIV>
     
     <DIV id='panel_img' style='margin: 0px auto; width: 90%;'>
         <DIV id='one' style='display: none;'> <!-- 닭가슴살 추천 필요 -->
-            <TABLE style='margin: 0px auto;'>
-                <TR>
-                    <TD class='td_image'>
-                        <img id='img1' src="/recommend/images/v11.jpg" style='float:left; height: 200px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img2' src="/recommend/images/v12.jpg" style='float:left; height: 200px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img3' src="/recommend/images/v13.jpg" style='float:left; height: 200px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img4' src="/recommend/images/v14.jpg" style='float:left; height: 200px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img5' src="/recommend/images/v15.jpg" style='float:left; height: 200px'>
-                    </TD>
-                </TR>          
-            </TABLE>
-            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=7">닭가슴살</a> 카테고리에서 쇼핑추천!</h2>
+            <a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=7" target='_top'><img id='img1' src="/recommend/cate1.png"></a>
         </DIV>
         <DIV id='two' style='display: none;'>  <!-- 간편요리 추천 -->
-            <TABLE style='margin: 0px auto;'>
-                <TR>
-                    <TD class='td_image'>
-                        <img id='img1' src="/recommend/images/v21.jpg" style='float:left; height: 200px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img2' src="/recommend/images/v22.jpg" style='float:left; height: 200px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img3' src="/recommend/images/v23.jpg" style='float:left; height: 200px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img4' src="/recommend/images/v24.jpg" style='float:left; height: 200px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img5' src="/recommend/images/v25.jpg" style='float:left; height: 200px'>
-                    </TD>
-                </TR>          
-            </TABLE>
-            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=8">간편요리</a> 카테고리에서 쇼핑추천!</h2>
+            <a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=8" target='_top'><img id='img1' src="/recommend/cate2.png"></a>
         </DIV>
         <DIV id='three' style='display: none;'> <!-- 샐러드 추천 필요 -->
-            <TABLE style='margin: 0px auto;'>
-                <TR>
-                    <TD class='td_image'>
-                        <img id='img1' src="/recommend/images/v31.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img2' src="/recommend/images/v32.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img3' src="/recommend/images/v33.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img4' src="/recommend/images/v34.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img5' src="/recommend/images/v35.jpg" style='float:left; height: 150px'>
-                    </TD>
-                </TR>          
-            </TABLE>
-            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=9">샐러드</a> 카테고리에서 쇼핑추천!</h2>
+            <a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=9" target='_top'><img id='img1' src="/recommend/cate3.png"></a>
         </DIV>
         <DIV id='four' style='display: none;'> <!-- 건강미용 추천 필요 -->
-            <TABLE style='margin: 0px auto;'>
-                <TR>
-                    <TD class='td_image'>
-                        <img id='img1' src="/recommend/images/v41.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img2' src="/recommend/images/v42.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img3' src="/recommend/images/v43.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img4' src="/recommend/images/v44.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img5' src="/recommend/images/v45.jpg" style='float:left; height: 150px'>
-                    </TD>
-                </TR>          
-            </TABLE>
-            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=10">건강미용</a> 카테고리에서 쇼핑추천!</h2>
+            <a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=10" target='_top'><img id='img1' src="/recommend/cate4.png"></a>
         </DIV>
         <DIV id='five' style='display: none;'> <!-- 간식 추천 필요 -->
-            <TABLE style='margin: 0px auto;'>
-                <TR>
-                    <TD class='td_image'>
-                        <img id='img1' src="/recommend/images/v51.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img2' src="/recommend/images/v52.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img3' src="/recommend/images/v53.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                    
-                        <img id='img4' src="/recommend/images/v54.jpg" style='float:left; height: 150px'>
-                    </TD>
-                    <TD class='td_image'>
-                        <img id='img5' src="/recommend/images/v55.jpg" style='float:left; height: 150px'>
-                    </TD>
-                </TR>          
-            </TABLE>
-            <h2><a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=11">간식</a> 카테고리에서 쇼핑추천!</h2>
+            <a href="../../product/list_by_cateno_grid.do?categrpno=6&cateno=11" target='_top'><img id='img1' src="/recommend/cate5.png"></a>
         </DIV>
     </DIV>
     
     <form id='frm' name='frm' action='' method='GET'>
-        <br>
-        <DIV style="text-align:center;">
-            <button type='button' id='btn_previous' class="btn btn-info">이전</button>
-            <button type='button' id='btn_next' class="btn btn-info" onclick=' javascript: recommend_product(${sessionScope.memberno })'>등록하고 추천상품 보기</button>
-            <button type='button' id='btn_close' class="btn btn-info">종료</button>
+        <DIV style="text-align:center; ">
+            <button type='button' id='btn_next' class="btn btn-dark btn-sm" onclick=' javascript: recommend_product(${sessionScope.memberno })'>등록하고 추천상품 보기</button>
         </DIV>
     </form>
 </body>

@@ -11,6 +11,10 @@
                  src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
     <script type="text/javascript">
@@ -56,7 +60,10 @@
 </head>
 <body style="background-color:#F5F5EE;">
 <DIV>
-    <H2>1/5 단계입니다.</H2>
+    <div>
+    <span style="font-family: 'Luckiest Guy', cursive; font-size:30px;">STEP 1</span>&nbsp;
+    <button type='button' id='btn_next' class="btn btn-dark btn-sm" style="margin-bottom:13px;"><i class="fas fa-caret-right fa-lg"></i></button>
+    </div>
     <DIV id='panel' style='display: none; margin: 10px auto; width: 90%;'></DIV>
     <form id='frm' name='frm' action='/tensorflow/recommend/form2.do' method='GET'>
         <br>
@@ -97,10 +104,6 @@
             </TR>            
         </TABLE>
         <br>
-        <DIV style="text-align:center;">
-            <button type='button' id='btn_previous' class="btn btn-info">이전</button>
-            <button type='button' id='btn_next' class="btn btn-info">다음</button>
-        </DIV>
     </form>
 </DIV>
 </body>
