@@ -23,7 +23,23 @@ function btn(sample){
  }  
   
 </script>
- 
+  <style type="text/css">
+ ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #E96D53;
+  border-radius: 10px;
+}
+ </style>
 </head> 
   
 <body>
@@ -49,18 +65,19 @@ function btn(sample){
   
   <DIV class='menu_line'></DIV>
   
-  <TABLE class='table table-striped'>
+  <TABLE class='table'>
     <colgroup>
       <col style='width: 40%;'/>
+      <col style='width: 10%;'/>
       <col style='width: 30%;'/>
-      <col style='width: 40%;'/>
+       <col style='width: 40%;'/>
     </colgroup>
    
     <thead>  
     <TR>
       <TH class="th_bs">제목</TH>
-      <TH class="th_bs">작성자</TH>
-      <TH class="th_bs">작성일</TH>
+      <TH class="th_bs" style='vertical-align: middle; text-align: center;'>작성자</TH>
+      <TH class="th_bs" style='vertical-align: middle; text-align: center;'>작성일</TH>
     </TR>
     </thead>
     
@@ -69,8 +86,9 @@ function btn(sample){
       <c:set var="title" value="${qnaVO.title }" />
       <c:set var="id" value="${qnaVO.id }" />
       <c:set var="rdate" value="${qnaVO.rdate }" />   
+      <c:set var="replycnt" value="${qnaVO.replycnt }" />
       <TR> 
-        <TD class="td_bs">
+        <TD class="td_bs" >
         <c:choose>
         <c:when test="${sessionScope.grade < 10}">
                 <a href ="./read.do?qnano=${qnaVO.qnano}">${title}</a>     
@@ -81,10 +99,31 @@ function btn(sample){
         
         
         </c:choose>
-        </TD>  
-        <TD class="td_bs">${id}</TD>     
-        <TD class="td_bs">${rdate}</TD>   
         
+        
+        </TD>  
+        <TD class="td_bs" style='vertical-align: middle; text-align: center;'>${id}</TD>     
+        <TD class="td_bs" style='vertical-align: middle; text-align: center;'>${rdate}</TD>   
+        <TD>
+             <c:choose>
+                    <c:when test="${replycnt >= 1}">
+                    <table style="width:60%; height:40px; margin:auto; text-align:center; border-radius: 40px 80px;  background-color:#D0F5C7 " >
+                    <tr>
+                    <td  style="font-size:1.1em; color: black ; ">답변완료 </td>
+                    </tr>
+                    </table>
+                    </c:when>
+                </c:choose>   
+                <c:choose>
+                    <c:when test="${replycnt < 1}">
+                    <table style="width:60%; height:40px; margin:auto; text-align:center; border-radius: 40px 80px;  background-color: #FFF4A8" >
+                    <tr>
+                    <td  style="font-size:1.1em; color: black ; ">답변대기 </td>
+                    </tr>
+                    </table>
+                    </c:when>
+                </c:choose>       
+        </TD>
       </TR>   
       
     </c:forEach> 

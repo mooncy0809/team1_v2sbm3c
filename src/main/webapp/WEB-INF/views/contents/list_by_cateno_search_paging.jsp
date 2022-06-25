@@ -39,6 +39,83 @@ function changeSize() {
     width: 120px; 
     height: 80px;
 }
+
+/*  .size {
+  opacity:0.3;
+  color:#FFF;
+  cursor:pointer; 
+  box-shadow: 0 1px 10px
+  rgba(0,0,0,0.4);
+  } */
+  
+  #frame {
+width: 120px; 
+    height: 80px;
+  background:#ffffff;
+  box-shadow: 0 1px 10px rgba(0,0,0,0.5);
+  position:relative;
+  top:50px;
+  left:50px;
+
+}
+
+.img-wrapper {
+  width: 120px; 
+  margin:0.5%; padding:0.5%;
+    height: 80px;
+  cursor:pointer;
+}
+
+.img-wrapper img {
+  box-shadow: 0 1px 10px rgba(0,0,0,0.4);
+   width: 200px; 
+  margin:0.5%; padding:0.5%;
+    height: 120px;
+}
+
+.darkness {
+  top:150px;
+  left:50px;
+   width: 200px; 
+  margin:0.5%; padding:0.5%;
+    height: 120px;
+  background:#000000;
+  /* 추가된 부분 */
+  opacity:0;
+  transition:all .6s linear;
+}
+
+.btn-plus {
+border-radius:50%;
+   width: 120px; 
+  margin:0.5%; padding:0.5%;
+    height: 80px;
+  background:white;
+  text-align:center;
+  /* 추가된 부분 */
+  opacity:0;
+  transform:scale(2);
+  transition:all .3s linear;
+} */
+
+.btn-plus span {
+  font-size:2.3em;
+  color:#ffffff;
+  user-select:none;
+}
+
+/* 추가된 부분 */
+.img-wrapper:hover .darkness{
+  opacity:0.4;
+}
+
+/* 추가된 부분 */
+.img-wrapper:hover .btn-plus {
+  opacity:1;
+  transform:scale(1);
+}
+
+
 </style>
  
 </head> 
@@ -109,19 +186,26 @@ function changeSize() {
         
         
         <tr> 
+        <div class="img-wrapper img1">
+        <div class="darkness"></div>
+         <div class="btn-plus">
+         <img src="/contents/images/heart_e2.png" /></div>
           <td style='vertical-align: middle; text-align: center; '>
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-                <%-- /static/contents/storage/ --%>
-                <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }"><IMG class='size' src="/contents/storage/${thumb1 }" ></a> 
-              </c:when>
+                <%-- /static/contents/storage/ --%>               
+                <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }">
+                <IMG src="/contents/storage/${thumb1 }" ></a>
+                </c:when>
               <c:otherwise> <!-- 기본 이미지 출력 -->
-                <IMG class='size' src="/contents/images/none1.png" ">
+                <IMG class='size' src="/contents/images/none1.png">
+                 <!-- <img  class='size2' src="/contents/images/heart_e.png" /> -->
               </c:otherwise>
             </c:choose>
-          </td>  
+          </td> 
+          </div>
           <td style='vertical-align: middle; text-align: center;'>
-            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
+         <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word }">
             <strong>${title} [${replycnt }]</strong> </a> </td>
           <td style='vertical-align: middle; text-align: center;'>${content} </td> 
           
@@ -138,6 +222,7 @@ function changeSize() {
             <A href="./delete.do?contentsno=${contentsno}&now_page=${param.now_page }&cateno=${cateno}"><img src="/contents/images/delete.png"></A>
           </td>
         </tr>
+        
       </c:forEach>
       
     </tbody>

@@ -241,7 +241,9 @@
       <c:set var="saleprice" value="${cate_productVO.saleprice }" />
       <c:set var="point" value="${cate_productVO.point }" />
         
-      
+      <c:if test="${status.index % 6 == 0 && status.index != 0 }"> 
+        <HR class='menu_line'>
+      </c:if>
       <!-- 하나의 이미지, 24 * 4 = 96% -->
       <DIV class="col-sm-4">
       <div class="product-image-wrapper">
@@ -252,7 +254,7 @@
             <c:choose> 
               <c:when test="${pthumb1.endsWith('jpg') || pthumb1.endsWith('png') || pthumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
                 <a href="./read.do?productno=${productno}">               
-                  <IMG src="./storage/${pthumb1 }" style='width: 230px; height:230px ;'>
+                  <IMG src="./storage/${pthumb1 }" style='width: 100%; height:230px ;'>
                 </a>
                 <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
                 <span style="color: #FF0000; font-size: 1.0em;">${dc} %</span>
@@ -278,20 +280,20 @@
           </c:otherwise>
         </c:choose>   
       </div> <%--사진 정렬 --%>
-      <!-- <div class="product-overlay" style="background: rgba(254,152,15,.8);">
+      <div class="product-overlay" style="background: rgba(76,121,72,.8);">
       <div class="overlay-content">
-                
+                <a class="read" href="./read.do?productno=${productno}"><i class="fas fa-door-open  fa-3x"></i></a>
                 <h2><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</h2>
                 <p>${ptitle}</p>
                 <a onclick="cart_ajax(${productno })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
       </div>  
-      </div>-->
+      </div>
       </div><%--add cart 구역 전 --%>
-      <div class="choose">
+      <!-- <div class="choose">
         <ul style="margin:5px auto;padding-left:5px;">
         <li><a href=""><i class="fa fa-plus-square"></i>위시리스트</a></li>
         </ul>
-      </div>
+      </div> -->
       </div>      
       </DIV>
     </c:forEach>

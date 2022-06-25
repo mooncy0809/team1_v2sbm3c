@@ -1235,7 +1235,9 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/delete.do", method = RequestMethod.POST)
-    public ModelAndView delete(HttpServletRequest request, ContentsVO contentsVO, int now_page,
+    public ModelAndView delete(HttpServletRequest request, ContentsVO contentsVO, 
+            
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page,
             @RequestParam(value = "word", defaultValue = "") String word) {
         ModelAndView mav = new ModelAndView();
         int contentsno = contentsVO.getContentsno();

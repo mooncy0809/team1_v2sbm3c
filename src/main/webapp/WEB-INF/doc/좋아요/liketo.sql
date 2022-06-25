@@ -1,7 +1,9 @@
+
+drop table liketo CASCADE CONSTRAINTS;
 CREATE TABLE liketo(
     likeno                      NUMBER(5)    NOT NULL PRIMARY KEY, 
-    contentsno                         NUMBER(7)    NOT NULL,    
-    memberno                             NUMBER(6)    NOT NULL,
+    contentsno                         NUMBER(7)    NOT NULL REFERENCES contents(contentsno) ON DELETE CASCADE  ,    
+    memberno                             NUMBER(6)    NOT NULL  REFERENCES member(memberno) ON DELETE CASCADE ,
     like_check                        NUMBER(5)   DEFAULT 0 NULL,
     FOREIGN KEY (memberno) REFERENCES member (memberno),
     FOREIGN KEY (contentsno) REFERENCES contents (contentsno)

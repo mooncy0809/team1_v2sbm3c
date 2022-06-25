@@ -10,6 +10,7 @@
 <c:set var="pwd" value="${qnaVO.pwd }" />
 <c:set var="rdate" value="${qnaVO.rdate }" /> 
 
+
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -215,7 +216,23 @@
   // -------------------- 댓글 관련 종료 --------------------
   
 </script>
- 
+  <style type="text/css">
+ ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #E96D53;
+  border-radius: 10px;
+}
+ </style>
 </head> 
  
 <body>

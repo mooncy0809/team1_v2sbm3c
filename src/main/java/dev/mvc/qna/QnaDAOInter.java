@@ -55,4 +55,5 @@ public interface QnaDAOInter {
     
     public String pagingBox(int categrpno, int search_count, int now_page, String word);
     
+    public int update_replycnt(QnaVO qnaVO);
 }

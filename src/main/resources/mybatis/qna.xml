@@ -49,11 +49,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
   <select id="list_search_paging" 
              resultType="dev.mvc.qna.QnaVO" parameterType="HashMap">
-   SELECT qnano, categrpno, memberno, title, content, pwd, rdate, id, r
+   SELECT qnano, categrpno, memberno, title, content, pwd, rdate, id, replycnt, r
    FROM (
-              SELECT qnano, categrpno, memberno, title, content, pwd, rdate, id, rownum as r
+              SELECT qnano, categrpno, memberno, title, content, pwd, rdate, id, replycnt, rownum as r
               FROM (
-                        SELECT qnano, categrpno, memberno, title, content, pwd, rdate,id
+                        SELECT qnano, categrpno, memberno, title, content, pwd, rdate, replycnt, id
                         FROM qna
                         <choose>
                           <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
@@ -89,6 +89,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </otherwise>
     </choose>
   </select>
+  
+  <!-- 댓글 수 확인 -->
+   <update id = "update_replycnt" parameterType="dev.mvc.qna.QnaVO">
+    update qna
+    set replycnt = (
+                        SELECT COUNT(qna_replyno) as replycnt
+                        from qna_reply
+                        where qnano = #{qnano}
+                    )
+    where qnano = #{qnano}
+   </update>
   
  </mapper>
   

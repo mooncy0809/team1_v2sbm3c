@@ -33,26 +33,26 @@ public class CartCont {
      * @param categrpVO
      * @return
      */
-    @RequestMapping(value="/cart/create.do", method=RequestMethod.POST )
+    @RequestMapping(value="/cart/create.do", method=RequestMethod.POST)
     @ResponseBody
     public String create(HttpSession session,
-                              int productno) {
+                              int productno, @RequestParam(value = "ordercnt", defaultValue = "1") int ordercnt) {
       CartVO cartVO = new CartVO();
       cartVO.setProductno(productno);
       
       int memberno = (Integer)session.getAttribute("memberno");
       cartVO.setMemberno(memberno);
-      
-      cartVO.setCnt(1); // 최초 구매 수량 1개로 지정
+
+      cartVO.setCnt(ordercnt); // 수량입력하고 버튼누르면..?
       
       int cnt = this.cartProc.create(cartVO); // 등록 처리
-      
       JSONObject json = new JSONObject();
       json.put("cnt", cnt);
-      
-      //System.out.println("-> cartCont create: " + json.toString());
+      json.put("ordercnt", ordercnt);
+      //System.out.println("-> json " + json.toString());
 
       return json.toString();
+      
     }
     
     /**

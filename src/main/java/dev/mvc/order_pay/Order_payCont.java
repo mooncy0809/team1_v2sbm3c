@@ -88,6 +88,7 @@ public class Order_payCont {
         
     mav.addObject("list", list); // request.setAttribute("list", list);
     
+    
     mav.addObject("tot_sum", tot_sum);
     mav.addObject("point_tot", point_tot);
     mav.addObject("baesong_tot", baesong_tot);
