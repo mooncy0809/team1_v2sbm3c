@@ -42,14 +42,6 @@
     <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
     <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }&now_page=${now_page }">기본 목록형</A>    
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }&now_page=${now_page }">갤러리형</A>
-    <span class='menu_divide' >│</span>
-    <A href="./update_text.do?contentsno=${contentsno}&now_page=${now_page }">수정</A>
-    <span class='menu_divide' >│</span>
-    <A href="./update_text.do?contentsno=${contentsno}&now_page=${now_page }">파일 수정</A>  
   </ASIDE> 
   
     <DIV style="text-align: right; clear: both;">  

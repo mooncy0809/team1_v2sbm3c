@@ -18,14 +18,14 @@
     
 <script type="text/javascript">
 
-  $(function() {
+  <%-- $(function() {
     // var productno = 0;
     // $('#btn_cart').on('click', function() { cart_ajax(productno)});
     //$('#btn_login').on('click', login_ajax);
     //$('#btn_loadDefault').on('click', loadDefault);
   });
   
-    <%-- 로그인 --%>
+    로그인
     function login_ajax() {
       var params = "";
       params = $('#frm_login').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
@@ -66,7 +66,7 @@
 
     }
 
-  <%-- 쇼핑 카트에 상품 추가 --%>
+  쇼핑 카트에 상품 추가
   function cart_ajax(productno) {
     var f = $('#frm_login');
     $('#productno', f).val(productno);  // 쇼핑카트 등록시 사용할 상품 번호를 저장.
@@ -82,7 +82,7 @@
 
   }
 
-  <%-- 쇼핑카트 상품 등록 --%>
+  쇼핑카트 상품 등록
   function cart_ajax_post() {
     var f = $('#frm_login');
     var productno = $('#productno', f).val();  // 쇼핑카트 등록시 사용할 상품 번호.
@@ -122,7 +122,7 @@
       }
     );  //  $.ajax END
 
-  }
+  } --%>
 
   
 </script>
@@ -143,8 +143,6 @@
     <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
     <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>
-    <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
   </ASIDE> 
 
   <DIV style="text-align: right; clear: both;">  
@@ -220,16 +218,16 @@
           <td style='vertical-align: middle; text-align: center;'>
             <del><fmt:formatNumber value="${price}" pattern="#,###" /></del><br>
             <span style="color: #FF0000; font-size: 1.2em;">${dc} %</span>
-            <strong><fmt:formatNumber value="${saleprice}" pattern="#,###" /></strong><br>
+            <strong><fmt:formatNumber value="${saleprice}" pattern="#,###" /></strong><br><%-- 
             <span style="font-size: 0.8em;">포인트: <fmt:formatNumber value="${point}" pattern="#,###" /></span>
-            <span><A id="recom_${status.count }" href="javascript:recom_ajax(${productno }, ${status.count })" class="recom_link">♥(${recom })</A></span>
+            <span><A id="recom_${status.count }" href="javascript:recom_ajax(${productno }, ${status.count })" class="recom_link">♥(${recom })</A></span> --%>
 
             <%-- <span id="span_animation_${status.count }"></span> --%>
-            <br>
+            <br><%-- 
             <button type='button' id='btn_cart' class="btn btn-info" style='margin-bottom: 2px;'
                         onclick="cart_ajax(${productno })">장바 구니</button><br>
             <button type='button' id='btn_ordering' class="btn btn-info" 
-                        onclick="cart_ajax(${productno })">바로 구매</button>  
+                        onclick="cart_ajax(${productno })">바로 구매</button>   --%>
                                     
           </td>
           <td style='vertical-align: middle; text-align: center;'>
