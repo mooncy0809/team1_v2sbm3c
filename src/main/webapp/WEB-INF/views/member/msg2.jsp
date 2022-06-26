@@ -104,7 +104,7 @@
           </LI>   
           <LI class='li_none'>
             <button type='button' 
-                         onclick="location.href='/'"
+                         onclick="location.href='/index2.do'"
                          class="btn btn-primary" style="width: 936px;">확인</button>
           </LI>                                                                     
         </c:when>   

@@ -62,7 +62,7 @@
       <A href="javascript:location.reload();">내 정보 변경 </A>&nbsp;
       <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>&nbsp;
       <span class='menu_divide' ><i class="fas fa-key"></i></span> 
-      <A href='./passwd_update.do?memberno=${memberVO.memberno }'>비밀번호 변경 </A>&nbsp;
+      <A href='./passwd_update2.do?memberno=${memberVO.memberno }'>비밀번호 변경 </A>&nbsp;
       <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>  &nbsp;
       <span class='menu_divide'><i class="fas fa-id-badge"></i></span>
       <A href='#'>내 활동 정보 </A>&nbsp;

@@ -51,7 +51,7 @@
  
  
 <body>
-<jsp:include page="../menu/top.jsp" flush='false' />
+<jsp:include page="../menu/top2.jsp" flush='false' />
  
   <!-- ---------- Modal ---------- -->
   <div class="modal fade" id="modal_panel" role="dialog">
@@ -82,7 +82,7 @@
    
     <div class='menu_line'></div>
       
-    <FORM name='frm' id='frm' method='POST' action='./passwd_update.do' 
+    <FORM name='frm' id='frm' method='POST' action='./passwd_update2.do' 
                 class="form-horizontal">
       <input type='hidden' name='memberno' id='memberno' value='${param.memberno }'>       
   
@@ -116,7 +116,7 @@
       <div class="form-group">
         <div class="col-md-offset-5 col-md-7">
           <button type="button" id='btn_send' class="btn btn-primary btn-md">변경</button>
-          <button type="button" onclick="location.href='./read2.do?memberno=${sessionScope.memberno}'" class="btn btn-primary btn-md">취소</button>
+          <button type="button" onclick="location.href='./read.do?memberno=${sessionScope.memberno}'" class="btn btn-primary btn-md">취소</button>
    
         </div>
       </div>   

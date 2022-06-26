@@ -321,6 +321,67 @@ public class MemberCont {
      }
      
      /**
+      * 패스워드를 변경합니다.
+      * @param memberno
+      * @return
+      */
+     @RequestMapping(value="/member/passwd_update2.do", method=RequestMethod.GET)
+     public ModelAndView passwd_update2(int memberno){
+       ModelAndView mav = new ModelAndView();      
+       
+       mav.setViewName("/member/passwd_update2"); // passwd_update.jsp
+       
+       return mav;
+     }
+     
+     /**
+      * 패스워드 변경 처리
+      * @param memberno 회원 번호
+      * @param current_passwd 현재 패스워드
+      * @param new_passwd 새로운 패스워드
+      * @return
+      */
+     @RequestMapping(value="/member/passwd_update2.do", method=RequestMethod.POST)
+     public ModelAndView passwd_update2(int memberno, String current_passwd, String new_passwd){
+       ModelAndView mav = new ModelAndView();
+       
+       MemberVO memberVO = this.memberProc.read(memberno);
+       mav.addObject("mname", memberVO.getMname());  // 홍길동님(user4) 패스워드를 변경했습니다.
+       mav.addObject("id", memberVO.getId());
+       
+       // 현재 패스워드 검사
+       HashMap<Object, Object> map = new HashMap<Object, Object>();
+       map.put("memberno", memberno);
+       map.put("passwd", current_passwd);
+       
+       int cnt = memberProc.passwd_check(map);
+       int update_cnt = 0; // 변경된 패스워드 수
+       
+       if (cnt == 1) { // 현재 패스워드가 일치하는 경우
+         map.put("passwd", new_passwd); // 새로운 패스워드를 저장
+         update_cnt = memberProc.passwd_update(map); // 패스워드 변경 처리
+         
+         if (update_cnt == 1) {
+           mav.addObject("code", "passwd_update_success"); // 패스워드 변경 성공
+         } else {
+           cnt = 0;  // 패스워드는 일치했으나 변경하지는 못함.
+           mav.addObject("code", "passwd_update_fail");       // 패스워드 변경 실패
+         }
+         
+         mav.addObject("update_cnt", update_cnt);  // 변경된 패스워드의 갯수    
+       } else {
+         mav.addObject("code", "passwd_fail"); // 패스워드가 일치하지 않는 경우
+       }
+
+       mav.addObject("cnt", cnt); // 패스워드 일치 여부
+       mav.addObject("url", "/member/msg2");  // /member/msg -> /member/msg.jsp
+       
+       mav.setViewName("redirect:/member/msg2.do");
+       
+       return mav;
+     }
+     
+     /**
       * 로그인 폼
       * @return
       */
