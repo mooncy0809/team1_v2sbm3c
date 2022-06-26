@@ -185,6 +185,7 @@
         <c:set var="cnt" value="${contentsVO.cnt }" />
         <c:set var="mname" value="${contentsVO.mname }" />
         <c:set var="replycnt" value="${contentsVO.replycnt }" />
+        <c:set var="recom" value="${contentsVO.recom }" />
       
      <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
         <HR class='menu_line'>
@@ -197,7 +198,7 @@
                   <DIV class="grid__description">  
                     <p class='grid__title'>${title} </p> <!-- 수직 가운데 정렬 -->
 	                <p class='grid__content'> ${content } </p>
-                    <DIV style="text-align:right;"> <i class="fa-solid fa-eye" >&nbsp;${cnt}</i> <br></DIV>   
+                    <DIV style="text-align:right;"> <i class="fa-solid fa-eye" >&nbsp;${cnt}</i> &nbsp;<i class="fa-solid fa-heart">&nbsp;${recom }</i><br></DIV>   
                    </DIV>
                    
                    <DIV class='grid__detail'> </DIV>       

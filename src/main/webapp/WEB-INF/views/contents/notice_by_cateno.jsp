@@ -88,7 +88,7 @@ function btn(sample){
       <TR> 
         <TD class="td_bs" style='vertical-align: middle; text-align: center;'>
 
-        <a href ="./read.do?contentsno=${contentsVO.contentsno}">${title}</a>     
+        <a href ="./read.do?contentsno=${contentsVO.contentsno}">${title}</a>
 
         </TD>  
         <TD class="td_bs" style='vertical-align: middle; text-align: center;'>${mname}</TD>     
