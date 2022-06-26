@@ -202,13 +202,13 @@
   <div>
         <div id="imgstart" style="text-align:center;margin:10px auto">
             <a class="imgbtn"onclick="openNav(this)" >
-            <img width="210px" height="100px;"src="/recommend/recom.png" alt="추천시스템 시작"></a>
+            <img width="270px" height="150px;"src="/recommend/recom.png" alt="추천시스템 시작"></a>
         </div>                             
   <div id="mySidenav2" style="position:relative; width:100%; display: none;">  
         <a class="imgbtn"  style="display:scroll; position:absolute; right:30px; z-index:1;" onclick="closeNav(this)" >
         <i class="fa-solid fa-square-minus"style="font-size:25px;"></i>
-        </a><iframe class="backimg" src="../../tensorflow/recommend/form1.do" scrolling="no" style="border:0px; width:100%; height:400px; " ></iframe>
-  </div>
+        </a><iframe class="backimg" src="http://localhost:9091/tensorflow/recommend/form1.do" scrolling="no" style="border:0px; width:100%; height:380px; " ></iframe>
+  </div> 
   </div>
 
   <DIV style="text-align: right; clear: both;padding-right:25px;">  
@@ -299,7 +299,7 @@
     </c:forEach>
     <!-- 갤러리 Layout 종료 -->
   </div>
-   <DIV class='bottom_menu' style="    text-align: center; padding-bottom: 45px;">${paging3    }</DIV>
+   <DIV class='bottom_menu' style="text-align: center; padding-bottom: 45px;">${paging3}</DIV>
   </div>
   </div>
   </div>

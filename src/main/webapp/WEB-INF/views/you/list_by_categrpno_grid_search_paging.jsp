@@ -15,7 +15,25 @@
 <link href="/css/bootstrap.min.css" rel="stylesheet"> 
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+ <style type="text/css">
+ ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #E96D53;
+  border-radius: 10px;
+}
+ </style>
+</head>
 
 <script type="text/javascript">
  
@@ -41,6 +59,22 @@ iframe {
     height:300px;
     border-radius:50%;
     box-shadow: 40px 40px 40px 40px grey;   
+}
+
+ ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #E96D53;
+  border-radius: 10px;
 }
 
 </style>

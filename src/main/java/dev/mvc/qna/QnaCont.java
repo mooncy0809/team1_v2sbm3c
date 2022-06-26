@@ -111,11 +111,14 @@ public class QnaCont {
         
         QnaVO qnaVO = this.qnaProc.read(qnano); 
         mav.addObject("qnaVO", qnaVO); // request.setAttribute("youVO", youVO);
+        this.qnaProc.update_replycnt(qnaVO);
         
         CategrpVO categrpVO = this.categrpProc.read(qnaVO.getCategrpno());
         mav.addObject("categrpVO", categrpVO);
        
         mav.setViewName("/qna/read"); // /WEB-INF/views/you/read.jsp
+        
+        
 
         return mav;
     }
@@ -192,6 +195,8 @@ public class QnaCont {
 
       List<QnaVO> list = this.qnaProc.list_all();
       mav.addObject("list", list);
+      
+      
 
       return mav; // forward
     }

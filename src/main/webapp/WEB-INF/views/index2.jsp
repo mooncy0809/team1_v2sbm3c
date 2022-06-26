@@ -14,7 +14,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sunflower&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
- 
+
+
+<script type="text/javascript">
+  //alert('memberno: ' + ${sessionScope.memberno});
+</script> 
+
 <style type="text/css">
 a{
     font-family: 'Kdam Thmor Pro', sans-serif;

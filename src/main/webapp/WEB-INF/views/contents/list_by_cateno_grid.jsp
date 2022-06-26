@@ -19,7 +19,8 @@
  
   
 </script>
- 
+
+ </style>
 </head> 
  
 <body>
