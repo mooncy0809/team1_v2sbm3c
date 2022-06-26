@@ -109,7 +109,7 @@
         
       </div>
     </div> <!-- Modal END -->
-    <FORM name='frm' id='frm' method='POST' action='./update.do' 
+    <FORM name='frm' id='frm' method='POST' action='./update2.do' 
                 onsubmit="return send();" class="form-horizontal">
       <input type='hidden' name='memberno' id='memberno' value='${memberVO.memberno }'>          
       <input type='hidden' name='id' id='id' value='${memberVO.id }'>          
@@ -228,7 +228,7 @@
     </section>
     </FORM>
  
-<jsp:include page="../menu/bottom.jsp" flush='false' />
+<jsp:include page="../menu/bottom2.jsp" flush='false' />
 </body>
  
 </html>

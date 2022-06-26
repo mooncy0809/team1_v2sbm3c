@@ -138,9 +138,6 @@ public class MemberProc implements MemberProcInter{
         return cnt;
     }
 
-
-    
-    
     
     
     

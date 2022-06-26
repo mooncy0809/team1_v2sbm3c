@@ -93,6 +93,7 @@ public interface MemberDAOInter {
    * 비밀번호 변경
    */
   public int find_passwd(Map<Object, Object> map);
+  
 
   
 }
