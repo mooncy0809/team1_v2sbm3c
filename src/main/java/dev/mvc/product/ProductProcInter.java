@@ -155,6 +155,8 @@ public interface ProductProcInter {
      * @return 페이징 생성 문자열
      */
     String pagingBox3(int cateno, int search_count, int now_page, String pword);
+    String pagingBox4(int cateno, int search_count, int now_page, String pword);
+    String pagingBox5(int cateno, int search_count, int now_page, String pword);
     
     /**
      * Cate + Product join, 연결 목록
