@@ -720,11 +720,25 @@ public class MemberCont {
         
     } else {
       mav.addObject("url", "login_fail_msg");
-      mav.setViewName("redirect:/member/msg.do"); 
+      mav.setViewName("redirect:/member/login_fail_msg.do"); 
     }
         
     return mav;
   }
+  
+  
+  /**
+   * 로그인 실패
+   */
+  @RequestMapping(value="/member/login_fail_msg.do", 
+                             method=RequestMethod.GET)
+  public ModelAndView login_fail_msg(){
+    ModelAndView mav = new ModelAndView();
+    
+    mav.setViewName("/member/login_fail_msg");
+    
+    return mav;
+  }    
      
   
   
@@ -880,6 +894,67 @@ public class MemberCont {
      }
      
      /**
+      * 아이디 찾기 폼
+      * @param session
+      * @return
+      */
+     @RequestMapping(value="/member/find_id_form2.do", 
+                                method=RequestMethod.GET)
+     public ModelAndView find_id_form2(){
+       ModelAndView mav = new ModelAndView();
+       
+       mav.setViewName("/member/find_id_form2");
+       
+       return mav;
+     }    
+     
+     
+     /**
+      * 아이디 찾기 처리
+      */
+     @RequestMapping(value = "/member/find_id2.do", method = RequestMethod.POST)
+     public ModelAndView find_id2(
+                               @RequestParam("mname") String mname,
+                               @RequestParam(value="tel") String tel) {
+         
+         ModelAndView mav = new ModelAndView();
+         
+         
+         Map<String, Object> map = new HashMap<String, Object>();
+         map.put("mname", mname);
+         map.put("tel", tel);
+         
+         int count = memberProc.find_id(map);
+         if (count == 1) { // 로그인 성공
+           // System.out.println(id + " 로그인 성공");
+           MemberVO memberVO = memberProc.read_id(map);
+           mav.addObject("id", memberVO.getId());
+                
+         }
+         
+         mav.setViewName("/member/find_id_result2");
+         
+         
+         return mav;
+     }
+     
+     /**
+      * 아이디 찾기 결과 창
+      * @param 
+      * @return
+      */
+     @RequestMapping(value="/member/find_id_result2.do", 
+                                method=RequestMethod.GET)
+     public ModelAndView find_id_result2(MemberVO memberVO){
+       ModelAndView mav = new ModelAndView();
+       
+       mav.addObject("id", memberVO.getId());
+       mav.setViewName("/member/find_id_form_result2");
+       
+       return mav;
+     }
+     
+     /**
       * Ajax 기반 회원 조회
       * http://localhost:9091/member/read_ajax.do
       * @param memberno
@@ -964,6 +1039,73 @@ public class MemberCont {
        ModelAndView mav = new ModelAndView();
       
        mav.setViewName("/member/find_passwd_result");
+       
+       return mav;
+     }
+     
+     
+     /** 비밀번호 찾기 폼 **/
+     @RequestMapping(value="/member/find_passwd2.do" , method=RequestMethod.GET)
+     public ModelAndView findPwView2(){
+         ModelAndView mav = new ModelAndView();
+         mav.setViewName("/member/find_passwd_form2");
+         return mav;
+     }
+     
+     /**
+      * 비밀번호 찾기 처리
+      * @param 
+      * @return
+      */     
+     @RequestMapping(value = "/member/find_passwd2.do", method = RequestMethod.POST)
+     public ModelAndView mail2(
+                               @RequestParam("mname") String mname,
+                               @RequestParam(value="id") String id, String memberKey) {
+         
+         memberKey = new TempKey().getKey(6,false);         
+         
+         ModelAndView mav = new ModelAndView();
+         
+         
+         Map<Object, Object> map = new HashMap<Object, Object>();
+         map.put("mname", mname);
+         map.put("id", id);
+         map.put("passwd", memberKey);
+         
+         int count = memberProc.find_passwd_check(map);
+         if (count == 1) { // 로그인 성공
+
+             memberProc.find_passwd(map);
+             
+             SimpleMailMessage simpleMessage = new SimpleMailMessage();
+             
+             simpleMessage.setFrom("yshg98@gmail.com");
+             simpleMessage.setTo(id);
+
+             simpleMessage.setSubject("삼대몇? 임시비밀번호 발급");
+             simpleMessage.setText("인증번호: " + memberKey);
+             javaMailSender.send(simpleMessage);
+         }
+         
+         mav.setViewName("/member/find_passwd_result2");
+         
+         // mav.setViewName("redirect:/index.do");
+         
+         
+         return mav;
+     }
+     
+     /**
+      * 비밀번호 찾기 결과 창
+      * @param 
+      * @return
+      */
+     @RequestMapping(value="/member/find_passwd_result2.do", 
+                                method=RequestMethod.GET)
+     public ModelAndView find_passwd_result2(){
+       ModelAndView mav = new ModelAndView();
+      
+       mav.setViewName("/member/find_passwd_result2");
        
        return mav;
      }
@@ -1102,11 +1244,24 @@ public class MemberCont {
            
        } else {
          mav.addObject("url", "login_fail_msg2");
-         mav.setViewName("redirect:/member/msg2.do"); 
+         mav.setViewName("redirect:/member/login_fail_msg2.do"); 
        }
            
        return mav;
      }
+     
+     /**
+      * 로그인 실패
+      */
+     @RequestMapping(value="/member/login_fail_msg2.do", 
+                                method=RequestMethod.GET)
+     public ModelAndView login_fail_msg2(){
+       ModelAndView mav = new ModelAndView();
+       
+       mav.setViewName("/member/login_fail_msg2");
+       
+       return mav;
+     }    
         
      
      

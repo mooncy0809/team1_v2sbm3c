@@ -28,7 +28,6 @@
 <jsp:include page="../menu/top2.jsp" flush='false' />
  
 <DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
   ${categrpVO.name } > ${cateVO.name } >
   상품 정보 등록(수정)
 </DIV>

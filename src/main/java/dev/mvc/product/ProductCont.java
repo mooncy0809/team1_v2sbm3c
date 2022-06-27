@@ -859,7 +859,7 @@ public class ProductCont {
          * @param word 검색어
          * @return 페이징 생성 문자열
          */
-        String paging3 = productProc.pagingBox3(cateno, search_count, now_page, word);
+        String paging3 = productProc.pagingBox4(cateno, search_count, now_page, word);
        
         mav.addObject("paging3", paging3);
 
@@ -912,7 +912,7 @@ public class ProductCont {
          * @param word 검색어
          * @return 페이징 생성 문자열
          */
-        String paging3 = productProc.pagingBox3(cateno, search_count, now_page, word);
+        String paging3 = productProc.pagingBox5(cateno, search_count, now_page, word);
        
         mav.addObject("paging3", paging3);
 

@@ -50,7 +50,7 @@ INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
 VALUES(6, '관리자에게', 6, 'Y', sysdate);
 
 INSERT INTO categrp(categrpno, name, seqno, visible, rdate)
-VALUES(7, '전체 카테고리', 7, 'Y', sysdate);
+VALUES(7, '전체 카테고리', 7, 'N', sysdate);
 
 commit;
 

@@ -46,7 +46,7 @@ COMMENT ON COLUMN products.point is '포인트';
 COMMENT ON COLUMN products.salecnt is '수량';
 
 CREATE SEQUENCE products_seq
-  START WITH 1                -- 시작 번호
+  START WITH 17               -- 시작 번호
   INCREMENT BY 1            -- 증가값
   MAXVALUE 9999999999  -- 최대값: 9999999999 --> NUMBER(10) 대응
   CACHE 2                        -- 2번은 메모리에서만 계산
@@ -55,7 +55,8 @@ CREATE SEQUENCE products_seq
 DROP TABLE products;
 DROP SEQUENCE products_seq;
 
-
+SELECT * FROM products_seq;
+SELECT * FROM products;
 DELETE FROM products WHERE productno=1;
 
 commit;

@@ -11,7 +11,9 @@ public class Product3 {
 
     /** 목록 파일명 */
     public static String LIST_FILE = "list_by_cateno_grid_join2.do";
-
+    public static String LIST_FILE2 = "list_by_cateno_grid_join_up.do";
+    public static String LIST_FILE3 = "list_by_cateno_grid_join_down.do";
+    
     // Windows, VMWare, AWS cloud 절대 경로 설정
     public static synchronized String getUploadDir() {
         String path = "";
