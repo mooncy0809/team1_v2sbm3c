@@ -71,6 +71,21 @@ a{
     
     
 }
+
+#cart::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+#cart::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #8DA386; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+#cart::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
     
 </style>
  
@@ -81,9 +96,10 @@ a{
 <%-- GET -> POST: 상품 삭제, 수량 변경용 폼 --%>
 
     <section id="cart_items">
-    <div class="container" style="     width: 330px;   padding-top: 100px;">
+    <div class="container" style="  width: 230px;   padding-top: 100px;">
 
-
+ <div id="cart" class="table-responsive cart_info" style="  height: 150px; overflow-x: hidden; border:none;
+    overflow-y: scroll;">
  
   <table class="table table-condensed">
   
@@ -109,13 +125,7 @@ a{
               <td class="cart_description" style="    width: 160px;">
                 <h4><a href="/product/read.do?productno=${productno}" target="_top">${ptitle}</a></h4>
               </td> 
-              
-              <td  class="cart_quantity">
-              <div class="cart_quantity_button">
-                <input class="cart_quantity_input" type='number' id='${cartno }_cnt' min='1' max='100' step='1' value="${cnt }" 
-                  style='width: 52px; font-family: 'Gaegu', cursive;'>&nbsp;
-                </div>
-              </td>
+
               <td class="cart_total">
                 <p class="cart_total_price" style="font-family: 'Gaegu', cursive;"><fmt:formatNumber value="${tot}" pattern="#,###" /></p>
               </td>
