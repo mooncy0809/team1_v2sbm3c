@@ -67,7 +67,7 @@ a{
     font-weight: bold;
     font-family: 'Kdam Thmor Pro', sans-serif;
    font-family: 'Gaegu', cursive;
-   font-size: 20px;
+   font-size: 13px;
     
     
 }

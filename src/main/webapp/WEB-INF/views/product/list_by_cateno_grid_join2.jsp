@@ -111,6 +111,16 @@
   
 </script>
  
+ <style>
+ a{
+    font-family: 'Kdam Thmor Pro', sans-serif;
+ font-family: 'Sunflower', sans-serif;
+ }
+ 
+ .cartimg{
+    background: url('../images/home/cart.png') no-repeat;
+}
+ </style>
 </head> 
  
 <body>
@@ -156,11 +166,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">베스트</a></h4>
-                                </div>
-                            </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a href="#">특가</a></h4>
@@ -172,26 +178,12 @@
                                 </div>
                             </div>
                         </div><!--/category-productsr-->
-                    
-                        <div class="brands_products"><!--brands_products-->
-                            <h2>Brands</h2>
-                            <div class="brands-name">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href=""> <span class="pull-right"></span>맛있닭</a></li>
-                                    <li><a href=""> <span class="pull-right"></span>굽네</a></li>
-                                    <li><a href=""> <span class="pull-right"></span>참프레</a></li>
-                                    <li><a href=""> <span class="pull-right"></span>러브잇</a></li>
-                                </ul>
-                            </div>
-                        </div><!--/brands_products-->
                         
-                        <div class="price-range"><!--price-range-->
-                            <h2>Price Range</h2>
-                            <div class="well">
-                                 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                                 <b>0</b> <b class="pull-right">10000</b>
-                            </div>
-                        </div><!--/price-range-->
+                        <div>
+                             <iframe class="cartimg" src="../cart/list_by_memberno2.do" align="left"  scrolling="no" style="border:0px; width:220px; height:280px;" ></iframe>
+                        
+                        </div>
+
                         
                     </div>
                 </div>
