@@ -121,8 +121,7 @@
   <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
        <input type="hidden" name="productno" id="productno" value="${productno }">
-       
-    </FORM>
+  </FORM>
     <section id="advertisement">
         <div class="container">
             <img src="images/shop/advertisement.jpg" alt="" />
