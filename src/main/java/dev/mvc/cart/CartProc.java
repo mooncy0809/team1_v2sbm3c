@@ -34,6 +34,12 @@ public class CartProc implements CartProcInter {
         return cnt;
     }
     
+    
+    @Override
+    public ArrayList<CartVO> list_by_memberno2(int memberno) {
+      ArrayList<CartVO> list = this.cartDAO.list_by_memberno2(memberno);
+      return list;
+    }
 }
 
 

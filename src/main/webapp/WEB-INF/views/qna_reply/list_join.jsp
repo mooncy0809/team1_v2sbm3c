@@ -58,7 +58,7 @@
       <%-- table 내용 --%>
       <tbody>
         <c:forEach var="replyMemberVO" items="${list }">
-          <c:set var="replyno" value="${replyMemberVO.replyno }" />
+          <c:set var="qna_replyno" value="${replyMemberVO.qna_replyno }" />
           <c:set var="contentsno" value="${replyMemberVO.contentsno }" />
           <c:set var="memberno" value="${replyMemberVO.memberno }" />
           <c:set var="id" value="${replyMemberVO.id }" />

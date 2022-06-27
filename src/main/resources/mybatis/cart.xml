@@ -32,6 +32,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE cartno=#{cartno}
   </update>
     
+    
+      <select id="list_by_memberno2" resultType="dev.mvc.cart.CartVO" parameterType="int">
+    SELECT t.cartno, p.productno, p.ptitle, p.pthumb1, p.price, p.dc, p.saleprice, p.point, t.memberno, t.cnt, t.rdate 
+    FROM products p, cart t
+    WHERE (p.productno = t.productno) AND t.memberno = #{memberno}
+    ORDER BY cartno ASC
+  </select>
 </mapper>
   
   

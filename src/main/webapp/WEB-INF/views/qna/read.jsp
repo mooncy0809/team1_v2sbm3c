@@ -144,7 +144,7 @@
           msg += "  " + row.rdate;
           
           if ('${sessionScope.memberno}' == row.memberno) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
-            msg += " <A href='javascript:qna_reply_delete("+row.qna_replyno+")'><IMG src='/qna_reply/images/delete.png'></A>";
+            msg += " <A href='javascript:qna_reply_delete("+row.qna_replyno+")'><IMG src='/contents/images/delete.png'></A>";
           }
           msg += "  " + "<br>";
           msg += row.content;
@@ -183,29 +183,12 @@
       success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
         // alert(rdata);
         var msg = "";
-        
-        if (rdata.passwd_cnt ==1) { // 패스워드 일치
-          if (rdata.delete_cnt == 1) { // 삭제 성공
 
             $('#btn_frm_qna_reply_delete_close').trigger("click"); // 삭제폼 닫기, click 발생 
             
             $('#' + qna_replyno).remove(); // 태그 삭제
               
             return; // 함수 실행 종료
-          } else {  // 삭제 실패
-            msg = "패스 워드는 일치하나 댓글 삭제에 실패했습니다. <br>";
-            msg += " 다시한번 시도해주세요."
-          }
-        } else { // 패스워드 일치하지 않음.
-          // alert('패스워드 불일치');
-          // return;
-          
-          msg = "패스워드가 일치하지 않습니다.";
-          $('#modal_panel_delete_msg').html(msg);
-
-          $('#passwd', '#frm_qna_reply_delete').focus();  // frm_qna_reply_delete 폼의 passwd 태그로 focus 설정
-          
-        }
       },
       // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
       error: function(request, status, error) { // callback 함수
@@ -241,7 +224,56 @@
 
 
 <DIV class='content_body' style="width:70%;">
-  
+<!-- Modal 알림창 시작 -->
+<div class="modal fade" id="modal_panel" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" id="modal_x" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title" id='modal_title'></h4><!-- 제목 -->
+      </div>
+      <div class="modal-body">
+        <p id='modal_content'></p>  <!-- 내용 -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="modal_close" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- Modal 알림창 종료 -->
+
+  <!-- -------------------- 리뷰 삭제폼 시작 -------------------- -->
+<div class="modal fade" id="modal_panel_delete" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+<!--       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title">리뷰 삭제</h4>제목
+      </div> -->
+      <div class="modal-body">
+        <form name='frm_qna_reply_delete' id='frm_qna_reply_delete'>
+          <input type='hidden' name='qna_replyno' id='qna_replyno' value=${qna_replyno }>
+          
+           <h4>댓글을 삭제하시겠습니까?</h4>
+          
+          <DIV id='modal_panel_delete_msg' style='color: #AA0000; font-size: 1.1em;'></DIV>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type='button' class='btn btn-danger' 
+                     onclick="qna_reply_delete_proc(frm_qna_reply_delete.qna_replyno.value); frm_qna_reply_delete.passwd.value='';">삭제</button>
+
+        <button type="button" class="btn btn-default" data-dismiss="modal" 
+                     id='btn_frm_qna_reply_delete_close'>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- -------------------- 리뷰 삭제폼 종료 -------------------- -->
+
+
   <fieldset class="fieldset_basic">
   <span style="width:50%; font-size: 1.5em; font-weight: bold;">관리자에게</span>
    <hr align="left" style="border-top: 1px solid #bbb; border-bottom: 1px solid #fff; width: 100%;">

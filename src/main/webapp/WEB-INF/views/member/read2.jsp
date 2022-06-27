@@ -65,24 +65,7 @@
       <A href='./passwd_update2.do?memberno=${memberVO.memberno }'>비밀번호 변경 </A>&nbsp;
       <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>  &nbsp;
       <span class='menu_divide'><i class="fas fa-id-badge"></i></span>
-      <A href='#'>내 활동 정보 </A>&nbsp;
-      <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span> &nbsp;
-      <span class='menu_divide'><i class="fas fa-coins"></i></span>
-      <A href='#'>적립금 </A>&nbsp;
-      <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>&nbsp; 
-      <span class='menu_divide'><i class="fas fa-wallet"></i></span>
-      <A href='#'>쿠폰 </A>&nbsp;
-      <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span> &nbsp;
-      <span class='menu_divide'><i class="fas fa-question"></i></span>
-      <A href='#'>1:1문의 </A>&nbsp;
-      <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>&nbsp;
-      <span class='menu_divide'><i class="fas fa-history"></i></span> 
-      <A href='#'>최근본상품 </A>&nbsp;
-      <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span> &nbsp;
-      <span class='menu_divide'><i class="fas fa-truck"></i></span>
-      <A href='#'>배송지 관리 </A>&nbsp;
-      <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>&nbsp;
-      <span class='menu_divide'><i class="fas fa-shopping-bag"></i></span>
+      
       <A href='../order_pay/list_by_memberno_search_paging.do?memberno=${memberVO.memberno }&now_page=1'>주문내역 </A>&nbsp;
       <span class='menu_divide'><i class="fas fa-grip-lines-vertical"></i></span>&nbsp;
     </ASIDE> 

@@ -29,6 +29,12 @@ public interface CartProcInter {
      * @return
      */
     public int update_cnt(CartVO cartVO);
+    
+    /**
+     * memberno 회원 번호별 쇼핑카트 목록 출력
+     * @return
+     */
+    public ArrayList<CartVO> list_by_memberno2(int memberno);
 }
 
 
