@@ -98,20 +98,11 @@ public class Qna_replyCont {
     @RequestMapping(value = "/qna_reply/delete.do", 
                                 method = RequestMethod.POST,
                                 produces = "text/plain;charset=UTF-8")
-    public String delete(int qna_replyno, String passwd) {
-      Map<String, Object> map = new HashMap<String, Object>();
-      map.put("qna_replyno", qna_replyno);
-      map.put("passwd", passwd);
-      
-      int passwd_cnt = qna_replyProc.checkPasswd(map); // 패스워드 일치 여부, 1: 일치, 0: 불일치
-      int delete_cnt = 0;                                    // 삭제된 댓글
-      if (passwd_cnt == 1) { // 패스워드가 일치할 경우
-        delete_cnt = qna_replyProc.delete(qna_replyno); // 댓글 삭제
-      }
-      
-      JSONObject obj = new JSONObject();
-      obj.put("passwd_cnt", passwd_cnt); // 패스워드 일치 여부, 1: 일치, 0: 불일치
-      obj.put("delete_cnt", delete_cnt); // 삭제된 댓글
+    public String delete(int qna_replyno) {
+        
+        qna_replyProc.delete(qna_replyno);
+        JSONObject obj = new JSONObject();
+
       
       return obj.toString();
     }
